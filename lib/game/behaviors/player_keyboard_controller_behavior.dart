@@ -18,7 +18,6 @@ class PlayerKeyboardControllerBehavior extends Behavior<Player> {
       KeyboardListenerComponent(
         keyDown: {
           LogicalKeyboardKey.space: (_) {
-            
             final flying = parent.findBehavior<FlyingBehavior>();
             if (flying.enabled) {
               flying.climb();
@@ -46,14 +45,14 @@ class PlayerKeyboardControllerBehavior extends Behavior<Player> {
   }
 
   @override
-    void update(double dt) {
-      super.update(dt);
+  void update(double dt) {
+    super.update(dt);
 
-      if (_flyHoldTimer > 0) {
-        _flyHoldTimer -= dt;
-        if (_flyHoldTimer <= 0) {
-          parent.findBehavior<FlyingBehavior>().enabled = true;
-        }
+    if (_flyHoldTimer > 0) {
+      _flyHoldTimer -= dt;
+      if (_flyHoldTimer <= 0) {
+        parent.findBehavior<FlyingBehavior>().enabled = true;
       }
     }
+  }
 }

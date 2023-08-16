@@ -1,4 +1,3 @@
-
 import 'package:dash_run/game/game.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 

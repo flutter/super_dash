@@ -18,11 +18,11 @@ class Obstacles extends TimerComponent
   late final Random _rng;
 
   @override
-    FutureOr<void> onLoad() async {
-      await super.onLoad();
+  FutureOr<void> onLoad() async {
+    await super.onLoad();
 
-      onTick();
-    }
+    onTick();
+  }
 
   @override
   void onTick() {
