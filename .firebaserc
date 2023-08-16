@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "dash-run-dev"
+  },
+  "targets": {
+    "dash-run-dev": {
+      "hosting": {
+        "app_dev": [
+          "endless-runner-9481713-383737"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
