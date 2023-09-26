@@ -10,7 +10,7 @@ class PlayerCollidingBehavior
     Set<Vector2> intersectionPoints,
     PositionComponent other,
   ) {
-    if (other is Obstacle) {
+    if (other is Enemies) {
       gameRef.gameOver();
     }
   }

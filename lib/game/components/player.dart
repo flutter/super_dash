@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:dash_run/game/game.dart';
+import 'package:dash_run/gen/assets.gen.dart';
+import 'package:flame/cache.dart';
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 
-class Player extends PositionedEntity
-    with HasGameRef<FixedResolutionFlameGame> {
+class Player extends PositionedEntity with HasGameRef<FixedResolutionGame> {
   Player()
       : super(
           behaviors: [
@@ -24,12 +26,12 @@ class Player extends PositionedEntity
           ],
         );
 
-  late SpriteAnimationComponent runningAnimation;
-  late SpriteComponent flyingSprite;
-
-  double yVelocity = 0;
-
   static final _size = Vector2.all(100);
+  static final _images = Images(prefix: '');
+
+  late SpriteComponent flyingSprite;
+  late SpriteAnimationComponent runningAnimation;
+  double yVelocity = 0;
 
   @override
   FutureOr<void> onLoad() async {
@@ -44,22 +46,26 @@ class Player extends PositionedEntity
       ),
     );
 
-    final animation = await gameRef.loadSpriteAnimation(
-      'running_character.png',
+    final flyingSpriteImage = await Sprite.load(
+      Assets.images.flyingCharacter.path,
+      images: _images,
+    );
+    flyingSprite = SpriteComponent(
+      sprite: flyingSpriteImage,
+      size: size,
+    );
+
+    final animation = await SpriteAnimation.load(
+      Assets.images.runningCharacter.path,
       SpriteAnimationData.sequenced(
         amount: 2,
         stepTime: .2,
         textureSize: Vector2.all(32),
       ),
+      images: _images,
     );
     runningAnimation = SpriteAnimationComponent(
       animation: animation,
-      size: size,
-    );
-
-    final flyingSpriteImage = await gameRef.loadSprite('flying_character.png');
-    flyingSprite = SpriteComponent(
-      sprite: flyingSpriteImage,
       size: size,
     );
 
@@ -71,7 +77,5 @@ class Player extends PositionedEntity
     );
   }
 
-  void jump() {
-    findBehavior<JumpingBehavior>().jump();
-  }
+  void jump() => findBehavior<JumpingBehavior>().jump();
 }

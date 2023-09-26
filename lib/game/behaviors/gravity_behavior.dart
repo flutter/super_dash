@@ -2,8 +2,7 @@ import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 
-class GravityBehavior extends Behavior<Player>
-    with HasGameRef<FixedResolutionFlameGame> {
+class GravityBehavior extends Behavior<Player> with HasGameRef<DashRunGame> {
   final double gravity = 2000;
 
   @override

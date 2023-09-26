@@ -1,68 +1,71 @@
 import 'dart:async';
 
 import 'package:dash_run/game/game.dart';
+import 'package:dash_run/gen/assets.gen.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:leap/leap.dart';
 
-abstract class FixedResolutionFlameGame extends FlameGame {
-  FixedResolutionFlameGame({
+abstract class FixedResolutionGame extends LeapGame {
+  FixedResolutionGame({
+    required super.tileSize,
     required this.resolution,
   });
 
   final Vector2 resolution;
 
-  late World world;
-  late CameraComponent gameCamera;
-
   @mustCallSuper
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
-
-    world = World();
-    gameCamera = CameraComponent.withFixedResolution(
-      world: world,
-      width: resolution.x,
-      height: resolution.y,
-    )..viewfinder.position = resolution / 2;
-
-    await add(world);
-    await add(gameCamera);
+    await loadWorldAndMap(
+      tiledMapPath: Assets.tiles.mapV01,
+      tileCameraWidth: resolution.x.toInt(),
+      tileCameraHeight: resolution.y.toInt(),
+    );
   }
 }
 
-class DashRunGame extends FixedResolutionFlameGame
-    with HasKeyboardHandlerComponents, HasCollisionDetection {
+class DashRunGame extends FixedResolutionGame
+    with TapCallbacks, HasKeyboardHandlerComponents, HasCollisionDetection {
   DashRunGame()
       : super(
-          resolution: Vector2(1400, 800),
+          tileSize: 32,
+          resolution: Vector2(130, 25),
         );
 
   static const floorSize = 220.0;
 
   int score = 0;
 
+  late final Player player;
+  late final Enemies enemies;
+  late final SimpleCombinedInput input;
+
   @override
-  FutureOr<void> onLoad() async {
+  Future<void> onLoad() async {
     await super.onLoad();
 
-    await world.addAll([
-      Background(),
-      Obstacles(),
-      Player(),
-      ScoreLabel(),
-    ]);
+    input = SimpleCombinedInput();
+    add(input);
+
+    player = Player();
+    world.add(player);
+    camera.follow(player);
+
+    enemies = Enemies();
+    await enemies.addAllToMap(leapMap);
   }
 
   void gameOver() {
     score = 0;
     world.firstChild<Player>()?.removeFromParent();
-    world.removeWhere((child) => child is Obstacle);
+    world.removeWhere((child) => child is Enemies);
 
-    Future<void>.delayed(const Duration(seconds: 1), () {
-      world.add(Player());
-    });
+    Future<void>.delayed(
+      const Duration(seconds: 1),
+      () => world.add(Player()),
+    );
   }
 }
