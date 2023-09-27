@@ -23,6 +23,7 @@ abstract class FixedResolutionGame extends LeapGame {
       tiledMapPath: Assets.tiles.mapV01,
       tileCameraWidth: resolution.x.toInt(),
       tileCameraHeight: resolution.y.toInt(),
+      prefix: '',
     );
   }
 }
@@ -32,7 +33,7 @@ class DashRunGame extends FixedResolutionGame
   DashRunGame()
       : super(
           tileSize: 32,
-          resolution: Vector2(130, 25),
+          resolution: Vector2(40, 10),
         );
 
   static const floorSize = 220.0;
@@ -47,15 +48,12 @@ class DashRunGame extends FixedResolutionGame
   Future<void> onLoad() async {
     await super.onLoad();
 
-    input = SimpleCombinedInput();
-    add(input);
+    // player = Player();
+    // await world.addAll([player, ScoreLabel(), SimpleCombinedInput()]);
+    // camera.follow(player);
 
-    player = Player();
-    world.add(player);
-    camera.follow(player);
-
-    enemies = Enemies();
-    await enemies.addAllToMap(leapMap);
+    // enemies = Enemies();
+    // await enemies.addAllToMap(leapMap);
   }
 
   void gameOver() {

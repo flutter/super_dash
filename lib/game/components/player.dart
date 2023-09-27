@@ -8,7 +8,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 
-class Player extends PositionedEntity with HasGameRef<FixedResolutionGame> {
+class Player extends PositionedEntity with HasGameRef<DashRunGame> {
   Player()
       : super(
           behaviors: [
@@ -29,9 +29,13 @@ class Player extends PositionedEntity with HasGameRef<FixedResolutionGame> {
   static final _size = Vector2.all(100);
   static final _images = Images(prefix: '');
 
-  late SpriteComponent flyingSprite;
-  late SpriteAnimationComponent runningAnimation;
+  late final SpriteComponent flyingSprite;
+  late final SpriteAnimationComponent runningAnimation;
+
   double yVelocity = 0;
+
+  @override
+  int get priority => 1;
 
   @override
   FutureOr<void> onLoad() async {
