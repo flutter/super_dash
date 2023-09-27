@@ -33,7 +33,7 @@ class DashRunGame extends FixedResolutionGame
   DashRunGame()
       : super(
           tileSize: 32,
-          resolution: Vector2(40, 10),
+          resolution: Vector2(130, 25),
         );
 
   static const floorSize = 220.0;
