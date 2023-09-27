@@ -3,7 +3,8 @@ import 'package:flame/components.dart';
 
 import 'package:flame/parallax.dart';
 
-class Background extends ParallaxComponent<FixedResolutionFlameGame> {
+class Background extends ParallaxComponent<FixedResolutionFlameGame>
+    with HasGameRef<FixedResolutionFlameGame> {
   Background();
 
   @override

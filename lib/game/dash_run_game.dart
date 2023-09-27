@@ -13,23 +13,17 @@ abstract class FixedResolutionFlameGame extends FlameGame {
 
   final Vector2 resolution;
 
-  late World world;
-  late CameraComponent gameCamera;
-
   @mustCallSuper
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
 
     world = World();
-    gameCamera = CameraComponent.withFixedResolution(
+    camera = CameraComponent.withFixedResolution(
       world: world,
       width: resolution.x,
       height: resolution.y,
     )..viewfinder.position = resolution / 2;
-
-    await add(world);
-    await add(gameCamera);
   }
 }
 
