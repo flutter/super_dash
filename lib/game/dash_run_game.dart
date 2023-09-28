@@ -19,11 +19,16 @@ abstract class FixedResolutionGame extends LeapGame {
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
+
+    camera = CameraComponent.withFixedResolution(
+      width: resolution.x * tileSize,
+      height: resolution.y * tileSize,
+    )..viewfinder.position = resolution * (tileSize / 2);
+
     await loadWorldAndMap(
-      tiledMapPath: Assets.tiles.mapV01,
-      tileCameraWidth: resolution.x.toInt(),
-      tileCameraHeight: resolution.y.toInt(),
       prefix: '',
+      camera: camera,
+      tiledMapPath: Assets.tiles.mapV01,
     );
   }
 }
@@ -33,7 +38,7 @@ class DashRunGame extends FixedResolutionGame
   DashRunGame()
       : super(
           tileSize: 32,
-          resolution: Vector2(130, 25),
+          resolution: Vector2(64, 32),
         );
 
   static const floorSize = 220.0;
@@ -43,18 +48,6 @@ class DashRunGame extends FixedResolutionGame
   late final Player player;
   late final Enemies enemies;
   late final SimpleCombinedInput input;
-
-  @override
-  Future<void> onLoad() async {
-    await super.onLoad();
-
-    // player = Player();
-    // await world.addAll([player, ScoreLabel(), SimpleCombinedInput()]);
-    // camera.follow(player);
-
-    // enemies = Enemies();
-    // await enemies.addAllToMap(leapMap);
-  }
 
   void gameOver() {
     score = 0;

@@ -5,6 +5,7 @@ publish_to: none
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
+  flutter: 3.13.2
 
 dependencies:
   bloc: ^8.1.2
@@ -13,13 +14,13 @@ dependencies:
   flame_tiled: ^1.13.0
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.3
+  flutter_bloc: ^8.1.3 
   flutter_localizations:
     sdk: flutter
   intl: ^0.18.0
   leap:
     git:
-      url: https://github.com/marcossevilla/leap
+      url: https://github.com/kurtome/leap
       ref: main
       path: packages/leap
 
