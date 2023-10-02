@@ -28,7 +28,7 @@ abstract class FixedResolutionGame extends LeapGame {
     await loadWorldAndMap(
       prefix: '',
       camera: camera,
-      tiledMapPath: Assets.tiles.mapV01,
+      tiledMapPath: Assets.tiles.flutterRunnergameMapV02,
     );
   }
 }
@@ -38,7 +38,7 @@ class DashRunGame extends FixedResolutionGame
   DashRunGame()
       : super(
           tileSize: 32,
-          resolution: Vector2(64, 32),
+          resolution: Vector2(100, 50),
         );
 
   static const floorSize = 220.0;
@@ -48,6 +48,13 @@ class DashRunGame extends FixedResolutionGame
   late final Player player;
   late final Enemies enemies;
   late final SimpleCombinedInput input;
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+
+    await Item.addAllToMap(leapMap);
+  }
 
   void gameOver() {
     score = 0;

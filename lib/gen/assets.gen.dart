@@ -20,6 +20,10 @@ class $AssetsImagesGen {
   AssetGenImage get runningCharacter =>
       const AssetGenImage('assets/images/running_character.png');
 
+  /// File path: assets/images/tile_clouds_v01.png
+  AssetGenImage get tileCloudsV01 =>
+      const AssetGenImage('assets/images/tile_clouds_v01.png');
+
   /// File path: assets/images/tile_enemies_v1.png
   AssetGenImage get tileEnemiesV1 =>
       const AssetGenImage('assets/images/tile_enemies_v1.png');
@@ -28,35 +32,55 @@ class $AssetsImagesGen {
   AssetGenImage get tileForestGroundV01 =>
       const AssetGenImage('assets/images/tile_forest_ground_v01.png');
 
+  /// File path: assets/images/tile_forest_trees_v01.png
+  AssetGenImage get tileForestTreesV01 =>
+      const AssetGenImage('assets/images/tile_forest_trees_v01.png');
+
   /// File path: assets/images/tile_gate_v1.png
   AssetGenImage get tileGateV1 =>
       const AssetGenImage('assets/images/tile_gate_v1.png');
+
+  /// File path: assets/images/tile_ground_transition_v01.png
+  AssetGenImage get tileGroundTransitionV01 =>
+      const AssetGenImage('assets/images/tile_ground_transition_v01.png');
 
   /// File path: assets/images/tile_items_v1.png
   AssetGenImage get tileItemsV1 =>
       const AssetGenImage('assets/images/tile_items_v1.png');
 
-  /// File path: assets/images/tile_test_v1.png
-  AssetGenImage get tileTestV1 =>
-      const AssetGenImage('assets/images/tile_test_v1.png');
+  /// File path: assets/images/tile_mountain_ground_v01.png
+  AssetGenImage get tileMountainGroundV01 =>
+      const AssetGenImage('assets/images/tile_mountain_ground_v01.png');
+
+  /// File path: assets/images/tile_plains_ground_v01.png
+  AssetGenImage get tilePlainsGroundV01 =>
+      const AssetGenImage('assets/images/tile_plains_ground_v01.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
         flyingCharacter,
         runningCharacter,
+        tileCloudsV01,
         tileEnemiesV1,
         tileForestGroundV01,
+        tileForestTreesV01,
         tileGateV1,
+        tileGroundTransitionV01,
         tileItemsV1,
-        tileTestV1
+        tileMountainGroundV01,
+        tilePlainsGroundV01
       ];
 }
 
 class $AssetsTilesGen {
   const $AssetsTilesGen();
 
-  /// File path: assets/tiles/map_v01.tmx
-  String get mapV01 => 'assets/tiles/map_v01.tmx';
+  /// File path: assets/tiles/flutter_runnergame_map_v02.tmx
+  String get flutterRunnergameMapV02 =>
+      'assets/tiles/flutter_runnergame_map_v02.tmx';
+
+  /// File path: assets/tiles/tile_clouds_v01.tsx
+  String get tileCloudsV01 => 'assets/tiles/tile_clouds_v01.tsx';
 
   /// File path: assets/tiles/tile_enemies_v1.tsx
   String get tileEnemiesV1 => 'assets/tiles/tile_enemies_v1.tsx';
@@ -64,23 +88,38 @@ class $AssetsTilesGen {
   /// File path: assets/tiles/tile_forest_ground_v01.tsx
   String get tileForestGroundV01 => 'assets/tiles/tile_forest_ground_v01.tsx';
 
+  /// File path: assets/tiles/tile_forest_trees_v01.tsx
+  String get tileForestTreesV01 => 'assets/tiles/tile_forest_trees_v01.tsx';
+
   /// File path: assets/tiles/tile_gate_v1.tsx
   String get tileGateV1 => 'assets/tiles/tile_gate_v1.tsx';
+
+  /// File path: assets/tiles/tile_ground_transition_v01.tsx
+  String get tileGroundTransitionV01 =>
+      'assets/tiles/tile_ground_transition_v01.tsx';
 
   /// File path: assets/tiles/tile_items_v1.tsx
   String get tileItemsV1 => 'assets/tiles/tile_items_v1.tsx';
 
-  /// File path: assets/tiles/tile_test_v1.tsx
-  String get tileTestV1 => 'assets/tiles/tile_test_v1.tsx';
+  /// File path: assets/tiles/tile_mountain_ground_v01.tsx
+  String get tileMountainGroundV01 =>
+      'assets/tiles/tile_mountain_ground_v01.tsx';
+
+  /// File path: assets/tiles/tile_plains_ground_v01.tsx
+  String get tilePlainsGroundV01 => 'assets/tiles/tile_plains_ground_v01.tsx';
 
   /// List of all assets
   List<String> get values => [
-        mapV01,
+        flutterRunnergameMapV02,
+        tileCloudsV01,
         tileEnemiesV1,
         tileForestGroundV01,
+        tileForestTreesV01,
         tileGateV1,
+        tileGroundTransitionV01,
         tileItemsV1,
-        tileTestV1
+        tileMountainGroundV01,
+        tilePlainsGroundV01
       ];
 }
 
