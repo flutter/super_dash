@@ -1,27 +1,28 @@
+import 'dart:async';
+
 import 'package:dash_run/game/dash_run_game.dart';
 import 'package:dash_run/gen/assets.gen.dart';
-
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
 
-class Enemies extends Component with HasGameRef<DashRunGame> {
+class Items extends Component with HasGameRef<DashRunGame> {
   @override
   Future<void> onLoad() async {
-    final enemiesLayer = gameRef.leapMap.getTileLayer<ObjectGroup>('enemies');
-    final enemyTiles = await gameRef.images.load(
-      Assets.images.tileEnemiesV1.path,
+    final itemsLayer = gameRef.leapMap.getTileLayer<ObjectGroup>('items');
+    final itemTiles = await gameRef.images.load(
+      Assets.images.tileItemsV1.path,
     );
 
-    for (final object in enemiesLayer.objects) {
+    for (final object in itemsLayer.objects) {
       final spritesheet = SpriteSheet(
-        image: enemyTiles,
+        image: itemTiles,
         srcSize: Vector2.all(32),
       );
 
       gameRef.leapMap.add(
-        Enemy(
+        Item(
           // We are sure we have a gid.
           sprite: spritesheet.getSpriteById(object.gid!),
           tiledObject: object,
@@ -33,8 +34,8 @@ class Enemies extends Component with HasGameRef<DashRunGame> {
   }
 }
 
-class Enemy extends PhysicalEntity<DashRunGame> {
-  Enemy({
+class Item extends PhysicalEntity<DashRunGame> {
+  Item({
     required this.sprite,
     required this.tiledObject,
     super.static = true,

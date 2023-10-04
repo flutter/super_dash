@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/gen/assets.gen.dart';
+import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
@@ -43,23 +44,28 @@ class DashRunGame extends FixedResolutionGame
 
   static const floorSize = 220.0;
 
-  int score = 0;
-
   late final Player player;
+  late final Items items;
   late final Enemies enemies;
   late final SimpleCombinedInput input;
+
+  int score = 0;
+
+  @override
+  Images get images => Images(prefix: '');
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    await Item.addAllToMap(leapMap);
+    items = Items();
+    enemies = Enemies();
+    await addAll([items, enemies]);
   }
 
   void gameOver() {
     score = 0;
     world.firstChild<Player>()?.removeFromParent();
-    world.removeWhere((child) => child is Enemies);
 
     Future<void>.delayed(
       const Duration(seconds: 1),
