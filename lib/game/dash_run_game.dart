@@ -52,11 +52,10 @@ class DashRunGame extends FixedResolutionGame
   int score = 0;
 
   @override
-  Images get images => Images(prefix: '');
-
-  @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    images = Images(prefix: '');
 
     items = Items();
     enemies = Enemies();
