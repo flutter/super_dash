@@ -1,5 +1,3 @@
-export 'background.dart';
-export 'obstacle.dart';
-export 'obstacles.dart';
+export 'enemies.dart';
 export 'player.dart';
 export 'score_label.dart';
