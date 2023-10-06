@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tileset version="1.10" tiledversion="1.10.2" name="tile_plains_ground_v01" tilewidth="32" tileheight="32" tilecount="30" columns="6">
+ <image source="tile_plains_ground_v01.png" width="192" height="160"/>
+</tileset>
