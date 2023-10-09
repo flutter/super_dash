@@ -50,15 +50,6 @@ class Player extends PositionedEntity with HasGameRef<DashRunGame> {
       ),
     );
 
-    final flyingSpriteImage = await Sprite.load(
-      Assets.images.flyingCharacter.path,
-      images: _images,
-    );
-    flyingSprite = SpriteComponent(
-      sprite: flyingSpriteImage,
-      size: size,
-    );
-
     final animation = await SpriteAnimation.load(
       Assets.images.runningCharacter.path,
       SpriteAnimationData.sequenced(

@@ -12,10 +12,6 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/flying_character.png
-  AssetGenImage get flyingCharacter =>
-      const AssetGenImage('assets/images/flying_character.png');
-
   /// File path: assets/images/running_character.png
   AssetGenImage get runningCharacter =>
       const AssetGenImage('assets/images/running_character.png');
@@ -24,17 +20,25 @@ class $AssetsImagesGen {
   AssetGenImage get tileCloudsV01 =>
       const AssetGenImage('assets/images/tile_clouds_v01.png');
 
-  /// File path: assets/images/tile_enemies_v1.png
-  AssetGenImage get tileEnemiesV1 =>
-      const AssetGenImage('assets/images/tile_enemies_v1.png');
+  /// File path: assets/images/tile_enemies_v2.png
+  AssetGenImage get tileEnemiesV2 =>
+      const AssetGenImage('assets/images/tile_enemies_v2.png');
+
+  /// File path: assets/images/tile_forest_bushes_v01.png
+  AssetGenImage get tileForestBushesV01 =>
+      const AssetGenImage('assets/images/tile_forest_bushes_v01.png');
 
   /// File path: assets/images/tile_forest_ground_v01.png
   AssetGenImage get tileForestGroundV01 =>
       const AssetGenImage('assets/images/tile_forest_ground_v01.png');
 
-  /// File path: assets/images/tile_forest_trees_v01.png
-  AssetGenImage get tileForestTreesV01 =>
-      const AssetGenImage('assets/images/tile_forest_trees_v01.png');
+  /// File path: assets/images/tile_forest_trees_back_v01.png
+  AssetGenImage get tileForestTreesBackV01 =>
+      const AssetGenImage('assets/images/tile_forest_trees_back_v01.png');
+
+  /// File path: assets/images/tile_forest_trees_front_v01.png
+  AssetGenImage get tileForestTreesFrontV01 =>
+      const AssetGenImage('assets/images/tile_forest_trees_front_v01.png');
 
   /// File path: assets/images/tile_gate_v1.png
   AssetGenImage get tileGateV1 =>
@@ -44,9 +48,9 @@ class $AssetsImagesGen {
   AssetGenImage get tileGroundTransitionV01 =>
       const AssetGenImage('assets/images/tile_ground_transition_v01.png');
 
-  /// File path: assets/images/tile_items_v1.png
-  AssetGenImage get tileItemsV1 =>
-      const AssetGenImage('assets/images/tile_items_v1.png');
+  /// File path: assets/images/tile_items_v2.png
+  AssetGenImage get tileItemsV2 =>
+      const AssetGenImage('assets/images/tile_items_v2.png');
 
   /// File path: assets/images/tile_mountain_ground_v01.png
   AssetGenImage get tileMountainGroundV01 =>
@@ -56,40 +60,54 @@ class $AssetsImagesGen {
   AssetGenImage get tilePlainsGroundV01 =>
       const AssetGenImage('assets/images/tile_plains_ground_v01.png');
 
+  /// File path: assets/images/tile_sky_v01.png
+  AssetGenImage get tileSkyV01 =>
+      const AssetGenImage('assets/images/tile_sky_v01.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
-        flyingCharacter,
         runningCharacter,
         tileCloudsV01,
-        tileEnemiesV1,
+        tileEnemiesV2,
+        tileForestBushesV01,
         tileForestGroundV01,
-        tileForestTreesV01,
+        tileForestTreesBackV01,
+        tileForestTreesFrontV01,
         tileGateV1,
         tileGroundTransitionV01,
-        tileItemsV1,
+        tileItemsV2,
         tileMountainGroundV01,
-        tilePlainsGroundV01
+        tilePlainsGroundV01,
+        tileSkyV01
       ];
 }
 
 class $AssetsTilesGen {
   const $AssetsTilesGen();
 
-  /// File path: assets/tiles/flutter_runnergame_map_v02.tmx
-  String get flutterRunnergameMapV02 =>
-      'assets/tiles/flutter_runnergame_map_v02.tmx';
+  /// File path: assets/tiles/flutter_runnergame_map_v03.tmx
+  String get flutterRunnergameMapV03 =>
+      'assets/tiles/flutter_runnergame_map_v03.tmx';
 
   /// File path: assets/tiles/tile_clouds_v01.tsx
   String get tileCloudsV01 => 'assets/tiles/tile_clouds_v01.tsx';
 
-  /// File path: assets/tiles/tile_enemies_v1.tsx
-  String get tileEnemiesV1 => 'assets/tiles/tile_enemies_v1.tsx';
+  /// File path: assets/tiles/tile_enemies_v2.tsx
+  String get tileEnemiesV2 => 'assets/tiles/tile_enemies_v2.tsx';
+
+  /// File path: assets/tiles/tile_forest_bushes_v01.tsx
+  String get tileForestBushesV01 => 'assets/tiles/tile_forest_bushes_v01.tsx';
 
   /// File path: assets/tiles/tile_forest_ground_v01.tsx
   String get tileForestGroundV01 => 'assets/tiles/tile_forest_ground_v01.tsx';
 
-  /// File path: assets/tiles/tile_forest_trees_v01.tsx
-  String get tileForestTreesV01 => 'assets/tiles/tile_forest_trees_v01.tsx';
+  /// File path: assets/tiles/tile_forest_trees_back_v01.tsx
+  String get tileForestTreesBackV01 =>
+      'assets/tiles/tile_forest_trees_back_v01.tsx';
+
+  /// File path: assets/tiles/tile_forest_trees_front_v01.tsx
+  String get tileForestTreesFrontV01 =>
+      'assets/tiles/tile_forest_trees_front_v01.tsx';
 
   /// File path: assets/tiles/tile_gate_v1.tsx
   String get tileGateV1 => 'assets/tiles/tile_gate_v1.tsx';
@@ -98,8 +116,8 @@ class $AssetsTilesGen {
   String get tileGroundTransitionV01 =>
       'assets/tiles/tile_ground_transition_v01.tsx';
 
-  /// File path: assets/tiles/tile_items_v1.tsx
-  String get tileItemsV1 => 'assets/tiles/tile_items_v1.tsx';
+  /// File path: assets/tiles/tile_items_v2.tsx
+  String get tileItemsV2 => 'assets/tiles/tile_items_v2.tsx';
 
   /// File path: assets/tiles/tile_mountain_ground_v01.tsx
   String get tileMountainGroundV01 =>
@@ -108,18 +126,24 @@ class $AssetsTilesGen {
   /// File path: assets/tiles/tile_plains_ground_v01.tsx
   String get tilePlainsGroundV01 => 'assets/tiles/tile_plains_ground_v01.tsx';
 
+  /// File path: assets/tiles/tile_sky_v01.tsx
+  String get tileSkyV01 => 'assets/tiles/tile_sky_v01.tsx';
+
   /// List of all assets
   List<String> get values => [
-        flutterRunnergameMapV02,
+        flutterRunnergameMapV03,
         tileCloudsV01,
-        tileEnemiesV1,
+        tileEnemiesV2,
+        tileForestBushesV01,
         tileForestGroundV01,
-        tileForestTreesV01,
+        tileForestTreesBackV01,
+        tileForestTreesFrontV01,
         tileGateV1,
         tileGroundTransitionV01,
-        tileItemsV1,
+        tileItemsV2,
         tileMountainGroundV01,
-        tilePlainsGroundV01
+        tilePlainsGroundV01,
+        tileSkyV01
       ];
 }
 

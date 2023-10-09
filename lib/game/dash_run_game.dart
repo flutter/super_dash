@@ -29,7 +29,7 @@ abstract class FixedResolutionGame extends LeapGame {
     await loadWorldAndMap(
       prefix: '',
       camera: camera,
-      tiledMapPath: Assets.tiles.flutterRunnergameMapV02,
+      tiledMapPath: Assets.tiles.flutterRunnergameMapV03,
     );
   }
 }
@@ -60,6 +60,9 @@ class DashRunGame extends FixedResolutionGame
     items = Items();
     enemies = Enemies();
     await addAll([items, enemies]);
+
+    // player = Player();
+    // add(player);
   }
 
   void gameOver() {
