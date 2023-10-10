@@ -24,6 +24,7 @@ dependencies:
       url: https://github.com/erickzanardo/leap
       ref: main
       path: packages/leap
+  path: ^1.8.3
 
 dependency_overrides:
   flame_tiled:

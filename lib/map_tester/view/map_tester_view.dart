@@ -1,4 +1,6 @@
+import 'package:dash_run/filesytem_asset_bundle/filesystem_asset_bundle.dart';
 import 'package:dash_run/game/game.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
@@ -21,10 +23,15 @@ class _MapTesterViewState extends State<MapTesterView> {
             const SizedBox(height: 16),
             if (game == null)
               ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    game = DashRunGame();
-                  });
+                onPressed: () async {
+                  final directory = await getDirectoryPath();
+                  if (directory != null) {
+                    setState(() {
+                      game = DashRunGame(
+                        customBundle: FileSystemAssetBundle(directory),
+                      );
+                    });
+                  }
                 },
                 child: const Text('Load folder'),
               )
