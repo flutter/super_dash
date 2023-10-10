@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:flame/cache.dart';
-
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:flame_tiled/flame_tiled.dart';
 
 class Player extends PositionedEntity with HasGameRef<DashRunGame> {
   Player()
@@ -18,18 +18,12 @@ class Player extends PositionedEntity with HasGameRef<DashRunGame> {
                 parentSize: _size,
               ),
             ),
-            GravityBehavior(),
-            PlayerKeyboardControllerBehavior(),
-            JumpingBehavior(),
-            FlyingBehavior(),
-            PlayerCollidingBehavior(),
           ],
         );
 
-  static final _size = Vector2.all(100);
+  static final _size = Vector2.all(32);
   static final _images = Images(prefix: '');
 
-  late final SpriteComponent flyingSprite;
   late final SpriteAnimationComponent runningAnimation;
 
   double yVelocity = 0;
@@ -66,10 +60,10 @@ class Player extends PositionedEntity with HasGameRef<DashRunGame> {
 
     add(runningAnimation);
 
-    position = Vector2(
-      200,
-      gameRef.resolution.y - DashRunGame.floorSize,
-    );
+    final playerSpawn = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
+    for (final spawn in playerSpawn.objects) {
+      position = Vector2(spawn.x, spawn.y);
+    }
   }
 
   void jump() => findBehavior<JumpingBehavior>().jump();

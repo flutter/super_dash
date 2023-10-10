@@ -18,8 +18,6 @@ class GravityBehavior extends Behavior<Player> with HasGameRef<DashRunGame> {
       parent
         ..y = boundary
         ..yVelocity = 0;
-
-      parent.findBehavior<FlyingBehavior>().enabled = false;
     }
   }
 }

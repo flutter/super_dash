@@ -60,6 +60,9 @@ class DashRunGame extends FixedResolutionGame
     items = Items();
     enemies = Enemies();
     await addAll([items, enemies]);
+
+    player = Player();
+    add(player);
   }
 
   void gameOver() {
