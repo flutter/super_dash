@@ -57,6 +57,12 @@ class DashRunGame extends FixedResolutionGame
       images: images,
     );
 
+    await loadWorldAndMap(
+      prefix: 'assets/',
+      camera: camera,
+      tiledMapPath: 'tiles/flutter_runnergame_map_v02.tmx',
+    );
+
     items = Items();
     enemies = Enemies();
     await addAll([items, enemies]);
