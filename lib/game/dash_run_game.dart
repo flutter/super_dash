@@ -38,7 +38,7 @@ class DashRunGame extends FixedResolutionGame
     with TapCallbacks, HasKeyboardHandlerComponents, HasCollisionDetection {
   DashRunGame()
       : super(
-          tileSize: 32,
+          tileSize: 64,
           resolution: Vector2(100, 50),
         );
 
@@ -56,13 +56,13 @@ class DashRunGame extends FixedResolutionGame
     await super.onLoad();
 
     images = Images(prefix: '');
-
     items = Items();
     enemies = Enemies();
+
     await addAll([items, enemies]);
 
     player = Player();
-    add(player);
+    world.add(player);
   }
 
   void gameOver() {

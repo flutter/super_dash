@@ -17,7 +17,7 @@ class Enemies extends Component with HasGameRef<DashRunGame> {
     for (final object in enemiesLayer.objects) {
       final spritesheet = SpriteSheet(
         image: enemyTiles,
-        srcSize: Vector2.all(32),
+        srcSize: Vector2.all(gameRef.tileSize),
       );
 
       gameRef.leapMap.add(
@@ -43,6 +43,10 @@ class Enemy extends PhysicalEntity<DashRunGame> {
 
   late final Sprite sprite;
   late final TiledObject tiledObject;
+
+  @override
+  // TODO: implement debugMode
+  bool get debugMode => true;
 
   @override
   Future<void> onLoad() async {

@@ -18,13 +18,13 @@ class Items extends Component with HasGameRef<DashRunGame> {
     for (final object in itemsLayer.objects) {
       final spritesheet = SpriteSheet(
         image: itemTiles,
-        srcSize: Vector2.all(32),
+        srcSize: Vector2.all(gameRef.tileSize),
       );
 
       gameRef.leapMap.add(
         Item(
           // We are sure we have a gid.
-          sprite: spritesheet.getSpriteById(object.gid!),
+          sprite: spritesheet.getSpriteById(object.id),
           tiledObject: object,
         ),
       );
@@ -44,6 +44,10 @@ class Item extends PhysicalEntity<DashRunGame> {
 
   late final Sprite sprite;
   late final TiledObject tiledObject;
+
+  // @override
+  // TODO: implement debugMode
+  // bool get debugMode => true;
 
   @override
   Future<void> onLoad() async {
