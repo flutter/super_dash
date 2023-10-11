@@ -26,12 +26,6 @@ dependencies:
       path: packages/leap
   path: ^1.8.3
 
-dependency_overrides:
-  flame_tiled:
-    git:
-      url: https://github.com/flame-engine/flame.git
-      ref: feat/allow-tsx-images-in-the-same-level
-      path: packages/flame_tiled
 dev_dependencies:
   bloc_test: ^9.1.2
   flutter_test:
@@ -44,9 +38,11 @@ dependency_overrides:
     git:
       url: https://github.com/flame-engine/flame.git
       path: packages/flame
+      ref: 97fff0ed2baab53f2780eca29a9d08ea5d90426a
   flame_tiled:
     git:
       url: https://github.com/flame-engine/flame.git
+      ref: feat/allow-tsx-images-in-the-same-level
       path: packages/flame_tiled
 
 flutter:

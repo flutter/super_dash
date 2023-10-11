@@ -17,4 +17,12 @@ class FileSystemAssetBundle extends AssetBundle {
 
     return file.readAsBytesSync().buffer.asByteData();
   }
+
+  @override
+  Future<T> loadStructuredData<T>(
+    String key,
+    Future<T> Function(String value) parser,
+  ) {
+    return loadString(key).then(parser);
+  }
 }
