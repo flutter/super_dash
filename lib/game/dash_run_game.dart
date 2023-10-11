@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dash_run/game/game.dart';
-import 'package:dash_run/gen/assets.gen.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -25,12 +24,6 @@ abstract class FixedResolutionGame extends LeapGame {
       width: resolution.x * tileSize,
       height: resolution.y * tileSize,
     )..viewfinder.position = resolution * (tileSize / 2);
-
-    await loadWorldAndMap(
-      prefix: '',
-      camera: camera,
-      tiledMapPath: Assets.tiles.flutterRunnergameMapV02,
-    );
   }
 }
 
@@ -55,7 +48,14 @@ class DashRunGame extends FixedResolutionGame
   Future<void> onLoad() async {
     await super.onLoad();
 
-    images = Images(prefix: '');
+    images = Images(prefix: 'assets/map/');
+
+    await loadWorldAndMap(
+      prefix: 'assets/map/',
+      camera: camera,
+      tiledMapPath: 'flutter_runnergame_map_v04.tmx',
+      images: images,
+    );
 
     items = Items();
     enemies = Enemies();

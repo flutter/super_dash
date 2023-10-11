@@ -1,5 +1,4 @@
 import 'package:dash_run/game/dash_run_game.dart';
-import 'package:dash_run/gen/assets.gen.dart';
 
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
@@ -11,7 +10,7 @@ class Enemies extends Component with HasGameRef<DashRunGame> {
   Future<void> onLoad() async {
     final enemiesLayer = gameRef.leapMap.getTileLayer<ObjectGroup>('enemies');
     final enemyTiles = await gameRef.images.load(
-      Assets.images.tileEnemiesV1.path,
+      'objects/tile_enemies_v2.png',
     );
 
     for (final object in enemiesLayer.objects) {
