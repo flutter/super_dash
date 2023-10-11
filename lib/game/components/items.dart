@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dash_run/game/dash_run_game.dart';
-import 'package:dash_run/gen/assets.gen.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -12,7 +11,7 @@ class Items extends Component with HasGameRef<DashRunGame> {
   Future<void> onLoad() async {
     final itemsLayer = gameRef.leapMap.getTileLayer<ObjectGroup>('items');
     final itemTiles = await gameRef.images.load(
-      Assets.images.tileItemsV1.path,
+      'objects/tile_items_v2.png',
     );
 
     for (final object in itemsLayer.objects) {

@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:dash_run/game/game.dart';
-import 'package:dash_run/gen/assets.gen.dart';
-import 'package:flame/cache.dart';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:flutter/material.dart';
 
 class Player extends PositionedEntity with HasGameRef<DashRunGame> {
   Player()
@@ -27,7 +26,6 @@ class Player extends PositionedEntity with HasGameRef<DashRunGame> {
         );
 
   static final _size = Vector2.all(100);
-  static final _images = Images(prefix: '');
 
   late final SpriteComponent flyingSprite;
   late final SpriteAnimationComponent runningAnimation;
@@ -50,30 +48,12 @@ class Player extends PositionedEntity with HasGameRef<DashRunGame> {
       ),
     );
 
-    final flyingSpriteImage = await Sprite.load(
-      Assets.images.flyingCharacter.path,
-      images: _images,
-    );
-    flyingSprite = SpriteComponent(
-      sprite: flyingSpriteImage,
-      size: size,
-    );
-
-    final animation = await SpriteAnimation.load(
-      Assets.images.runningCharacter.path,
-      SpriteAnimationData.sequenced(
-        amount: 2,
-        stepTime: .2,
-        textureSize: Vector2.all(32),
+    add(
+      RectangleComponent(
+        size: size,
+        paint: Paint()..color = Colors.blue,
       ),
-      images: _images,
     );
-    runningAnimation = SpriteAnimationComponent(
-      animation: animation,
-      size: size,
-    );
-
-    add(runningAnimation);
 
     position = Vector2(
       200,

@@ -1,0 +1,285 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "flutter_runnergame_map_v04.tmx",
+    "expandedProjectPaths": [
+        "objects",
+        "tiles",
+        "."
+    ],
+    "exportAsImage.drawTileGrid": true,
+    "exportAsImage.useCurrentScale": false,
+    "fileStates": {
+        "C:/Users/ftsjo/Art/WORK/flutter_runnergame/_example/map.tmx": {
+            "expandedObjectLayers": [
+                10,
+                3
+            ],
+            "scale": 0.74515625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 93.2690291465716,
+                "y": 395.8901237156638
+            }
+        },
+        "C:/Users/ftsjo/Art/WORK/flutter_runnergame/_example/map.tmx#level_ice_tileset": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ftsjo/Art/WORK/flutter_runnergame/_example/map.tmx#level_standard_tileset": {
+            "scaleInDock": 1
+        },
+        "flutter_runnergame_map_v02.tmx": {
+            "expandedObjectLayers": [
+                8,
+                11,
+                9
+            ],
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 8830.5,
+                "y": 840.5
+            }
+        },
+        "flutter_runnergame_map_v03.tmx": {
+            "expandedGroupLayers": [
+                20
+            ],
+            "expandedObjectLayers": [
+                11
+            ],
+            "scale": 0.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 3739,
+                "y": 532
+            }
+        },
+        "flutter_runnergame_map_v04.tmx": {
+            "expandedGroupLayers": [
+                20,
+                26,
+                38
+            ],
+            "scale": 0.33,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 2762.121212121212,
+                "y": 1200
+            }
+        },
+        "map_v01.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2115,
+                "y": 366
+            }
+        },
+        "objects/tile_enemies_v2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "objects/tile_forest_trees_back_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "objects/tile_forest_trees_back_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "objects/tile_forest_trees_front_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "objects/tile_forest_trees_front_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "objects/tile_items_v2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "objects/tile_mountain_tree_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "objects/tile_plains_mountains_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile_egg_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile_feather_blue_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile_feather_gold_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile_items_v1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile_powerup_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile_test_1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile_test_2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tile_test_v1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/plains_hills_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_clouds_v01.tsx": {
+            "scaleInDock": 1
+        },
+        "tiles/tile_clouds_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_decorations_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_enemies_v1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_forest_bushes_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_forest_bushes_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_forest_ground_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_forest_ground_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_forest_trees_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_forest_trees_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_gate_v1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_gate_v2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_ground_transition_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_ground_transition_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_items_v1.tsx": {
+            "scaleInDock": 1
+        },
+        "tiles/tile_mountain_ground_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_mountain_ground_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_mountain_mountains_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_mountain_stars_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_plains_ground_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_plains_ground_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_plains_ground_v03.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_plains_hills_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_sky_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_sky_v02.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_stars_v01.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/tile_test_v1.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "last.externalTilesetPath": "C:/Users/ftsjo/Art/WORK/flutter_runnergame/flutter_runnergame_tiled_64/tiles",
+    "last.imagePath": "C:/Users/ftsjo/Art/WORK/flutter_runnergame/flutter_runnergame_tiled_64/tiles",
+    "map.height": 50,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 50,
+    "openFiles": [
+        "flutter_runnergame_map_v04.tmx"
+    ],
+    "project": "flutter_runnergame_tiled_v02.tiled-project",
+    "property.type": "color",
+    "recentFiles": [
+        "flutter_runnergame_map_v04.tmx",
+        "tiles/tile_decorations_v01.tsx",
+        "tiles/tile_mountain_stars_v01.tsx",
+        "objects/tile_plains_mountains_v01.tsx",
+        "tiles/tile_plains_hills_v01.tsx",
+        "tiles/tile_plains_ground_v02.tsx",
+        "tiles/tile_plains_ground_v03.tsx",
+        "objects/tile_mountain_tree_v01.tsx",
+        "tiles/plains_hills_v01.tsx",
+        "tiles/tile_mountain_mountains_v01.tsx",
+        "tiles/tile_forest_bushes_v02.tsx",
+        "tiles/tile_clouds_v02.tsx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}
