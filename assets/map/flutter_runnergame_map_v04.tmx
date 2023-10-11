@@ -825,10 +825,8 @@
   <object id="320" gid="739" x="18304" y="832" width="64" height="64"/>
   <object id="321" gid="739" x="18944" y="768" width="64" height="64"/>
   <object id="322" gid="739" x="19328" y="448" width="64" height="64"/>
-  <object id="323" gid="739" x="20288" y="896" width="64" height="64"/>
   <object id="324" gid="739" x="21440" y="1216" width="64" height="64"/>
   <object id="325" gid="739" x="21952" y="1536" width="64" height="64"/>
-  <object id="326" gid="738" x="20800" y="1152" width="64" height="64"/>
   <object id="332" gid="734" x="1920" y="1984" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="11" name="spawn">
