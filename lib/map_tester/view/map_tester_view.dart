@@ -4,8 +4,15 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
+typedef GetDirectoryPath = Future<String?> Function();
+
 class MapTesterView extends StatefulWidget {
-  const MapTesterView({super.key});
+  const MapTesterView({
+    this.selectGameFolder = getDirectoryPath,
+    super.key,
+  });
+
+  final GetDirectoryPath selectGameFolder;
 
   @override
   State<MapTesterView> createState() => _MapTesterViewState();
@@ -13,6 +20,7 @@ class MapTesterView extends StatefulWidget {
 
 class _MapTesterViewState extends State<MapTesterView> {
   DashRunGame? game;
+  String? rootPath;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +32,10 @@ class _MapTesterViewState extends State<MapTesterView> {
             if (game == null)
               ElevatedButton(
                 onPressed: () async {
-                  final directory = await getDirectoryPath();
+                  final directory = await widget.selectGameFolder();
                   if (directory != null) {
                     setState(() {
+                      rootPath = directory;
                       game = DashRunGame(
                         customBundle: FileSystemAssetBundle(directory),
                       );
@@ -36,13 +45,31 @@ class _MapTesterViewState extends State<MapTesterView> {
                 child: const Text('Load folder'),
               )
             else
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    game = null;
-                  });
-                },
-                child: const Text('Unload'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        game = null;
+                      });
+                    },
+                    child: const Text('Unload'),
+                  ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        game = DashRunGame(
+                          customBundle: FileSystemAssetBundle(
+                            rootPath!,
+                          ),
+                        );
+                      });
+                    },
+                    child: const Text('Reload'),
+                  ),
+                ],
               ),
             const SizedBox(height: 16),
             Expanded(
