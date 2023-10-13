@@ -45,10 +45,6 @@ class Enemy extends PhysicalEntity<DashRunGame> {
   late final TiledObject tiledObject;
 
   @override
-  // TODO: implement debugMode
-  bool get debugMode => true;
-
-  @override
   Future<void> onLoad() async {
     size = sprite.srcSize;
     anchor = Anchor.center;

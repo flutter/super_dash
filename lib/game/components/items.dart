@@ -45,10 +45,6 @@ class Item extends PhysicalEntity<DashRunGame> {
   late final Sprite sprite;
   late final TiledObject tiledObject;
 
-  // @override
-  // TODO: implement debugMode
-  // bool get debugMode => true;
-
   @override
   Future<void> onLoad() async {
     size = sprite.srcSize;
