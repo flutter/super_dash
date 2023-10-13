@@ -8,12 +8,9 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 
 class Player extends PositionedEntity with HasGameRef<DashRunGame> {
-  late final SpriteAnimationComponent runningAnimation;
+  late final SpriteAnimationComponent spriteAnimation;
 
   double yVelocity = 0;
-
-  @override
-  int get priority => 5;
 
   @override
   FutureOr<void> onLoad() async {
@@ -45,12 +42,11 @@ class Player extends PositionedEntity with HasGameRef<DashRunGame> {
         textureSize: Vector2.all(32),
       ),
     );
-    runningAnimation = SpriteAnimationComponent(
-      animation: animation,
-      size: size,
-    );
 
-    add(runningAnimation);
+    spriteAnimation = SpriteAnimationComponent(
+      size: size,
+      animation: animation,
+    );
 
     final playerSpawn = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
     for (final spawn in playerSpawn.objects) {

@@ -6,17 +6,17 @@
  <tileset firstgid="81" source="tiles/tile_mountain_ground_v02.tsx"/>
  <tileset firstgid="136" source="tiles/tile_clouds_v02.tsx"/>
  <tileset firstgid="208" source="tiles/tile_forest_bushes_v02.tsx"/>
- <tileset firstgid="268" source="tiles/tile_forest_trees_front_v02.tsx"/>
- <tileset firstgid="271" source="tiles/tile_forest_trees_back_v02.tsx"/>
+ <tileset firstgid="268" source="objects/tile_forest_trees_front_v02.tsx"/>
+ <tileset firstgid="271" source="objects/tile_forest_trees_back_v02.tsx"/>
  <tileset firstgid="274" source="tiles/tile_sky_v02.tsx"/>
  <tileset firstgid="714" source="tiles/tile_ground_transition_v02.tsx"/>
- <tileset firstgid="734" source="tiles/tile_enemies_v2.tsx"/>
- <tileset firstgid="740" source="tiles/tile_items_v2.tsx"/>
+ <tileset firstgid="734" source="objects/tile_enemies_v2.tsx"/>
+ <tileset firstgid="740" source="objects/tile_items_v2.tsx"/>
  <tileset firstgid="744" source="tiles/tile_mountain_stars_v01.tsx"/>
  <tileset firstgid="752" source="tiles/tile_mountain_mountains_v01.tsx"/>
- <tileset firstgid="785" source="tiles/tile_mountain_tree_v01.tsx"/>
+ <tileset firstgid="785" source="objects/tile_mountain_tree_v01.tsx"/>
  <tileset firstgid="787" source="tiles/tile_plains_hills_v01.tsx"/>
- <tileset firstgid="865" source="tiles/tile_plains_mountains_v01.tsx"/>
+ <tileset firstgid="865" source="objects/tile_plains_mountains_v01.tsx"/>
  <tileset firstgid="869" source="tiles/tile_decorations_v01.tsx"/>
  <layer id="24" name="BG_sky" width="360" height="40" parallaxx="0.5" parallaxy="0">
   <data encoding="csv">

@@ -12,7 +12,7 @@ class Items extends Component with HasGameRef<DashRunGame> {
   Future<void> onLoad() async {
     final itemsLayer = gameRef.leapMap.getTileLayer<ObjectGroup>('items');
     final itemTiles = await gameRef.images.load(
-      Assets.images.tileItemsV2.path,
+      Assets.map.objects.tileItemsV2Png.path,
     );
 
     for (final object in itemsLayer.objects) {

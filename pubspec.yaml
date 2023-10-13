@@ -14,16 +14,22 @@ dependencies:
   flame_tiled: ^1.13.0
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.3 
+  flutter_bloc: ^8.1.3
   flutter_localizations:
     sdk: flutter
   intl: ^0.18.0
   leap:
     git:
-      url: https://github.com/kurtome/leap
+      url: https://github.com/erickzanardo/leap
       ref: main
       path: packages/leap
 
+dependency_overrides:
+  flame_tiled:
+    git:
+      url: https://github.com/flame-engine/flame.git
+      ref: feat/allow-tsx-images-in-the-same-level
+      path: packages/flame_tiled
 dev_dependencies:
   bloc_test: ^9.1.2
   flutter_test:
@@ -36,5 +42,7 @@ flutter:
   generate: true
 
   assets:
+    - assets/map/
+    - assets/map/tiles/
+    - assets/map/objects/
     - assets/images/
-    - assets/tiles/

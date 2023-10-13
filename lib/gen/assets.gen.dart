@@ -16,190 +16,215 @@ class $AssetsImagesGen {
   AssetGenImage get runningCharacter =>
       const AssetGenImage('assets/images/running_character.png');
 
-  /// File path: assets/images/tile_clouds_v02.png
-  AssetGenImage get tileCloudsV02 =>
-      const AssetGenImage('assets/images/tile_clouds_v02.png');
+  /// List of all assets
+  List<AssetGenImage> get values => [runningCharacter];
+}
 
-  /// File path: assets/images/tile_decorations_v01.png
-  AssetGenImage get tileDecorationsV01 =>
-      const AssetGenImage('assets/images/tile_decorations_v01.png');
+class $AssetsMapGen {
+  const $AssetsMapGen();
 
-  /// File path: assets/images/tile_enemies_v2.png
-  AssetGenImage get tileEnemiesV2 =>
-      const AssetGenImage('assets/images/tile_enemies_v2.png');
+  /// File path: assets/map/.gitignore
+  String get gitignore => 'assets/map/.gitignore';
 
-  /// File path: assets/images/tile_forest_bushes_v02.png
-  AssetGenImage get tileForestBushesV02 =>
-      const AssetGenImage('assets/images/tile_forest_bushes_v02.png');
+  /// File path: assets/map/flutter_runnergame_map_v04.tmx
+  String get flutterRunnergameMapV04 =>
+      'assets/map/flutter_runnergame_map_v04.tmx';
 
-  /// File path: assets/images/tile_forest_ground_v02.png
-  AssetGenImage get tileForestGroundV02 =>
-      const AssetGenImage('assets/images/tile_forest_ground_v02.png');
-
-  /// File path: assets/images/tile_forest_trees_back_v02.png
-  AssetGenImage get tileForestTreesBackV02 =>
-      const AssetGenImage('assets/images/tile_forest_trees_back_v02.png');
-
-  /// File path: assets/images/tile_forest_trees_front_v02.png
-  AssetGenImage get tileForestTreesFrontV02 =>
-      const AssetGenImage('assets/images/tile_forest_trees_front_v02.png');
-
-  /// File path: assets/images/tile_gate_v2.png
-  AssetGenImage get tileGateV2 =>
-      const AssetGenImage('assets/images/tile_gate_v2.png');
-
-  /// File path: assets/images/tile_ground_transition_v02.png
-  AssetGenImage get tileGroundTransitionV02 =>
-      const AssetGenImage('assets/images/tile_ground_transition_v02.png');
-
-  /// File path: assets/images/tile_items_v2.png
-  AssetGenImage get tileItemsV2 =>
-      const AssetGenImage('assets/images/tile_items_v2.png');
-
-  /// File path: assets/images/tile_mountain_ground_v02.png
-  AssetGenImage get tileMountainGroundV02 =>
-      const AssetGenImage('assets/images/tile_mountain_ground_v02.png');
-
-  /// File path: assets/images/tile_mountain_mountains_v01.png
-  AssetGenImage get tileMountainMountainsV01 =>
-      const AssetGenImage('assets/images/tile_mountain_mountains_v01.png');
-
-  /// File path: assets/images/tile_mountain_stars_v01.png
-  AssetGenImage get tileMountainStarsV01 =>
-      const AssetGenImage('assets/images/tile_mountain_stars_v01.png');
-
-  /// File path: assets/images/tile_mountain_tree_v01.png
-  AssetGenImage get tileMountainTreeV01 =>
-      const AssetGenImage('assets/images/tile_mountain_tree_v01.png');
-
-  /// File path: assets/images/tile_plains_ground_v02.png
-  AssetGenImage get tilePlainsGroundV02 =>
-      const AssetGenImage('assets/images/tile_plains_ground_v02.png');
-
-  /// File path: assets/images/tile_plains_hills_v01.png
-  AssetGenImage get tilePlainsHillsV01 =>
-      const AssetGenImage('assets/images/tile_plains_hills_v01.png');
-
-  /// File path: assets/images/tile_plains_mountains_v01.png
-  AssetGenImage get tilePlainsMountainsV01 =>
-      const AssetGenImage('assets/images/tile_plains_mountains_v01.png');
-
-  /// File path: assets/images/tile_sky_v02.png
-  AssetGenImage get tileSkyV02 =>
-      const AssetGenImage('assets/images/tile_sky_v02.png');
+  $AssetsMapObjectsGen get objects => const $AssetsMapObjectsGen();
+  $AssetsMapTilesGen get tiles => const $AssetsMapTilesGen();
 
   /// List of all assets
-  List<AssetGenImage> get values => [
-        runningCharacter,
-        tileCloudsV02,
-        tileDecorationsV01,
-        tileEnemiesV2,
-        tileForestBushesV02,
-        tileForestGroundV02,
-        tileForestTreesBackV02,
-        tileForestTreesFrontV02,
-        tileGateV2,
-        tileGroundTransitionV02,
-        tileItemsV2,
-        tileMountainGroundV02,
-        tileMountainMountainsV01,
-        tileMountainStarsV01,
-        tileMountainTreeV01,
-        tilePlainsGroundV02,
-        tilePlainsHillsV01,
-        tilePlainsMountainsV01,
-        tileSkyV02
+  List<String> get values => [gitignore, flutterRunnergameMapV04];
+}
+
+class $AssetsMapObjectsGen {
+  const $AssetsMapObjectsGen();
+
+  /// File path: assets/map/objects/tile_enemies_v2.png
+  AssetGenImage get tileEnemiesV2Png =>
+      const AssetGenImage('assets/map/objects/tile_enemies_v2.png');
+
+  /// File path: assets/map/objects/tile_enemies_v2.tsx
+  String get tileEnemiesV2Tsx => 'assets/map/objects/tile_enemies_v2.tsx';
+
+  /// File path: assets/map/objects/tile_forest_trees_back_v02.png
+  AssetGenImage get tileForestTreesBackV02Png =>
+      const AssetGenImage('assets/map/objects/tile_forest_trees_back_v02.png');
+
+  /// File path: assets/map/objects/tile_forest_trees_back_v02.tsx
+  String get tileForestTreesBackV02Tsx =>
+      'assets/map/objects/tile_forest_trees_back_v02.tsx';
+
+  /// File path: assets/map/objects/tile_forest_trees_front_v02.png
+  AssetGenImage get tileForestTreesFrontV02Png =>
+      const AssetGenImage('assets/map/objects/tile_forest_trees_front_v02.png');
+
+  /// File path: assets/map/objects/tile_forest_trees_front_v02.tsx
+  String get tileForestTreesFrontV02Tsx =>
+      'assets/map/objects/tile_forest_trees_front_v02.tsx';
+
+  /// File path: assets/map/objects/tile_items_v2.png
+  AssetGenImage get tileItemsV2Png =>
+      const AssetGenImage('assets/map/objects/tile_items_v2.png');
+
+  /// File path: assets/map/objects/tile_items_v2.tsx
+  String get tileItemsV2Tsx => 'assets/map/objects/tile_items_v2.tsx';
+
+  /// File path: assets/map/objects/tile_mountain_tree_v01.png
+  AssetGenImage get tileMountainTreeV01Png =>
+      const AssetGenImage('assets/map/objects/tile_mountain_tree_v01.png');
+
+  /// File path: assets/map/objects/tile_mountain_tree_v01.tsx
+  String get tileMountainTreeV01Tsx =>
+      'assets/map/objects/tile_mountain_tree_v01.tsx';
+
+  /// File path: assets/map/objects/tile_plains_mountains_v01.png
+  AssetGenImage get tilePlainsMountainsV01Png =>
+      const AssetGenImage('assets/map/objects/tile_plains_mountains_v01.png');
+
+  /// File path: assets/map/objects/tile_plains_mountains_v01.tsx
+  String get tilePlainsMountainsV01Tsx =>
+      'assets/map/objects/tile_plains_mountains_v01.tsx';
+
+  /// List of all assets
+  List<dynamic> get values => [
+        tileEnemiesV2Png,
+        tileEnemiesV2Tsx,
+        tileForestTreesBackV02Png,
+        tileForestTreesBackV02Tsx,
+        tileForestTreesFrontV02Png,
+        tileForestTreesFrontV02Tsx,
+        tileItemsV2Png,
+        tileItemsV2Tsx,
+        tileMountainTreeV01Png,
+        tileMountainTreeV01Tsx,
+        tilePlainsMountainsV01Png,
+        tilePlainsMountainsV01Tsx
       ];
 }
 
-class $AssetsTilesGen {
-  const $AssetsTilesGen();
+class $AssetsMapTilesGen {
+  const $AssetsMapTilesGen();
 
-  /// File path: assets/tiles/flutter_runnergame_map_v04.tmx
-  String get flutterRunnergameMapV04 =>
-      'assets/tiles/flutter_runnergame_map_v04.tmx';
+  /// File path: assets/map/tiles/tile_clouds_v02.png
+  AssetGenImage get tileCloudsV02Png =>
+      const AssetGenImage('assets/map/tiles/tile_clouds_v02.png');
 
-  /// File path: assets/tiles/tile_clouds_v02.tsx
-  String get tileCloudsV02 => 'assets/tiles/tile_clouds_v02.tsx';
+  /// File path: assets/map/tiles/tile_clouds_v02.tsx
+  String get tileCloudsV02Tsx => 'assets/map/tiles/tile_clouds_v02.tsx';
 
-  /// File path: assets/tiles/tile_decorations_v01.tsx
-  String get tileDecorationsV01 => 'assets/tiles/tile_decorations_v01.tsx';
+  /// File path: assets/map/tiles/tile_decorations_v01.png
+  AssetGenImage get tileDecorationsV01Png =>
+      const AssetGenImage('assets/map/tiles/tile_decorations_v01.png');
 
-  /// File path: assets/tiles/tile_enemies_v2.tsx
-  String get tileEnemiesV2 => 'assets/tiles/tile_enemies_v2.tsx';
+  /// File path: assets/map/tiles/tile_decorations_v01.tsx
+  String get tileDecorationsV01Tsx =>
+      'assets/map/tiles/tile_decorations_v01.tsx';
 
-  /// File path: assets/tiles/tile_forest_bushes_v02.tsx
-  String get tileForestBushesV02 => 'assets/tiles/tile_forest_bushes_v02.tsx';
+  /// File path: assets/map/tiles/tile_forest_bushes_v02.png
+  AssetGenImage get tileForestBushesV02Png =>
+      const AssetGenImage('assets/map/tiles/tile_forest_bushes_v02.png');
 
-  /// File path: assets/tiles/tile_forest_ground_v02.tsx
-  String get tileForestGroundV02 => 'assets/tiles/tile_forest_ground_v02.tsx';
+  /// File path: assets/map/tiles/tile_forest_bushes_v02.tsx
+  String get tileForestBushesV02Tsx =>
+      'assets/map/tiles/tile_forest_bushes_v02.tsx';
 
-  /// File path: assets/tiles/tile_forest_trees_back_v02.tsx
-  String get tileForestTreesBackV02 =>
-      'assets/tiles/tile_forest_trees_back_v02.tsx';
+  /// File path: assets/map/tiles/tile_forest_ground_v02.png
+  AssetGenImage get tileForestGroundV02Png =>
+      const AssetGenImage('assets/map/tiles/tile_forest_ground_v02.png');
 
-  /// File path: assets/tiles/tile_forest_trees_front_v02.tsx
-  String get tileForestTreesFrontV02 =>
-      'assets/tiles/tile_forest_trees_front_v02.tsx';
+  /// File path: assets/map/tiles/tile_forest_ground_v02.tsx
+  String get tileForestGroundV02Tsx =>
+      'assets/map/tiles/tile_forest_ground_v02.tsx';
 
-  /// File path: assets/tiles/tile_gate_v2.tsx
-  String get tileGateV2 => 'assets/tiles/tile_gate_v2.tsx';
+  /// File path: assets/map/tiles/tile_gate_v2.png
+  AssetGenImage get tileGateV2Png =>
+      const AssetGenImage('assets/map/tiles/tile_gate_v2.png');
 
-  /// File path: assets/tiles/tile_ground_transition_v02.tsx
-  String get tileGroundTransitionV02 =>
-      'assets/tiles/tile_ground_transition_v02.tsx';
+  /// File path: assets/map/tiles/tile_gate_v2.tsx
+  String get tileGateV2Tsx => 'assets/map/tiles/tile_gate_v2.tsx';
 
-  /// File path: assets/tiles/tile_items_v2.tsx
-  String get tileItemsV2 => 'assets/tiles/tile_items_v2.tsx';
+  /// File path: assets/map/tiles/tile_ground_transition_v02.png
+  AssetGenImage get tileGroundTransitionV02Png =>
+      const AssetGenImage('assets/map/tiles/tile_ground_transition_v02.png');
 
-  /// File path: assets/tiles/tile_mountain_ground_v02.tsx
-  String get tileMountainGroundV02 =>
-      'assets/tiles/tile_mountain_ground_v02.tsx';
+  /// File path: assets/map/tiles/tile_ground_transition_v02.tsx
+  String get tileGroundTransitionV02Tsx =>
+      'assets/map/tiles/tile_ground_transition_v02.tsx';
 
-  /// File path: assets/tiles/tile_mountain_mountains_v01.tsx
-  String get tileMountainMountainsV01 =>
-      'assets/tiles/tile_mountain_mountains_v01.tsx';
+  /// File path: assets/map/tiles/tile_mountain_ground_v02.png
+  AssetGenImage get tileMountainGroundV02Png =>
+      const AssetGenImage('assets/map/tiles/tile_mountain_ground_v02.png');
 
-  /// File path: assets/tiles/tile_mountain_stars_v01.tsx
-  String get tileMountainStarsV01 => 'assets/tiles/tile_mountain_stars_v01.tsx';
+  /// File path: assets/map/tiles/tile_mountain_ground_v02.tsx
+  String get tileMountainGroundV02Tsx =>
+      'assets/map/tiles/tile_mountain_ground_v02.tsx';
 
-  /// File path: assets/tiles/tile_mountain_tree_v01.tsx
-  String get tileMountainTreeV01 => 'assets/tiles/tile_mountain_tree_v01.tsx';
+  /// File path: assets/map/tiles/tile_mountain_mountains_v01.png
+  AssetGenImage get tileMountainMountainsV01Png =>
+      const AssetGenImage('assets/map/tiles/tile_mountain_mountains_v01.png');
 
-  /// File path: assets/tiles/tile_plains_ground_v02.tsx
-  String get tilePlainsGroundV02 => 'assets/tiles/tile_plains_ground_v02.tsx';
+  /// File path: assets/map/tiles/tile_mountain_mountains_v01.tsx
+  String get tileMountainMountainsV01Tsx =>
+      'assets/map/tiles/tile_mountain_mountains_v01.tsx';
 
-  /// File path: assets/tiles/tile_plains_hills_v01.tsx
-  String get tilePlainsHillsV01 => 'assets/tiles/tile_plains_hills_v01.tsx';
+  /// File path: assets/map/tiles/tile_mountain_stars_v01.png
+  AssetGenImage get tileMountainStarsV01Png =>
+      const AssetGenImage('assets/map/tiles/tile_mountain_stars_v01.png');
 
-  /// File path: assets/tiles/tile_plains_mountains_v01.tsx
-  String get tilePlainsMountainsV01 =>
-      'assets/tiles/tile_plains_mountains_v01.tsx';
+  /// File path: assets/map/tiles/tile_mountain_stars_v01.tsx
+  String get tileMountainStarsV01Tsx =>
+      'assets/map/tiles/tile_mountain_stars_v01.tsx';
 
-  /// File path: assets/tiles/tile_sky_v02.tsx
-  String get tileSkyV02 => 'assets/tiles/tile_sky_v02.tsx';
+  /// File path: assets/map/tiles/tile_plains_ground_v02.png
+  AssetGenImage get tilePlainsGroundV02Png =>
+      const AssetGenImage('assets/map/tiles/tile_plains_ground_v02.png');
+
+  /// File path: assets/map/tiles/tile_plains_ground_v02.tsx
+  String get tilePlainsGroundV02Tsx =>
+      'assets/map/tiles/tile_plains_ground_v02.tsx';
+
+  /// File path: assets/map/tiles/tile_plains_hills_v01.png
+  AssetGenImage get tilePlainsHillsV01Png =>
+      const AssetGenImage('assets/map/tiles/tile_plains_hills_v01.png');
+
+  /// File path: assets/map/tiles/tile_plains_hills_v01.tsx
+  String get tilePlainsHillsV01Tsx =>
+      'assets/map/tiles/tile_plains_hills_v01.tsx';
+
+  /// File path: assets/map/tiles/tile_sky_v02.png
+  AssetGenImage get tileSkyV02Png =>
+      const AssetGenImage('assets/map/tiles/tile_sky_v02.png');
+
+  /// File path: assets/map/tiles/tile_sky_v02.tsx
+  String get tileSkyV02Tsx => 'assets/map/tiles/tile_sky_v02.tsx';
 
   /// List of all assets
-  List<String> get values => [
-        flutterRunnergameMapV04,
-        tileCloudsV02,
-        tileDecorationsV01,
-        tileEnemiesV2,
-        tileForestBushesV02,
-        tileForestGroundV02,
-        tileForestTreesBackV02,
-        tileForestTreesFrontV02,
-        tileGateV2,
-        tileGroundTransitionV02,
-        tileItemsV2,
-        tileMountainGroundV02,
-        tileMountainMountainsV01,
-        tileMountainStarsV01,
-        tileMountainTreeV01,
-        tilePlainsGroundV02,
-        tilePlainsHillsV01,
-        tilePlainsMountainsV01,
-        tileSkyV02
+  List<dynamic> get values => [
+        tileCloudsV02Png,
+        tileCloudsV02Tsx,
+        tileDecorationsV01Png,
+        tileDecorationsV01Tsx,
+        tileForestBushesV02Png,
+        tileForestBushesV02Tsx,
+        tileForestGroundV02Png,
+        tileForestGroundV02Tsx,
+        tileGateV2Png,
+        tileGateV2Tsx,
+        tileGroundTransitionV02Png,
+        tileGroundTransitionV02Tsx,
+        tileMountainGroundV02Png,
+        tileMountainGroundV02Tsx,
+        tileMountainMountainsV01Png,
+        tileMountainMountainsV01Tsx,
+        tileMountainStarsV01Png,
+        tileMountainStarsV01Tsx,
+        tilePlainsGroundV02Png,
+        tilePlainsGroundV02Tsx,
+        tilePlainsHillsV01Png,
+        tilePlainsHillsV01Tsx,
+        tileSkyV02Png,
+        tileSkyV02Tsx
       ];
 }
 
@@ -207,7 +232,7 @@ class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
-  static const $AssetsTilesGen tiles = $AssetsTilesGen();
+  static const $AssetsMapGen map = $AssetsMapGen();
 }
 
 class AssetGenImage {

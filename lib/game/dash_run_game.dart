@@ -25,12 +25,6 @@ abstract class FixedResolutionGame extends LeapGame {
       width: resolution.x * tileSize,
       height: resolution.y * tileSize,
     )..viewfinder.position = resolution * (tileSize / 2);
-
-    await loadWorldAndMap(
-      prefix: '',
-      camera: camera,
-      tiledMapPath: Assets.tiles.flutterRunnergameMapV04,
-    );
   }
 }
 
@@ -55,7 +49,13 @@ class DashRunGame extends FixedResolutionGame
   Future<void> onLoad() async {
     await super.onLoad();
 
-    images = Images(prefix: '');
+    images = Images();
+
+    await loadWorldAndMap(
+      camera: camera,
+      tiledMapPath: Assets.map.flutterRunnergameMapV04,
+    );
+
     items = Items();
     enemies = Enemies();
 

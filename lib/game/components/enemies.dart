@@ -11,7 +11,7 @@ class Enemies extends Component with HasGameRef<DashRunGame> {
   Future<void> onLoad() async {
     final enemiesLayer = gameRef.leapMap.getTileLayer<ObjectGroup>('enemies');
     final enemyTiles = await gameRef.images.load(
-      Assets.images.tileEnemiesV2.path,
+      Assets.map.objects.tileEnemiesV2Png.path,
     );
 
     for (final object in enemiesLayer.objects) {

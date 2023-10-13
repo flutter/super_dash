@@ -15,8 +15,8 @@ class Background extends ParallaxComponent<DashRunGame>
     size = gameRef.size.clone();
     parallax = await gameRef.loadParallax(
       [
-        ParallaxImageData(Assets.images.tilePlainsHillsV01.path),
-        ParallaxImageData(Assets.images.tilePlainsMountainsV01.path),
+        ParallaxImageData(Assets.map.tiles.tilePlainsHillsV01Png.path),
+        ParallaxImageData(Assets.map.tiles.tileMountainMountainsV01Png.path),
       ],
       fill: LayerFill.width,
       baseVelocity: Vector2(50, 0),
