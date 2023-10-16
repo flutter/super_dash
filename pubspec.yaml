@@ -20,24 +20,24 @@ dependencies:
   intl: ^0.18.0
   leap: ^0.1.0
 
-dependency_overrides:
-  flame_behaviors:
-    git:
-      url: https://github.com/marcossevilla/flame_behaviors
-      ref: chore/upgrade-flame-1.10.0
-      path: packages/flame_behaviors
-  leap:
-    git:
-      url: https://github.com/erickzanardo/leap
-      ref: main
-      path: packages/leap
-
 dev_dependencies:
   bloc_test: ^9.1.2
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.0
   very_good_analysis: ^5.0.0
+
+dependency_overrides:
+  flame_behaviors:
+    git:
+      url: https://github.com/VeryGoodOpenSource/flame_behaviors
+      ref: feat!(flame_behaviors)-migrate-to-flame-v1.8.0
+      path: packages/flame_behaviors
+  leap:
+    git:
+      url: https://github.com/erickzanardo/leap
+      ref: main
+      path: packages/leap
 
 flutter:
   uses-material-design: true
