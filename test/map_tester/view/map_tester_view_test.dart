@@ -28,7 +28,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byWidgetPredicate((widget) => widget is GameWidget<DashRunGame>),
+        find.byType(GameWidget<DashRunGame>),
         findsOneWidget,
       );
     });
@@ -46,7 +46,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byWidgetPredicate((widget) => widget is GameWidget<DashRunGame>),
+        find.byType(GameWidget<DashRunGame>),
         findsOneWidget,
       );
 
@@ -54,7 +54,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byWidgetPredicate((widget) => widget is GameWidget<DashRunGame>),
+        find.byType(GameWidget<DashRunGame>),
         findsNothing,
       );
     });
@@ -71,9 +71,9 @@ void main() {
       await tester.tap(find.text('Load folder'));
       await tester.pump();
 
-      var widget = tester.widget(
-        find.byWidgetPredicate((widget) => widget is GameWidget<DashRunGame>),
-      ) as GameWidget<DashRunGame>;
+      var widget = tester.widget<GameWidget<DashRunGame>>(
+        find.byType(GameWidget<DashRunGame>),
+      );
 
       final originalGame = widget.game;
       expect(originalGame, isNotNull);
@@ -81,9 +81,9 @@ void main() {
       await tester.tap(find.text('Reload'));
       await tester.pump();
 
-      widget = tester.widget(
-        find.byWidgetPredicate((widget) => widget is GameWidget<DashRunGame>),
-      ) as GameWidget<DashRunGame>;
+      widget = tester.widget<GameWidget<DashRunGame>>(
+        find.byType(GameWidget<DashRunGame>),
+      );
 
       final updatedGame = widget.game;
       expect(updatedGame, isNotNull);
