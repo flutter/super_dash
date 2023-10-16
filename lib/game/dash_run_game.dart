@@ -48,18 +48,21 @@ class DashRunGame extends FixedResolutionGame
   Future<void> onLoad() async {
     await super.onLoad();
 
-    images = Images(prefix: 'assets/map/');
+    images = Images();
 
     await loadWorldAndMap(
-      prefix: 'assets/map/',
       camera: camera,
-      tiledMapPath: 'flutter_runnergame_map_v04.tmx',
       images: images,
+      prefix: 'assets/map/',
+      tiledMapPath: 'flutter_runnergame_map_v04.tmx',
     );
 
     items = Items();
     enemies = Enemies();
     await addAll([items, enemies]);
+
+    player = Player();
+    world.add(player);
   }
 
   void gameOver() {
