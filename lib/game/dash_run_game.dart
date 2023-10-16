@@ -35,6 +35,9 @@ class DashRunGame extends FixedResolutionGame
           resolution: Vector2(100, 50),
         );
 
+  @override
+  bool get debugMode => true;
+
   static const floorSize = 220.0;
 
   late final Player player;
@@ -59,6 +62,7 @@ class DashRunGame extends FixedResolutionGame
 
     items = Items();
     enemies = Enemies();
+
     await addAll([items, enemies]);
 
     player = Player();

@@ -1,33 +1,16 @@
 import 'dart:async';
 
 import 'package:dash_run/game/game.dart';
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
+import 'package:leap/leap.dart';
 
-class Player extends PositionedEntity with HasGameRef<DashRunGame> {
-  Player()
-      : super(
-          behaviors: [
-            PropagatingCollisionBehavior(
-              RectangleHitbox.relative(
-                Vector2.all(.8),
-                parentSize: _size,
-              ),
-            ),
-            GravityBehavior(),
-            PlayerKeyboardControllerBehavior(),
-            JumpingBehavior(),
-            FlyingBehavior(),
-            PlayerCollidingBehavior(),
-          ],
-        );
-
-  static final _size = Vector2.all(100);
-
-  late final SpriteComponent flyingSprite;
-  late final SpriteAnimationComponent runningAnimation;
+class Player extends JumperCharacter {
+  Player();
 
   double yVelocity = 0;
 
@@ -38,14 +21,7 @@ class Player extends PositionedEntity with HasGameRef<DashRunGame> {
   FutureOr<void> onLoad() async {
     await super.onLoad();
 
-    size = _size;
-
-    add(
-      RectangleHitbox.relative(
-        Vector2.all(.8),
-        parentSize: size,
-      ),
-    );
+    size = Vector2.all(gameRef.tileSize);
 
     add(
       RectangleComponent(
@@ -54,10 +30,18 @@ class Player extends PositionedEntity with HasGameRef<DashRunGame> {
       ),
     );
 
-    position = Vector2(
-      200,
-      gameRef.resolution.y - DashRunGame.floorSize,
+    final hitbox = RectangleHitbox.relative(
+      Vector2.all(.8),
+      parentSize: size,
     );
+
+    add(hitbox);
+    add(PropagatingCollisionBehavior(hitbox));
+
+    final spawn = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
+    for (final object in spawn.objects) {
+      position = Vector2(object.x, object.y);
+    }
   }
 
   void jump() => findBehavior<JumpingBehavior>().jump();

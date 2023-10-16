@@ -1,4 +1,3 @@
-export 'flying_behavior.dart';
 export 'gravity_behavior.dart';
 export 'jumping_behavior.dart';
 export 'obstacle_scrolling_behavior.dart';

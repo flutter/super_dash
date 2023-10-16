@@ -1,5 +1,4 @@
 import 'package:dash_run/game/dash_run_game.dart';
-
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -16,7 +15,7 @@ class Enemies extends Component with HasGameRef<DashRunGame> {
     for (final object in enemiesLayer.objects) {
       final spritesheet = SpriteSheet(
         image: enemyTiles,
-        srcSize: Vector2.all(32),
+        srcSize: Vector2.all(gameRef.tileSize),
       );
 
       gameRef.leapMap.add(
