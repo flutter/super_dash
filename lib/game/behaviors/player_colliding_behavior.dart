@@ -10,8 +10,21 @@ class PlayerCollidingBehavior
     Set<Vector2> intersectionPoints,
     PositionComponent other,
   ) {
-    if (other is Enemies) {
-      gameRef.gameOver();
+    if (parent.collisionInfo.downCollision?.isHazard ?? false) {
+      parent.health -= parent.collisionInfo.downCollision!.hazardDamage;
+    }
+
+    for (final other in parent.collisionInfo.otherCollisions ?? const []) {
+      if (other is Item) {
+        other.removeFromParent();
+        parent.items.add(other);
+      }
+
+      if (other is Enemy) {
+        parent.health -= other.enemyDamage;
+      }
+
+      if (parent.isDead) gameRef.gameOver();
     }
   }
 }

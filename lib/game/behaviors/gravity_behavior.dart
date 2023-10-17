@@ -3,21 +3,20 @@ import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 
 class GravityBehavior extends Behavior<Player> with HasGameRef<DashRunGame> {
-  final double gravity = 2000;
+  GravityBehavior({required this.gravity});
+
+  final double gravity;
 
   @override
   void update(double dt) {
     super.update(dt);
 
     parent
-      ..yVelocity = parent.yVelocity + gravity * dt
-      ..y = parent.y + parent.yVelocity * dt;
+      ..velocity.y = parent.velocity.y + gravity * dt
+      ..y = parent.y + parent.velocity.y * dt;
 
-    final boundary = gameRef.resolution.y - DashRunGame.floorSize;
-    if (parent.y > boundary) {
-      parent
-        ..y = boundary
-        ..yVelocity = 0;
+    if (parent.isOnGround) {
+      parent.velocity.y = 0;
     }
   }
 }

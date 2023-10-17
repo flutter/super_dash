@@ -35,10 +35,12 @@ class Enemy extends PhysicalEntity<DashRunGame> {
   Enemy({
     required this.sprite,
     required this.tiledObject,
+    this.enemyDamage = 1,
     super.static = true,
     super.collisionType = CollisionType.standard,
   });
 
+  final double enemyDamage;
   late final Sprite sprite;
   late final TiledObject tiledObject;
 

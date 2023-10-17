@@ -35,9 +35,6 @@ class DashRunGame extends FixedResolutionGame
           resolution: Vector2(100, 50),
         );
 
-  @override
-  bool get debugMode => true;
-
   static const floorSize = 220.0;
 
   late final Player player;
@@ -60,10 +57,11 @@ class DashRunGame extends FixedResolutionGame
       tiledMapPath: 'flutter_runnergame_map_v04.tmx',
     );
 
+    input = SimpleCombinedInput();
     items = Items();
     enemies = Enemies();
 
-    await addAll([items, enemies]);
+    await addAll([items, enemies, input]);
 
     player = Player();
     world.add(player);
