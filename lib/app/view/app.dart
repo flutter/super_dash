@@ -1,9 +1,15 @@
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/l10n/l10n.dart';
+import 'package:dash_run/map_tester/map_tester.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({
+    super.key,
+    this.isTesting = false,
+  });
+
+  final bool isTesting;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +22,7 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const GameView(),
+      home: isTesting ? const MapTesterView() : const GameView(),
     );
   }
 }

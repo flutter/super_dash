@@ -29,8 +29,9 @@ abstract class FixedResolutionGame extends LeapGame {
 
 class DashRunGame extends FixedResolutionGame
     with TapCallbacks, HasKeyboardHandlerComponents, HasCollisionDetection {
-  DashRunGame()
-      : super(
+  DashRunGame({
+    this.customBundle,
+  }) : super(
           tileSize: 32,
           resolution: Vector2(100, 50),
         );
@@ -42,19 +43,25 @@ class DashRunGame extends FixedResolutionGame
   late final Enemies enemies;
   late final SimpleCombinedInput input;
 
+  final AssetBundle? customBundle;
+
   int score = 0;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    images = Images(prefix: 'assets/map/');
+    images = Images(
+      prefix: 'assets/map/',
+      bundle: customBundle,
+    );
 
     await loadWorldAndMap(
       prefix: 'assets/map/',
       camera: camera,
       tiledMapPath: 'flutter_runnergame_map_v04.tmx',
       images: images,
+      bundle: customBundle,
     );
 
     items = Items();
