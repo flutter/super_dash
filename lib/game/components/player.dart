@@ -1,10 +1,36 @@
+import 'dart:async';
+
 import 'package:dash_run/game/game.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:flame/effects.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
+
+class PlayerCameraAnchor extends Component
+    with ParentIsA<Player>
+    implements ReadOnlyPositionProvider {
+  late final Vector2 _anchor;
+
+  @override
+  Vector2 get position => _anchor;
+
+  @override
+  FutureOr<void> onLoad() async {
+    await super.onLoad();
+
+    _anchor = parent.position.clone();
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    _anchor
+      ..x = parent.position.x
+      ..y = parent.position.y - 200;
+  }
+}
 
 class Player extends JumperCharacter<DashRunGame> {
   Player({super.health = initialHealth});
@@ -13,6 +39,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
   late final Vector2 spawn;
   late final SimpleCombinedInput input;
+  late final PlayerCameraAnchor cameraAnchor;
 
   final List<Item> items = [];
 
@@ -28,22 +55,17 @@ class Player extends JumperCharacter<DashRunGame> {
     walkSpeed = gameRef.tileSize * 7;
     minJumpImpulse = world.gravity * 0.6;
 
-    final hitbox = RectangleHitbox.relative(
-      Vector2.all(.8),
-      parentSize: size,
-    );
-
-    add(hitbox);
-    add(PropagatingCollisionBehavior(hitbox));
     add(
-      RectangleComponent(
+      spriteAnimation = RectangleComponent(
         size: size,
         paint: Paint()..color = Colors.blue,
       ),
     );
-    add(GravityBehavior(gravity: world.gravity));
     add(PlayerCollidingBehavior());
     add(PlayerKeyboardControllerBehavior());
+    add(cameraAnchor = PlayerCameraAnchor());
+
+    gameRef.camera.follow(cameraAnchor);
 
     final spawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
     for (final object in spawnGroup.objects) {
@@ -54,13 +76,9 @@ class Player extends JumperCharacter<DashRunGame> {
 
   @override
   void update(double dt) {
+    super.update(dt);
+
     if (world.isOutside(this)) resetPosition();
-
-    velocity
-      ..x = walkSpeed
-      ..y += world.gravity * dt;
-
-    return super.update(dt);
   }
 
   void resetPosition() {
