@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:dash_run/game/game.dart';
-
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
@@ -16,19 +13,20 @@ class Player extends JumperCharacter<DashRunGame> {
 
   late final Vector2 spawn;
   late final SimpleCombinedInput input;
+
   final List<Item> items = [];
 
   @override
   int get priority => 1;
 
   @override
-  FutureOr<void> onLoad() async {
+  Future<void> onLoad() async {
     await super.onLoad();
 
     input = gameRef.input;
-    walkSpeed = map.tileSize * 2;
-    minJumpImpulse = world.gravity * 0.6;
     size = Vector2.all(gameRef.tileSize);
+    walkSpeed = gameRef.tileSize * 7;
+    minJumpImpulse = world.gravity * 0.6;
 
     final hitbox = RectangleHitbox.relative(
       Vector2.all(.8),
@@ -45,6 +43,7 @@ class Player extends JumperCharacter<DashRunGame> {
     );
     add(GravityBehavior(gravity: world.gravity));
     add(PlayerCollidingBehavior());
+    add(PlayerKeyboardControllerBehavior());
 
     final spawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
     for (final object in spawnGroup.objects) {
@@ -55,15 +54,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
   @override
   void update(double dt) {
-    updateHandleInput(dt);
-
-    if (isDead) {
-      walking = false;
-    }
-
-    if (world.isOutside(this)) {
-      resetPosition();
-    }
+    if (world.isOutside(this)) resetPosition();
 
     velocity
       ..x = walkSpeed
@@ -80,54 +71,5 @@ class Player extends JumperCharacter<DashRunGame> {
       ..y = 0;
     lastGroundXVelocity = 0;
     faceLeft = false;
-  }
-
-  void updateHandleInput(double dt) {
-    if (isAlive) {
-      // Keep jumping if started.
-      if (jumping && input.isPressed) {
-        jumping = true;
-      } else {
-        jumping = false;
-      }
-    }
-
-    if (!input.justPressed) return;
-
-    if (input.isPressedLeft) {
-      // Tapped left.
-      if (walking) {
-        if (faceLeft) {
-          // Already moving left.
-          if (isOnGround) jumping = true;
-        } else {
-          // Moving right, stop.
-          walking = false;
-          faceLeft = true;
-        }
-      } else {
-        // Standing still.
-        walking = true;
-        faceLeft = true;
-      }
-    }
-
-    if (input.isPressedRight) {
-      // Tapped right.
-      if (walking) {
-        if (!faceLeft) {
-          // Already moving right.
-          if (isOnGround) jumping = true;
-        } else {
-          // Moving left, stop.
-          walking = false;
-          faceLeft = false;
-        }
-      } else {
-        // Standing still.
-        walking = true;
-        faceLeft = false;
-      }
-    }
   }
 }

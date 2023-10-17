@@ -1,28 +1,61 @@
-import 'dart:async';
-
 import 'package:dash_run/game/game.dart';
-import 'package:flame/components.dart';
+
 import 'package:flame_behaviors/flame_behaviors.dart';
-import 'package:flutter/services.dart';
 
 class PlayerKeyboardControllerBehavior extends Behavior<Player> {
   @override
-  FutureOr<void> onLoad() async {
-    await super.onLoad();
+  void update(double dt) {
+    super.update(dt);
 
-    add(
-      KeyboardListenerComponent(
-        keyDown: {
-          LogicalKeyboardKey.space: (_) {
-            return false;
-          },
-        },
-        keyUp: {
-          LogicalKeyboardKey.space: (_) {
-            return false;
-          },
-        },
-      ),
-    );
+    if (parent.isAlive) {
+      // Keep jumping if started.
+      if (parent.jumping && parent.input.isPressed) {
+        parent.jumping = true;
+      } else {
+        parent.jumping = false;
+      }
+    }
+
+    if (!parent.input.justPressed) return;
+
+    if (parent.input.isPressedLeft) {
+      // Tapped left.
+      if (parent.walking) {
+        if (parent.faceLeft) {
+          // Already moving left.
+          if (parent.isOnGround) parent.jumping = true;
+        } else {
+          // Moving right, stop.
+          parent
+            ..walking = false
+            ..faceLeft = true;
+        }
+      } else {
+        // Standing still.
+        parent
+          ..walking = true
+          ..faceLeft = true;
+      }
+    }
+
+    if (parent.input.isPressedRight) {
+      // Tapped right.
+      if (parent.walking) {
+        if (!parent.faceLeft) {
+          // Already moving right.
+          if (parent.isOnGround) parent.jumping = true;
+        } else {
+          // Moving left, stop.
+          parent
+            ..walking = false
+            ..faceLeft = false;
+        }
+      } else {
+        // Standing still.
+        parent
+          ..walking = true
+          ..faceLeft = false;
+      }
+    }
   }
 }

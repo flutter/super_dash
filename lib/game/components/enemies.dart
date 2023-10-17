@@ -40,7 +40,7 @@ class Enemy extends PhysicalEntity<DashRunGame> {
     super.collisionType = CollisionType.standard,
   });
 
-  final double enemyDamage;
+  final int enemyDamage;
   late final Sprite sprite;
   late final TiledObject tiledObject;
 

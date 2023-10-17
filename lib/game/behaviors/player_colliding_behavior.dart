@@ -24,7 +24,10 @@ class PlayerCollidingBehavior
         parent.health -= other.enemyDamage;
       }
 
-      if (parent.isDead) gameRef.gameOver();
+      if (parent.isDead) {
+        parent.walking = false;
+        gameRef.gameOver();
+      }
     }
   }
 }

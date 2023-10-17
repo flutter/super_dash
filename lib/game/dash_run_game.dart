@@ -35,8 +35,6 @@ class DashRunGame extends FixedResolutionGame
           resolution: Vector2(100, 50),
         );
 
-  static const floorSize = 220.0;
-
   late final Player player;
   late final Items items;
   late final Enemies enemies;
