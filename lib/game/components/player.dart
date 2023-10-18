@@ -54,16 +54,17 @@ class Player extends JumperCharacter<DashRunGame> {
     size = Vector2.all(gameRef.tileSize);
     walkSpeed = gameRef.tileSize * 7;
     minJumpImpulse = world.gravity * 0.6;
+    cameraAnchor = PlayerCameraAnchor();
 
+    add(cameraAnchor);
+    add(PlayerCollidingBehavior());
+    add(PlayerKeyboardControllerBehavior());
     add(
-      spriteAnimation = RectangleComponent(
+      RectangleComponent(
         size: size,
         paint: Paint()..color = Colors.blue,
       ),
     );
-    add(PlayerCollidingBehavior());
-    add(PlayerKeyboardControllerBehavior());
-    add(cameraAnchor = PlayerCameraAnchor());
 
     gameRef.camera.follow(cameraAnchor);
 

@@ -33,7 +33,7 @@ dependency_overrides:
   flame_behaviors:
     git:
       url: https://github.com/VeryGoodOpenSource/flame_behaviors
-      ref: feat!(flame_behaviors)-migrate-to-flame-v1.8.0
+      ref: main
       path: packages/flame_behaviors
   leap:
     git:
