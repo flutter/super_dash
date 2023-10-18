@@ -11,7 +11,7 @@ dependencies:
   bloc: ^8.1.2
   file_selector: ^1.0.1
   flame: ^1.8.2
-  flame_behaviors: ^0.2.0
+  flame_behaviors: ^1.0.0
   flame_tiled: ^1.14.0
   flutter:
     sdk: flutter
@@ -32,18 +32,6 @@ dev_dependencies:
     sdk: flutter
   mocktail: ^1.0.0
   very_good_analysis: ^5.0.0
-
-dependency_overrides:
-  flame:
-    git:
-      url: https://github.com/flame-engine/flame.git
-      path: packages/flame
-      ref: 97fff0ed2baab53f2780eca29a9d08ea5d90426a
-  flame_tiled:
-    git:
-      url: https://github.com/flame-engine/flame.git
-      ref: feat/allow-tsx-images-in-the-same-level
-      path: packages/flame_tiled
 
 flutter:
   uses-material-design: true
