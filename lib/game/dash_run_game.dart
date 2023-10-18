@@ -21,9 +21,9 @@ abstract class FixedResolutionGame extends LeapGame {
     await super.onLoad();
 
     camera = CameraComponent.withFixedResolution(
-      width: resolution.x * tileSize,
-      height: resolution.y * tileSize,
-    )..viewfinder.position = resolution * (tileSize / 2);
+      width: 800,
+      height: 1200,
+    );
   }
 }
 
@@ -55,6 +55,7 @@ class DashRunGame extends FixedResolutionGame
       tiledMapPath: 'flutter_runnergame_map_v04.tmx',
     );
 
+
     input = SimpleCombinedInput();
     items = Items();
     enemies = Enemies();
@@ -62,6 +63,7 @@ class DashRunGame extends FixedResolutionGame
     await addAll([items, enemies, input]);
 
     player = Player();
+
     world.add(player);
   }
 
