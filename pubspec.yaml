@@ -10,24 +10,21 @@ environment:
 dependencies:
   bloc: ^8.1.2
   file_selector: ^1.0.1
-  flame: ^1.8.2
+  flame: ^1.10.0
   flame_behaviors: ^1.0.0
-  flame_tiled: ^1.14.0
+  flame_tiled: ^1.15.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
   flutter_localizations:
     sdk: flutter
   intl: ^0.18.0
-  leap:
-    git:
-      url: https://github.com/erickzanardo/leap
-      ref: main
-      path: packages/leap
+  leap: ^0.2.0
   path: ^1.8.3
 
 dev_dependencies:
   bloc_test: ^9.1.2
+  flame_test: ^1.13.2
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.0

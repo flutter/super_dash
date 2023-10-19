@@ -4,6 +4,7 @@ import 'package:dash_run/game/game.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
@@ -20,10 +21,13 @@ abstract class FixedResolutionGame extends LeapGame {
   FutureOr<void> onLoad() async {
     await super.onLoad();
 
+    await Flame.device.fullScreen();
+    await Flame.device.setLandscape();
+
     camera = CameraComponent.withFixedResolution(
-      width: resolution.x * tileSize,
-      height: resolution.y * tileSize,
-    )..viewfinder.position = resolution * (tileSize / 2);
+      width: resolution.x,
+      height: resolution.y,
+    );
   }
 }
 
@@ -32,11 +36,11 @@ class DashRunGame extends FixedResolutionGame
   DashRunGame({
     this.customBundle,
   }) : super(
-          tileSize: 32,
-          resolution: Vector2(100, 50),
+          tileSize: 64,
+          resolution: Vector2(2000, 1000),
         );
 
-  static const floorSize = 220.0;
+  static const prefix = 'assets/map/';
 
   late final Player player;
   late final Items items;
@@ -52,21 +56,26 @@ class DashRunGame extends FixedResolutionGame
     await super.onLoad();
 
     images = Images(
-      prefix: 'assets/map/',
+      prefix: prefix,
       bundle: customBundle,
     );
 
     await loadWorldAndMap(
-      prefix: 'assets/map/',
       camera: camera,
-      tiledMapPath: 'flutter_runnergame_map_v04.tmx',
       images: images,
+      prefix: prefix,
       bundle: customBundle,
+      tiledMapPath: 'flutter_runnergame_map_v04.tmx',
     );
 
+    input = SimpleCombinedInput();
     items = Items();
     enemies = Enemies();
-    await addAll([items, enemies]);
+
+    await addAll([items, enemies, input]);
+
+    player = Player();
+    world.add(player);
   }
 
   void gameOver() {

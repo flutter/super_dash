@@ -17,13 +17,13 @@ class Items extends Component with HasGameRef<DashRunGame> {
     for (final object in itemsLayer.objects) {
       final spritesheet = SpriteSheet(
         image: itemTiles,
-        srcSize: Vector2.all(32),
+        srcSize: Vector2.all(gameRef.tileSize),
       );
 
       gameRef.leapMap.add(
         Item(
           // We are sure we have a gid.
-          sprite: spritesheet.getSpriteById(object.gid!),
+          sprite: spritesheet.getSpriteById(object.id),
           tiledObject: object,
         ),
       );
