@@ -11,7 +11,7 @@ dependencies:
   bloc: ^8.1.2
   file_selector: ^1.0.1
   flame: ^1.10.0
-  flame_behaviors: ^0.2.0
+  flame_behaviors: ^1.0.0
   flame_tiled: ^1.15.0
   flutter:
     sdk: flutter
@@ -19,7 +19,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.18.0
-  leap: ^0.1.0
+  leap: ^0.2.0
   path: ^1.8.3
 
 dev_dependencies:
@@ -29,18 +29,6 @@ dev_dependencies:
     sdk: flutter
   mocktail: ^1.0.0
   very_good_analysis: ^5.0.0
-
-dependency_overrides:
-  flame_behaviors:
-    git:
-      url: https://github.com/VeryGoodOpenSource/flame_behaviors
-      ref: main
-      path: packages/flame_behaviors
-  leap:
-    git:
-      url: https://github.com/erickzanardo/leap
-      ref: main
-      path: packages/leap
 
 flutter:
   uses-material-design: true
