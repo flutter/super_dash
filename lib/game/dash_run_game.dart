@@ -81,4 +81,24 @@ class DashRunGame extends LeapGame
       ),
     );
   }
+
+  void addCameraDebugger() {
+    if (descendants().whereType<CameraDebugger>().isEmpty) {
+      final player = world.firstChild<Player>()!;
+
+      final cameraDebugger = CameraDebugger(
+        position: player.position.clone(),
+      );
+      world.add(cameraDebugger);
+
+      final anchor = PlayerCameraAnchor(
+        levelSize: leapMap.tiledMap.size.clone(),
+        cameraViewport: _cameraViewport,
+      );
+      cameraDebugger.add(anchor);
+      camera.follow(anchor);
+
+      player.removeFromParent();
+    }
+  }
 }

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
 class PlayerCameraAnchor extends Component
-    with ParentIsA<Player>
+    with ParentIsA<PositionComponent>
     implements ReadOnlyPositionProvider {
   PlayerCameraAnchor({
     required this.cameraViewport,
