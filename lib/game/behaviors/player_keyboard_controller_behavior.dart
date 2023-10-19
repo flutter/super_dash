@@ -9,7 +9,7 @@ class PlayerKeyboardControllerBehavior extends Behavior<Player> {
 
     if (parent.isAlive) {
       // Keep jumping if started.
-      if (parent.jumping && parent.input.isPressed) {
+      if (parent.jumping && parent.input.isPressed && parent.isOnGround) {
         parent.jumping = true;
       } else {
         parent.jumping = false;
