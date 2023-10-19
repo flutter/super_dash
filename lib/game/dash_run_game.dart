@@ -8,36 +8,12 @@ import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
-abstract class FixedResolutionGame extends LeapGame {
-  FixedResolutionGame({
-    required super.tileSize,
-    required this.resolution,
-  });
-
-  final Vector2 resolution;
-
-  @mustCallSuper
-  @override
-  FutureOr<void> onLoad() async {
-    await super.onLoad();
-
-    await Flame.device.fullScreen();
-    await Flame.device.setLandscape();
-
-    camera = CameraComponent.withFixedResolution(
-      width: resolution.x,
-      height: resolution.y,
-    );
-  }
-}
-
-class DashRunGame extends FixedResolutionGame
+class DashRunGame extends LeapGame
     with TapCallbacks, HasKeyboardHandlerComponents, HasCollisionDetection {
   DashRunGame({
     this.customBundle,
   }) : super(
           tileSize: 64,
-          resolution: Vector2(2000, 1000),
         );
 
   static const prefix = 'assets/map/';
@@ -49,11 +25,21 @@ class DashRunGame extends FixedResolutionGame
 
   final AssetBundle? customBundle;
 
+  static final _cameraViewport = Vector2(592, 1280);
+
   int score = 0;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    await Flame.device.fullScreen();
+    await Flame.device.setLandscape();
+
+    camera = CameraComponent.withFixedResolution(
+      width: _cameraViewport.x,
+      height: _cameraViewport.y,
+    );
 
     images = Images(
       prefix: prefix,
@@ -74,7 +60,10 @@ class DashRunGame extends FixedResolutionGame
 
     await addAll([items, enemies, input]);
 
-    player = Player();
+    player = Player(
+      levelSize: leapMap.tiledMap.size.clone(),
+      cameraViewport: _cameraViewport,
+    );
     world.add(player);
   }
 
@@ -84,7 +73,12 @@ class DashRunGame extends FixedResolutionGame
 
     Future<void>.delayed(
       const Duration(seconds: 1),
-      () => world.add(Player()),
+      () => world.add(
+        Player(
+          levelSize: leapMap.tiledMap.size.clone(),
+          cameraViewport: _cameraViewport,
+        ),
+      ),
     );
   }
 }
