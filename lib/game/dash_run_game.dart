@@ -67,7 +67,7 @@ class DashRunGame extends LeapGame
       tileLayerName: 'enemies',
       tilesetPath: 'objects/tile_enemies_v2.png',
       firstGId: 734,
-      componentBuilder: Item.new,
+      componentBuilder: Enemy.new,
     );
 
     await addAll([items, enemies, input]);
