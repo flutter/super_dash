@@ -22,10 +22,6 @@ dependencies:
   leap: ^0.2.0
   path: ^1.8.3
 
-dependency_overrides:
-  leap:
-    path: ../../gamedev/leap/packages/leap
-
 dev_dependencies:
   bloc_test: ^9.1.2
   flame_test: ^1.13.2
