@@ -54,19 +54,26 @@ class DashRunGame extends LeapGame
 
     input = SimpleCombinedInput();
 
+    final tilesets = leapMap.tiledMap.tileMap.map.tilesets;
+    final itemsTileset =
+        tilesets.firstWhere((tileset) => tileset.name == 'tile_items_v2');
+
+    final enemiesTileset =
+        tilesets.firstWhere((tileset) => tileset.name == 'tile_enemies_v2');
+
     final items = ImageObjectGroupBuilder(
+      tileset: itemsTileset,
       leapMap: leapMap,
       tileLayerName: 'items',
       tilesetPath: 'objects/tile_items_v2.png',
-      firstGId: 740,
       componentBuilder: Item.new,
     );
 
     final enemies = ImageObjectGroupBuilder(
+      tileset: enemiesTileset,
       leapMap: leapMap,
       tileLayerName: 'enemies',
       tilesetPath: 'objects/tile_enemies_v2.png',
-      firstGId: 734,
       componentBuilder: Enemy.new,
     );
 
