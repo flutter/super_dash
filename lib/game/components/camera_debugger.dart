@@ -16,6 +16,8 @@ class CameraDebugger extends RectangleComponent {
   final _direction = Vector2.zero();
   double _speed = 300;
 
+  double get speed => _speed;
+
   @override
   void update(double dt) {
     super.update(dt);
