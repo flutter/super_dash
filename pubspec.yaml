@@ -20,6 +20,7 @@ dependencies:
     sdk: flutter
   intl: ^0.18.0
   leap: ^0.2.0
+  ordered_set: ^5.0.2
   path: ^1.8.3
 
 dev_dependencies:

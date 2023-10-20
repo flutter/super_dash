@@ -61,6 +61,12 @@ class DashRunGame extends LeapGame
     final enemiesTileset =
         tilesets.firstWhere((tileset) => tileset.name == 'tile_enemies_v2');
 
+    player = Player(
+      levelSize: leapMap.tiledMap.size.clone(),
+      cameraViewport: _cameraViewport,
+    );
+    world.add(player);
+
     final items = ImageObjectGroupBuilder(
       tileset: itemsTileset,
       leapMap: leapMap,
@@ -69,21 +75,25 @@ class DashRunGame extends LeapGame
       componentBuilder: Item.new,
     );
 
-    final enemies = ImageObjectGroupBuilder(
+    //final enemies = ImageObjectGroupBuilder(
+    //  tileset: enemiesTileset,
+    //  leapMap: leapMap,
+    //  tileLayerName: 'enemies',
+    //  tilesetPath: 'objects/tile_enemies_v2.png',
+    //  componentBuilder: Enemy.new,
+    //);
+
+    final enemies = ObjectGroupProximityBuilder(
       tileset: enemiesTileset,
       leapMap: leapMap,
       tileLayerName: 'enemies',
       tilesetPath: 'objects/tile_enemies_v2.png',
       componentBuilder: Enemy.new,
+      proximity: _cameraViewport.x * 1.5,
+      reference: player,
     );
 
     await addAll([items, enemies, input]);
-
-    player = Player(
-      levelSize: leapMap.tiledMap.size.clone(),
-      cameraViewport: _cameraViewport,
-    );
-    world.add(player);
   }
 
   void gameOver() {
