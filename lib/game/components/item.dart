@@ -9,7 +9,7 @@ class Item extends PhysicalEntity<DashRunGame> {
   Item({
     required this.sprite,
     required this.tiledObject,
-  });
+  }) : super(static: true);
 
   late final Sprite sprite;
   late final TiledObject tiledObject;
