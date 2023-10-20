@@ -7,8 +7,13 @@ class GameView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GameWidget.controlled(
-      gameFactory: DashRunGame.new,
+    return const DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.blueAccent,
+      ),
+      child: GameWidget.controlled(
+        gameFactory: DashRunGame.new,
+      ),
     );
   }
 }
