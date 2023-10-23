@@ -41,8 +41,6 @@ class Player extends JumperCharacter<DashRunGame> {
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
 
-  final List<Item> items = [];
-
   @override
   int get priority => 1;
 

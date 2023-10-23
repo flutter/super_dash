@@ -72,7 +72,7 @@ class DashRunGame extends FixedResolutionGame
     items = Items();
     enemies = Enemies();
 
-    await addAll([items, enemies, input]);
+    await addAll([items, enemies, input, ScoreLabel()]);
 
     player = Player();
     world.add(player);

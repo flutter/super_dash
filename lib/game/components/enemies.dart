@@ -7,7 +7,11 @@ import 'package:leap/leap.dart';
 class Enemies extends Component with HasGameRef<DashRunGame> {
   @override
   Future<void> onLoad() async {
-    final enemiesLayer = gameRef.leapMap.getTileLayer<ObjectGroup>('enemies');
+    final tileset = game.leapMap.tiledMap.tileMap.map.tilesets.firstWhere(
+      (tileset) => tileset.name == 'tile_items_v2',
+    );
+    final firstGId = tileset.firstGid ?? 0;
+    final enemiesLayer = game.leapMap.getTileLayer<ObjectGroup>('enemies');
     final enemyTiles = await gameRef.images.load(
       'objects/tile_enemies_v2.png',
     );
@@ -20,9 +24,10 @@ class Enemies extends Component with HasGameRef<DashRunGame> {
 
       gameRef.leapMap.add(
         Enemy(
-          // We are sure we have a gid.
-          sprite: spritesheet.getSpriteById(object.gid!),
           tiledObject: object,
+          sprite: spritesheet.getSpriteById(
+            (object.gid ?? 0) - firstGId,
+          ),
         ),
       );
     }

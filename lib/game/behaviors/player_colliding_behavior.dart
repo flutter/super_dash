@@ -17,7 +17,7 @@ class PlayerCollidingBehavior
     for (final other in parent.collisionInfo.otherCollisions ?? const []) {
       if (other is Item) {
         other.removeFromParent();
-        parent.items.add(other);
+        game.score++;
       }
 
       if (other is Enemy) {
@@ -26,7 +26,7 @@ class PlayerCollidingBehavior
 
       if (parent.isDead) {
         parent.walking = false;
-        gameRef.gameOver();
+        game.gameOver();
       }
     }
   }
