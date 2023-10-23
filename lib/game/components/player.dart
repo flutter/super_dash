@@ -8,35 +8,67 @@ import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
 class PlayerCameraAnchor extends Component
-    with ParentIsA<Player>
+    with ParentIsA<PositionComponent>
     implements ReadOnlyPositionProvider {
-  late final Vector2 _anchor;
+  PlayerCameraAnchor({
+    required this.cameraViewport,
+    required this.levelSize,
+  });
+
+  final Vector2 _anchor = Vector2.zero();
+
+  final Vector2 cameraViewport;
+  final Vector2 levelSize;
+
+  late final Vector2 _cameraMin = Vector2(
+    cameraViewport.x / 2,
+    cameraViewport.y / 2,
+  );
+
+  late final Vector2 _cameraMax = Vector2(
+    levelSize.x - cameraViewport.x / 2,
+    levelSize.y - cameraViewport.y / 2,
+  );
 
   @override
   Vector2 get position => _anchor;
+
+  void _setAnchor(double x, double y) {
+    _anchor
+      ..x = x.clamp(_cameraMin.x, _cameraMax.x)
+      ..y = y.clamp(_cameraMin.y, _cameraMax.y);
+  }
 
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
 
-    _anchor = parent.position.clone();
+    final value = parent.position.clone();
+    _setAnchor(value.x, value.y);
   }
 
   @override
   void update(double dt) {
     super.update(dt);
 
-    _anchor
-      ..x = parent.position.x
-      ..y = parent.position.y - 200;
+    _setAnchor(
+      parent.position.x,
+      parent.position.y,
+    );
   }
 }
 
 class Player extends JumperCharacter<DashRunGame> {
-  Player({super.health = initialHealth});
+  Player({
+    required this.levelSize,
+    required this.cameraViewport,
+    super.health = initialHealth,
+  });
 
   static const initialHealth = 3;
 
+  final Vector2 levelSize;
+  final Vector2 cameraViewport;
   late final Vector2 spawn;
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
@@ -52,7 +84,10 @@ class Player extends JumperCharacter<DashRunGame> {
     size = Vector2.all(gameRef.tileSize);
     walkSpeed = gameRef.tileSize * 5;
     minJumpImpulse = world.gravity * 0.7;
-    cameraAnchor = PlayerCameraAnchor();
+    cameraAnchor = PlayerCameraAnchor(
+      cameraViewport: cameraViewport,
+      levelSize: levelSize,
+    );
 
     add(cameraAnchor);
     add(PlayerCollidingBehavior());

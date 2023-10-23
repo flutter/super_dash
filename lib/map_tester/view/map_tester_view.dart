@@ -69,6 +69,13 @@ class _MapTesterViewState extends State<MapTesterView> {
                     },
                     child: const Text('Reload'),
                   ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      game?.addCameraDebugger();
+                    },
+                    child: const Text('Seize camera control'),
+                  ),
                 ],
               ),
             const SizedBox(height: 16),
