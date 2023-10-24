@@ -93,7 +93,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
     add(cameraAnchor);
     add(PlayerCollidingBehavior());
-    add(PlayerKeyboardControllerBehavior());
+    add(PlayerControllerBehavior());
     add(
       RectangleComponent(
         size: size,

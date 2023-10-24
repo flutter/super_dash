@@ -2,7 +2,7 @@ import 'package:dash_run/game/game.dart';
 
 import 'package:flame_behaviors/flame_behaviors.dart';
 
-class PlayerKeyboardControllerBehavior extends Behavior<Player> {
+class PlayerControllerBehavior extends Behavior<Player> {
   @override
   void update(double dt) {
     super.update(dt);
@@ -17,26 +17,6 @@ class PlayerKeyboardControllerBehavior extends Behavior<Player> {
     }
 
     if (!parent.input.justPressed) return;
-
-    if (parent.input.isPressedLeft) {
-      // Tapped left.
-      if (parent.walking) {
-        if (parent.faceLeft) {
-          // Already moving left.
-          if (parent.isOnGround) parent.jumping = true;
-        } else {
-          // Moving right, stop.
-          parent
-            ..walking = false
-            ..faceLeft = true;
-        }
-      } else {
-        // Standing still.
-        parent
-          ..walking = true
-          ..faceLeft = true;
-      }
-    }
 
     if (parent.input.isPressedRight) {
       // Tapped right.
