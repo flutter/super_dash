@@ -10,22 +10,17 @@ import 'package:leap/leap.dart';
 
 class DashRunGame extends LeapGame
     with TapCallbacks, HasKeyboardHandlerComponents, HasCollisionDetection {
-  DashRunGame({
-    this.customBundle,
-  }) : super(
-          tileSize: 64,
-        );
+  DashRunGame({this.customBundle}) : super(tileSize: 64);
 
   static const prefix = 'assets/map/';
+  static final _cameraViewport = Vector2(592, 1280);
+
+  final AssetBundle? customBundle;
 
   late final Player player;
   late final Items items;
   late final Enemies enemies;
   late final SimpleCombinedInput input;
-
-  final AssetBundle? customBundle;
-
-  static final _cameraViewport = Vector2(592, 1280);
 
   int score = 0;
 
