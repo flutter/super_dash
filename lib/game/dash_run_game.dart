@@ -10,20 +10,15 @@ import 'package:leap/leap.dart';
 
 class DashRunGame extends LeapGame
     with TapCallbacks, HasKeyboardHandlerComponents {
-  DashRunGame({
-    this.customBundle,
-  }) : super(
-          tileSize: 64,
-        );
+  DashRunGame({this.customBundle}) : super(tileSize: 64);
 
   static const prefix = 'assets/map/';
-
-  late final Player player;
-  late final SimpleCombinedInput input;
+  static final _cameraViewport = Vector2(592, 1280);
 
   final AssetBundle? customBundle;
 
-  static final _cameraViewport = Vector2(592, 1280);
+  late final Player player;
+  late final SimpleCombinedInput input;
 
   int score = 0;
 
@@ -49,7 +44,7 @@ class DashRunGame extends LeapGame
       images: images,
       prefix: prefix,
       bundle: customBundle,
-      tiledMapPath: 'flutter_runnergame_map_v04.tmx',
+      tiledMapPath: 'flutter_runnergame_map_v05.tmx',
     );
 
     input = SimpleCombinedInput();
