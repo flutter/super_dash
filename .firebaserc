@@ -9,6 +9,13 @@
           "endless-runner-9481713-383737"
         ]
       }
+    },
+    "super-dash-game": {
+      "hosting": {
+        "app_prod": [
+          "super-dash-game"
+        ]
+      }
     }
   },
   "etags": {}
