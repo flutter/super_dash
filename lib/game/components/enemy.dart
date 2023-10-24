@@ -8,15 +8,14 @@ class Enemy extends PhysicalEntity<DashRunGame> {
     required this.sprite,
     required this.tiledObject,
     this.enemyDamage = 1,
-    super.collisionType = CollisionType.standard,
-  });
+  }) : super(collisionType: CollisionType.standard);
 
   final int enemyDamage;
   late final Sprite sprite;
   late final TiledObject tiledObject;
 
   @override
-  int get priority => 1;
+  int get priority => 2;
 
   @override
   Future<void> onLoad() async {

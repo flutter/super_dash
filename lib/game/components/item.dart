@@ -9,13 +9,13 @@ class Item extends PhysicalEntity<DashRunGame> {
   Item({
     required this.sprite,
     required this.tiledObject,
-  }) : super(static: true);
+  }) : super(static: true, collisionType: CollisionType.standard);
 
   late final Sprite sprite;
   late final TiledObject tiledObject;
 
   @override
-  int get priority => 1;
+  int get priority => 2;
 
   @override
   Future<void> onLoad() async {
