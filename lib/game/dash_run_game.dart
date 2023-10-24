@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
 class DashRunGame extends LeapGame
-    with TapCallbacks, HasKeyboardHandlerComponents, HasCollisionDetection {
+    with TapCallbacks, HasKeyboardHandlerComponents {
   DashRunGame({
     this.customBundle,
   }) : super(
@@ -19,8 +19,6 @@ class DashRunGame extends LeapGame
   static const prefix = 'assets/map/';
 
   late final Player player;
-  late final Items items;
-  late final Enemies enemies;
   late final SimpleCombinedInput input;
 
   final AssetBundle? customBundle;
@@ -55,8 +53,27 @@ class DashRunGame extends LeapGame
     );
 
     input = SimpleCombinedInput();
-    items = Items();
-    enemies = Enemies();
+
+    final tilesets = leapMap.tiledMap.tileMap.map.tilesets;
+    final itemsTileset =
+        tilesets.firstWhere((tileset) => tileset.name == 'tile_items_v2');
+
+    final enemiesTileset =
+        tilesets.firstWhere((tileset) => tileset.name == 'tile_enemies_v2');
+
+    final items = SpriteObjectGroupBuilder(
+      tileset: itemsTileset,
+      tileLayerName: 'items',
+      tilesetPath: 'objects/tile_items_v2.png',
+      componentBuilder: Item.new,
+    );
+
+    final enemies = SpriteObjectGroupBuilder(
+      tileset: enemiesTileset,
+      tileLayerName: 'enemies',
+      tilesetPath: 'objects/tile_enemies_v2.png',
+      componentBuilder: Enemy.new,
+    );
 
     await addAll([items, enemies, input]);
 
