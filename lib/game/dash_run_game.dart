@@ -61,17 +61,15 @@ class DashRunGame extends LeapGame
     final enemiesTileset =
         tilesets.firstWhere((tileset) => tileset.name == 'tile_enemies_v2');
 
-    final items = ImageObjectGroupBuilder(
+    final items = SpriteObjectGroupBuilder(
       tileset: itemsTileset,
-      leapMap: leapMap,
       tileLayerName: 'items',
       tilesetPath: 'objects/tile_items_v2.png',
       componentBuilder: Item.new,
     );
 
-    final enemies = ImageObjectGroupBuilder(
+    final enemies = SpriteObjectGroupBuilder(
       tileset: enemiesTileset,
-      leapMap: leapMap,
       tileLayerName: 'enemies',
       tilesetPath: 'objects/tile_enemies_v2.png',
       componentBuilder: Enemy.new,

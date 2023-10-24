@@ -90,7 +90,6 @@ class Player extends JumperCharacter<DashRunGame> {
     );
 
     add(cameraAnchor);
-    add(PlayerCollidingBehavior());
     add(PlayerKeyboardControllerBehavior());
     add(
       RectangleComponent(
@@ -111,6 +110,15 @@ class Player extends JumperCharacter<DashRunGame> {
   @override
   void update(double dt) {
     super.update(dt);
+
+    final collisions = collisionInfo.otherCollisions ?? const [];
+
+    if (collisions.isNotEmpty) {
+      for(final item in collisions.whereType<Item>()) {
+        // TODO: Increase score.
+        item.removeFromParent();
+      }
+    }
 
     if (world.isOutside(this)) resetPosition();
   }
