@@ -51,7 +51,7 @@ class DashRunGame extends LeapGame
       images: images,
       prefix: prefix,
       bundle: customBundle,
-      tiledMapPath: 'flutter_runnergame_map_v04.tmx',
+      tiledMapPath: 'flutter_runnergame_map_v05.tmx',
     );
 
     input = SimpleCombinedInput();
