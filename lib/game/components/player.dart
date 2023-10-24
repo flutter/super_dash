@@ -111,16 +111,27 @@ class Player extends JumperCharacter<DashRunGame> {
   void update(double dt) {
     super.update(dt);
 
-    final collisions = collisionInfo.otherCollisions ?? const [];
+    if (world.isOutside(this)) resetPosition();
 
-    if (collisions.isNotEmpty) {
-      for(final item in collisions.whereType<Item>()) {
-        // TODO: Increase score.
-        item.removeFromParent();
-      }
+    if (isDead) {
+      walking = false;
+      game.gameOver();
     }
 
-    if (world.isOutside(this)) resetPosition();
+    final collisions = collisionInfo.otherCollisions ?? const [];
+
+    if (collisions.isEmpty) return;
+
+    for (final collision in collisions) {
+      if (collision is Item) {
+        collision.removeFromParent();
+        game.score++;
+      }
+
+      if (collision is Enemy) {
+        health -= collision.enemyDamage;
+      }
+    }
   }
 
   void resetPosition() {

@@ -55,11 +55,14 @@ class DashRunGame extends LeapGame
     input = SimpleCombinedInput();
 
     final tilesets = leapMap.tiledMap.tileMap.map.tilesets;
-    final itemsTileset =
-        tilesets.firstWhere((tileset) => tileset.name == 'tile_items_v2');
 
-    final enemiesTileset =
-        tilesets.firstWhere((tileset) => tileset.name == 'tile_enemies_v2');
+    final itemsTileset = tilesets.firstWhere(
+      (tileset) => tileset.name == 'tile_items_v2',
+    );
+
+    final enemiesTileset = tilesets.firstWhere(
+      (tileset) => tileset.name == 'tile_enemies_v2',
+    );
 
     final items = SpriteObjectGroupBuilder(
       tileset: itemsTileset,
@@ -75,13 +78,13 @@ class DashRunGame extends LeapGame
       componentBuilder: Enemy.new,
     );
 
-    await addAll([items, enemies, input, ScoreLabel()]);
-
     player = Player(
       levelSize: leapMap.tiledMap.size.clone(),
       cameraViewport: _cameraViewport,
     );
     world.add(player);
+
+    await addAll([items, enemies, input, ScoreLabel()]);
   }
 
   void gameOver() {
