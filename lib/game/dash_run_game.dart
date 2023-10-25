@@ -65,9 +65,8 @@ class DashRunGame extends LeapGame
       (tileset) => tileset.name == 'tile_enemies_v2',
     );
 
-    final items = ImageObjectGroupBuilder(
+    final items = SpriteObjectGroupBuilder(
       tileset: itemsTileset,
-      leapMap: leapMap,
       tileLayerName: 'items',
       tilesetPath: 'objects/tile_items_v2.png',
       componentBuilder: Item.new,
