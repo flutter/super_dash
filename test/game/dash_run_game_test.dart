@@ -54,13 +54,13 @@ void main() {
     );
 
     testWithGame(
-      'starts with correct amount of enemies',
+      'starts with 0 enemies spawned',
       DashRunGame.new,
       (game) async {
         await game.ready();
         expect(
           game.leapMap.children.whereType<Enemy>().length,
-          equals(46),
+          isZero,
         );
       },
     );
