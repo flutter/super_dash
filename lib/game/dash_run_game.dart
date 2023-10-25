@@ -49,6 +49,12 @@ class DashRunGame extends LeapGame
 
     input = SimpleCombinedInput();
 
+    player = Player(
+      levelSize: leapMap.tiledMap.size.clone(),
+      cameraViewport: _cameraViewport,
+    );
+    world.add(player);
+
     final tilesets = leapMap.tiledMap.tileMap.map.tilesets;
 
     final itemsTileset = tilesets.firstWhere(
@@ -77,12 +83,6 @@ class DashRunGame extends LeapGame
       reference: player,
     );
 
-    player = Player(
-      levelSize: leapMap.tiledMap.size.clone(),
-      cameraViewport: _cameraViewport,
-    );
-    world.add(player);
-    
     await addAll([items, enemies, input, ScoreLabel()]);
   }
 
