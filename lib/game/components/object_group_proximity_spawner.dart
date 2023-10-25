@@ -5,7 +5,6 @@ import 'package:dash_run/game/dash_run_game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:leap/leap.dart';
 import 'package:ordered_set/comparing.dart';
 import 'package:ordered_set/ordered_set.dart';
 
@@ -17,45 +16,41 @@ typedef ObjectGroupProximitySpawner = PositionComponent Function({
 class ObjectGroupProximityBuilder extends Component
     with HasGameRef<DashRunGame> {
   ObjectGroupProximityBuilder({
-    required this.tileset,
-    required this.leapMap,
-    required this.tileLayerName,
-    required this.tilesetPath,
-    required this.reference,
     required this.proximity,
+    required this.tilesetPath,
+    required this.tileLayerName,
+    required this.tileset,
+    required this.reference,
     required this.componentBuilder,
   });
 
-  final Tileset tileset;
-  final LeapMap leapMap;
-  final String tileLayerName;
-  final String tilesetPath;
-  final ObjectGroupProximitySpawner componentBuilder;
-  final PositionComponent reference;
   final double proximity;
+  final String tilesetPath;
+  final String tileLayerName;
+  final Tileset tileset;
+  final PositionComponent reference;
+  final ObjectGroupProximitySpawner componentBuilder;
 
-  late final Image itemTiles;
-  late SpriteSheet spritesheet;
   late int firstGId;
+  late SpriteSheet spritesheet;
+  late final Image itemTiles;
 
   final _objects = OrderedSet<TiledObject>(
     Comparing.on((object) => object.x),
   );
 
+  final List<PositionComponent> _spawnedComponents = [];
+
   var _referenceIndex = 0;
   var _lastReferenceX = 0.0;
   var _referenceDirection = 1;
-
-  final List<PositionComponent> _spawnedComponents = [];
 
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
     firstGId = tileset.firstGid ?? 0;
     final itemsLayer = gameRef.leapMap.getTileLayer<ObjectGroup>(tileLayerName);
-    itemTiles = await gameRef.images.load(
-      tilesetPath,
-    );
+    itemTiles = await gameRef.images.load(tilesetPath);
 
     spritesheet = SpriteSheet(
       image: itemTiles,

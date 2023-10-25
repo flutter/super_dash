@@ -4,7 +4,6 @@ import 'package:dash_run/game/game.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
@@ -25,9 +24,6 @@ class DashRunGame extends LeapGame
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-
-    await Flame.device.fullScreen();
-    await Flame.device.setLandscape();
 
     camera = CameraComponent.withFixedResolution(
       width: _cameraViewport.x,
@@ -73,13 +69,12 @@ class DashRunGame extends LeapGame
     );
 
     final enemies = ObjectGroupProximityBuilder(
-      tileset: enemiesTileset,
-      leapMap: leapMap,
-      tileLayerName: 'enemies',
-      tilesetPath: 'objects/tile_enemies_v2.png',
-      componentBuilder: Enemy.new,
       proximity: _cameraViewport.x * 1.5,
+      tilesetPath: 'objects/tile_enemies_v2.png',
+      tileLayerName: 'enemies',
+      tileset: enemiesTileset,
       reference: player,
+      componentBuilder: Enemy.new,
     );
 
     await addAll([items, enemies, input, ScoreLabel()]);
