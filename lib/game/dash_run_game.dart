@@ -4,7 +4,6 @@ import 'package:dash_run/game/game.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
@@ -26,9 +25,6 @@ class DashRunGame extends LeapGame
   Future<void> onLoad() async {
     await super.onLoad();
 
-    await Flame.device.fullScreen();
-    await Flame.device.setLandscape();
-
     camera = CameraComponent.withFixedResolution(
       width: _cameraViewport.x,
       height: _cameraViewport.y,
@@ -49,6 +45,12 @@ class DashRunGame extends LeapGame
 
     input = SimpleCombinedInput();
 
+    player = Player(
+      levelSize: leapMap.tiledMap.size.clone(),
+      cameraViewport: _cameraViewport,
+    );
+    world.add(player);
+
     final tilesets = leapMap.tiledMap.tileMap.map.tilesets;
 
     final itemsTileset = tilesets.firstWhere(
@@ -66,18 +68,14 @@ class DashRunGame extends LeapGame
       componentBuilder: Item.new,
     );
 
-    final enemies = SpriteObjectGroupBuilder(
-      tileset: enemiesTileset,
-      tileLayerName: 'enemies',
+    final enemies = ObjectGroupProximityBuilder(
+      proximity: _cameraViewport.x * 1.5,
       tilesetPath: 'objects/tile_enemies_v2.png',
+      tileLayerName: 'enemies',
+      tileset: enemiesTileset,
+      reference: player,
       componentBuilder: Enemy.new,
     );
-
-    player = Player(
-      levelSize: leapMap.tiledMap.size.clone(),
-      cameraViewport: _cameraViewport,
-    );
-    world.add(player);
 
     await addAll([items, enemies, input, ScoreLabel()]);
   }

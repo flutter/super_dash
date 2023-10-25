@@ -15,7 +15,7 @@ class Enemy extends PhysicalEntity<DashRunGame> {
   late final TiledObject tiledObject;
 
   @override
-  int get priority => 2;
+  int get priority => 1;
 
   @override
   Future<void> onLoad() async {
