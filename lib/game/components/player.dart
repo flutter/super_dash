@@ -11,14 +11,13 @@ class PlayerCameraAnchor extends Component
     with ParentIsA<PositionComponent>
     implements ReadOnlyPositionProvider {
   PlayerCameraAnchor({
-    required this.cameraViewport,
     required this.levelSize,
+    required this.cameraViewport,
   });
 
-  final Vector2 _anchor = Vector2.zero();
-
-  final Vector2 cameraViewport;
   final Vector2 levelSize;
+  final Vector2 cameraViewport;
+  final Vector2 _anchor = Vector2.zero();
 
   late final Vector2 _cameraMin = Vector2(
     cameraViewport.x / 2,
@@ -69,10 +68,11 @@ class Player extends JumperCharacter<DashRunGame> {
 
   final Vector2 levelSize;
   final Vector2 cameraViewport;
-  final List<Item> items = [];
   late final Vector2 spawn;
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
+
+  List<Item> items = [];
 
   @override
   int get priority => 1;
@@ -115,14 +115,14 @@ class Player extends JumperCharacter<DashRunGame> {
     if (world.isOutside(this)) resetPosition();
 
     if (isDead) {
-      walking = false;
       health = initialHealth;
+      walking = false;
       game.gameOver();
     }
 
     if (collisionInfo.downCollision?.isHazard ?? false) {
       if (items.isEmpty) game.gameOver();
-      items.removeLast().removeFromParent();
+      items.removeLast();
     }
 
     final collisions = collisionInfo.otherCollisions ?? const [];

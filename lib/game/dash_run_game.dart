@@ -84,30 +84,30 @@ class DashRunGame extends LeapGame
       componentBuilder: Enemy.new,
     );
 
-    await addAll([items, enemies, input, ScoreLabel()]);
+    await addAll([
+      input,
+      items,
+      enemies,
+      ScoreLabel(
+        initialScore: score,
+        initialItems: player.items.length,
+        initialHealth: player.health,
+      ),
+    ]);
   }
 
   void gameOver() {
     score = 0;
     world.firstChild<Player>()?.removeFromParent();
-    world.remove(items);
 
     Future<void>.delayed(
       const Duration(seconds: 1),
-      () => world
-        ..add(
-          Player(
-            levelSize: leapMap.tiledMap.size.clone(),
-            cameraViewport: _cameraViewport,
-          )..add(
-              SpriteObjectGroupBuilder(
-                tilesetPath: 'objects/tile_items_v2.png',
-                tileLayerName: 'items',
-                tileset: itemsTileset,
-                componentBuilder: Item.new,
-              ),
-            ),
+      () => world.add(
+        Player(
+          levelSize: leapMap.tiledMap.size.clone(),
+          cameraViewport: _cameraViewport,
         ),
+      ),
     );
   }
 
