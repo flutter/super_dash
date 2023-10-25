@@ -10,20 +10,15 @@ import 'package:leap/leap.dart';
 
 class DashRunGame extends LeapGame
     with TapCallbacks, HasKeyboardHandlerComponents {
-  DashRunGame({
-    this.customBundle,
-  }) : super(
-          tileSize: 64,
-        );
+  DashRunGame({this.customBundle}) : super(tileSize: 64);
 
   static const prefix = 'assets/map/';
-
-  late final Player player;
-  late final SimpleCombinedInput input;
+  static final _cameraViewport = Vector2(592, 1280);
 
   final AssetBundle? customBundle;
 
-  static final _cameraViewport = Vector2(592, 1280);
+  late final Player player;
+  late final SimpleCombinedInput input;
 
   int score = 0;
 
@@ -49,23 +44,20 @@ class DashRunGame extends LeapGame
       images: images,
       prefix: prefix,
       bundle: customBundle,
-      tiledMapPath: 'flutter_runnergame_map_v04.tmx',
+      tiledMapPath: 'flutter_runnergame_map_v05.tmx',
     );
 
     input = SimpleCombinedInput();
 
     final tilesets = leapMap.tiledMap.tileMap.map.tilesets;
-    final itemsTileset =
-        tilesets.firstWhere((tileset) => tileset.name == 'tile_items_v2');
 
-    final enemiesTileset =
-        tilesets.firstWhere((tileset) => tileset.name == 'tile_enemies_v2');
-
-    player = Player(
-      levelSize: leapMap.tiledMap.size.clone(),
-      cameraViewport: _cameraViewport,
+    final itemsTileset = tilesets.firstWhere(
+      (tileset) => tileset.name == 'tile_items_v2',
     );
-    world.add(player);
+
+    final enemiesTileset = tilesets.firstWhere(
+      (tileset) => tileset.name == 'tile_enemies_v2',
+    );
 
     final items = ImageObjectGroupBuilder(
       tileset: itemsTileset,
@@ -74,14 +66,6 @@ class DashRunGame extends LeapGame
       tilesetPath: 'objects/tile_items_v2.png',
       componentBuilder: Item.new,
     );
-
-    //final enemies = ImageObjectGroupBuilder(
-    //  tileset: enemiesTileset,
-    //  leapMap: leapMap,
-    //  tileLayerName: 'enemies',
-    //  tilesetPath: 'objects/tile_enemies_v2.png',
-    //  componentBuilder: Enemy.new,
-    //);
 
     final enemies = ObjectGroupProximityBuilder(
       tileset: enemiesTileset,
@@ -93,7 +77,13 @@ class DashRunGame extends LeapGame
       reference: player,
     );
 
-    await addAll([items, enemies, input]);
+    player = Player(
+      levelSize: leapMap.tiledMap.size.clone(),
+      cameraViewport: _cameraViewport,
+    );
+    world.add(player);
+    
+    await addAll([items, enemies, input, ScoreLabel()]);
   }
 
   void gameOver() {

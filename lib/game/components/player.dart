@@ -60,20 +60,18 @@ class PlayerCameraAnchor extends Component
 
 class Player extends JumperCharacter<DashRunGame> {
   Player({
-    required this.cameraViewport,
     required this.levelSize,
+    required this.cameraViewport,
     super.health = initialHealth,
   });
 
   static const initialHealth = 3;
 
+  final Vector2 levelSize;
+  final Vector2 cameraViewport;
   late final Vector2 spawn;
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
-  final Vector2 cameraViewport;
-  final Vector2 levelSize;
-
-  final List<Item> items = [];
 
   @override
   int get priority => 1;
@@ -92,8 +90,7 @@ class Player extends JumperCharacter<DashRunGame> {
     );
 
     add(cameraAnchor);
-    add(PlayerCollidingBehavior());
-    add(PlayerKeyboardControllerBehavior());
+    add(PlayerControllerBehavior());
     add(
       RectangleComponent(
         size: size,
@@ -115,6 +112,26 @@ class Player extends JumperCharacter<DashRunGame> {
     super.update(dt);
 
     if (world.isOutside(this)) resetPosition();
+
+    if (isDead) {
+      walking = false;
+      game.gameOver();
+    }
+
+    final collisions = collisionInfo.otherCollisions ?? const [];
+
+    if (collisions.isEmpty) return;
+
+    for (final collision in collisions) {
+      if (collision is Item) {
+        collision.removeFromParent();
+        game.score++;
+      }
+
+      if (collision is Enemy) {
+        health -= collision.enemyDamage;
+      }
+    }
   }
 
   void resetPosition() {
