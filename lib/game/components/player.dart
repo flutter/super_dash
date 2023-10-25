@@ -65,10 +65,11 @@ class Player extends JumperCharacter<DashRunGame> {
     super.health = initialHealth,
   });
 
-  static const initialHealth = 3;
+  static const initialHealth = 1;
 
   final Vector2 levelSize;
   final Vector2 cameraViewport;
+  final List<Item> items = [];
   late final Vector2 spawn;
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
@@ -115,7 +116,13 @@ class Player extends JumperCharacter<DashRunGame> {
 
     if (isDead) {
       walking = false;
+      health = initialHealth;
       game.gameOver();
+    }
+
+    if (collisionInfo.downCollision?.isHazard ?? false) {
+      if (items.isEmpty) game.gameOver();
+      items.removeLast().removeFromParent();
     }
 
     final collisions = collisionInfo.otherCollisions ?? const [];
@@ -124,8 +131,15 @@ class Player extends JumperCharacter<DashRunGame> {
 
     for (final collision in collisions) {
       if (collision is Item) {
+        switch (collision.type) {
+          case ItemType.egg:
+          case ItemType.feather:
+            game.score += collision.type.points;
+          case ItemType.goldenFeather:
+          case ItemType.wings:
+            items.add(collision);
+        }
         collision.removeFromParent();
-        game.score++;
       }
 
       if (collision is Enemy) {

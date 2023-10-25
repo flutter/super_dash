@@ -23,7 +23,9 @@ class ScoreLabel extends TextComponent with HasGameRef<DashRunGame> {
   void update(double dt) {
     super.update(dt);
 
-    _current = '${gameRef.score} - 💙 ${gameRef.player.health}';
+    _current = '${gameRef.score} '
+        '💙 ${gameRef.player.health} '
+        '🚀 ${gameRef.player.items.length}';
     text = _current;
   }
 }

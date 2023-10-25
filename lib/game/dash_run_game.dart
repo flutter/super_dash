@@ -4,6 +4,7 @@ import 'package:dash_run/game/game.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
@@ -18,8 +19,24 @@ class DashRunGame extends LeapGame
 
   late final Player player;
   late final SimpleCombinedInput input;
+  late final SpriteObjectGroupBuilder items;
+  late final ObjectGroupProximityBuilder enemies;
 
   int score = 0;
+
+  List<Tileset> get tilesets => leapMap.tiledMap.tileMap.map.tilesets;
+
+  Tileset get itemsTileset {
+    return tilesets.firstWhere(
+      (tileset) => tileset.name == 'tile_items_v2',
+    );
+  }
+
+  Tileset get enemiesTileset {
+    return tilesets.firstWhere(
+      (tileset) => tileset.name == 'tile_enemies_v2',
+    );
+  }
 
   @override
   Future<void> onLoad() async {
@@ -51,24 +68,14 @@ class DashRunGame extends LeapGame
     );
     world.add(player);
 
-    final tilesets = leapMap.tiledMap.tileMap.map.tilesets;
-
-    final itemsTileset = tilesets.firstWhere(
-      (tileset) => tileset.name == 'tile_items_v2',
-    );
-
-    final enemiesTileset = tilesets.firstWhere(
-      (tileset) => tileset.name == 'tile_enemies_v2',
-    );
-
-    final items = SpriteObjectGroupBuilder(
-      tileset: itemsTileset,
-      tileLayerName: 'items',
+    items = SpriteObjectGroupBuilder(
       tilesetPath: 'objects/tile_items_v2.png',
+      tileLayerName: 'items',
+      tileset: itemsTileset,
       componentBuilder: Item.new,
     );
 
-    final enemies = ObjectGroupProximityBuilder(
+    enemies = ObjectGroupProximityBuilder(
       proximity: _cameraViewport.x * 1.5,
       tilesetPath: 'objects/tile_enemies_v2.png',
       tileLayerName: 'enemies',
@@ -83,15 +90,24 @@ class DashRunGame extends LeapGame
   void gameOver() {
     score = 0;
     world.firstChild<Player>()?.removeFromParent();
+    world.remove(items);
 
     Future<void>.delayed(
       const Duration(seconds: 1),
-      () => world.add(
-        Player(
-          levelSize: leapMap.tiledMap.size.clone(),
-          cameraViewport: _cameraViewport,
+      () => world
+        ..add(
+          Player(
+            levelSize: leapMap.tiledMap.size.clone(),
+            cameraViewport: _cameraViewport,
+          )..add(
+              SpriteObjectGroupBuilder(
+                tilesetPath: 'objects/tile_items_v2.png',
+                tileLayerName: 'items',
+                tileset: itemsTileset,
+                componentBuilder: Item.new,
+              ),
+            ),
         ),
-      ),
     );
   }
 
