@@ -13,14 +13,13 @@ typedef ObjectGroupProximitySpawner = PositionComponent Function({
   required Sprite sprite,
 });
 
-class ObjectGroupProximityBuilder extends Component
-    with HasGameRef<DashRunGame> {
+class ObjectGroupProximityBuilder<Reference extends PositionComponent>
+    extends Component with HasGameRef<DashRunGame> {
   ObjectGroupProximityBuilder({
     required this.proximity,
     required this.tilesetPath,
     required this.tileLayerName,
     required this.tileset,
-    required this.reference,
     required this.componentBuilder,
   });
 
@@ -28,12 +27,11 @@ class ObjectGroupProximityBuilder extends Component
   final String tilesetPath;
   final String tileLayerName;
   final Tileset tileset;
-  final PositionComponent reference;
   final ObjectGroupProximitySpawner componentBuilder;
 
-  late int firstGId;
+  late int firstGid;
   late SpriteSheet spritesheet;
-  late final Image itemTiles;
+  late final Image tiles;
 
   final _objects = OrderedSet<TiledObject>(
     Comparing.on((object) => object.x),
@@ -45,21 +43,23 @@ class ObjectGroupProximityBuilder extends Component
   var _lastReferenceX = 0.0;
   var _referenceDirection = 1;
 
+  Reference? get reference => game.world.firstChild<Reference>();
+
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
-    firstGId = tileset.firstGid ?? 0;
-    final itemsLayer = gameRef.leapMap.getTileLayer<ObjectGroup>(tileLayerName);
-    itemTiles = await gameRef.images.load(tilesetPath);
+    firstGid = tileset.firstGid ?? 0;
+    final layer = gameRef.leapMap.getTileLayer<ObjectGroup>(tileLayerName);
+    tiles = await gameRef.images.load(tilesetPath);
 
     spritesheet = SpriteSheet(
-      image: itemTiles,
+      image: tiles,
       srcSize: Vector2.all(gameRef.tileSize),
     );
 
-    _objects.addAll(itemsLayer.objects);
+    _objects.addAll(layer.objects);
 
-    _lastReferenceX = reference.x;
+    _lastReferenceX = reference!.x;
     _findPlayerIndex();
   }
 
@@ -69,7 +69,7 @@ class ObjectGroupProximityBuilder extends Component
     if (i != _referenceIndex) {
       while (i >= 0 && i < _objects.length) {
         final object = _objects.elementAt(i);
-        if (object.x > reference.x) {
+        if (object.x > reference!.x) {
           _referenceIndex = i - _referenceDirection;
           break;
         }
@@ -81,6 +81,9 @@ class ObjectGroupProximityBuilder extends Component
   @override
   void update(double dt) {
     super.update(dt);
+
+    final reference = this.reference;
+    if (reference == null) return;
 
     _referenceDirection = reference.x > _lastReferenceX
         ? 1
@@ -116,7 +119,7 @@ class ObjectGroupProximityBuilder extends Component
         final component = componentBuilder(
           tiledObject: object,
           sprite: spritesheet.getSpriteById(
-            (object.gid ?? 0) - firstGId,
+            (object.gid ?? 0) - firstGid,
           ),
         );
 

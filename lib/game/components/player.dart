@@ -72,7 +72,7 @@ class Player extends JumperCharacter<DashRunGame> {
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
 
-  List<Item> items = [];
+  List<Item> powerUps = [];
 
   @override
   int get priority => 1;
@@ -117,12 +117,24 @@ class Player extends JumperCharacter<DashRunGame> {
     if (isDead) {
       health = initialHealth;
       walking = false;
-      game.gameOver();
+      return game.gameOver();
     }
 
     if (collisionInfo.downCollision?.isHazard ?? false) {
-      if (items.isEmpty) game.gameOver();
-      items.removeLast();
+      if (powerUps.isEmpty) return game.gameOver();
+      powerUps.removeLast();
+      // Respawn player at the last safe ground position.
+      final LeapMapGroundTile(:gridX, :gridY) = collisionInfo.downCollision!;
+      for (var i = 0; i < 5; i++) {
+        final LeapMapGroundTile(position: tilePosition, :isHazard) =
+            game.leapMap.groundTiles[gridX - i][gridY]!;
+        if (!isHazard) {
+          position.setValues(
+            tilePosition.x,
+            tilePosition.y - game.tileSize,
+          );
+        }
+      }
     }
 
     final collisions = collisionInfo.otherCollisions ?? const [];
@@ -137,7 +149,7 @@ class Player extends JumperCharacter<DashRunGame> {
             game.score += collision.type.points;
           case ItemType.goldenFeather:
           case ItemType.wings:
-            items.add(collision);
+            powerUps.add(collision);
         }
         collision.removeFromParent();
       }

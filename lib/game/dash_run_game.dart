@@ -17,12 +17,13 @@ class DashRunGame extends LeapGame
 
   final AssetBundle? customBundle;
 
-  late final Player player;
   late final SimpleCombinedInput input;
   late final SpriteObjectGroupBuilder items;
   late final ObjectGroupProximityBuilder enemies;
 
   int score = 0;
+
+  Player? get player => world.firstChild<Player>();
 
   List<Tileset> get tilesets => leapMap.tiledMap.tileMap.map.tilesets;
 
@@ -62,7 +63,7 @@ class DashRunGame extends LeapGame
 
     input = SimpleCombinedInput();
 
-    player = Player(
+    final player = Player(
       levelSize: leapMap.tiledMap.size.clone(),
       cameraViewport: _cameraViewport,
     );
@@ -75,12 +76,11 @@ class DashRunGame extends LeapGame
       componentBuilder: Item.new,
     );
 
-    enemies = ObjectGroupProximityBuilder(
+    enemies = ObjectGroupProximityBuilder<Player>(
       proximity: _cameraViewport.x * 1.5,
       tilesetPath: 'objects/tile_enemies_v2.png',
       tileLayerName: 'enemies',
       tileset: enemiesTileset,
-      reference: player,
       componentBuilder: Enemy.new,
     );
 
@@ -90,7 +90,7 @@ class DashRunGame extends LeapGame
       enemies,
       ScoreLabel(
         initialScore: score,
-        initialItems: player.items.length,
+        initialItems: player.powerUps.length,
         initialHealth: player.health,
       ),
     ]);
