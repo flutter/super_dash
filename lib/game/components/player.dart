@@ -123,11 +123,22 @@ class Player extends JumperCharacter<DashRunGame> {
     if (collisionInfo.downCollision?.isHazard ?? false) {
       if (powerUps.isEmpty) return game.gameOver();
       powerUps.removeLast();
+
       // Respawn player at the last safe ground position.
       final LeapMapGroundTile(:gridX, :gridY) = collisionInfo.downCollision!;
+
+      // We set an offset of 5 tiles to the left assuming that there is a tile
+      // where the player can stand in the previous 5 tiles from where he hit.
       for (var i = 0; i < 5; i++) {
-        final LeapMapGroundTile(position: tilePosition, :isHazard) =
-            game.leapMap.groundTiles[gridX - i][gridY]!;
+        // We assume that this tile is not null
+        // based on the hazard zones of the map.
+        final LeapMapGroundTile(
+          :isHazard,
+          position: tilePosition,
+        ) = game.leapMap.groundTiles[gridX - i][gridY]!;
+
+        // If is not a hazard, we can respawn the player here.
+        // We need to also set the y position to the top of the tile.
         if (!isHazard) {
           position.setValues(
             tilePosition.x,
