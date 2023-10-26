@@ -129,7 +129,8 @@ class Player extends JumperCharacter<DashRunGame> {
 
       // We set an offset of 5 tiles to the left assuming that there is a tile
       // where the player can stand in the previous 5 tiles from where he hit.
-      for (var i = 0; i < 5; i++) {
+      const offset = 5;
+      for (var i = 0; i < offset; i++) {
         // We assume that this tile is not null
         // based on the hazard zones of the map.
         final LeapMapGroundTile(
