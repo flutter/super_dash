@@ -4,26 +4,35 @@ import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 
 class ScoreLabel extends TextComponent with HasGameRef<DashRunGame> {
-  ScoreLabel()
-      : super(
-          text: '0 - ${Player.initialHealth}',
+  ScoreLabel({
+    int initialScore = 0,
+    int initialItems = 0,
+    int initialHealth = Player.initialHealth,
+  }) : super(
+          text: '$initialScore '
+              '💙 $initialHealth '
+              '🚀 $initialItems',
           textRenderer: TextPaint(),
         );
 
   late String _current;
 
   @override
-  FutureOr<void> onLoad() async {
+  Future<void> onLoad() async {
     await super.onLoad();
 
-    _current = '${gameRef.score} - 💙 ${gameRef.player.health}';
+    _current = '${gameRef.score} '
+        '💙 ${gameRef.player?.health ?? 0} '
+        '🚀 ${gameRef.player?.powerUps.length ?? 0}';
   }
 
   @override
   void update(double dt) {
     super.update(dt);
 
-    _current = '${gameRef.score} - 💙 ${gameRef.player.health}';
+    _current = '${gameRef.score} '
+        '💙 ${gameRef.player?.health ?? 0} '
+        '🚀 ${gameRef.player?.powerUps.length ?? 0}';
     text = _current;
   }
 }

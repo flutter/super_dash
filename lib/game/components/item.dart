@@ -5,12 +5,35 @@ import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
 
+enum ItemType {
+  acorn(10),
+  egg(1000),
+  wings(0),
+  goldenFeather(0);
+
+  const ItemType(this.points);
+
+  final int points;
+
+  static ItemType fromGid(int gid) {
+    return switch (gid) {
+      740 => ItemType.egg,
+      741 => ItemType.acorn,
+      742 => ItemType.goldenFeather,
+      743 => ItemType.wings,
+      _ => throw Exception('Invalid item gid: $gid'),
+    };
+  }
+}
+
 class Item extends PhysicalEntity<DashRunGame> {
   Item({
     required this.sprite,
     required this.tiledObject,
-  }) : super(static: true, collisionType: CollisionType.standard);
+  })  : type = ItemType.fromGid(tiledObject.gid!),
+        super(static: true, collisionType: CollisionType.standard);
 
+  final ItemType type;
   late final Sprite sprite;
   late final TiledObject tiledObject;
 
