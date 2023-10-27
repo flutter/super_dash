@@ -6,27 +6,22 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
 
 enum ItemType {
-  egg,
-  wings,
-  feather,
-  goldenFeather;
+  acorn(10),
+  egg(1000),
+  wings(0),
+  goldenFeather(0);
+
+  const ItemType(this.points);
+
+  final int points;
 
   static ItemType fromGid(int gid) {
     return switch (gid) {
       740 => ItemType.egg,
-      741 => ItemType.feather,
+      741 => ItemType.acorn,
       742 => ItemType.goldenFeather,
       743 => ItemType.wings,
       _ => throw Exception('Invalid item gid: $gid'),
-    };
-  }
-
-  int get points {
-    return switch (this) {
-      ItemType.egg => 1000,
-      ItemType.feather => 10,
-      ItemType.goldenFeather => 0,
-      ItemType.wings => 0,
     };
   }
 }

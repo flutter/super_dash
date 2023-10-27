@@ -21,15 +21,15 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
     required this.tileLayerName,
     required this.tileset,
     required this.componentBuilder,
-  });
+  }) : firstGid = tileset.firstGid ?? 0;
 
+  final int firstGid;
   final double proximity;
   final String tilesetPath;
   final String tileLayerName;
   final Tileset tileset;
   final ObjectGroupProximitySpawner componentBuilder;
 
-  late int firstGid;
   late SpriteSheet spritesheet;
   late final Image tiles;
 
@@ -48,7 +48,7 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
-    firstGid = tileset.firstGid ?? 0;
+
     final layer = gameRef.leapMap.getTileLayer<ObjectGroup>(tileLayerName);
     tiles = await gameRef.images.load(tilesetPath);
 

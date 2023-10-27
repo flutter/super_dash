@@ -114,11 +114,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
     if (world.isOutside(this)) resetPosition();
 
-    if (isDead) {
-      health = initialHealth;
-      walking = false;
-      return game.gameOver();
-    }
+    if (isDead) return game.gameOver();
 
     if (collisionInfo.downCollision?.isHazard ?? false) {
       if (powerUps.isEmpty) return game.gameOver();
@@ -156,11 +152,9 @@ class Player extends JumperCharacter<DashRunGame> {
     for (final collision in collisions) {
       if (collision is Item) {
         switch (collision.type) {
-          case ItemType.egg:
-          case ItemType.feather:
+          case ItemType.acorn || ItemType.egg:
             game.score += collision.type.points;
-          case ItemType.goldenFeather:
-          case ItemType.wings:
+          case ItemType.goldenFeather || ItemType.wings:
             powerUps.add(collision);
         }
         collision.removeFromParent();
