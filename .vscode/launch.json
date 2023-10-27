@@ -8,11 +8,13 @@
       "name": "Launch game",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main_development.dart",
-      "args": [
-        "--target",
-        "lib/main.dart"
-      ]
+      "program": "lib/main.dart",
+    },
+    {
+      "name": "Launch game tester",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_tester.dart",
     }
   ]
 }

@@ -1,5 +1,7 @@
-export 'background.dart';
-export 'obstacle.dart';
-export 'obstacles.dart';
+export 'camera_debugger.dart';
+export 'enemy.dart';
+export 'item.dart';
+export 'object_group_proximity_spawner.dart';
 export 'player.dart';
 export 'score_label.dart';
+export 'sprite_object_group_builder.dart';
