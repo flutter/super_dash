@@ -19,7 +19,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.18.0
-  leap: ^0.2.0
+  leap: ^0.2.1
   ordered_set: ^5.0.2
   path: ^1.8.3
 
