@@ -13,15 +13,15 @@ typedef SpriteObjectGroupComponentBuilder = Component Function({
 /// A component that given a tileset and object group, creates its components.
 class SpriteObjectGroupBuilder extends Component with HasGameRef<DashRunGame> {
   SpriteObjectGroupBuilder({
-    required this.tileset,
     required this.tileLayerName,
     required this.tilesetPath,
+    required this.tileset,
     required this.componentBuilder,
   });
 
-  final Tileset tileset;
   final String tileLayerName;
   final String tilesetPath;
+  final Tileset tileset;
   final SpriteObjectGroupComponentBuilder componentBuilder;
 
   @override
