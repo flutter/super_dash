@@ -17,10 +17,10 @@ enum ItemType {
 
   static ItemType fromGid(int gid) {
     return switch (gid) {
-      740 => ItemType.egg,
-      741 => ItemType.acorn,
-      742 => ItemType.goldenFeather,
-      743 => ItemType.wings,
+      752 => ItemType.egg,
+      753 => ItemType.acorn,
+      754 => ItemType.goldenFeather,
+      755 => ItemType.wings,
       _ => throw Exception('Invalid item gid: $gid'),
     };
   }
