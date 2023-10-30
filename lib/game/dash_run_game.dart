@@ -5,7 +5,7 @@ import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 
 class DashRunGame extends LeapGame
@@ -46,7 +46,7 @@ class DashRunGame extends LeapGame
     camera = CameraComponent.withFixedResolution(
       width: _cameraViewport.x,
       height: _cameraViewport.y,
-    );
+    )..world = world;
 
     images = Images(
       prefix: prefix,
@@ -54,14 +54,19 @@ class DashRunGame extends LeapGame
     );
 
     await loadWorldAndMap(
-      camera: camera,
       images: images,
       prefix: prefix,
       bundle: customBundle,
       tiledMapPath: 'flutter_runnergame_map_v05b.tmx',
     );
 
-    input = SimpleCombinedInput();
+    input = SimpleCombinedInput(
+      keyboardInput: SimpleKeyboardInput(
+        rightKeys: {
+          PhysicalKeyboardKey.space,
+        },
+      ),
+    );
 
     final player = Player(
       levelSize: leapMap.tiledMap.size.clone(),
