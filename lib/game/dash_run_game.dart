@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
@@ -10,7 +11,10 @@ import 'package:leap/leap.dart';
 
 class DashRunGame extends LeapGame
     with TapCallbacks, HasKeyboardHandlerComponents {
-  DashRunGame({this.customBundle}) : super(tileSize: 64);
+  DashRunGame({
+    required this.audioController,
+    this.customBundle,
+  }) : super(tileSize: 64);
 
   static const prefix = 'assets/map/';
   static final _cameraViewport = Vector2(592, 1280);
@@ -18,6 +22,9 @@ class DashRunGame extends LeapGame
   final AssetBundle? customBundle;
 
   late final SimpleCombinedInput input;
+  late final SpriteObjectGroupBuilder items;
+  late final ObjectGroupProximityBuilder enemies;
+  final AudioController audioController;
 
   int score = 0;
 

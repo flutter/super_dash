@@ -8,6 +8,7 @@ environment:
   flutter: 3.13.2
 
 dependencies:
+  audioplayers: ^5.2.0
   bloc: ^8.1.2
   file_selector: ^1.0.1
   flame: ^1.10.0
@@ -20,8 +21,11 @@ dependencies:
     sdk: flutter
   intl: ^0.18.0
   leap: ^0.2.1
+  logging: ^1.2.0
   ordered_set: ^5.0.2
   path: ^1.8.3
+  provider: ^6.0.5
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   bloc_test: ^9.1.2
@@ -36,6 +40,8 @@ flutter:
   generate: true
 
   assets:
+    - assets/sfx/
+    - assets/music/
     - assets/map/
     - assets/map/anim/
     - assets/map/tiles/

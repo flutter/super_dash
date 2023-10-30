@@ -1,11 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/dash_run_game.dart';
 import 'package:dash_run/map_tester/map_tester.dart';
 import 'package:flame/game.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
+
+class _MockAudioController extends Mock implements AudioController {}
 
 void main() {
   group('MapTesterView', () {
@@ -18,11 +23,7 @@ void main() {
     testWidgets('allows to select a game folder', (tester) async {
       Future<String> getDirectoryPath() async => '.';
 
-      await tester.pumpApp(
-        MapTesterView(
-          selectGameFolder: getDirectoryPath,
-        ),
-      );
+      await tester.pumpSubject(getDirectoryPath);
 
       await tester.tap(find.text('Load folder'));
       await tester.pump();
@@ -36,11 +37,7 @@ void main() {
     testWidgets('can unload the game', (tester) async {
       Future<String> getDirectoryPath() async => '.';
 
-      await tester.pumpApp(
-        MapTesterView(
-          selectGameFolder: getDirectoryPath,
-        ),
-      );
+      await tester.pumpSubject(getDirectoryPath);
 
       await tester.tap(find.text('Load folder'));
       await tester.pump();
@@ -62,11 +59,7 @@ void main() {
     testWidgets('allows to reload a game', (tester) async {
       Future<String> getDirectoryPath() async => '.';
 
-      await tester.pumpApp(
-        MapTesterView(
-          selectGameFolder: getDirectoryPath,
-        ),
-      );
+      await tester.pumpSubject(getDirectoryPath);
 
       await tester.tap(find.text('Load folder'));
       await tester.pump();
@@ -90,4 +83,20 @@ void main() {
       expect(updatedGame, isNot(originalGame));
     });
   });
+}
+
+extension on WidgetTester {
+  Future<void> pumpSubject(
+    Future<String> Function() getDirectoryPath, {
+    AudioController? audioController,
+  }) async {
+    await pumpApp(
+      RepositoryProvider.value(
+        value: audioController ?? _MockAudioController(),
+        child: MapTesterView(
+          selectGameFolder: getDirectoryPath,
+        ),
+      ),
+    );
+  }
 }
