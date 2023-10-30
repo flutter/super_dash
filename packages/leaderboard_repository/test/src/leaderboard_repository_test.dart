@@ -115,7 +115,6 @@ void main() {
           'during deserialization', () async {
         final top10LeaderboardDataMalformed = <String, dynamic>{
           'playerInitials': 'ABC',
-          'score': 1500,
         };
         final queryDocumentSnapshot = _MockQueryDocumentSnapshot();
         when(() => querySnapshot.docs).thenReturn([queryDocumentSnapshot]);
