@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:dash_run/game/behaviors/behaviors.dart';
-import 'package:dash_run/game/components/components.dart';
-import 'package:dash_run/game/dash_run_game.dart';
-import 'package:dash_run/game/entities/entities.dart';
+import 'package:dash_run/audio/audio.dart';
+import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
@@ -29,6 +27,15 @@ class Player extends JumperCharacter<DashRunGame> {
 
   @override
   int get priority => 1;
+
+  @override
+  set jumping(bool value) {
+    if (!super.jumping && value) {
+      gameRef.audioController.playSfx(Sfx.jump);
+    }
+
+    super.jumping = value;
+  }
 
   @override
   Future<void> onLoad() async {

@@ -5,11 +5,18 @@
 import 'dart:collection';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:dash_run/audio/songs.dart';
 import 'package:dash_run/settings/settings_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 
 typedef CreateAudioPlayer = AudioPlayer Function({required String playerId});
+
+enum Sfx { jump }
+
+const sfx = {
+  Sfx.jump: 'sfx/jump.mp3',
+};
 
 /// Allows playing music and sound. A facade to `package:audioplayers`.
 class AudioController {
@@ -108,13 +115,7 @@ class AudioController {
     // If there are hundreds of long sound effect files, it's better
     // to be more selective when preloading.
 
-    await AudioCache.instance.loadAll(
-      Assets.sfx.values.map(_replaceUrl).toList(),
-    );
-  }
-
-  String _replaceUrl(String asset) {
-    return asset.replaceFirst('assets/', '');
+    await AudioCache.instance.loadAll(sfx.values.toList());
   }
 
   /// Plays a single sound effect.
@@ -122,15 +123,7 @@ class AudioController {
   /// The controller will ignore this call when the attached settings'
   /// [SettingsController.muted] is `true` or if its
   /// [SettingsController.soundsOn] is `false`.
-  void playSfx(String sfx) {
-    if (!Assets.sfx.values.contains(sfx)) {
-      throw ArgumentError.value(
-        sfx,
-        'sfx',
-        'The given sfx is not a valid sound effect.',
-      );
-    }
-
+  void playSfx(Sfx current) {
     final muted = _settings?.muted.value ?? true;
     if (muted) {
       _log.info(() => 'Ignoring playing sound ($sfx) because audio is muted.');
@@ -147,7 +140,7 @@ class AudioController {
     _log.info(() => 'Playing sound: $sfx');
 
     _sfxPlayers[_currentSfxPlayer].play(
-      AssetSource(_replaceUrl(sfx)),
+      AssetSource(sfx[current]!),
     );
     _currentSfxPlayer = (_currentSfxPlayer + 1) % _sfxPlayers.length;
   }

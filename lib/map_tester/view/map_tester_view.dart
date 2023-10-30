@@ -3,6 +3,7 @@ import 'package:dash_run/game/game.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 typedef GetDirectoryPath = Future<String?> Function();
 
@@ -38,6 +39,7 @@ class _MapTesterViewState extends State<MapTesterView> {
                       rootPath = directory;
                       game = DashRunGame(
                         customBundle: FileSystemAssetBundle(directory),
+                        audioController: context.read(),
                       );
                     });
                   }
@@ -64,6 +66,7 @@ class _MapTesterViewState extends State<MapTesterView> {
                           customBundle: FileSystemAssetBundle(
                             rootPath!,
                           ),
+                          audioController: context.read(),
                         );
                       });
                     },
