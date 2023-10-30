@@ -14,7 +14,15 @@ class DashRunGame extends LeapGame
   DashRunGame({
     required this.audioController,
     this.customBundle,
-  }) : super(tileSize: 64);
+  }) : super(
+          tileSize: 64,
+          configuration: const LeapConfiguration(
+            tiled: TiledOptions(
+              atlasMaxX: 8192,
+              atlasMaxY: 8192,
+            ),
+          ),
+        );
 
   static const prefix = 'assets/map/';
   static final _cameraViewport = Vector2(592, 1280);
