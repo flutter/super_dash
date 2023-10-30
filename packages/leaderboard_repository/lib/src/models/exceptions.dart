@@ -18,8 +18,7 @@ abstract class LeaderboardException implements Exception {
 /// {@endtemplate}
 class LeaderboardDeserializationException extends LeaderboardException {
   /// {@macro leaderboard_deserialization_exception}
-  const LeaderboardDeserializationException(Object error, StackTrace stackTrace)
-      : super(error, stackTrace);
+  const LeaderboardDeserializationException(super.error, super.stackTrace);
 }
 
 /// {@template fetch_top_10_leaderboard_exception}
@@ -27,8 +26,7 @@ class LeaderboardDeserializationException extends LeaderboardException {
 /// {@endtemplate}
 class FetchTop10LeaderboardException extends LeaderboardException {
   /// {@macro fetch_top_10_leaderboard_exception}
-  const FetchTop10LeaderboardException(Object error, StackTrace stackTrace)
-      : super(error, stackTrace);
+  const FetchTop10LeaderboardException(super.error, super.stackTrace);
 }
 
 /// {@template fetch_leaderboard_exception}
@@ -36,8 +34,7 @@ class FetchTop10LeaderboardException extends LeaderboardException {
 /// {@endtemplate}
 class FetchLeaderboardException extends LeaderboardException {
   /// {@macro fetch_top_10_leaderboard_exception}
-  const FetchLeaderboardException(Object error, StackTrace stackTrace)
-      : super(error, stackTrace);
+  const FetchLeaderboardException(super.error, super.stackTrace);
 }
 
 /// {@template add_leaderboard_entry_exception}
@@ -45,6 +42,5 @@ class FetchLeaderboardException extends LeaderboardException {
 /// {@endtemplate}
 class AddLeaderboardEntryException extends LeaderboardException {
   /// {@macro add_leaderboard_entry_exception}
-  const AddLeaderboardEntryException(Object error, StackTrace stackTrace)
-      : super(error, stackTrace);
+  const AddLeaderboardEntryException(super.error, super.stackTrace);
 }
