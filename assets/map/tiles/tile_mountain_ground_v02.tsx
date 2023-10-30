@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="tile_mountain_ground_v02" tilewidth="64" tileheight="64" tilecount="66" columns="11">
+<tileset version="1.10" tiledversion="1.10.2" name="tile_mountain_ground_v02" tilewidth="64" tileheight="64" tilecount="55" columns="11">
  <image source="tile_mountain_ground_v02.png" width="704" height="320"/>
  <tile id="0">
   <objectgroup draworder="index" id="2">
@@ -15,7 +15,7 @@
    <object id="1" x="0" y="0" width="31" height="64"/>
   </objectgroup>
  </tile>
- <tile id="10" type="Hazard">
+ <tile id="10">
   <objectgroup draworder="index" id="2">
    <object id="1" x="22" y="0" width="23" height="20"/>
   </objectgroup>
@@ -36,7 +36,7 @@
    <object id="1" x="0" y="0" width="31" height="39"/>
   </objectgroup>
  </tile>
- <tile id="21" type="Hazard">
+ <tile id="21">
   <objectgroup draworder="index" id="2">
    <object id="1" x="1" y="0" width="54" height="41"/>
   </objectgroup>
@@ -62,7 +62,7 @@
    <property name="RightTop" type="int" value="0"/>
   </properties>
  </tile>
- <tile id="43" type="Hazard">
+ <tile id="43">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="62" height="38"/>
   </objectgroup>
@@ -83,7 +83,7 @@
    <property name="RightTop" type="int" value="0"/>
   </properties>
  </tile>
- <tile id="54" type="Hazard">
+ <tile id="54">
   <objectgroup draworder="index" id="2">
    <object id="1" x="7" y="0" width="54" height="30"/>
   </objectgroup>
