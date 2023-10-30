@@ -18,8 +18,6 @@ class DashRunGame extends LeapGame
   final AssetBundle? customBundle;
 
   late final SimpleCombinedInput input;
-  late final SpriteObjectGroupBuilder items;
-  late final ObjectGroupProximityBuilder enemies;
 
   int score = 0;
 
@@ -57,8 +55,14 @@ class DashRunGame extends LeapGame
       images: images,
       prefix: prefix,
       bundle: customBundle,
-      tiledMapPath: 'flutter_runnergame_map_v05b.tmx',
+      tiledMapPath: 'flutter_runnergame_map.tmx',
     );
+
+    final player = Player(
+      levelSize: leapMap.tiledMap.size.clone(),
+      cameraViewport: _cameraViewport,
+    );
+    world.add(player);
 
     input = SimpleCombinedInput(
       keyboardInput: SimpleKeyboardInput(
@@ -68,20 +72,14 @@ class DashRunGame extends LeapGame
       ),
     );
 
-    final player = Player(
-      levelSize: leapMap.tiledMap.size.clone(),
-      cameraViewport: _cameraViewport,
-    );
-    world.add(player);
-
-    items = SpriteObjectGroupBuilder(
+    final items = SpriteObjectGroupBuilder(
       tilesetPath: 'objects/tile_items_v2.png',
       tileLayerName: 'items',
       tileset: itemsTileset,
       componentBuilder: Item.new,
     );
 
-    enemies = ObjectGroupProximityBuilder<Player>(
+    final enemies = ObjectGroupProximityBuilder<Player>(
       proximity: _cameraViewport.x * 1.5,
       tilesetPath: 'objects/tile_enemies_v2.png',
       tileLayerName: 'enemies',
@@ -104,15 +102,35 @@ class DashRunGame extends LeapGame
   void gameOver() {
     score = 0;
     world.firstChild<Player>()?.removeFromParent();
+    world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
+    world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
 
     Future<void>.delayed(
       const Duration(seconds: 1),
-      () => world.add(
-        Player(
-          levelSize: leapMap.tiledMap.size.clone(),
-          cameraViewport: _cameraViewport,
-        ),
-      ),
+      () async {
+        await world.add(
+          Player(
+            levelSize: leapMap.tiledMap.size.clone(),
+            cameraViewport: _cameraViewport,
+          ),
+        );
+
+        await addAll([
+          SpriteObjectGroupBuilder(
+            tilesetPath: 'objects/tile_items_v2.png',
+            tileLayerName: 'items',
+            tileset: itemsTileset,
+            componentBuilder: Item.new,
+          ),
+          ObjectGroupProximityBuilder<Player>(
+            proximity: _cameraViewport.x * 1.5,
+            tilesetPath: 'objects/tile_enemies_v2.png',
+            tileLayerName: 'enemies',
+            tileset: enemiesTileset,
+            componentBuilder: Enemy.new,
+          ),
+        ]);
+      },
     );
   }
 
