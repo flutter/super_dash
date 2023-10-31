@@ -43,11 +43,13 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
   var _lastReferenceX = 0.0;
   var _referenceDirection = 1;
 
-  Reference? get reference => game.world.firstChild<Reference>();
+  late PositionComponent? currentReference;
 
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
+
+    currentReference = game.world.firstChild<Reference>();
 
     final layer = gameRef.leapMap.getTileLayer<ObjectGroup>(tileLayerName);
     tiles = await gameRef.images.load(tilesetPath);
@@ -59,7 +61,7 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
 
     _objects.addAll(layer.objects);
 
-    _lastReferenceX = reference?.x ?? 0.0;
+    _lastReferenceX = currentReference?.x ?? 0.0;
     _findPlayerIndex();
   }
 
@@ -69,7 +71,7 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
     if (i != _referenceIndex) {
       while (i >= 0 && i < _objects.length) {
         final object = _objects.elementAt(i);
-        if (object.x > reference!.x) {
+        if (object.x > currentReference!.x) {
           _referenceIndex = i - _referenceDirection;
           break;
         }
@@ -82,7 +84,7 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
   void update(double dt) {
     super.update(dt);
 
-    final reference = this.reference;
+    final reference = this.currentReference;
     if (reference == null) return;
 
     _referenceDirection = reference.x > _lastReferenceX
