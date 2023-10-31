@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:ui';
+
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/dash_run_game.dart';
 import 'package:dash_run/map_tester/map_tester.dart';
@@ -21,6 +23,8 @@ void main() {
     });
 
     testWidgets('allows to select a game folder', (tester) async {
+      setViewSize(tester);
+
       Future<String> getDirectoryPath() async => '.';
 
       await tester.pumpSubject(getDirectoryPath);
@@ -35,6 +39,7 @@ void main() {
     });
 
     testWidgets('can unload the game', (tester) async {
+      setViewSize(tester);
       Future<String> getDirectoryPath() async => '.';
 
       await tester.pumpSubject(getDirectoryPath);
@@ -57,6 +62,7 @@ void main() {
     });
 
     testWidgets('allows to reload a game', (tester) async {
+      setViewSize(tester);
       Future<String> getDirectoryPath() async => '.';
 
       await tester.pumpSubject(getDirectoryPath);
@@ -83,6 +89,12 @@ void main() {
       expect(updatedGame, isNot(originalGame));
     });
   });
+}
+
+void setViewSize(WidgetTester tester) {
+  tester.view.physicalSize = Size(1280, 1024);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
 }
 
 extension on WidgetTester {

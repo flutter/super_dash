@@ -120,31 +120,36 @@ class DashRunGame extends LeapGame
     world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
 
+    leapMap.children
+        .whereType<Enemy>()
+        .forEach((enemy) => enemy.removeFromParent());
+
     Future<void>.delayed(
       const Duration(seconds: 1),
       () async {
-        await world.add(
-          Player(
-            levelSize: leapMap.tiledMap.size.clone(),
-            cameraViewport: _cameraViewport,
-          ),
+        final newPlayer = Player(
+          levelSize: leapMap.tiledMap.size.clone(),
+          cameraViewport: _cameraViewport,
         );
+        await world.add(newPlayer);
 
-        await addAll([
-          SpriteObjectGroupBuilder(
-            tilesetPath: 'objects/tile_items_v2.png',
-            tileLayerName: 'items',
-            tileset: itemsTileset,
-            componentBuilder: Item.new,
-          ),
-          ObjectGroupProximityBuilder<Player>(
-            proximity: _cameraViewport.x * 1.5,
-            tilesetPath: 'objects/tile_enemies_v2.png',
-            tileLayerName: 'enemies',
-            tileset: enemiesTileset,
-            componentBuilder: Enemy.new,
-          ),
-        ]);
+        await newPlayer.mounted.then((_) {
+          addAll([
+            SpriteObjectGroupBuilder(
+              tilesetPath: 'objects/tile_items_v2.png',
+              tileLayerName: 'items',
+              tileset: itemsTileset,
+              componentBuilder: Item.new,
+            ),
+            ObjectGroupProximityBuilder<Player>(
+              proximity: _cameraViewport.x * 1.5,
+              tilesetPath: 'objects/tile_enemies_v2.png',
+              tileLayerName: 'enemies',
+              tileset: enemiesTileset,
+              componentBuilder: Enemy.new,
+            ),
+          ]);
+        });
       },
     );
   }
@@ -173,5 +178,9 @@ class DashRunGame extends LeapGame
 
       player.removeFromParent();
     }
+  }
+
+  void toggleInvincibility() {
+    player?.isPlayerInvincible = !(player?.isPlayerInvincible ?? false);
   }
 }
