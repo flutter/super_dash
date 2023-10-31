@@ -24,7 +24,7 @@ dependencies:
   logging: ^1.2.0
   ordered_set: ^5.0.2
   path: ^1.8.3
-  pathxp: ^0.3.0
+  pathxp: ^0.4.0
   provider: ^6.0.5
   shared_preferences: ^2.2.2
 
@@ -42,9 +42,6 @@ dependency_overrides:
       url: https://github.com/erickzanardo/leap.git
       ref: main
       path: packages/leap
-  pathxp:
-    git:
-      url: https://github.com/erickzanardo/pathxp.git
 
 flutter:
   uses-material-design: true
