@@ -23,8 +23,10 @@ class Player extends JumperCharacter<DashRunGame> {
   late final PlayerCameraAnchor cameraAnchor;
   late final SpriteAnimationComponent runningAnimation;
 
-  List<Item> powerUps = [];
+  List<ItemType> powerUps = [];
   bool isPlayerInvincible = false;
+
+  bool get doubleJumpEnabled => powerUps.contains(ItemType.goldenFeather);
 
   @override
   int get priority => 1;
@@ -45,7 +47,7 @@ class Player extends JumperCharacter<DashRunGame> {
     input = gameRef.input;
     size = Vector2.all(gameRef.tileSize);
     walkSpeed = gameRef.tileSize * 5;
-    minJumpImpulse = world.gravity * 0.7;
+    minJumpImpulse = world.gravity * 0.5;
     cameraAnchor = PlayerCameraAnchor(
       cameraViewport: cameraViewport,
       levelSize: levelSize,
@@ -127,7 +129,7 @@ class Player extends JumperCharacter<DashRunGame> {
           case ItemType.acorn || ItemType.egg:
             game.score += collision.type.points;
           case ItemType.goldenFeather:
-            powerUps.add(collision);
+            powerUps.add(ItemType.goldenFeather);
         }
         collision.removeFromParent();
       }
