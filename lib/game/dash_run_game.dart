@@ -133,23 +133,22 @@ class DashRunGame extends LeapGame
         );
         await world.add(newPlayer);
 
-        await newPlayer.mounted.then((_) {
-          addAll([
-            SpriteObjectGroupBuilder(
-              tilesetPath: 'objects/tile_items_v2.png',
-              tileLayerName: 'items',
-              tileset: itemsTileset,
-              componentBuilder: Item.new,
-            ),
-            ObjectGroupProximityBuilder<Player>(
-              proximity: _cameraViewport.x * 1.5,
-              tilesetPath: 'objects/tile_enemies_v2.png',
-              tileLayerName: 'enemies',
-              tileset: enemiesTileset,
-              componentBuilder: Enemy.new,
-            ),
-          ]);
-        });
+        await newPlayer.mounted;
+        await addAll([
+          SpriteObjectGroupBuilder(
+            tilesetPath: 'objects/tile_items_v2.png',
+            tileLayerName: 'items',
+            tileset: itemsTileset,
+            componentBuilder: Item.new,
+          ),
+          ObjectGroupProximityBuilder<Player>(
+            proximity: _cameraViewport.x * 1.5,
+            tilesetPath: 'objects/tile_enemies_v2.png',
+            tileLayerName: 'enemies',
+            tileset: enemiesTileset,
+            componentBuilder: Enemy.new,
+          ),
+        ]);
       },
     );
   }

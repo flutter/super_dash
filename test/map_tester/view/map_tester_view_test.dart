@@ -23,7 +23,7 @@ void main() {
     });
 
     testWidgets('allows to select a game folder', (tester) async {
-      setViewSize(tester);
+      tester.setViewSize();
 
       Future<String> getDirectoryPath() async => '.';
 
@@ -39,7 +39,7 @@ void main() {
     });
 
     testWidgets('can unload the game', (tester) async {
-      setViewSize(tester);
+      tester.setViewSize();
       Future<String> getDirectoryPath() async => '.';
 
       await tester.pumpSubject(getDirectoryPath);
@@ -62,7 +62,7 @@ void main() {
     });
 
     testWidgets('allows to reload a game', (tester) async {
-      setViewSize(tester);
+      tester.setViewSize();
       Future<String> getDirectoryPath() async => '.';
 
       await tester.pumpSubject(getDirectoryPath);
@@ -89,12 +89,6 @@ void main() {
       expect(updatedGame, isNot(originalGame));
     });
   });
-}
-
-void setViewSize(WidgetTester tester) {
-  tester.view.physicalSize = Size(1280, 1024);
-  tester.view.devicePixelRatio = 1;
-  addTearDown(tester.view.resetPhysicalSize);
 }
 
 extension on WidgetTester {
