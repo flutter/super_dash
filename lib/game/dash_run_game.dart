@@ -25,7 +25,7 @@ class DashRunGame extends LeapGame
         );
 
   static const prefix = 'assets/map/';
-  static final _cameraViewport = Vector2(592, 1280);
+  static final _cameraViewport = Vector2(592, 1024);
 
   final AssetBundle? customBundle;
 
