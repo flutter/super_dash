@@ -24,6 +24,7 @@ class PlayerCameraAnchor extends Component
   );
 
   late final _cameraXOffset = cameraViewport.x * .4;
+  late final _cameraYOffset = cameraViewport.y * .2;
 
   @override
   Vector2 get position => _anchor;
@@ -31,7 +32,7 @@ class PlayerCameraAnchor extends Component
   void _setAnchor(double x, double y) {
     _anchor
       ..x = x.clamp(_cameraMin.x, _cameraMax.x) + _cameraXOffset
-      ..y = y.clamp(_cameraMin.y, _cameraMax.y);
+      ..y = y.clamp(_cameraMin.y, _cameraMax.y) - _cameraYOffset;
   }
 
   @override
