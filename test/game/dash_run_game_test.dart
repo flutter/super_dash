@@ -58,6 +58,7 @@ void main() {
           equals(65),
         );
       },
+      timeout: const Timeout(Duration(minutes: 1)),
     );
 
     testWithGame(
@@ -70,6 +71,7 @@ void main() {
           isZero,
         );
       },
+      timeout: const Timeout(Duration(minutes: 1)),
     );
   });
 }

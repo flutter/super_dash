@@ -24,6 +24,7 @@ class Player extends JumperCharacter<DashRunGame> {
   late final SpriteAnimationComponent runningAnimation;
 
   List<Item> powerUps = [];
+  bool isPlayerInvincible = false;
 
   @override
   int get priority => 1;
@@ -94,7 +95,8 @@ class Player extends JumperCharacter<DashRunGame> {
     if (isDead) return game.gameOver();
 
     // Player falls in a hazard zone.
-    if (collisionInfo.downCollision?.isHazard ?? false) {
+    if ((collisionInfo.downCollision?.isHazard ?? false) &&
+        !isPlayerInvincible) {
       // If player has no golden feathers, game over.
       if (powerUps.isEmpty) return game.gameOver();
 
@@ -130,7 +132,7 @@ class Player extends JumperCharacter<DashRunGame> {
         collision.removeFromParent();
       }
 
-      if (collision is Enemy) {
+      if (collision is Enemy && !isPlayerInvincible) {
         health -= collision.enemyDamage;
       }
     }
