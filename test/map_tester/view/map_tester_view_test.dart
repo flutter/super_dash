@@ -21,6 +21,8 @@ void main() {
     });
 
     testWidgets('allows to select a game folder', (tester) async {
+      tester.setViewSize();
+
       Future<String> getDirectoryPath() async => '.';
 
       await tester.pumpSubject(getDirectoryPath);
@@ -35,6 +37,7 @@ void main() {
     });
 
     testWidgets('can unload the game', (tester) async {
+      tester.setViewSize();
       Future<String> getDirectoryPath() async => '.';
 
       await tester.pumpSubject(getDirectoryPath);
@@ -57,6 +60,7 @@ void main() {
     });
 
     testWidgets('allows to reload a game', (tester) async {
+      tester.setViewSize();
       Future<String> getDirectoryPath() async => '.';
 
       await tester.pumpSubject(getDirectoryPath);
