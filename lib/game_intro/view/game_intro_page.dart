@@ -1,4 +1,5 @@
 import 'package:dash_run/game/game.dart';
+import 'package:dash_run/game_instructions/game_instructions.dart';
 import 'package:dash_run/game_intro/widgets/widgets.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
@@ -74,7 +75,9 @@ class _Actions extends StatelessWidget {
           icon: Icons.info,
         ),
         GameIconButton(
-          onPressed: () {},
+          onPressed: () => Navigator.of(context).push(
+            GameInstructionsOverlay.route(),
+          ),
           icon: Icons.help,
         ),
       ],
