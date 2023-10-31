@@ -55,7 +55,7 @@ class Player extends JumperCharacter<DashRunGame> {
       'anim/spritesheet_dash_run.png',
       SpriteAnimationData.sequenced(
         amount: 32,
-        stepTime: 42,
+        stepTime: .1,
         textureSize: Vector2.all(gameRef.tileSize),
         amountPerRow: 8,
       ),
