@@ -1,15 +1,22 @@
 // ignore_for_file: cascade_invocations
 
+import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leap/leap.dart';
+import 'package:mocktail/mocktail.dart';
+
+class _MockAudioController extends Mock implements AudioController {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('DashRunGame', () {
-    final flameTester = FlameTester(DashRunGame.new);
+    DashRunGame createGame() => DashRunGame(
+          audioController: _MockAudioController(),
+        );
+    final flameTester = FlameTester(createGame);
 
     flameTester.testGameWidget(
       'starts with score 0',
@@ -43,7 +50,7 @@ void main() {
 
     testWithGame(
       'starts with correct amount of items',
-      DashRunGame.new,
+      createGame,
       (game) async {
         await game.ready();
         expect(
@@ -55,7 +62,7 @@ void main() {
 
     testWithGame(
       'starts with 0 enemies spawned',
-      DashRunGame.new,
+      createGame,
       (game) async {
         await game.ready();
         expect(

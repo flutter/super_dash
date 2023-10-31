@@ -1,18 +1,22 @@
+import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameView extends StatelessWidget {
   const GameView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const DecoratedBox(
-      decoration: BoxDecoration(
+    return DecoratedBox(
+      decoration: const BoxDecoration(
         color: Colors.blueAccent,
       ),
       child: GameWidget.controlled(
-        gameFactory: DashRunGame.new,
+        gameFactory: () => DashRunGame(
+          audioController: context.read<AudioController>(),
+        ),
       ),
     );
   }

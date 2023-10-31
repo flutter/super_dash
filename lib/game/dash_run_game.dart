@@ -1,16 +1,28 @@
 import 'dart:async';
 
+import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 
 class DashRunGame extends LeapGame
     with TapCallbacks, HasKeyboardHandlerComponents {
-  DashRunGame({this.customBundle}) : super(tileSize: 64);
+  DashRunGame({
+    required this.audioController,
+    this.customBundle,
+  }) : super(
+          tileSize: 64,
+          configuration: const LeapConfiguration(
+            tiled: TiledOptions(
+              atlasMaxX: 8192,
+              atlasMaxY: 8192,
+            ),
+          ),
+        );
 
   static const prefix = 'assets/map/';
   static final _cameraViewport = Vector2(592, 1280);
@@ -20,6 +32,7 @@ class DashRunGame extends LeapGame
   late final SimpleCombinedInput input;
   late final SpriteObjectGroupBuilder items;
   late final ObjectGroupProximityBuilder enemies;
+  final AudioController audioController;
 
   int score = 0;
 
@@ -46,7 +59,7 @@ class DashRunGame extends LeapGame
     camera = CameraComponent.withFixedResolution(
       width: _cameraViewport.x,
       height: _cameraViewport.y,
-    );
+    )..world = world;
 
     images = Images(
       prefix: prefix,
@@ -54,14 +67,11 @@ class DashRunGame extends LeapGame
     );
 
     await loadWorldAndMap(
-      camera: camera,
       images: images,
       prefix: prefix,
       bundle: customBundle,
-      tiledMapPath: 'flutter_runnergame_map_v05b.tmx',
+      tiledMapPath: 'flutter_runnergame_map.tmx',
     );
-
-    input = SimpleCombinedInput();
 
     final player = Player(
       levelSize: leapMap.tiledMap.size.clone(),
@@ -69,14 +79,22 @@ class DashRunGame extends LeapGame
     );
     world.add(player);
 
-    items = SpriteObjectGroupBuilder(
+    input = SimpleCombinedInput(
+      keyboardInput: SimpleKeyboardInput(
+        rightKeys: {
+          PhysicalKeyboardKey.space,
+        },
+      ),
+    );
+
+    final items = SpriteObjectGroupBuilder(
       tilesetPath: 'objects/tile_items_v2.png',
       tileLayerName: 'items',
       tileset: itemsTileset,
       componentBuilder: Item.new,
     );
 
-    enemies = ObjectGroupProximityBuilder<Player>(
+    final enemies = ObjectGroupProximityBuilder<Player>(
       proximity: _cameraViewport.x * 1.5,
       tilesetPath: 'objects/tile_enemies_v2.png',
       tileLayerName: 'enemies',
@@ -99,15 +117,35 @@ class DashRunGame extends LeapGame
   void gameOver() {
     score = 0;
     world.firstChild<Player>()?.removeFromParent();
+    world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
+    world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
 
     Future<void>.delayed(
       const Duration(seconds: 1),
-      () => world.add(
-        Player(
-          levelSize: leapMap.tiledMap.size.clone(),
-          cameraViewport: _cameraViewport,
-        ),
-      ),
+      () async {
+        await world.add(
+          Player(
+            levelSize: leapMap.tiledMap.size.clone(),
+            cameraViewport: _cameraViewport,
+          ),
+        );
+
+        await addAll([
+          SpriteObjectGroupBuilder(
+            tilesetPath: 'objects/tile_items_v2.png',
+            tileLayerName: 'items',
+            tileset: itemsTileset,
+            componentBuilder: Item.new,
+          ),
+          ObjectGroupProximityBuilder<Player>(
+            proximity: _cameraViewport.x * 1.5,
+            tilesetPath: 'objects/tile_enemies_v2.png',
+            tileLayerName: 'enemies',
+            tileset: enemiesTileset,
+            componentBuilder: Enemy.new,
+          ),
+        ]);
+      },
     );
   }
 

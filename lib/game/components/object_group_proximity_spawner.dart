@@ -59,7 +59,7 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
 
     _objects.addAll(layer.objects);
 
-    _lastReferenceX = reference!.x;
+    _lastReferenceX = reference?.x ?? 0.0;
     _findPlayerIndex();
   }
 

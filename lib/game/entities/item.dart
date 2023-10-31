@@ -8,7 +8,6 @@ import 'package:leap/leap.dart';
 enum ItemType {
   acorn(10),
   egg(1000),
-  wings(0),
   goldenFeather(0);
 
   const ItemType(this.points);
@@ -17,11 +16,10 @@ enum ItemType {
 
   static ItemType fromGid(int gid) {
     return switch (gid) {
-      752 => ItemType.egg,
-      753 => ItemType.acorn,
-      754 => ItemType.goldenFeather,
-      755 => ItemType.wings,
-      _ => throw Exception('Invalid item gid: $gid'),
+      731 => ItemType.egg,
+      732 => ItemType.acorn,
+      733 => ItemType.goldenFeather,
+      _ => ItemType.egg,
     };
   }
 }
