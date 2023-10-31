@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:ui';
-
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/dash_run_game.dart';
 import 'package:dash_run/map_tester/map_tester.dart';
