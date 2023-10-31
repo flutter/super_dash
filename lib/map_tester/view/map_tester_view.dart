@@ -79,6 +79,13 @@ class _MapTesterViewState extends State<MapTesterView> {
                     },
                     child: const Text('Seize camera control'),
                   ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      game?.toggleInvincibility();
+                    },
+                    child: const Text('Toggle invincibility'),
+                  ),
                 ],
               ),
             const SizedBox(height: 16),
