@@ -1,4 +1,3 @@
-import 'package:dash_run/game/dash_run_game.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
