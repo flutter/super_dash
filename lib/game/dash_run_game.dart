@@ -165,6 +165,12 @@ class DashRunGame extends LeapGame
       cameraDebugger.add(anchor);
       camera.follow(anchor);
 
+      final proximityBuilders =
+          descendants().whereType<ObjectGroupProximityBuilder<Player>>();
+      for (final proximityBuilder in proximityBuilders) {
+        proximityBuilder.currentReference = cameraDebugger;
+      }
+
       player.removeFromParent();
     }
   }

@@ -20,7 +20,7 @@ class SettingsController {
 
   ValueNotifier<bool> soundsOn = ValueNotifier(true);
 
-  ValueNotifier<bool> musicOn = ValueNotifier(true);
+  ValueNotifier<bool> musicOn = ValueNotifier(false);
 
   /// Asynchronously loads values from the injected persistence store.
   Future<void> loadStateFromPersistence() async {
