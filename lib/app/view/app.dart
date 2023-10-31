@@ -1,6 +1,6 @@
 import 'package:dash_run/app_lifecycle/app_lifecycle.dart';
 import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/intro/intro.dart';
+import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/map_tester/map_tester.dart';
 import 'package:dash_run/settings/settings_controller.dart';
@@ -24,10 +24,10 @@ class App extends StatelessWidget {
     return AppLifecycleObserver(
       child: MultiRepositoryProvider(
         providers: [
-          RepositoryProvider.value(
+          RepositoryProvider<SettingsController>.value(
             value: settingsController,
           ),
-          RepositoryProvider(
+          RepositoryProvider<AudioController>(
             create: (context) {
               final lifecycleNotifier =
                   context.read<ValueNotifier<AppLifecycleState>>();
@@ -38,13 +38,15 @@ class App extends StatelessWidget {
         ],
         child: MaterialApp(
           theme: ThemeData(
-            appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
+            appBarTheme: const AppBarTheme(
+              color: Color(0xFF13B9FF),
+            ),
             colorScheme: ColorScheme.fromSwatch(
               accentColor: const Color(0xFF13B9FF),
             ),
           ),
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
           home: isTesting ? const MapTesterView() : const GameIntroPage(),
         ),
       ),
