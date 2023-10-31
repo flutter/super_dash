@@ -1,6 +1,6 @@
 import 'package:dash_run/app_lifecycle/app_lifecycle.dart';
 import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/game/game.dart';
+import 'package:dash_run/intro/intro.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/map_tester/map_tester.dart';
 import 'package:dash_run/settings/settings_controller.dart';
@@ -11,8 +11,8 @@ class App extends StatelessWidget {
   const App({
     required this.settingsController,
     required this.audioController,
-    super.key,
     this.isTesting = false,
+    super.key,
   });
 
   final bool isTesting;
@@ -45,7 +45,7 @@ class App extends StatelessWidget {
           ),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: isTesting ? const MapTesterView() : const GameView(),
+          home: isTesting ? const MapTesterView() : const GameIntroPage(),
         ),
       ),
     );
