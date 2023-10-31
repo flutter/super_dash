@@ -9,15 +9,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class App extends StatelessWidget {
   const App({
-    required this.settingsController,
     required this.audioController,
+    required this.settingsController,
     this.isTesting = false,
     super.key,
   });
 
   final bool isTesting;
-  final SettingsController settingsController;
   final AudioController audioController;
+  final SettingsController settingsController;
 
   @override
   Widget build(BuildContext context) {
