@@ -46,7 +46,7 @@ dependency_overrides:
       path: packages/flame_test
   leap:
     git:
-      url: https://github.com/erickzanardo/leap.git
+      url: https://github.com/kurtome/leap.git
       ref: main
       path: packages/leap
 

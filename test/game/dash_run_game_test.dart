@@ -55,7 +55,7 @@ void main() {
         await game.ready();
         expect(
           game.leapMap.children.whereType<Item>().length,
-          equals(65),
+          equals(109),
         );
       },
       timeout: const Timeout(Duration(minutes: 1)),
