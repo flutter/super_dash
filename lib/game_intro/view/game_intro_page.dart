@@ -1,6 +1,6 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/game_instructions/game_instructions.dart';
-import 'package:dash_run/game_intro/widgets/widgets.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/settings/settings.dart';
@@ -39,7 +39,7 @@ class GameIntroPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              GameButton(
+              GameElevatedButton(
                 label: l10n.gameIntroPagePlayButtonText,
                 onPressed: () => Navigator.of(context).push(GameView.route()),
               ),

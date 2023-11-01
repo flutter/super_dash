@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
-class GameButton extends StatelessWidget {
-  GameButton({
+/// {@template game_button}
+/// Common elevated button for the screens in the game.
+/// {@endtemplate}
+class GameElevatedButton extends StatelessWidget {
+  /// {@macro game_button}
+  GameElevatedButton({
     required String label,
     VoidCallback? onPressed,
     super.key,
@@ -10,7 +14,8 @@ class GameButton extends StatelessWidget {
           child: Text(label),
         );
 
-  GameButton.icon({
+  /// {@macro game_button}
+  GameElevatedButton.icon({
     required String label,
     required Icon icon,
     VoidCallback? onPressed,

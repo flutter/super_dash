@@ -1,3 +1,5 @@
+import 'package:app_ui/app_ui.dart';
+import 'package:dash_run/game_instructions/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class GameCard extends StatelessWidget {
@@ -5,12 +7,14 @@ class GameCard extends StatelessWidget {
     required this.title,
     required this.description,
     required this.image,
+    required this.pageController,
     super.key,
   });
 
   final String title;
   final String description;
   final Widget image;
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +30,19 @@ class GameCard extends StatelessWidget {
         color: Colors.white24,
         child: Stack(
           children: [
-            const Positioned(
-              top: 24,
-              right: 24,
-              child: CloseButton(),
+            Positioned(
+              top: 16,
+              right: 16,
+              child: GameIconButton(
+                icon: Icons.close,
+                onPressed: Navigator.of(context).pop,
+              ),
             ),
             _CardContent(
               image: image,
               title: title,
               description: description,
+              pageController: pageController,
             ),
           ],
         ),
@@ -48,11 +56,13 @@ class _CardContent extends StatelessWidget {
     required this.image,
     required this.title,
     required this.description,
+    required this.pageController,
   });
 
   final Widget image;
   final String title;
   final String description;
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +79,7 @@ class _CardContent extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 64,
+            horizontal: 24,
           ),
           child: Text(
             description,
@@ -78,6 +88,9 @@ class _CardContent extends StatelessWidget {
               color: Colors.white,
             ),
           ),
+        ),
+        GameInstructionNavigationControls(
+          pageController: pageController,
         ),
       ],
     );
@@ -93,31 +106,21 @@ class _CardImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: Opacity(
-            opacity: 0.4,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.white,
-                ),
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFFB1B1B1),
-                    Color(0xFF363567),
-                    Color(0xFFE2F8FA),
-                    Colors.white38,
-                  ],
-                ),
-              ),
-            ),
-          ),
+    return SizedBox(
+      width: 224,
+      height: 224,
+      child: TraslucentBackground(
+        border: Border.all(
+          color: Colors.white,
         ),
-        image,
-      ],
+        gradient: const [
+          Color(0xFFB1B1B1),
+          Color(0xFF363567),
+          Color(0xFFE2F8FA),
+          Colors.white38,
+        ],
+        child: Positioned.fill(child: image),
+      ),
     );
   }
 }
