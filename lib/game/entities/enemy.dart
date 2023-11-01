@@ -20,7 +20,7 @@ class Enemy extends PhysicalEntity<DashRunGame> {
 
   @override
   Future<void> onLoad() async {
-    size = sprite.srcSize;
+    size = Vector2.all(gameRef.tileSize * .5);
     position = Vector2(tiledObject.x, tiledObject.y);
 
     final path =
@@ -33,8 +33,10 @@ class Enemy extends PhysicalEntity<DashRunGame> {
 
     add(
       SpriteComponent(
-        size: size,
+        size: Vector2.all(gameRef.tileSize),
         sprite: sprite,
+        anchor: Anchor.center,
+        position: size / 2 - Vector2(0, size.y / 2),
       ),
     );
 
