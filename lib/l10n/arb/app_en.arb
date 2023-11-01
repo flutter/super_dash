@@ -1,7 +1,11 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "gameIntroPageHeadline": "Fly into Super Dash, avoid the bugs, collect points, and see how far you can go!",
+    "@gameIntroPageHeadline": {
+        "description": "Text shown in the Headline of the Game Info Page"
+    },
+    "gameIntroPagePlayButtonText": "Play",
+    "@gameIntroPagePlayButtonText": {
+        "description": "Text shown in the Play button of the Game Info Page"
     }
 }
