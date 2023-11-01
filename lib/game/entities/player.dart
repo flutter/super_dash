@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:leap/leap.dart';
 
 class Player extends JumperCharacter<DashRunGame> {
@@ -92,7 +96,7 @@ class Player extends JumperCharacter<DashRunGame> {
   void update(double dt) {
     super.update(dt);
 
-    if (world.isOutside(this)) resetPosition();
+    if (x >= gameRef.leapMap.width - gameRef.tileSize) levelCleared();
 
     if (isDead) return game.gameOver();
 
@@ -140,13 +144,68 @@ class Player extends JumperCharacter<DashRunGame> {
     }
   }
 
-  void resetPosition() {
-    x = spawn.x;
-    y = spawn.y;
+  void levelCleared() {
+    gameRef.levelCleared();
+
+    walking = false;
     velocity
       ..x = 0
       ..y = 0;
     lastGroundXVelocity = 0;
     faceLeft = false;
+
+    runningAnimation.add(
+      MoveEffect.by(
+        Vector2(0, -gameRef.tileSize * 3),
+        CurvedEffectController(
+          1,
+          Curves.easeOutCubic,
+        ),
+        onComplete: () {
+          runningAnimation.add(
+            RotateEffect.by(
+              math.pi * 2,
+              CurvedEffectController(
+                .5,
+                Curves.easeOutCubic,
+              ),
+              onComplete: () {
+                removeFromParent();
+
+                late CircleComponent component;
+                component = CircleComponent(
+                  position: position + runningAnimation.position.clone(),
+                  paint: Paint()..color = Colors.white,
+                  radius: size.x / 2,
+                  anchor: Anchor.center,
+                )..add(
+                    MoveEffect.to(
+                      spawn,
+                      CurvedEffectController(
+                        1.5,
+                        Curves.easeInOutSine,
+                      ),
+                      onComplete: () {
+                        runningAnimation
+                          ..angle = 0
+                          ..position = Vector2.zero();
+
+                        component.removeFromParent();
+
+                        position = spawn.clone();
+
+                        gameRef.world.add(this);
+                      },
+                    ),
+                  );
+
+                gameRef.world.add(component);
+                gameRef.camera.follow(component);
+              },
+            ),
+          );
+        },
+      ),
+    );
   }
 }

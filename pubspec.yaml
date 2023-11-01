@@ -53,6 +53,7 @@ flutter:
   generate: true
 
   assets:
+    - assets/images/
     - assets/sfx/
     - assets/music/
     - assets/map/
