@@ -9,7 +9,10 @@ class Enemy extends PhysicalEntity<DashRunGame> {
     required this.sprite,
     required this.tiledObject,
     this.enemyDamage = 1,
-  }) : super(collisionType: CollisionType.standard);
+  }) : super(
+          collisionType: CollisionType.standard,
+          static: tiledObject.properties.byName['Fly']?.value as bool? ?? false,
+        );
 
   final int enemyDamage;
   late final Sprite sprite;
