@@ -1,9 +1,13 @@
 import 'package:dash_run/game/game.dart';
+import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leap/leap.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:pathxp/pathxp.dart';
+
+class _MockSprite extends Mock implements Sprite {}
 
 class _TestGame extends LeapGame {
   _TestGame() : super(tileSize: 64);
@@ -56,6 +60,36 @@ void main() {
 
         expect(moveEffects.first.measure(), equals(128));
         expect(moveEffects.last.measure(), equals(64));
+      },
+    );
+
+    testWithGame(
+      'flips the parent sprite when it changes direction',
+      _TestGame.new,
+      (game) async {
+        final pathxp = Pathxp('{L, R}');
+        final parent = PhysicalEntity();
+        final behavior = FollowPathBehavior(pathxp);
+
+        await game.ensureAdd(parent);
+        await parent.ensureAdd(behavior);
+
+        final sprite = _MockSprite();
+        when(() => sprite.srcSize).thenReturn(Vector2(1, 1));
+        final spriteComponent = SpriteComponent()..sprite = sprite;
+        await parent.ensureAdd(spriteComponent);
+
+        expect(spriteComponent.isFlippedHorizontally, isFalse);
+
+        var timeElapsed = 0.0;
+
+        while (timeElapsed < 8) {
+          behavior.update(.1);
+          parent.updateTree(.1);
+          timeElapsed += .1;
+        }
+
+        expect(spriteComponent.isFlippedHorizontally, isTrue);
       },
     );
   });

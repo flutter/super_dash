@@ -8,6 +8,8 @@ environment:
   flutter: 3.13.2
 
 dependencies:
+  app_ui:
+    path: packages/app_ui
   audioplayers: ^5.2.0
   bloc: ^8.1.2
   file_selector: ^1.0.1
@@ -53,9 +55,10 @@ flutter:
   generate: true
 
   assets:
-    - assets/sfx/
-    - assets/music/
+    - assets/images/
     - assets/map/
     - assets/map/anim/
     - assets/map/tiles/
     - assets/map/objects/
+    - assets/music/
+    - assets/sfx/
