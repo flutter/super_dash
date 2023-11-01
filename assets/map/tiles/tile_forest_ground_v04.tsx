@@ -65,16 +65,18 @@
   </objectgroup>
  </tile>
  <tile id="81" type="Platform"/>
- <tile id="86" type="Hazard">
+ <tile id="86">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="17" width="64" height="47"/>
   </objectgroup>
  </tile>
- <tile id="87" type="Hazard">
+ <tile id="87">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="17" width="64" height="47"/>
   </objectgroup>
  </tile>
+ <tile id="97" type="Hazard"/>
+ <tile id="98" type="Hazard"/>
  <tile id="110" type="Platform"/>
  <tile id="111" type="Platform"/>
  <tile id="113" type="Platform"/>
