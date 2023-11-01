@@ -1,5 +1,5 @@
 name: app_ui
-description: A Very Good Project created by Very Good CLI.
+description: App UI Package of the Super Dash game.
 version: 0.1.0+1
 publish_to: none
 
