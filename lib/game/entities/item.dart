@@ -18,7 +18,7 @@ enum ItemType {
     return switch (gid) {
       731 => ItemType.egg,
       732 => ItemType.acorn,
-      733 => ItemType.goldenFeather,
+      734 => ItemType.goldenFeather,
       _ => ItemType.egg,
     };
   }

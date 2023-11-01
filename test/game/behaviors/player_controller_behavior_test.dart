@@ -26,9 +26,11 @@ class _TestPlayer extends Player {
     required _TestDashRunGame game,
     bool isAlive = true,
     bool isOnGround = true,
+    bool doubleJumpEnabled = false,
   })  : _game = game,
         _isAlive = isAlive,
         _isOnGround = isOnGround,
+        _doubleJumpEnabled = doubleJumpEnabled,
         super(
           cameraViewport: Vector2.all(200),
           levelSize: Vector2.all(200),
@@ -36,6 +38,7 @@ class _TestPlayer extends Player {
 
   final bool _isAlive;
   final bool _isOnGround;
+  final bool _doubleJumpEnabled;
   final _TestDashRunGame _game;
 
   @override
@@ -46,6 +49,9 @@ class _TestPlayer extends Player {
 
   @override
   bool get isOnGround => _isOnGround;
+
+  @override
+  bool get doubleJumpEnabled => _doubleJumpEnabled;
 
   @override
   Future<void> onLoad() async {
@@ -233,6 +239,93 @@ void main() {
           playerControllerBehavior.update(0);
 
           expect(player.faceLeft, isFalse);
+        },
+      );
+
+      testWithGame(
+        'cannot double jump if not enabled',
+        createGame,
+        (game) async {
+          final input = _MockSimpleCombinedInput();
+
+          final player = _TestPlayer(game: game, isOnGround: false)
+            ..input = input
+            ..jumping = false
+            ..walking = true;
+
+          when(() => input.isPressed).thenReturn(false);
+          when(() => input.justPressed).thenReturn(true);
+          when(() => input.isPressedRight).thenReturn(true);
+
+          await game.ensureAdd(player);
+
+          final playerControllerBehavior = PlayerControllerBehavior();
+          await player.ensureAdd(playerControllerBehavior);
+
+          playerControllerBehavior.update(0);
+
+          expect(player.jumping, isFalse);
+        },
+      );
+
+      testWithGame(
+        'can double jump when has the power up enabled',
+        createGame,
+        (game) async {
+          final input = _MockSimpleCombinedInput();
+
+          final player = _TestPlayer(
+            game: game,
+            isOnGround: false,
+            doubleJumpEnabled: true,
+          )
+            ..input = input
+            ..jumping = false
+            ..walking = true;
+
+          when(() => input.isPressed).thenReturn(false);
+          when(() => input.justPressed).thenReturn(true);
+          when(() => input.isPressedRight).thenReturn(true);
+
+          await game.ensureAdd(player);
+
+          final playerControllerBehavior = PlayerControllerBehavior();
+          await player.ensureAdd(playerControllerBehavior);
+
+          playerControllerBehavior.update(0);
+
+          expect(player.jumping, isTrue);
+        },
+      );
+
+      testWithGame(
+        'resets the double jump when on the ground',
+        createGame,
+        (game) async {
+          final input = _MockSimpleCombinedInput();
+
+          final player = _TestPlayer(
+            game: game,
+          )
+            ..input = input
+            ..jumping = false
+            ..walking = true;
+
+          when(() => input.isPressed).thenReturn(false);
+          when(() => input.justPressed).thenReturn(false);
+          when(() => input.isPressedRight).thenReturn(false);
+
+          await game.ensureAdd(player);
+
+          final playerControllerBehavior = PlayerControllerBehavior()
+            ..doubleJumpUsed = true;
+          await player.ensureAdd(playerControllerBehavior);
+
+          expect(playerControllerBehavior.doubleJumpUsed, isTrue);
+
+          playerControllerBehavior.update(0);
+
+          expect(playerControllerBehavior.doubleJumpUsed, isFalse);
         },
       );
     });

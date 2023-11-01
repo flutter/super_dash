@@ -37,7 +37,7 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
     Comparing.on((object) => object.x),
   );
 
-  final List<PositionComponent> _spawnedComponents = [];
+  final Map<int, PositionComponent> _spawnedComponents = {};
 
   var _referenceIndex = 0;
   var _lastReferenceX = 0.0;
@@ -85,7 +85,7 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
     super.update(dt);
 
     final reference = this.currentReference;
-    if (reference == null) return;
+    if (reference == null || !reference.isMounted) return;
 
     _referenceDirection = reference.x > _lastReferenceX
         ? 1
@@ -98,11 +98,12 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
     if (_referenceDirection != 0) {
       _findPlayerIndex();
 
-      for (final component in _spawnedComponents) {
+      for (final entry in _spawnedComponents.entries) {
+        final component = entry.value;
         if ((component.x - reference.x).abs() > proximity) {
           component
             ..removeFromParent()
-            ..removed.then((_) => _spawnedComponents.remove(component));
+            ..removed.then((_) => _spawnedComponents.remove(entry.key));
         }
       }
 
@@ -114,7 +115,7 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
           break;
         }
 
-        if (_spawnedComponents.any((component) => component.x == object.x)) {
+        if (_spawnedComponents.containsKey(object.id)) {
           continue;
         }
 
@@ -125,7 +126,7 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
           ),
         );
 
-        _spawnedComponents.add(component);
+        _spawnedComponents[object.id] = component;
         gameRef.leapMap.add(component);
       }
     }
