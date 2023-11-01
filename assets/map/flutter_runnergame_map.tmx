@@ -1259,8 +1259,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="11" name="spawn" locked="1">
-  <object id="163" name="Spawn" type="PlayerSpawn" x="864" y="1984">
+ <objectgroup id="11" name="spawn">
+  <object id="163" name="Spawn" type="PlayerSpawn" x="352" y="1984">
    <point/>
   </object>
  </objectgroup>
@@ -1392,7 +1392,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="45" name="Dash" locked="1">
+ <objectgroup id="45" name="Dash" visible="0" locked="1">
   <object id="514" gid="873" x="833" y="1984" width="64" height="64"/>
  </objectgroup>
  <layer id="12" name="//frame//" width="380" height="40" visible="0" locked="1">
