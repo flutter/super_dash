@@ -18,18 +18,24 @@ class GameIntroPage extends StatelessWidget {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Assets.images.introBackground.image(),
+            child: Assets.images.introBackground.image(
+              fit: BoxFit.fill,
+            ),
           ),
           Column(
             children: [
               const Spacer(),
               Assets.images.gameLogo.image(),
               const Spacer(flex: 4),
-              Text(
-                l10n.gameIntroPageHeadline,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  l10n.gameIntroPageHeadline,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(height: 32),

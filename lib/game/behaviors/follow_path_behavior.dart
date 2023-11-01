@@ -11,9 +11,14 @@ class FollowPathBehavior extends Behavior<PhysicalEntity> {
 
   final Pathxp pathExpression;
 
+  bool _facingLeft = true;
+  late double _lastParentX;
+
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
+
+    _lastParentX = parent.x;
 
     const speed = 3.0;
 
@@ -61,6 +66,33 @@ class FollowPathBehavior extends Behavior<PhysicalEntity> {
         infinite: pathExpression.path.infinite,
       ),
     );
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    final currentParentX = parent.x;
+
+    if (currentParentX != _lastParentX) {
+      final newFacingLeft = currentParentX < _lastParentX;
+
+      if (_facingLeft != newFacingLeft) {
+        _facingLeft = newFacingLeft;
+
+        _flipParentSprite();
+      }
+    }
+
+    _lastParentX = currentParentX;
+  }
+
+  void _flipParentSprite() {
+    final sprite = parent.firstChild<SpriteComponent>() ??
+        parent.firstChild<SpriteAnimationComponent>();
+
+    if (sprite != null) {
+      sprite.flipHorizontallyAroundCenter();
+    }
   }
 }
 

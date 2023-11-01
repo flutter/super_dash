@@ -46,7 +46,7 @@ class GameButton extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(
                 horizontal: 72,
-                vertical: 32,
+                vertical: 16,
               ),
               textStyle: theme.textTheme.labelLarge?.copyWith(
                 color: Colors.white,
