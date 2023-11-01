@@ -23,7 +23,10 @@ class Player extends JumperCharacter<DashRunGame> {
   late final PlayerCameraAnchor cameraAnchor;
   late final SpriteAnimationComponent runningAnimation;
 
-  List<Item> powerUps = [];
+  List<ItemType> powerUps = [];
+  bool isPlayerInvincible = false;
+
+  bool get doubleJumpEnabled => powerUps.contains(ItemType.goldenFeather);
 
   @override
   int get priority => 1;
@@ -44,7 +47,7 @@ class Player extends JumperCharacter<DashRunGame> {
     input = gameRef.input;
     size = Vector2.all(gameRef.tileSize);
     walkSpeed = gameRef.tileSize * 5;
-    minJumpImpulse = world.gravity * 0.7;
+    minJumpImpulse = world.gravity * 0.5;
     cameraAnchor = PlayerCameraAnchor(
       cameraViewport: cameraViewport,
       levelSize: levelSize,
@@ -94,7 +97,8 @@ class Player extends JumperCharacter<DashRunGame> {
     if (isDead) return game.gameOver();
 
     // Player falls in a hazard zone.
-    if (collisionInfo.downCollision?.isHazard ?? false) {
+    if ((collisionInfo.downCollision?.isHazard ?? false) &&
+        !isPlayerInvincible) {
       // If player has no golden feathers, game over.
       if (powerUps.isEmpty) return game.gameOver();
 
@@ -125,12 +129,12 @@ class Player extends JumperCharacter<DashRunGame> {
           case ItemType.acorn || ItemType.egg:
             game.score += collision.type.points;
           case ItemType.goldenFeather:
-            powerUps.add(collision);
+            powerUps.add(ItemType.goldenFeather);
         }
         collision.removeFromParent();
       }
 
-      if (collision is Enemy) {
+      if (collision is Enemy && !isPlayerInvincible) {
         health -= collision.enemyDamage;
       }
     }

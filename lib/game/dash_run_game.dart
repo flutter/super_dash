@@ -25,7 +25,7 @@ class DashRunGame extends LeapGame
         );
 
   static const prefix = 'assets/map/';
-  static final _cameraViewport = Vector2(592, 1280);
+  static final _cameraViewport = Vector2(592, 1024);
 
   final AssetBundle? customBundle;
 
@@ -120,16 +120,20 @@ class DashRunGame extends LeapGame
     world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
 
+    leapMap.children
+        .whereType<Enemy>()
+        .forEach((enemy) => enemy.removeFromParent());
+
     Future<void>.delayed(
       const Duration(seconds: 1),
       () async {
-        await world.add(
-          Player(
-            levelSize: leapMap.tiledMap.size.clone(),
-            cameraViewport: _cameraViewport,
-          ),
+        final newPlayer = Player(
+          levelSize: leapMap.tiledMap.size.clone(),
+          cameraViewport: _cameraViewport,
         );
+        await world.add(newPlayer);
 
+        await newPlayer.mounted;
         await addAll([
           SpriteObjectGroupBuilder(
             tilesetPath: 'objects/tile_items_v2.png',
@@ -173,5 +177,9 @@ class DashRunGame extends LeapGame
 
       player.removeFromParent();
     }
+  }
+
+  void toggleInvincibility() {
+    player?.isPlayerInvincible = !(player?.isPlayerInvincible ?? false);
   }
 }

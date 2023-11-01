@@ -1,11 +1,20 @@
 import 'package:dash_run/game/game.dart';
 
 import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:flutter/widgets.dart';
 
 class PlayerControllerBehavior extends Behavior<Player> {
+  @visibleForTesting
+  bool doubleJumpUsed = false;
+
   @override
   void update(double dt) {
     super.update(dt);
+
+    // Reset the double jump.
+    if (doubleJumpUsed && parent.isOnGround) {
+      doubleJumpUsed = false;
+    }
 
     if (parent.isAlive) {
       // Keep jumping if started.
@@ -22,8 +31,13 @@ class PlayerControllerBehavior extends Behavior<Player> {
       // Tapped right.
       if (parent.walking) {
         if (!parent.faceLeft) {
-          // Already moving right.
-          if (parent.isOnGround) parent.jumping = true;
+          if (parent.isOnGround) {
+            parent.jumping = true;
+          } else if (!parent.isOnGround &&
+              (parent.doubleJumpEnabled && !doubleJumpUsed)) {
+            parent.jumping = true;
+            doubleJumpUsed = true;
+          }
         } else {
           // Moving left, stop.
           parent
