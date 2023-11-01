@@ -1,4 +1,3 @@
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class GameCard extends StatelessWidget {
@@ -20,27 +19,24 @@ class GameCard extends StatelessWidget {
         vertical: 72,
         horizontal: 24,
       ),
-      child: BackdropFilter(
-        filter: ui.ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-          color: Colors.white24,
-          child: Stack(
-            children: [
-              const Positioned(
-                top: 24,
-                right: 24,
-                child: CloseButton(),
-              ),
-              _CardContent(
-                image: image,
-                title: title,
-                description: description,
-              ),
-            ],
-          ),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        color: Colors.white24,
+        child: Stack(
+          children: [
+            const Positioned(
+              top: 24,
+              right: 24,
+              child: CloseButton(),
+            ),
+            _CardContent(
+              image: image,
+              title: title,
+              description: description,
+            ),
+          ],
         ),
       ),
     );

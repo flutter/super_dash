@@ -1,3 +1,4 @@
+import 'dart:ui' as ui;
 import 'package:dash_run/game_instructions/routes/routes.dart';
 import 'package:dash_run/game_instructions/widgets/widgets.dart';
 import 'package:dash_run/gen/assets.gen.dart';
@@ -80,16 +81,19 @@ class GameInstructionsOverlay extends StatelessWidget {
       ),
     ];
 
-    return PageView.builder(
-      itemCount: instructions.length,
-      itemBuilder: (context, index) {
-        final instruction = instructions.elementAt(index);
-        return GameCard(
-          title: instruction.title,
-          description: instruction.description,
-          image: instruction.image,
-        );
-      },
+    return BackdropFilter(
+      filter: ui.ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+      child: PageView.builder(
+        itemCount: instructions.length,
+        itemBuilder: (context, index) {
+          final instruction = instructions.elementAt(index);
+          return GameCard(
+            title: instruction.title,
+            description: instruction.description,
+            image: instruction.image,
+          );
+        },
+      ),
     );
   }
 }
