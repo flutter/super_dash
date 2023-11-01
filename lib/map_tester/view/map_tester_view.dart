@@ -86,6 +86,13 @@ class _MapTesterViewState extends State<MapTesterView> {
                     },
                     child: const Text('Toggle invincibility'),
                   ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      game?.teleportPlayerToEnd();
+                    },
+                    child: const Text('Teleport to end'),
+                  ),
                 ],
               ),
             const SizedBox(height: 16),

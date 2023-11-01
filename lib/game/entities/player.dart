@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:leap/leap.dart';
 
 class Player extends JumperCharacter<DashRunGame> {
@@ -25,6 +28,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
   List<ItemType> powerUps = [];
   bool isPlayerInvincible = false;
+  bool isPlayerTeleporting = false;
 
   bool get doubleJumpEnabled => powerUps.contains(ItemType.goldenFeather);
 
@@ -66,6 +70,8 @@ class Player extends JumperCharacter<DashRunGame> {
     runningAnimation = SpriteAnimationComponent(
       size: size,
       animation: animation,
+      anchor: Anchor.center,
+      position: size / 2,
     );
 
     add(runningAnimation);
@@ -92,7 +98,12 @@ class Player extends JumperCharacter<DashRunGame> {
   void update(double dt) {
     super.update(dt);
 
-    if (world.isOutside(this)) resetPosition();
+    if (isPlayerTeleporting) return;
+
+    if (x >= gameRef.leapMap.width - gameRef.tileSize) {
+      levelCleared();
+      return;
+    }
 
     if (isDead) return game.gameOver();
 
@@ -140,13 +151,78 @@ class Player extends JumperCharacter<DashRunGame> {
     }
   }
 
-  void resetPosition() {
-    x = spawn.x;
-    y = spawn.y;
+  void levelCleared() {
+    isPlayerTeleporting = true;
+    gameRef.levelCleared();
+
+    walking = false;
     velocity
       ..x = 0
       ..y = 0;
     lastGroundXVelocity = 0;
     faceLeft = false;
+
+    runningAnimation.add(
+      MoveEffect.by(
+        Vector2(0, -gameRef.tileSize * 2),
+        CurvedEffectController(
+          .5,
+          Curves.easeOutCubic,
+        ),
+        onComplete: () async {
+          await Future<void>.delayed(const Duration(milliseconds: 200));
+          runningAnimation.add(
+            SequenceEffect(
+              [
+                ScaleEffect.to(
+                  Vector2(-1, 1),
+                  CurvedEffectController(
+                    .1,
+                    Curves.easeIn,
+                  ),
+                ),
+                ScaleEffect.to(
+                  Vector2(0, 1),
+                  CurvedEffectController(
+                    .1,
+                    Curves.easeOut,
+                  ),
+                ),
+              ],
+              onComplete: () async {
+                position = spawn.clone();
+                await Future<void>.delayed(const Duration(milliseconds: 200));
+
+                runningAnimation
+                  ..position = size / 2
+                  ..add(
+                    SequenceEffect(
+                      [
+                        ScaleEffect.to(
+                          Vector2(-1, 1),
+                          CurvedEffectController(
+                            .1,
+                            Curves.easeIn,
+                          ),
+                        ),
+                        ScaleEffect.to(
+                          Vector2.all(1),
+                          CurvedEffectController(
+                            .1,
+                            Curves.easeOut,
+                          ),
+                        ),
+                      ],
+                      onComplete: () {
+                        isPlayerTeleporting = false;
+                      },
+                    ),
+                  );
+              },
+            ),
+          );
+        },
+      ),
+    );
   }
 }
