@@ -124,6 +124,7 @@ class DashRunGame extends LeapGame
 
   void gameOver() {
     score = 0;
+    currentLevel = 1;
     world.firstChild<Player>()?.removeFromParent();
     world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();

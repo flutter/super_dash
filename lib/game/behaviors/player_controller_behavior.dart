@@ -11,6 +11,8 @@ class PlayerControllerBehavior extends Behavior<Player> {
   void update(double dt) {
     super.update(dt);
 
+    if (parent.isPlayerTeleporting) return;
+
     // Reset the double jump.
     if (doubleJumpUsed && parent.isOnGround) {
       doubleJumpUsed = false;

@@ -6,7 +6,6 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart';
 
 class Gate extends SpriteComponent with HasGameRef<DashRunGame> {
-
   late int _currentLevel;
 
   @override
@@ -19,9 +18,10 @@ class Gate extends SpriteComponent with HasGameRef<DashRunGame> {
     sprite = await gameRef.loadSprite('../images/gate.png');
     size = sprite!.srcSize;
     position = Vector2(
-      tiledObject.x,
-      tiledObject.y,
-    ) + Vector2.all(gameRef.tileSize);
+          tiledObject.x,
+          tiledObject.y,
+        ) +
+        Vector2.all(gameRef.tileSize);
     anchor = Anchor.bottomLeft;
 
     _currentLevel = gameRef.currentLevel;
@@ -41,12 +41,12 @@ class Gate extends SpriteComponent with HasGameRef<DashRunGame> {
   }
 
   @override
-    void update(double dt) {
-      super.update(dt);
+  void update(double dt) {
+    super.update(dt);
 
-      if (gameRef.currentLevel != _currentLevel) {
-        _currentLevel = gameRef.currentLevel;
-        firstChild<TextComponent>()?.text = _currentLevel.toString();
-      }
+    if (gameRef.currentLevel != _currentLevel) {
+      _currentLevel = gameRef.currentLevel;
+      firstChild<TextComponent>()?.text = _currentLevel.toString();
     }
+  }
 }
