@@ -33,6 +33,9 @@ class GameIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TraslucentBackground(
       gradient: gradient ?? _defaultGradient.colors,
+      border: Border.all(
+        color: Colors.white,
+      ),
       child: IconButton(
         onPressed: onPressed,
         icon: Icon(

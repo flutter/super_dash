@@ -7,6 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class GameView extends StatelessWidget {
   const GameView({super.key});
 
+  static MaterialPageRoute<void> route() {
+    return MaterialPageRoute<void>(
+      builder: (_) => const GameView(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
