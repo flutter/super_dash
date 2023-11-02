@@ -108,7 +108,7 @@ class Player extends JumperCharacter<DashRunGame> {
     if (isDead) return game.gameOver();
 
     // Player falls in a hazard zone.
-    if ((collisionInfo.downCollision?.isHazard ?? false) &&
+    if ((collisionInfo.downCollision?.tags.contains('hazard') ?? false) &&
         !isPlayerInvincible) {
       // If player has no golden feathers, game over.
       if (powerUps.isEmpty) return game.gameOver();
