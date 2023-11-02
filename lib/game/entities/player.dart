@@ -100,8 +100,8 @@ class Player extends JumperCharacter<DashRunGame> {
 
     if (isPlayerTeleporting) return;
 
-    if (x >= gameRef.leapMap.width - gameRef.tileSize) {
-      levelCleared();
+    if (x >= gameRef.leapMap.width - gameRef.tileSize * 15) {
+      sectionCleared();
       return;
     }
 
@@ -151,78 +151,8 @@ class Player extends JumperCharacter<DashRunGame> {
     }
   }
 
-  void levelCleared() {
+  void sectionCleared() {
     isPlayerTeleporting = true;
-    gameRef.levelCleared();
-
-    walking = false;
-    velocity
-      ..x = 0
-      ..y = 0;
-    lastGroundXVelocity = 0;
-    faceLeft = false;
-
-    runningAnimation.add(
-      MoveEffect.by(
-        Vector2(0, -gameRef.tileSize * 2),
-        CurvedEffectController(
-          .5,
-          Curves.easeOutCubic,
-        ),
-        onComplete: () async {
-          await Future<void>.delayed(const Duration(milliseconds: 200));
-          runningAnimation.add(
-            SequenceEffect(
-              [
-                ScaleEffect.to(
-                  Vector2(-1, 1),
-                  CurvedEffectController(
-                    .1,
-                    Curves.easeIn,
-                  ),
-                ),
-                ScaleEffect.to(
-                  Vector2(0, 1),
-                  CurvedEffectController(
-                    .1,
-                    Curves.easeOut,
-                  ),
-                ),
-              ],
-              onComplete: () async {
-                position = spawn.clone();
-                await Future<void>.delayed(const Duration(milliseconds: 200));
-
-                runningAnimation
-                  ..position = size / 2
-                  ..add(
-                    SequenceEffect(
-                      [
-                        ScaleEffect.to(
-                          Vector2(-1, 1),
-                          CurvedEffectController(
-                            .1,
-                            Curves.easeIn,
-                          ),
-                        ),
-                        ScaleEffect.to(
-                          Vector2.all(1),
-                          CurvedEffectController(
-                            .1,
-                            Curves.easeOut,
-                          ),
-                        ),
-                      ],
-                      onComplete: () {
-                        isPlayerTeleporting = false;
-                      },
-                    ),
-                  );
-              },
-            ),
-          );
-        },
-      ),
-    );
+    gameRef.sectionCleared();
   }
 }
