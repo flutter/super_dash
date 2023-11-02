@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
@@ -6,12 +7,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:leap/leap.dart';
 import 'package:mocktail/mocktail.dart';
 
+class _MockGameBloc extends MockBloc<GameEvent, GameState>
+    implements GameBloc {}
+
 class _MockAudioController extends Mock implements AudioController {}
 
 class _MockSimpleCombinedInput extends Mock implements SimpleCombinedInput {}
 
 class _TestDashRunGame extends DashRunGame {
   _TestDashRunGame({
+    required super.gameBloc,
     required super.audioController,
   });
 
@@ -64,10 +69,19 @@ void main() {
     setUpAll(() {
       registerFallbackValue(Sfx.jump);
     });
-    _TestDashRunGame createGame([AudioController? audioController]) {
+
+    _TestDashRunGame createGame([
+      GameBloc? gameBloc,
+      AudioController? audioController,
+    ]) {
+      final bloc = gameBloc ?? _MockGameBloc();
       final controller = audioController ?? _MockAudioController();
+
       when(() => controller.playSfx(any())).thenAnswer((_) async {});
+      when(() => bloc.state).thenReturn(const GameState.initial());
+
       return _TestDashRunGame(
+        gameBloc: bloc,
         audioController: controller,
       );
     }

@@ -38,6 +38,7 @@ class _MapTesterViewState extends State<MapTesterView> {
                     setState(() {
                       rootPath = directory;
                       game = DashRunGame(
+                        gameBloc: GameBloc(),
                         customBundle: FileSystemAssetBundle(directory),
                         audioController: context.read(),
                       );
@@ -63,10 +64,9 @@ class _MapTesterViewState extends State<MapTesterView> {
                     onPressed: () {
                       setState(() {
                         game = DashRunGame(
-                          customBundle: FileSystemAssetBundle(
-                            rootPath!,
-                          ),
+                          gameBloc: GameBloc(),
                           audioController: context.read(),
+                          customBundle: FileSystemAssetBundle(rootPath!),
                         );
                       });
                     },

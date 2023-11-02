@@ -4,26 +4,51 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GameView extends StatelessWidget {
-  const GameView({super.key});
+class Game extends StatelessWidget {
+  const Game({super.key});
 
-  static MaterialPageRoute<void> route() {
+  static PageRoute<void> route() {
     return MaterialPageRoute<void>(
-      builder: (_) => const GameView(),
+      builder: (_) => const Game(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: Colors.blueAccent,
-      ),
-      child: GameWidget.controlled(
-        gameFactory: () => DashRunGame(
-          audioController: context.read<AudioController>(),
+    return BlocProvider(
+      create: (context) => GameBloc(),
+      child: const GameView(),
+    );
+  }
+}
+
+class GameView extends StatelessWidget {
+  const GameView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        GameWidget.controlled(
+          gameFactory: () => DashRunGame(
+            gameBloc: context.read<GameBloc>(),
+            audioController: context.read<AudioController>(),
+          ),
         ),
-      ),
+        Positioned(
+          top: 16,
+          right: 16,
+          child: BlocSelector<GameBloc, GameState, int>(
+            selector: (state) => state.score,
+            builder: (context, score) {
+              return Text(
+                'Score: $score',
+                style: Theme.of(context).textTheme.displaySmall,
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

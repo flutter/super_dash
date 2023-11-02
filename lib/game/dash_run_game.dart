@@ -12,6 +12,7 @@ import 'package:leap/leap.dart';
 class DashRunGame extends LeapGame
     with TapCallbacks, HasKeyboardHandlerComponents {
   DashRunGame({
+    required this.gameBloc,
     required this.audioController,
     this.customBundle,
   }) : super(
@@ -27,12 +28,13 @@ class DashRunGame extends LeapGame
   static const prefix = 'assets/map/';
   static final _cameraViewport = Vector2(592, 1024);
 
+  final GameBloc gameBloc;
   final AssetBundle? customBundle;
+  final AudioController audioController;
 
   late final SimpleCombinedInput input;
   late final SpriteObjectGroupBuilder items;
   late final ObjectGroupProximityBuilder enemies;
-  final AudioController audioController;
 
   int score = 0;
   int currentLevel = 1;
@@ -110,16 +112,7 @@ class DashRunGame extends LeapGame
       componentBuilder: Enemy.new,
     );
 
-    await addAll([
-      input,
-      items,
-      enemies,
-      ScoreLabel(
-        initialScore: score,
-        initialItems: player.powerUps.length,
-        initialHealth: player.health,
-      ),
-    ]);
+    await addAll([input, items, enemies]);
   }
 
   void gameOver() {
