@@ -49,7 +49,7 @@ class Player extends JumperCharacter<DashRunGame> {
     await super.onLoad();
 
     input = gameRef.input;
-    size = Vector2.all(gameRef.tileSize);
+    size = Vector2.all(gameRef.tileSize * .5);
     walkSpeed = gameRef.tileSize * 5;
     minJumpImpulse = world.gravity * 0.5;
     cameraAnchor = PlayerCameraAnchor(
@@ -68,10 +68,10 @@ class Player extends JumperCharacter<DashRunGame> {
     );
 
     runningAnimation = SpriteAnimationComponent(
-      size: size,
+      size: Vector2.all(gameRef.tileSize),
       animation: animation,
       anchor: Anchor.center,
-      position: size / 2,
+      position: size / 2 - Vector2(0, size.y / 2),
     );
 
     add(runningAnimation);

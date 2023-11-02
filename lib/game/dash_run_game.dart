@@ -193,4 +193,13 @@ class DashRunGame extends LeapGame
     gameBloc.add(GameScoreIncreased(by: 1000 * currentLevel));
     currentLevel++;
   }
+
+  void showHitBoxes() {
+    descendants()
+        .whereType<PhysicalEntity>()
+        .where(
+          (element) => element is Player || element is Item || element is Enemy,
+        )
+        .forEach((entity) => entity.debugMode = true);
+  }
 }
