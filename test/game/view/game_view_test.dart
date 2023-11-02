@@ -2,6 +2,7 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dash_run/game/game.dart';
+import 'package:dash_run/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,14 +13,27 @@ import '../../helpers/helpers.dart';
 class _MockGameBloc extends MockBloc<GameEvent, GameState>
     implements GameBloc {}
 
+class _MockSettingsController extends Mock implements SettingsController {}
+
 void main() {
+  late SettingsController settingsController;
+
+  setUp(() {
+    settingsController = _MockSettingsController();
+    when(() => settingsController.soundsOn).thenReturn(ValueNotifier(true));
+  });
+
   group('Game', () {
     test('is routable', () {
       expect(Game.route(), isA<MaterialPageRoute<void>>());
     });
 
     testWidgets('renders GameView', (tester) async {
-      await tester.pumpApp(Game());
+      await tester.pumpApp(
+        Game(),
+        settingsController: settingsController,
+      );
+
       expect(find.byType(GameView), findsOneWidget);
     });
   });
@@ -39,10 +53,13 @@ void main() {
     testWidgets('renders score', (tester) async {
       when(() => gameBloc.state).thenReturn(GameState(score: 100));
 
-      await tester.pumpApp(buildSubject());
+      await tester.pumpApp(
+        buildSubject(),
+        settingsController: settingsController,
+      );
 
       expect(
-        find.text('Score: ${gameBloc.state.score}'),
+        find.text('${gameBloc.state.score} Pts'),
         findsOneWidget,
       );
     });

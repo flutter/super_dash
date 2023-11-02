@@ -30,6 +30,7 @@ void main() {
       'starts with score 0',
       setUp: (game, tester) async {
         await game.ready();
+        when(() => game.gameBloc.state).thenReturn(const GameState.initial());
       },
       verify: (game, tester) async => expect(
         game.gameBloc.state.score,
