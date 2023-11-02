@@ -20,7 +20,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
   final Vector2 levelSize;
   final Vector2 cameraViewport;
-  late final Vector2 spawn;
+  late Vector2 spawn;
   late final List<Vector2> respawnPoints;
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
@@ -80,11 +80,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
     gameRef.camera.follow(cameraAnchor);
 
-    final spawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
-    for (final object in spawnGroup.objects) {
-      position = Vector2(object.x, object.y);
-      spawn = position.clone();
-    }
+    loadSpawnPoint();
 
     final respawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('respawn');
     respawnPoints = [
@@ -92,6 +88,14 @@ class Player extends JumperCharacter<DashRunGame> {
         (object) => Vector2(object.x, object.y),
       ),
     ];
+  }
+
+  void loadSpawnPoint() {
+    final spawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
+    for (final object in spawnGroup.objects) {
+      position = Vector2(object.x, object.y);
+      spawn = position.clone();
+    }
   }
 
   @override

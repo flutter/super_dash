@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
@@ -42,6 +43,12 @@ class DashRunGame extends LeapGame
     'flutter_runnergame_map_C.tmx',
   ];
 
+  static const _sectionsBackgroundColor = [
+    Color(0xffe9e9df),
+    Color(0xffdae2ee),
+    Color(0xff0353b0),
+  ];
+
   Player? get player => world.firstChild<Player>();
 
   List<Tileset> get tilesets => leapMap.tiledMap.tileMap.map.tilesets;
@@ -78,6 +85,7 @@ class DashRunGame extends LeapGame
       bundle: customBundle,
       tiledMapPath: _sections.first,
     );
+    _setSectionBackground();
 
     final player = Player(
       levelSize: leapMap.tiledMap.size.clone(),
@@ -109,6 +117,13 @@ class DashRunGame extends LeapGame
         initialHealth: player.health,
       ),
     ]);
+  }
+
+  void _setSectionBackground() {
+    camera.backdrop = RectangleComponent(
+      size: size.clone(),
+      paint: Paint()..color = _sectionsBackgroundColor[currentSection],
+    );
   }
 
   void gameOver() {
@@ -161,6 +176,7 @@ class DashRunGame extends LeapGame
   }
 
   Future<void> _loadNewSection() async {
+    _setSectionBackground();
     final nextSection = _sections[currentSection];
 
     _resetEntities();
@@ -173,6 +189,18 @@ class DashRunGame extends LeapGame
     );
 
     await _addSpawnmers();
+  }
+
+  @override
+  void onMapUnload() {
+    player?.velocity.setZero();
+  }
+
+  @override
+  void onMapLoaded() {
+    player?.loadSpawnPoint();
+    player?.walking = true;
+    player?.isPlayerTeleporting = false;
   }
 
   void sectionCleared() {
