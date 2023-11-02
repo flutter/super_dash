@@ -8,7 +8,7 @@
 PRODUCT_NAME = dash_run
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.dashRun
+PRODUCT_BUNDLE_IDENTIFIER = com.vgv.superdash.dashRun
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.vgv.super_dash. All rights reserved.

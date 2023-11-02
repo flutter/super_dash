@@ -1,7 +1,5 @@
 import 'dart:ui';
 
-import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/game/game.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame_test/flame_test.dart';
@@ -9,6 +7,8 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leap/leap.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/audio/audio.dart';
+import 'package:super_dash/game/game.dart';
 
 class _MockImage extends Mock implements Image {}
 
@@ -20,8 +20,8 @@ class _MockLeapMap extends Mock implements LeapMap {}
 
 class _MockObjectGroup extends Mock implements ObjectGroup {}
 
-class _TestDashRunGame extends DashRunGame {
-  _TestDashRunGame({
+class _TestSuperDashGame extends SuperDashGame {
+  _TestSuperDashGame({
     required super.audioController,
     this.spawnObects = const [],
     this.respawnObects = const [],
@@ -78,8 +78,8 @@ class _TestDashRunGame extends DashRunGame {
 
 void main() {
   group('Player', () {
-    _TestDashRunGame createGame() {
-      return _TestDashRunGame(
+    _TestSuperDashGame createGame() {
+      return _TestSuperDashGame(
         audioController: _MockAudioController(),
         spawnObects: [
           TiledObject(id: 1, x: 10, y: 10),

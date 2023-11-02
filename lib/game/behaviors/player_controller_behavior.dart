@@ -1,7 +1,6 @@
-import 'package:dash_run/game/game.dart';
-
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/widgets.dart';
+import 'package:super_dash/game/game.dart';
 
 class PlayerControllerBehavior extends Behavior<Player> {
   @visibleForTesting

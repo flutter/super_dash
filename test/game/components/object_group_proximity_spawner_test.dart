@@ -1,7 +1,5 @@
 import 'dart:ui';
 
-import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/game/game.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame_test/flame_test.dart';
@@ -9,6 +7,8 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leap/leap.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/audio/audio.dart';
+import 'package:super_dash/game/game.dart';
 
 class _MockImage extends Mock implements Image {}
 
@@ -22,8 +22,8 @@ class _MockLeapMap extends Mock implements LeapMap {}
 
 class _MockObjectGroup extends Mock implements ObjectGroup {}
 
-class _TestDashRunGame extends DashRunGame {
-  _TestDashRunGame({
+class _TestSuperDashGame extends SuperDashGame {
+  _TestSuperDashGame({
     this.layerObjects = const [],
   }) : super(audioController: _MockAudioController());
 
@@ -87,7 +87,7 @@ void main() {
         x: 800,
       ),
     ];
-    testWithGame('can be added to a game', _TestDashRunGame.new, (game) async {
+    testWithGame('can be added to a game', _TestSuperDashGame.new, (game) async {
       final reference = _ReferenceComponent();
       await game.world.ensureAdd(reference);
 
@@ -108,7 +108,7 @@ void main() {
 
     testWithGame(
       'spawn an object when the reference is far enough',
-      () => _TestDashRunGame(layerObjects: objects),
+      () => _TestSuperDashGame(layerObjects: objects),
       (game) async {
         final reference = _ReferenceComponent();
         await game.world.ensureAdd(reference);
@@ -139,7 +139,7 @@ void main() {
 
     testWithGame(
       "doesn't spanw the component again",
-      () => _TestDashRunGame(layerObjects: objects),
+      () => _TestSuperDashGame(layerObjects: objects),
       (game) async {
         final reference = _ReferenceComponent();
         await game.world.ensureAdd(reference);

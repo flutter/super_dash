@@ -1,19 +1,19 @@
 // ignore_for_file: cascade_invocations
 
-import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/game/game.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leap/leap.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/audio/audio.dart';
+import 'package:super_dash/game/game.dart';
 
 class _MockAudioController extends Mock implements AudioController {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  group('DashRunGame', () {
-    DashRunGame createGame() => DashRunGame(
+  group('SuperDashGame', () {
+    SuperDashGame createGame() => SuperDashGame(
           audioController: _MockAudioController(),
         );
     final flameTester = FlameTester(createGame);

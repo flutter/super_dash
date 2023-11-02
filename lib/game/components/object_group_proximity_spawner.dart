@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:dash_run/game/dash_run_game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:ordered_set/comparing.dart';
 import 'package:ordered_set/ordered_set.dart';
+import 'package:super_dash/game/super_dash_game.dart';
 
 typedef ObjectGroupProximitySpawner = PositionComponent Function({
   required TiledObject tiledObject,
@@ -14,7 +14,7 @@ typedef ObjectGroupProximitySpawner = PositionComponent Function({
 });
 
 class ObjectGroupProximityBuilder<Reference extends PositionComponent>
-    extends Component with HasGameRef<DashRunGame> {
+    extends Component with HasGameRef<SuperDashGame> {
   ObjectGroupProximityBuilder({
     required this.proximity,
     required this.tilesetPath,

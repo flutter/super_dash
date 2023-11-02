@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart';
+import 'package:super_dash/game/game.dart';
 
-class Gate extends SpriteComponent with HasGameRef<DashRunGame> {
+class Gate extends SpriteComponent with HasGameRef<SuperDashGame> {
   late int _currentLevel;
 
   @override

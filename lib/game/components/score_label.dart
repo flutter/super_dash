@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
+import 'package:super_dash/game/game.dart';
 
-class ScoreLabel extends TextComponent with HasGameRef<DashRunGame> {
+class ScoreLabel extends TextComponent with HasGameRef<SuperDashGame> {
   ScoreLabel({
     int initialScore = 0,
     int initialItems = 0,

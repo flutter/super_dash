@@ -1,9 +1,9 @@
-import 'package:dash_run/filesytem_asset_bundle/filesystem_asset_bundle.dart';
-import 'package:dash_run/game/game.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_dash/filesytem_asset_bundle/filesystem_asset_bundle.dart';
+import 'package:super_dash/game/game.dart';
 
 typedef GetDirectoryPath = Future<String?> Function();
 
@@ -20,7 +20,7 @@ class MapTesterView extends StatefulWidget {
 }
 
 class _MapTesterViewState extends State<MapTesterView> {
-  DashRunGame? game;
+  SuperDashGame? game;
   String? rootPath;
 
   @override
@@ -37,7 +37,7 @@ class _MapTesterViewState extends State<MapTesterView> {
                   if (directory != null) {
                     setState(() {
                       rootPath = directory;
-                      game = DashRunGame(
+                      game = SuperDashGame(
                         customBundle: FileSystemAssetBundle(directory),
                         audioController: context.read(),
                       );
@@ -61,7 +61,7 @@ class _MapTesterViewState extends State<MapTesterView> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        game = DashRunGame(
+                        game = SuperDashGame(
                           customBundle: FileSystemAssetBundle(
                             rootPath!,
                           ),

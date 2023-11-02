@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/settings/settings.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/audio/audio.dart';
+import 'package:super_dash/settings/settings.dart';
 
 class _MockSettingsController extends Mock implements SettingsController {}
 

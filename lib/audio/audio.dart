@@ -5,10 +5,10 @@
 import 'dart:collection';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:dash_run/audio/songs.dart';
-import 'package:dash_run/settings/settings_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
+import 'package:super_dash/audio/songs.dart';
+import 'package:super_dash/settings/settings_controller.dart';
 
 typedef CreateAudioPlayer = AudioPlayer Function({required String playerId});
 

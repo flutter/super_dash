@@ -1,10 +1,10 @@
-import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
 import 'package:pathxp/pathxp.dart';
+import 'package:super_dash/game/game.dart';
 
-class Enemy extends PhysicalEntity<DashRunGame> {
+class Enemy extends PhysicalEntity<SuperDashGame> {
   Enemy({
     required this.sprite,
     required this.tiledObject,

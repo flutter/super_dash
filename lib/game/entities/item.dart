@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:dash_run/game/dash_run_game.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
+import 'package:super_dash/game/super_dash_game.dart';
 
 enum ItemType {
   acorn(10),
@@ -24,7 +24,7 @@ enum ItemType {
   }
 }
 
-class Item extends PhysicalEntity<DashRunGame> {
+class Item extends PhysicalEntity<SuperDashGame> {
   Item({
     required this.sprite,
     required this.tiledObject,

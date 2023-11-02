@@ -1,17 +1,17 @@
-import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leap/leap.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/audio/audio.dart';
+import 'package:super_dash/game/game.dart';
 
 class _MockAudioController extends Mock implements AudioController {}
 
 class _MockSimpleCombinedInput extends Mock implements SimpleCombinedInput {}
 
-class _TestDashRunGame extends DashRunGame {
-  _TestDashRunGame({
+class _TestSuperDashGame extends SuperDashGame {
+  _TestSuperDashGame({
     required super.audioController,
   });
 
@@ -23,7 +23,7 @@ class _TestDashRunGame extends DashRunGame {
 
 class _TestPlayer extends Player {
   _TestPlayer({
-    required _TestDashRunGame game,
+    required _TestSuperDashGame game,
     bool isAlive = true,
     bool isOnGround = true,
     bool doubleJumpEnabled = false,
@@ -39,10 +39,10 @@ class _TestPlayer extends Player {
   final bool _isAlive;
   final bool _isOnGround;
   final bool _doubleJumpEnabled;
-  final _TestDashRunGame _game;
+  final _TestSuperDashGame _game;
 
   @override
-  DashRunGame get gameRef => _game;
+  SuperDashGame get gameRef => _game;
 
   @override
   bool get isAlive => _isAlive;
@@ -64,10 +64,10 @@ void main() {
     setUpAll(() {
       registerFallbackValue(Sfx.jump);
     });
-    _TestDashRunGame createGame([AudioController? audioController]) {
+    _TestSuperDashGame createGame([AudioController? audioController]) {
       final controller = audioController ?? _MockAudioController();
       when(() => controller.playSfx(any())).thenAnswer((_) async {});
-      return _TestDashRunGame(
+      return _TestSuperDashGame(
         audioController: controller,
       );
     }

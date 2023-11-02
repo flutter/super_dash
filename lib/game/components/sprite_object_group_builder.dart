@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:dash_run/game/dash_run_game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:super_dash/game/super_dash_game.dart';
 
 typedef SpriteObjectGroupComponentBuilder = Component Function({
   required TiledObject tiledObject,
@@ -11,7 +11,7 @@ typedef SpriteObjectGroupComponentBuilder = Component Function({
 });
 
 /// A component that given a tileset and object group, creates its components.
-class SpriteObjectGroupBuilder extends Component with HasGameRef<DashRunGame> {
+class SpriteObjectGroupBuilder extends Component with HasGameRef<SuperDashGame> {
   SpriteObjectGroupBuilder({
     required this.tileLayerName,
     required this.tilesetPath,

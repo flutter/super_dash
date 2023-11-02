@@ -3,8 +3,8 @@
 // BSD-style license that can be found in the LICENSE file.
 import 'dart:async';
 
-import 'package:dash_run/settings/persistence/persistence.dart';
 import 'package:flutter/foundation.dart';
+import 'package:super_dash/settings/persistence/persistence.dart';
 
 /// An class that holds settings like [muted] or [musicOn],
 /// and saves them to an injected persistence store.
