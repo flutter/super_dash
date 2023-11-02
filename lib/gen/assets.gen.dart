@@ -45,9 +45,13 @@ class $AssetsImagesGen {
   AssetGenImage get inputInitialsBg =>
       const AssetGenImage('assets/images/input_initials_bg.png');
 
-  /// File path: assets/images/intro_background.png
-  AssetGenImage get introBackground =>
-      const AssetGenImage('assets/images/intro_background.png');
+  /// File path: assets/images/intro_background_desktop.png
+  AssetGenImage get introBackgroundDesktop =>
+      const AssetGenImage('assets/images/intro_background_desktop.png');
+
+  /// File path: assets/images/intro_background_mobile.png
+  AssetGenImage get introBackgroundMobile =>
+      const AssetGenImage('assets/images/intro_background_mobile.png');
 
   /// File path: assets/images/leaderboard_bg.png
   AssetGenImage get leaderboardBg =>
@@ -79,7 +83,8 @@ class $AssetsImagesGen {
         gameLogo,
         gate,
         inputInitialsBg,
-        introBackground,
+        introBackgroundDesktop,
+        introBackgroundMobile,
         leaderboardBg,
         levelGatesInstruction,
         powerfulWingsInstruction,
@@ -99,11 +104,26 @@ class $AssetsMapGen {
   /// File path: assets/map/flutter_runnergame_map.tmx
   String get flutterRunnergameMap => 'assets/map/flutter_runnergame_map.tmx';
 
+  /// File path: assets/map/flutter_runnergame_map_A.tmx
+  String get flutterRunnergameMapA => 'assets/map/flutter_runnergame_map_A.tmx';
+
+  /// File path: assets/map/flutter_runnergame_map_B.tmx
+  String get flutterRunnergameMapB => 'assets/map/flutter_runnergame_map_B.tmx';
+
+  /// File path: assets/map/flutter_runnergame_map_C.tmx
+  String get flutterRunnergameMapC => 'assets/map/flutter_runnergame_map_C.tmx';
+
   $AssetsMapObjectsGen get objects => const $AssetsMapObjectsGen();
   $AssetsMapTilesGen get tiles => const $AssetsMapTilesGen();
 
   /// List of all assets
-  List<String> get values => [gitignore, flutterRunnergameMap];
+  List<String> get values => [
+        gitignore,
+        flutterRunnergameMap,
+        flutterRunnergameMapA,
+        flutterRunnergameMapB,
+        flutterRunnergameMapC
+      ];
 }
 
 class $AssetsMusicGen {

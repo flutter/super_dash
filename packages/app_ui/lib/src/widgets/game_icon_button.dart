@@ -36,11 +36,16 @@ class GameIconButton extends StatelessWidget {
       border: Border.all(
         color: Colors.white,
       ),
-      child: IconButton(
-        onPressed: onPressed,
-        icon: Icon(
-          icon,
-          color: Colors.white,
+      child: InkWell(
+        onTap: onPressed,
+        child: Container(
+          padding: const EdgeInsets.all(14),
+          alignment: Alignment.center,
+          child: Icon(
+            icon,
+            size: 24,
+            color: Colors.white,
+          ),
         ),
       ),
     );

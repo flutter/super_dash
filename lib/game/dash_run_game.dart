@@ -72,7 +72,7 @@ class DashRunGame extends LeapGame
       images: images,
       prefix: prefix,
       bundle: customBundle,
-      tiledMapPath: 'flutter_runnergame_map.tmx',
+      tiledMapPath: 'flutter_runnergame_map_A.tmx',
     );
 
     final player = Player(
@@ -83,7 +83,6 @@ class DashRunGame extends LeapGame
       world.addAll(
         [
           player,
-          Gate(),
         ],
       ),
     );
@@ -192,5 +191,14 @@ class DashRunGame extends LeapGame
   void levelCleared() {
     gameBloc.add(GameScoreIncreased(by: 1000 * currentLevel));
     currentLevel++;
+  }
+
+  void showHitBoxes() {
+    descendants()
+        .whereType<PhysicalEntity>()
+        .where(
+          (element) => element is Player || element is Item || element is Enemy,
+        )
+        .forEach((entity) => entity.debugMode = true);
   }
 }
