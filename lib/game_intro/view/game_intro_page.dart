@@ -1,6 +1,6 @@
 import 'package:app_ui/app_ui.dart';
+import 'package:dash_run/assets/assets.dart';
 import 'package:dash_run/game/game.dart';
-import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/settings/settings.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,9 @@ class GameIntroPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: Assets.images.introBackground.provider(),
+            image: context.isSmall
+                ? const AssetImage(Assets.introBackgroundMobile)
+                : const AssetImage(Assets.introBackgroundDesktop),
             fit: BoxFit.cover,
           ),
         ),
@@ -27,7 +29,10 @@ class GameIntroPage extends StatelessWidget {
             child: Column(
               children: [
                 const Spacer(),
-                Assets.images.gameLogo.image(),
+                Image.asset(
+                  Assets.logo,
+                  width: context.isSmall ? 282 : 380,
+                ),
                 const Spacer(flex: 4),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
