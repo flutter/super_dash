@@ -11,7 +11,8 @@ typedef SpriteObjectGroupComponentBuilder = Component Function({
 });
 
 /// A component that given a tileset and object group, creates its components.
-class SpriteObjectGroupBuilder extends Component with HasGameRef<SuperDashGame> {
+class SpriteObjectGroupBuilder extends Component
+    with HasGameRef<SuperDashGame> {
   SpriteObjectGroupBuilder({
     required this.tileLayerName,
     required this.tilesetPath,

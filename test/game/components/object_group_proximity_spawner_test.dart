@@ -87,7 +87,8 @@ void main() {
         x: 800,
       ),
     ];
-    testWithGame('can be added to a game', _TestSuperDashGame.new, (game) async {
+    testWithGame('can be added to a game', _TestSuperDashGame.new,
+        (game) async {
       final reference = _ReferenceComponent();
       await game.world.ensureAdd(reference);
 
