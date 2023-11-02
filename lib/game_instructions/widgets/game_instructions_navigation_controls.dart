@@ -13,6 +13,12 @@ class GameInstructionNavigationControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentStep = context.select(
+      (GameInstructionsCubit cubit) => cubit.state.currentStep,
+    );
+    final isFirstStep = currentStep == GameInstructionsStep.values.first;
+    final isLastStep = currentStep == GameInstructionsStep.values.last;
+
     return Column(
       children: [
         Row(
@@ -26,16 +32,19 @@ class GameInstructionNavigationControls extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            GameIconButton(
-              icon: Icons.arrow_back,
-              onPressed: () => pageController.previousPage(
-                duration: kThemeAnimationDuration,
-                curve: Curves.easeIn,
+            Opacity(
+              opacity: isFirstStep ? 0.4 : 1,
+              child: GameIconButton(
+                icon: Icons.arrow_back,
+                onPressed: () => pageController.previousPage(
+                  duration: kThemeAnimationDuration,
+                  curve: Curves.easeIn,
+                ),
               ),
             ),
             const SizedBox(width: 24),
             GameIconButton(
-              icon: Icons.arrow_forward,
+              icon: isLastStep ? Icons.check : Icons.arrow_forward,
               onPressed: () => pageController.nextPage(
                 duration: kThemeAnimationDuration,
                 curve: Curves.easeIn,
