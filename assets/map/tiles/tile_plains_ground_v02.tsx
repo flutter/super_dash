@@ -55,13 +55,12 @@
    <property name="RightTop" type="int" value="64"/>
   </properties>
  </tile>
- <tile id="19" type="Hazard"/>
  <tile id="20" type="Platform">
   <objectgroup draworder="index" id="2">
    <object id="1" x="31.68" y="0" width="32.32" height="64"/>
   </objectgroup>
  </tile>
- <tile id="28" type="Hazard">
+ <tile id="28">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="37" width="64" height="27"/>
   </objectgroup>
