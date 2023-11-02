@@ -14,40 +14,44 @@ class GameIntroPage extends StatelessWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Assets.images.introBackground.image(
-              fit: BoxFit.fill,
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Assets.images.introBackground.provider(),
+            fit: BoxFit.cover,
           ),
-          Column(
-            children: [
-              const Spacer(),
-              Assets.images.gameLogo.image(),
-              const Spacer(flex: 4),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  l10n.gameIntroPageHeadline,
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+        ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 390),
+            child: Column(
+              children: [
+                const Spacer(),
+                Assets.images.gameLogo.image(),
+                const Spacer(flex: 4),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Text(
+                    l10n.gameIntroPageHeadline,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 32),
-              GameElevatedButton(
-                label: l10n.gameIntroPagePlayButtonText,
-                onPressed: () => Navigator.of(context).push(GameView.route()),
-              ),
-              const Spacer(),
-              const _Actions(),
-              const SizedBox(height: 32),
-            ],
+                const SizedBox(height: 32),
+                GameElevatedButton(
+                  label: l10n.gameIntroPagePlayButtonText,
+                  onPressed: () => Navigator.of(context).push(GameView.route()),
+                ),
+                const Spacer(),
+                const _Actions(),
+                const SizedBox(height: 32),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
