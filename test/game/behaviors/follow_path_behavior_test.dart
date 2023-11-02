@@ -2,6 +2,7 @@ import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame_test/flame_test.dart';
+import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leap/leap.dart';
 import 'package:mocktail/mocktail.dart';
@@ -20,7 +21,7 @@ void main() {
       _TestGame.new,
       (game) async {
         final pathxp = Pathxp('{L, R}');
-        final parent = PhysicalEntity();
+        final parent = LeapMapGroundTile(Tile(localId: 0), 0, 0);
         final behavior = FollowPathBehavior(pathxp);
 
         await game.ensureAdd(parent);
@@ -44,7 +45,7 @@ void main() {
       _TestGame.new,
       (game) async {
         final pathxp = Pathxp('{2L, R}');
-        final parent = PhysicalEntity();
+        final parent = LeapMapGroundTile(Tile(localId: 0), 0, 0);
         final behavior = FollowPathBehavior(pathxp);
 
         await game.ensureAdd(parent);
@@ -68,7 +69,7 @@ void main() {
       _TestGame.new,
       (game) async {
         final pathxp = Pathxp('{L, R}');
-        final parent = PhysicalEntity();
+        final parent = LeapMapGroundTile(Tile(localId: 0), 0, 0);
         final behavior = FollowPathBehavior(pathxp);
 
         await game.ensureAdd(parent);

@@ -9,7 +9,10 @@ class Enemy extends PhysicalEntity<DashRunGame> {
     required this.sprite,
     required this.tiledObject,
     this.enemyDamage = 1,
-  }) : super(collisionType: CollisionType.standard);
+  }) : super(
+          collisionType: CollisionType.standard,
+          static: tiledObject.properties.byName['Fly']?.value as bool? ?? false,
+        );
 
   final int enemyDamage;
   late final Sprite sprite;
@@ -20,7 +23,7 @@ class Enemy extends PhysicalEntity<DashRunGame> {
 
   @override
   Future<void> onLoad() async {
-    size = sprite.srcSize;
+    size = Vector2.all(gameRef.tileSize * .5);
     position = Vector2(tiledObject.x, tiledObject.y);
 
     final path =
@@ -33,8 +36,10 @@ class Enemy extends PhysicalEntity<DashRunGame> {
 
     add(
       SpriteComponent(
-        size: size,
+        size: Vector2.all(gameRef.tileSize),
         sprite: sprite,
+        anchor: Anchor.center,
+        position: size / 2 - Vector2(0, size.y / 2),
       ),
     );
 

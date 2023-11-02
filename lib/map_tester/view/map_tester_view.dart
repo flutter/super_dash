@@ -47,8 +47,7 @@ class _MapTesterViewState extends State<MapTesterView> {
                 child: const Text('Load folder'),
               )
             else
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
                 children: [
                   ElevatedButton(
                     onPressed: () {
@@ -92,6 +91,13 @@ class _MapTesterViewState extends State<MapTesterView> {
                       game?.teleportPlayerToEnd();
                     },
                     child: const Text('Teleport to end'),
+                  ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      game?.showHitBoxes();
+                    },
+                    child: const Text('Show hitboxes'),
                   ),
                 ],
               ),
