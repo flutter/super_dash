@@ -3,10 +3,7 @@ import 'dart:async';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
-import 'package:flame/effects.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:leap/leap.dart';
 
 class Player extends JumperCharacter<DashRunGame> {
