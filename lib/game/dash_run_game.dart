@@ -35,6 +35,7 @@ class DashRunGame extends LeapGame
   final AudioController audioController;
 
   int score = 0;
+  int currentLevel = 1;
 
   Player? get player => world.firstChild<Player>();
 
@@ -77,7 +78,14 @@ class DashRunGame extends LeapGame
       levelSize: leapMap.tiledMap.size.clone(),
       cameraViewport: _cameraViewport,
     );
-    world.add(player);
+    unawaited(
+      world.addAll(
+        [
+          player,
+          Gate(),
+        ],
+      ),
+    );
 
     input = SimpleCombinedInput(
       keyboardInput: SimpleKeyboardInput(
@@ -116,6 +124,7 @@ class DashRunGame extends LeapGame
 
   void gameOver() {
     score = 0;
+    currentLevel = 1;
     world.firstChild<Player>()?.removeFromParent();
     world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
@@ -181,5 +190,14 @@ class DashRunGame extends LeapGame
 
   void toggleInvincibility() {
     player?.isPlayerInvincible = !(player?.isPlayerInvincible ?? false);
+  }
+
+  void teleportPlayerToEnd() {
+    player?.x = leapMap.tiledMap.size.x - (player?.size.x ?? 0) * 4;
+  }
+
+  void levelCleared() {
+    score += 1000 * currentLevel;
+    currentLevel++;
   }
 }
