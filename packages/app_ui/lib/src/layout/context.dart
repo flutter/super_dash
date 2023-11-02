@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 /// Extension on [BuildContext] to provide information about the layout.
 extension BuildContextLayoutX on BuildContext {
   /// Whether the device is small.
-  bool get isSmall =>
-      MediaQuery.of(this).size.width < AppBreakpoints.small &&
-      MediaQuery.of(this).orientation == Orientation.portrait;
+  bool get isSmall {
+    final mediaQuery = MediaQuery.of(this);
+    return mediaQuery.size.width < AppBreakpoints.small &&
+        mediaQuery.orientation == Orientation.portrait;
+  }
 }
