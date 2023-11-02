@@ -1,6 +1,6 @@
 {
-    "name": "dash_run",
-    "short_name": "dash_run",
+    "name": "super_dash",
+    "short_name": "super_dash",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#002686",
