@@ -34,6 +34,8 @@ class GameElevatedButton extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
           colors: [
             Color(0xFFA7EED2),
             Color(0xFF0ACDB3),
@@ -51,7 +53,7 @@ class GameElevatedButton extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(
                 horizontal: 72,
-                vertical: 16,
+                vertical: 24,
               ),
               textStyle: theme.textTheme.labelLarge?.copyWith(
                 color: Colors.white,
