@@ -71,7 +71,7 @@ class DashRunGame extends LeapGame
       images: images,
       prefix: prefix,
       bundle: customBundle,
-      tiledMapPath: 'flutter_runnergame_map.tmx',
+      tiledMapPath: 'flutter_runnergame_map_A.tmx',
     );
 
     final player = Player(
@@ -82,7 +82,6 @@ class DashRunGame extends LeapGame
       world.addAll(
         [
           player,
-          Gate(),
         ],
       ),
     );
