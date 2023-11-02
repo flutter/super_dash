@@ -31,7 +31,10 @@ void main() {
       setUp: (game, tester) async {
         await game.ready();
       },
-      verify: (game, tester) async => expect(game.score, isZero),
+      verify: (game, tester) async => expect(
+        game.gameBloc.state.score,
+        isZero,
+      ),
     );
 
     flameTester.testGameWidget(

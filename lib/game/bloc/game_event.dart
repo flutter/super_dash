@@ -2,8 +2,18 @@ part of 'game_bloc.dart';
 
 sealed class GameEvent {}
 
-class GameScoreChanged extends GameEvent {
-  GameScoreChanged(this.score);
+final class GameScoreReset extends GameEvent {
+  GameScoreReset();
+}
 
-  final int score;
+final class GameScoreIncreased extends GameEvent {
+  GameScoreIncreased({this.by = 1});
+
+  final int by;
+}
+
+final class GameScoreDecreased extends GameEvent {
+  GameScoreDecreased({this.by = 1});
+
+  final int by;
 }

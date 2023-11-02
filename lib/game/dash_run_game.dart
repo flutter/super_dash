@@ -36,7 +36,6 @@ class DashRunGame extends LeapGame
   late final SpriteObjectGroupBuilder items;
   late final ObjectGroupProximityBuilder enemies;
 
-  int score = 0;
   int currentLevel = 1;
 
   Player? get player => world.firstChild<Player>();
@@ -116,8 +115,9 @@ class DashRunGame extends LeapGame
   }
 
   void gameOver() {
-    score = 0;
     currentLevel = 1;
+    gameBloc.add(GameScoreReset());
+
     world.firstChild<Player>()?.removeFromParent();
     world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
@@ -190,7 +190,7 @@ class DashRunGame extends LeapGame
   }
 
   void levelCleared() {
-    score += 1000 * currentLevel;
+    gameBloc.add(GameScoreIncreased(by: 1000 * currentLevel));
     currentLevel++;
   }
 }

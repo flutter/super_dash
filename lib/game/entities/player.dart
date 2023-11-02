@@ -138,7 +138,9 @@ class Player extends JumperCharacter<DashRunGame> {
       if (collision is Item) {
         switch (collision.type) {
           case ItemType.acorn || ItemType.egg:
-            game.score += collision.type.points;
+            gameRef.gameBloc.add(
+              GameScoreIncreased(by: collision.type.points),
+            );
           case ItemType.goldenFeather:
             powerUps.add(ItemType.goldenFeather);
         }

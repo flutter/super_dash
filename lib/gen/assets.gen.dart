@@ -23,16 +23,35 @@ class $AssetsImagesGen {
   AssetGenImage get avoidBugsInstruction =>
       const AssetGenImage('assets/images/avoid_bugs_instruction.png');
 
+  /// File path: assets/images/dash_fainted.png
+  AssetGenImage get dashFainted =>
+      const AssetGenImage('assets/images/dash_fainted.png');
+
   /// File path: assets/images/egg.png
   AssetGenImage get egg => const AssetGenImage('assets/images/egg.png');
+
+  /// File path: assets/images/floating_island.png
+  AssetGenImage get floatingIsland =>
+      const AssetGenImage('assets/images/floating_island.png');
 
   /// File path: assets/images/game_logo.png
   AssetGenImage get gameLogo =>
       const AssetGenImage('assets/images/game_logo.png');
 
+  /// File path: assets/images/gate.png
+  AssetGenImage get gate => const AssetGenImage('assets/images/gate.png');
+
+  /// File path: assets/images/input_initials_bg.png
+  AssetGenImage get inputInitialsBg =>
+      const AssetGenImage('assets/images/input_initials_bg.png');
+
   /// File path: assets/images/intro_background.png
   AssetGenImage get introBackground =>
       const AssetGenImage('assets/images/intro_background.png');
+
+  /// File path: assets/images/leaderboard_bg.png
+  AssetGenImage get leaderboardBg =>
+      const AssetGenImage('assets/images/leaderboard_bg.png');
 
   /// File path: assets/images/level_gates_instruction.png
   AssetGenImage get levelGatesInstruction =>
@@ -46,17 +65,26 @@ class $AssetsImagesGen {
   AssetGenImage get tapToJumpInstruction =>
       const AssetGenImage('assets/images/tap_to_jump_instruction.png');
 
+  /// File path: assets/images/trophy.png
+  AssetGenImage get trophy => const AssetGenImage('assets/images/trophy.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         acorn,
         autoRunInstruction,
         avoidBugsInstruction,
+        dashFainted,
         egg,
+        floatingIsland,
         gameLogo,
+        gate,
+        inputInitialsBg,
         introBackground,
+        leaderboardBg,
         levelGatesInstruction,
         powerfulWingsInstruction,
-        tapToJumpInstruction
+        tapToJumpInstruction,
+        trophy
       ];
 }
 
@@ -146,6 +174,13 @@ class $AssetsMapObjectsGen {
   /// File path: assets/map/objects/tile_gate_lvl5.tsx
   String get tileGateLvl5Tsx => 'assets/map/objects/tile_gate_lvl5.tsx';
 
+  /// File path: assets/map/objects/tile_gate_lvl7.png
+  AssetGenImage get tileGateLvl7Png =>
+      const AssetGenImage('assets/map/objects/tile_gate_lvl7.png');
+
+  /// File path: assets/map/objects/tile_gate_lvl7.tsx
+  String get tileGateLvl7Tsx => 'assets/map/objects/tile_gate_lvl7.tsx';
+
   /// File path: assets/map/objects/tile_items_v2.png
   AssetGenImage get tileItemsV2Png =>
       const AssetGenImage('assets/map/objects/tile_items_v2.png');
@@ -179,6 +214,8 @@ class $AssetsMapObjectsGen {
         tileForestTreesFrontV02Tsx,
         tileGateLvl5Png,
         tileGateLvl5Tsx,
+        tileGateLvl7Png,
+        tileGateLvl7Tsx,
         tileItemsV2Png,
         tileItemsV2Tsx,
         tileMountainTreeV01Png,
