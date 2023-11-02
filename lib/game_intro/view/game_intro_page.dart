@@ -1,6 +1,6 @@
 import 'package:app_ui/app_ui.dart';
+import 'package:dash_run/assets/assets.dart';
 import 'package:dash_run/game/game.dart';
-import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/settings/settings.dart';
 import 'package:flutter/material.dart';
@@ -14,40 +14,49 @@ class GameIntroPage extends StatelessWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Assets.images.introBackground.image(
-              fit: BoxFit.fill,
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: context.isSmall
+                ? const AssetImage(Assets.introBackgroundMobile)
+                : const AssetImage(Assets.introBackgroundDesktop),
+            fit: BoxFit.cover,
           ),
-          Column(
-            children: [
-              const Spacer(),
-              Assets.images.gameLogo.image(),
-              const Spacer(flex: 4),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  l10n.gameIntroPageHeadline,
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+        ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 390),
+            child: Column(
+              children: [
+                const Spacer(),
+                Image.asset(
+                  Assets.logo,
+                  width: context.isSmall ? 282 : 380,
+                ),
+                const Spacer(flex: 4),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Text(
+                    l10n.gameIntroPageHeadline,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 32),
-              GameElevatedButton(
-                label: l10n.gameIntroPagePlayButtonText,
-                onPressed: () => Navigator.of(context).push(GameView.route()),
-              ),
-              const Spacer(),
-              const _Actions(),
-              const SizedBox(height: 32),
-            ],
+                const SizedBox(height: 32),
+                GameElevatedButton(
+                  label: l10n.gameIntroPagePlayButtonText,
+                  onPressed: () => Navigator.of(context).push(GameView.route()),
+                ),
+                const Spacer(),
+                const _Actions(),
+                const SizedBox(height: 32),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
