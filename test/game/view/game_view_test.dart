@@ -20,7 +20,7 @@ void main() {
 
   setUp(() {
     settingsController = _MockSettingsController();
-    when(() => settingsController.soundsOn).thenReturn(ValueNotifier(true));
+    when(() => settingsController.muted).thenReturn(ValueNotifier(true));
   });
 
   group('Game', () {
