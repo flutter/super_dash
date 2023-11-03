@@ -37,6 +37,7 @@ class GameIconButton extends StatelessWidget {
         color: Colors.white,
       ),
       child: InkWell(
+        borderRadius: BorderRadius.circular(100),
         onTap: onPressed,
         child: Container(
           padding: const EdgeInsets.all(14),

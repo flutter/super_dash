@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/app_lifecycle/app_lifecycle.dart';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
@@ -44,6 +45,7 @@ class App extends StatelessWidget {
             colorScheme: ColorScheme.fromSwatch(
               accentColor: const Color(0xFF13B9FF),
             ),
+            textTheme: AppTextStyles.textTheme,
           ),
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
