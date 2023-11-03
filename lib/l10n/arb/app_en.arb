@@ -8,6 +8,54 @@
     "@gameIntroPagePlayButtonText": {
         "description": "Text shown in the Play button of the Game Info Page"
     },
+    "gameInstructionsPageAutoRunTitle": "Dash Auto-runs",
+    "@gameInstructionsPageAutoRunTitle": {
+        "description": "Text shown in the title of the auto run instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPageAutoRunDescription": "Welcome to Super Dash. In this game Dash runs automatically.",
+    "@gameInstructionsPageAutoRunDescription": {
+        "description": "Text shown in the description of the auto run instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPageTapToJumpTitle": "Tap to Jump",
+    "@gameInstructionsPageTapToJumpTitle": {
+        "description": "Text shown in the title of the tap to jump instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPageTapToJumpDescription": "Tap the screen to make Dash jump.",
+    "@gameInstructionsPageTapToJumpDescription": {
+        "description": "Text shown in the description of the tap to jump instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPageCollectEggsAcornsTitle": "Collect Eggs & Acorns",
+    "@gameInstructionsPageCollectEggsAcornsTitle": {
+        "description": "Text shown in the title of the collect eggs and acorns instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPageCollectEggsAcornsDescription": "Get points by collecting eggs and acorns in the stage.",
+    "@gameInstructionsPageCollectEggsAcornsDescription": {
+        "description": "Text shown in the description of the collect eggs and acorns instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPagePowerfulWingsTitle": "Powerful Wings",
+    "@gameInstructionsPagePowerfulWingsTitle": {
+        "description": "Text shown in the title of the powerful wings instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPagePowerfulWingsDescription": "Collect the golden feather to power up Dash with Flutter. While in midair, tap to do a double jump and see Dash fly!",
+    "@gameInstructionsPagePowerfulWingsDescription": {
+        "description": "Text shown in the description of the powerful wings instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPageLevelGatesTitle": "Level Gates",
+    "@gameInstructionsPageLevelGatesTitle": {
+        "description": "Text shown in the title of the level gates instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPageLevelGatesDescription": "Advance through gates to face tougher challenges at higher stages.",
+    "@gameInstructionsPageLevelGatesDescription": {
+        "description": "Text shown in the description of the level gates instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPageAvoidBugsTitle": "Avoid Bugs",
+    "@gameInstructionsPageAvoidBugsTitle": {
+        "description": "Text shown in the title of the avoid bugs instruction of the Game Instructions Overlay"
+    },
+    "gameInstructionsPageAvoidBugsDescription": "No one likes bugs! Jump to dodge them and avoid taking damage.",
+    "@gameInstructionsPageAvoidBugsDescription": {
+        "description": "Text shown in the description of the avoid bugs instruction of the Game Instructions Overlay"
+    },
     "mobileModeUnavailable": "Mobile mode unavailable",
     "@mobileModeUnavailable": {
         "description": "Title shown in the Game Info Page for mobile devices joining from a browser"

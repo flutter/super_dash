@@ -12,6 +12,7 @@ dependencies:
     path: packages/app_ui
   audioplayers: ^5.2.0
   bloc: ^8.1.2
+  equatable: ^2.0.5
   file_selector: ^1.0.1
   flame: ^1.10.0
   flame_behaviors: ^1.0.0

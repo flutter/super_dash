@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:app_ui/app_ui.dart';
-import 'package:dash_run/assets/assets.dart';
 import 'package:dash_run/constants/constants.dart';
+import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class GameInfoDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 24),
-          Image.asset(Assets.logo, width: 230),
+          Assets.images.gameLogo.image(width: 230),
           const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),

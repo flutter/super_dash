@@ -10,6 +10,7 @@ class GameIconButton extends StatelessWidget {
     required this.icon,
     this.onPressed,
     this.gradient,
+    this.border,
     super.key,
   });
 
@@ -22,6 +23,9 @@ class GameIconButton extends StatelessWidget {
   /// The colors gradient to use for the button.
   final List<Color>? gradient;
 
+  /// The border to use for the button.
+  final Border? border;
+
   static const _defaultGradient = LinearGradient(
     colors: [
       Color(0xFFB1B1B1),
@@ -29,16 +33,18 @@ class GameIconButton extends StatelessWidget {
     ],
   );
 
+  static final _defaultBorder = Border.all(
+    color: Colors.white,
+  );
+
   @override
   Widget build(BuildContext context) {
     return TraslucentBackground(
       gradient: gradient ?? _defaultGradient.colors,
-      border: Border.all(
-        color: Colors.white,
-      ),
+      border: border ?? _defaultBorder,
       child: InkWell(
-        borderRadius: BorderRadius.circular(100),
         onTap: onPressed,
+        borderRadius: BorderRadius.circular(100),
         child: Container(
           padding: const EdgeInsets.all(14),
           alignment: Alignment.center,

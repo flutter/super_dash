@@ -1,8 +1,8 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:dash_run/assets/assets.dart';
 import 'package:dash_run/constants/constants.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
+import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -15,12 +15,12 @@ class GameIntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: context.isSmall
-                ? const AssetImage(Assets.introBackgroundMobile)
-                : const AssetImage(Assets.introBackgroundDesktop),
+                ? Assets.images.introBackgroundMobile.provider()
+                : Assets.images.introBackgroundDesktop.provider(),
             fit: BoxFit.cover,
           ),
         ),
@@ -50,8 +50,7 @@ class _IntroPage extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(),
-            Image.asset(
-              Assets.logo,
+            Assets.images.gameLogo.image(
               width: context.isSmall ? 282 : 380,
             ),
             const Spacer(flex: 4),
@@ -102,7 +101,7 @@ class _MobileWebNotAvailableIntroPage extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(),
-            Image.asset(Assets.logo, width: 282),
+            Assets.images.gameLogo.image(width: 282),
             const Spacer(flex: 4),
             Container(
               decoration: const BoxDecoration(
