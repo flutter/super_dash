@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
 import '../../helpers/helpers.dart';
 
 class _MockGameInstructionsCubit extends MockCubit<GameInstructionsState>
@@ -23,6 +24,8 @@ void main() {
     );
 
     testWidgets('renders GameInstructionsOverlayView', (tester) async {
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetDevicePixelRatio());
       await tester.pumpApp(GameInstructionsOverlay());
 
       expect(find.byType(GameInstructionsOverlayView), findsOneWidget);
@@ -48,6 +51,8 @@ void main() {
     }
 
     testWidgets('renders PageView', (tester) async {
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() => tester.view.resetDevicePixelRatio());
       await tester.pumpApp(buildSubject());
 
       expect(find.byType(PageView), findsOneWidget);
