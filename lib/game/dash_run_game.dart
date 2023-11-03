@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
@@ -30,12 +31,23 @@ class DashRunGame extends LeapGame
   final AssetBundle? customBundle;
 
   late final SimpleCombinedInput input;
-  late final SpriteObjectGroupBuilder items;
-  late final ObjectGroupProximityBuilder enemies;
   final AudioController audioController;
 
   int score = 0;
   int currentLevel = 1;
+  int currentSection = 0;
+
+  static const _sections = [
+    'flutter_runnergame_map_A.tmx',
+    'flutter_runnergame_map_B.tmx',
+    'flutter_runnergame_map_C.tmx',
+  ];
+
+  static const _sectionsBackgroundColor = [
+    Color(0xffe9e9df),
+    Color(0xffdae2ee),
+    Color(0xff0353b0),
+  ];
 
   Player? get player => world.firstChild<Player>();
 
@@ -71,8 +83,9 @@ class DashRunGame extends LeapGame
       images: images,
       prefix: prefix,
       bundle: customBundle,
-      tiledMapPath: 'flutter_runnergame_map_A.tmx',
+      tiledMapPath: _sections.first,
     );
+    _setSectionBackground();
 
     final player = Player(
       levelSize: leapMap.tiledMap.size.clone(),
@@ -94,25 +107,10 @@ class DashRunGame extends LeapGame
       ),
     );
 
-    final items = SpriteObjectGroupBuilder(
-      tilesetPath: 'objects/tile_items_v2.png',
-      tileLayerName: 'items',
-      tileset: itemsTileset,
-      componentBuilder: Item.new,
-    );
-
-    final enemies = ObjectGroupProximityBuilder<Player>(
-      proximity: _cameraViewport.x * 1.5,
-      tilesetPath: 'objects/tile_enemies_v2.png',
-      tileLayerName: 'enemies',
-      tileset: enemiesTileset,
-      componentBuilder: Enemy.new,
-    );
+    await _addSpawners();
 
     await addAll([
       input,
-      items,
-      enemies,
       ScoreLabel(
         initialScore: score,
         initialItems: player.powerUps.length,
@@ -121,16 +119,19 @@ class DashRunGame extends LeapGame
     ]);
   }
 
+  void _setSectionBackground() {
+    camera.backdrop = RectangleComponent(
+      size: size.clone(),
+      paint: Paint()..color = _sectionsBackgroundColor[currentSection],
+    );
+  }
+
   void gameOver() {
     score = 0;
     currentLevel = 1;
     world.firstChild<Player>()?.removeFromParent();
-    world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
-    world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
 
-    leapMap.children
-        .whereType<Enemy>()
-        .forEach((enemy) => enemy.removeFromParent());
+    _resetEntities();
 
     Future<void>.delayed(
       const Duration(seconds: 1),
@@ -142,23 +143,77 @@ class DashRunGame extends LeapGame
         await world.add(newPlayer);
 
         await newPlayer.mounted;
-        await addAll([
-          SpriteObjectGroupBuilder(
-            tilesetPath: 'objects/tile_items_v2.png',
-            tileLayerName: 'items',
-            tileset: itemsTileset,
-            componentBuilder: Item.new,
-          ),
-          ObjectGroupProximityBuilder<Player>(
-            proximity: _cameraViewport.x * 1.5,
-            tilesetPath: 'objects/tile_enemies_v2.png',
-            tileLayerName: 'enemies',
-            tileset: enemiesTileset,
-            componentBuilder: Enemy.new,
-          ),
-        ]);
+        await _addSpawners();
       },
     );
+  }
+
+  void _resetEntities() {
+    world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
+    world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
+
+    leapMap.children
+        .whereType<Enemy>()
+        .forEach((enemy) => enemy.removeFromParent());
+  }
+
+  Future<void> _addSpawners() async {
+    await addAll([
+      SpriteObjectGroupBuilder(
+        tilesetPath: 'objects/tile_items_v2.png',
+        tileLayerName: 'items',
+        tileset: itemsTileset,
+        componentBuilder: Item.new,
+      ),
+      ObjectGroupProximityBuilder<Player>(
+        proximity: _cameraViewport.x * 1.5,
+        tilesetPath: 'objects/tile_enemies_v2.png',
+        tileLayerName: 'enemies',
+        tileset: enemiesTileset,
+        componentBuilder: Enemy.new,
+      ),
+    ]);
+  }
+
+  Future<void> _loadNewSection() async {
+    _setSectionBackground();
+    final nextSection = _sections[currentSection];
+
+    _resetEntities();
+
+    await loadWorldAndMap(
+      images: images,
+      prefix: prefix,
+      bundle: customBundle,
+      tiledMapPath: nextSection,
+    );
+
+    await _addSpawners();
+  }
+
+  @override
+  void onMapUnload() {
+    player?.velocity.setZero();
+  }
+
+  @override
+  void onMapLoaded() {
+    player?.loadSpawnPoint();
+    player?.walking = true;
+    player?.isPlayerTeleporting = false;
+  }
+
+  void sectionCleared() {
+    score += 1000 * currentLevel;
+
+    if (currentSection < _sections.length - 1) {
+      currentSection++;
+    } else {
+      currentSection = 0;
+      currentLevel++;
+    }
+
+    _loadNewSection();
   }
 
   void addCameraDebugger() {
@@ -192,12 +247,7 @@ class DashRunGame extends LeapGame
   }
 
   void teleportPlayerToEnd() {
-    player?.x = leapMap.tiledMap.size.x - (player?.size.x ?? 0) * 4;
-  }
-
-  void levelCleared() {
-    score += 1000 * currentLevel;
-    currentLevel++;
+    player?.x = leapMap.tiledMap.size.x - (player?.size.x ?? 0) * 40;
   }
 
   void showHitBoxes() {
