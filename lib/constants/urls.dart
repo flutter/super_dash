@@ -1,6 +1,6 @@
 class Urls {
   // TODO(all): confirm url once is in google's org
-  static const String githubRepo = 'https://github.com/flutter/superdash';
+  static const String githubRepo = 'https://github.com/flutter/super_dash';
 
   static const String flutterGames = 'https://flutter.dev/games';
 
