@@ -99,6 +99,13 @@ class _MapTesterViewState extends State<MapTesterView> {
                     },
                     child: const Text('Show hitboxes'),
                   ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      game?.player?.addPowerUp(ItemType.goldenFeather);
+                    },
+                    child: const Text('Add powerup'),
+                  ),
                 ],
               ),
             const SizedBox(height: 16),

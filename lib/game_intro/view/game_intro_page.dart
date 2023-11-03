@@ -9,13 +9,24 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class GameIntroPage extends StatelessWidget {
+class GameIntroPage extends StatefulWidget {
   const GameIntroPage({super.key});
+
+  @override
+  State<GameIntroPage> createState() => _GameIntroPageState();
+}
+
+class _GameIntroPageState extends State<GameIntroPage> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(Assets.images.gameBackground.provider(), context);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: context.isSmall

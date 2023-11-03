@@ -2,6 +2,7 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dash_run/game/game.dart';
+import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +26,7 @@ void main() {
 
   group('Game', () {
     test('is routable', () {
-      expect(Game.route(), isA<MaterialPageRoute<void>>());
+      expect(Game.route(), isA<PageRoute<void>>());
     });
 
     testWidgets('renders GameView', (tester) async {
@@ -58,8 +59,12 @@ void main() {
         settingsController: settingsController,
       );
 
+      final context = tester.element(find.byType(ScoreLabel));
+
       expect(
-        find.text('${gameBloc.state.score} Pts'),
+        find.text(
+          context.l10n.gameScoreLabel(gameBloc.state.score),
+        ),
         findsOneWidget,
       );
     });
