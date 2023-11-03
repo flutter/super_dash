@@ -1,5 +1,6 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/game_instructions/game_instructions.dart';
+import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/settings/settings_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +42,7 @@ class InfoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GameIconButton(
       icon: Icons.info,
-      onPressed: () {},
+      onPressed: () => Navigator.of(context).push(GameInfoDialog.route()),
     );
   }
 }

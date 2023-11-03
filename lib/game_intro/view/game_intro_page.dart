@@ -1,4 +1,5 @@
 import 'package:app_ui/app_ui.dart';
+import 'package:dash_run/constants/constants.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/gen/assets.gen.dart';
@@ -176,8 +177,7 @@ class _BottomBar extends StatelessWidget {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      // TODO(all): confirm url once is in google's org
-                      launchUrlString('https://github.com/flutter/superdash');
+                      launchUrlString(Urls.githubRepo);
                     },
                 ),
               ),

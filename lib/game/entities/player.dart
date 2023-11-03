@@ -3,10 +3,7 @@ import 'dart:async';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
-import 'package:flame/effects.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:leap/leap.dart';
 
 class Player extends JumperCharacter<DashRunGame> {
@@ -20,7 +17,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
   final Vector2 levelSize;
   final Vector2 cameraViewport;
-  late final Vector2 spawn;
+  late Vector2 spawn;
   late final List<Vector2> respawnPoints;
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
@@ -60,7 +57,7 @@ class Player extends JumperCharacter<DashRunGame> {
     final animation = await gameRef.loadSpriteAnimation(
       'anim/spritesheet_dash_run.png',
       SpriteAnimationData.sequenced(
-        amount: 32,
+        amount: 16,
         stepTime: 0.042,
         textureSize: Vector2.all(gameRef.tileSize),
         amountPerRow: 8,
@@ -80,11 +77,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
     gameRef.camera.follow(cameraAnchor);
 
-    final spawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
-    for (final object in spawnGroup.objects) {
-      position = Vector2(object.x, object.y);
-      spawn = position.clone();
-    }
+    loadSpawnPoint();
 
     final respawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('respawn');
     respawnPoints = [
@@ -94,14 +87,22 @@ class Player extends JumperCharacter<DashRunGame> {
     ];
   }
 
+  void loadSpawnPoint() {
+    final spawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
+    for (final object in spawnGroup.objects) {
+      position = Vector2(object.x, object.y);
+      spawn = position.clone();
+    }
+  }
+
   @override
   void update(double dt) {
     super.update(dt);
 
     if (isPlayerTeleporting) return;
 
-    if (x >= gameRef.leapMap.width - gameRef.tileSize) {
-      levelCleared();
+    if (x >= gameRef.leapMap.width - gameRef.tileSize * 15) {
+      sectionCleared();
       return;
     }
 
@@ -151,78 +152,8 @@ class Player extends JumperCharacter<DashRunGame> {
     }
   }
 
-  void levelCleared() {
+  void sectionCleared() {
     isPlayerTeleporting = true;
-    gameRef.levelCleared();
-
-    walking = false;
-    velocity
-      ..x = 0
-      ..y = 0;
-    lastGroundXVelocity = 0;
-    faceLeft = false;
-
-    runningAnimation.add(
-      MoveEffect.by(
-        Vector2(0, -gameRef.tileSize * 2),
-        CurvedEffectController(
-          .5,
-          Curves.easeOutCubic,
-        ),
-        onComplete: () async {
-          await Future<void>.delayed(const Duration(milliseconds: 200));
-          runningAnimation.add(
-            SequenceEffect(
-              [
-                ScaleEffect.to(
-                  Vector2(-1, 1),
-                  CurvedEffectController(
-                    .1,
-                    Curves.easeIn,
-                  ),
-                ),
-                ScaleEffect.to(
-                  Vector2(0, 1),
-                  CurvedEffectController(
-                    .1,
-                    Curves.easeOut,
-                  ),
-                ),
-              ],
-              onComplete: () async {
-                position = spawn.clone();
-                await Future<void>.delayed(const Duration(milliseconds: 200));
-
-                runningAnimation
-                  ..position = size / 2
-                  ..add(
-                    SequenceEffect(
-                      [
-                        ScaleEffect.to(
-                          Vector2(-1, 1),
-                          CurvedEffectController(
-                            .1,
-                            Curves.easeIn,
-                          ),
-                        ),
-                        ScaleEffect.to(
-                          Vector2.all(1),
-                          CurvedEffectController(
-                            .1,
-                            Curves.easeOut,
-                          ),
-                        ),
-                      ],
-                      onComplete: () {
-                        isPlayerTeleporting = false;
-                      },
-                    ),
-                  );
-              },
-            ),
-          );
-        },
-      ),
-    );
+    gameRef.sectionCleared();
   }
 }
