@@ -37,6 +37,8 @@ class Player extends JumperCharacter<DashRunGame> {
 
   bool get doubleJumpEnabled => powerUps.contains(ItemType.goldenFeather);
 
+  double lastY = 9;
+
   @override
   int get priority => 1;
 
@@ -143,6 +145,8 @@ class Player extends JumperCharacter<DashRunGame> {
         (object) => Vector2(object.x, object.y),
       ),
     ];
+
+    lastY = y;
   }
 
   void loadSpawnPoint() {
@@ -163,11 +167,20 @@ class Player extends JumperCharacter<DashRunGame> {
     }
   }
 
+  void _playEdgeClimb() {
+  }
+
   @override
   void update(double dt) {
     super.update(dt);
 
     if (isPlayerTeleporting) return;
+
+    if (lastY - y > 20) {
+      _playEdgeClimb();
+    }
+
+    lastY = y;
 
     if (x >= gameRef.leapMap.width - gameRef.tileSize * 15) {
       sectionCleared();
