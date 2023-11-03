@@ -1,5 +1,4 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:dash_run/game_instructions/game_instructions.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/settings/settings_controller.dart';
 import 'package:flutter/material.dart';

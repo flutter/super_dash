@@ -1,5 +1,5 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:dash_run/game_instructions/cubit/game_instructions_cubit.dart';
+import 'package:dash_run/game_intro/game_instructions/game_instructions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,6 +20,7 @@ class GameInstructionNavigationControls extends StatelessWidget {
     final isLastStep = currentStep == GameInstructionsStep.values.last;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

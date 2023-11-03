@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:app_ui/app_ui.dart';
-import 'package:dash_run/game_instructions/game_instructions.dart';
+import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:equatable/equatable.dart';
@@ -27,7 +27,10 @@ class GameInstructionsOverlay extends StatelessWidget {
 
   static PageRoute<void> route() {
     return HeroDialogRoute(
-      builder: (_) => const GameInstructionsOverlay(),
+      builder: (_) => BackdropFilter(
+        filter: ui.ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+        child: const GameInstructionsOverlay(),
+      ),
     );
   }
 
@@ -136,21 +139,128 @@ class _GameInstructionsOverlayViewState
 
   @override
   Widget build(BuildContext context) {
-    return BackdropFilter(
-      filter: ui.ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-      child: PageView.builder(
-        controller: pageController,
-        onPageChanged: context.read<GameInstructionsCubit>().updateStep,
-        itemCount: instructions.length,
-        itemBuilder: (context, index) {
-          final instruction = instructions.elementAt(index);
-          return GameCard(
-            title: instruction.title,
-            description: instruction.description,
-            image: instruction.image,
-            pageController: pageController,
-          );
-        },
+    return FractionallySizedBox(
+      heightFactor: 0.8,
+      widthFactor: context.isSmall ? 0.9 : 0.3,
+      child: Card(
+        color: Colors.white24,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Flexible(
+                  child: PageView.builder(
+                    controller: pageController,
+                    onPageChanged:
+                        context.read<GameInstructionsCubit>().updateStep,
+                    itemCount: instructions.length,
+                    itemBuilder: (context, index) {
+                      final instruction = instructions.elementAt(index);
+                      return _CardContent(
+                        title: instruction.title,
+                        description: instruction.description,
+                        image: instruction.image,
+                        pageController: pageController,
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 32),
+                  child: GameInstructionNavigationControls(
+                    pageController: pageController,
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              top: 16,
+              right: 16,
+              child: GameIconButton(
+                icon: Icons.close,
+                onPressed: Navigator.of(context).pop,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardContent extends StatelessWidget {
+  const _CardContent({
+    required this.title,
+    required this.description,
+    required this.image,
+    required this.pageController,
+  });
+
+  final Widget image;
+  final String title;
+  final String description;
+  final PageController pageController;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      children: [
+        const Spacer(),
+        _CardImage(image: image),
+        const Spacer(),
+        Text(
+          title,
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: Colors.white,
+          ),
+        ),
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+          ),
+          child: Text(
+            description,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: Colors.white,
+            ),
+          ),
+        ),
+        const Spacer(flex: 3),
+      ],
+    );
+  }
+}
+
+class _CardImage extends StatelessWidget {
+  const _CardImage({required this.image});
+
+  final Widget image;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 224,
+      height: 224,
+      child: TraslucentBackground(
+        border: Border.all(
+          color: Colors.white,
+        ),
+        gradient: const [
+          Color(0xFFB1B1B1),
+          Color(0xFF363567),
+          Color(0xFFE2F8FA),
+          Colors.white38,
+        ],
+        child: Positioned.fill(child: image),
       ),
     );
   }
