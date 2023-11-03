@@ -33,6 +33,7 @@ class GameInfoDialog extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const SizedBox(height: 24),
           Image.asset(Assets.logo, width: 230),
           const SizedBox(height: 40),
           Padding(
