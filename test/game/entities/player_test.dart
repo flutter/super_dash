@@ -6,6 +6,7 @@ import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/src/services/asset_bundle.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leap/leap.dart';
 import 'package:mocktail/mocktail.dart';
@@ -20,6 +21,12 @@ class _MockLeapMap extends Mock implements LeapMap {}
 
 class _MockObjectGroup extends Mock implements ObjectGroup {}
 
+class _MockTiledComponent extends Mock implements TiledComponent {}
+
+class _MockRenderableTiledMap extends Mock implements RenderableTiledMap {}
+
+class _MockTileset extends Mock implements Tileset {}
+
 class _TestDashRunGame extends DashRunGame {
   _TestDashRunGame({
     required super.audioController,
@@ -33,6 +40,19 @@ class _TestDashRunGame extends DashRunGame {
   @override
   Future<void> onLoad() async {
     // Noop
+  }
+
+  @override
+  Future<void> loadWorldAndMap({
+    required String tiledMapPath,
+    String prefix = 'assets/tiles/',
+    AssetBundle? bundle,
+    Images? images,
+    Map<String, TiledObjectHandler> tiledObjectHandlers = const {},
+    LeapMapTransition Function(LeapGame p1) mapTransitionFactory =
+        LeapMapTransition.defaultFactory,
+  }) async {
+    // noop
   }
 
   @override
@@ -54,6 +74,8 @@ class _TestDashRunGame extends DashRunGame {
     if (_leapMap == null) {
       final map = _MockLeapMap();
 
+      when(() => map.children).thenReturn(ComponentSet());
+
       when(() => map.width).thenReturn(100);
       when(() => map.height).thenReturn(100);
 
@@ -66,7 +88,47 @@ class _TestDashRunGame extends DashRunGame {
       when(() => map.getTileLayer<ObjectGroup>('spawn')).thenReturn(spawnGroup);
       when(() => map.getTileLayer<ObjectGroup>('respawn'))
           .thenReturn(respawnGroup);
+
+      final tiledComponent = _MockTiledComponent();
+
+      final tiledMap = _MockRenderableTiledMap();
+      when(() => tiledComponent.tileMap).thenReturn(tiledMap);
+
+      final itemTileset = _MockTileset();
+      when(() => itemTileset.name).thenReturn('tile_items_v2');
+
+      final enemyTileset = _MockTileset();
+      when(() => enemyTileset.name).thenReturn('tile_enemies_v2');
+
+      when(() => tiledMap.map).thenReturn(
+        TiledMap(
+          width: 640,
+          height: 640,
+          tileWidth: 64,
+          tileHeight: 64,
+          tilesets: [
+            itemTileset,
+            enemyTileset,
+          ],
+        ),
+      );
+
+      when(() => map.tiledMap).thenReturn(tiledComponent);
       _leapMap = map;
+
+      when(() => map.getTileLayer<ObjectGroup>('items')).thenReturn(
+        ObjectGroup(
+          name: '',
+          objects: const [],
+        ),
+      );
+
+      when(() => map.getTileLayer<ObjectGroup>('enemies')).thenReturn(
+        ObjectGroup(
+          name: '',
+          objects: const [],
+        ),
+      );
     }
 
     return _leapMap!;
