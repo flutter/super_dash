@@ -59,18 +59,13 @@ class SoundControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settingsController = context.read<SettingsController>();
+    final settingsController = context.watch<SettingsController>();
     return SafeArea(
-      child: Material(
-        color: Colors.transparent,
-        child: ValueListenableBuilder<bool>(
-          valueListenable: settingsController.soundsOn,
-          builder: (context, soundsOn, child) => GameIconButton(
-            icon: soundsOn ? Icons.volume_up : Icons.volume_off,
-            onPressed: soundsOn
-                ? settingsController.toggleMuted
-                : settingsController.toggleMusicOn,
-          ),
+      child: ValueListenableBuilder<bool>(
+        valueListenable: settingsController.muted,
+        builder: (context, muted, child) => GameIconButton(
+          icon: muted ? Icons.volume_up : Icons.volume_off,
+          onPressed: context.read<SettingsController>().toggleMuted,
         ),
       ),
     );
