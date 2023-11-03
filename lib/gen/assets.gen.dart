@@ -26,6 +26,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/egg.png
   AssetGenImage get egg => const AssetGenImage('assets/images/egg.png');
 
+  /// File path: assets/images/game_background.png
+  AssetGenImage get gameBackground =>
+      const AssetGenImage('assets/images/game_background.png');
+
   /// File path: assets/images/game_logo.png
   AssetGenImage get gameLogo =>
       const AssetGenImage('assets/images/game_logo.png');
@@ -59,6 +63,7 @@ class $AssetsImagesGen {
         autoRunInstruction,
         avoidBugsInstruction,
         egg,
+        gameBackground,
         gameLogo,
         gate,
         introBackgroundDesktop,
@@ -125,6 +130,62 @@ class $AssetsSfxGen {
 class $AssetsMapAnimGen {
   const $AssetsMapAnimGen();
 
+  /// File path: assets/map/anim/spritesheet_dash_deathDrown.png
+  AssetGenImage get spritesheetDashDeathDrownPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_dash_deathDrown.png');
+
+  /// File path: assets/map/anim/spritesheet_dash_deathDrown.tsx
+  String get spritesheetDashDeathDrownTsx =>
+      'assets/map/anim/spritesheet_dash_deathDrown.tsx';
+
+  /// File path: assets/map/anim/spritesheet_dash_deathFaint.png
+  AssetGenImage get spritesheetDashDeathFaintPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_dash_deathFaint.png');
+
+  /// File path: assets/map/anim/spritesheet_dash_deathFaint.tsx
+  String get spritesheetDashDeathFaintTsx =>
+      'assets/map/anim/spritesheet_dash_deathFaint.tsx';
+
+  /// File path: assets/map/anim/spritesheet_dash_deathPit.png
+  AssetGenImage get spritesheetDashDeathPitPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_dash_deathPit.png');
+
+  /// File path: assets/map/anim/spritesheet_dash_deathPit.tsx
+  String get spritesheetDashDeathPitTsx =>
+      'assets/map/anim/spritesheet_dash_deathPit.tsx';
+
+  /// File path: assets/map/anim/spritesheet_dash_edgeGrab.png
+  AssetGenImage get spritesheetDashEdgeGrabPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_dash_edgeGrab.png');
+
+  /// File path: assets/map/anim/spritesheet_dash_edgeGrab.tsx
+  String get spritesheetDashEdgeGrabTsx =>
+      'assets/map/anim/spritesheet_dash_edgeGrab.tsx';
+
+  /// File path: assets/map/anim/spritesheet_dash_flap.png
+  AssetGenImage get spritesheetDashFlapPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_dash_flap.png');
+
+  /// File path: assets/map/anim/spritesheet_dash_flap.tsx
+  String get spritesheetDashFlapTsx =>
+      'assets/map/anim/spritesheet_dash_flap.tsx';
+
+  /// File path: assets/map/anim/spritesheet_dash_idle.png
+  AssetGenImage get spritesheetDashIdlePng =>
+      const AssetGenImage('assets/map/anim/spritesheet_dash_idle.png');
+
+  /// File path: assets/map/anim/spritesheet_dash_idle.tsx
+  String get spritesheetDashIdleTsx =>
+      'assets/map/anim/spritesheet_dash_idle.tsx';
+
+  /// File path: assets/map/anim/spritesheet_dash_jump.png
+  AssetGenImage get spritesheetDashJumpPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_dash_jump.png');
+
+  /// File path: assets/map/anim/spritesheet_dash_jump.tsx
+  String get spritesheetDashJumpTsx =>
+      'assets/map/anim/spritesheet_dash_jump.tsx';
+
   /// File path: assets/map/anim/spritesheet_dash_run.png
   AssetGenImage get spritesheetDashRunPng =>
       const AssetGenImage('assets/map/anim/spritesheet_dash_run.png');
@@ -133,8 +194,75 @@ class $AssetsMapAnimGen {
   String get spritesheetDashRunTsx =>
       'assets/map/anim/spritesheet_dash_run.tsx';
 
+  /// File path: assets/map/anim/spritesheet_dash_slide.png
+  AssetGenImage get spritesheetDashSlidePng =>
+      const AssetGenImage('assets/map/anim/spritesheet_dash_slide.png');
+
+  /// File path: assets/map/anim/spritesheet_dash_slide.tsx
+  String get spritesheetDashSlideTsx =>
+      'assets/map/anim/spritesheet_dash_slide.tsx';
+
+  /// File path: assets/map/anim/spritesheet_phoenixDash_doublejump.png
+  AssetGenImage get spritesheetPhoenixDashDoublejumpPng => const AssetGenImage(
+      'assets/map/anim/spritesheet_phoenixDash_doublejump.png');
+
+  /// File path: assets/map/anim/spritesheet_phoenixDash_doublejump.tsx
+  String get spritesheetPhoenixDashDoublejumpTsx =>
+      'assets/map/anim/spritesheet_phoenixDash_doublejump.tsx';
+
+  /// File path: assets/map/anim/spritesheet_phoenixDash_idle.png
+  AssetGenImage get spritesheetPhoenixDashIdlePng =>
+      const AssetGenImage('assets/map/anim/spritesheet_phoenixDash_idle.png');
+
+  /// File path: assets/map/anim/spritesheet_phoenixDash_idle.tsx
+  String get spritesheetPhoenixDashIdleTsx =>
+      'assets/map/anim/spritesheet_phoenixDash_idle.tsx';
+
+  /// File path: assets/map/anim/spritesheet_phoenixDash_jump.png
+  AssetGenImage get spritesheetPhoenixDashJumpPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_phoenixDash_jump.png');
+
+  /// File path: assets/map/anim/spritesheet_phoenixDash_jump.tsx
+  String get spritesheetPhoenixDashJumpTsx =>
+      'assets/map/anim/spritesheet_phoenixDash_jump.tsx';
+
+  /// File path: assets/map/anim/spritesheet_phoenixDash_run.png
+  AssetGenImage get spritesheetPhoenixDashRunPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_phoenixDash_run.png');
+
+  /// File path: assets/map/anim/spritesheet_phoenixDash_run.tsx
+  String get spritesheetPhoenixDashRunTsx =>
+      'assets/map/anim/spritesheet_phoenixDash_run.tsx';
+
   /// List of all assets
-  List<dynamic> get values => [spritesheetDashRunPng, spritesheetDashRunTsx];
+  List<dynamic> get values => [
+        spritesheetDashDeathDrownPng,
+        spritesheetDashDeathDrownTsx,
+        spritesheetDashDeathFaintPng,
+        spritesheetDashDeathFaintTsx,
+        spritesheetDashDeathPitPng,
+        spritesheetDashDeathPitTsx,
+        spritesheetDashEdgeGrabPng,
+        spritesheetDashEdgeGrabTsx,
+        spritesheetDashFlapPng,
+        spritesheetDashFlapTsx,
+        spritesheetDashIdlePng,
+        spritesheetDashIdleTsx,
+        spritesheetDashJumpPng,
+        spritesheetDashJumpTsx,
+        spritesheetDashRunPng,
+        spritesheetDashRunTsx,
+        spritesheetDashSlidePng,
+        spritesheetDashSlideTsx,
+        spritesheetPhoenixDashDoublejumpPng,
+        spritesheetPhoenixDashDoublejumpTsx,
+        spritesheetPhoenixDashIdlePng,
+        spritesheetPhoenixDashIdleTsx,
+        spritesheetPhoenixDashJumpPng,
+        spritesheetPhoenixDashJumpTsx,
+        spritesheetPhoenixDashRunPng,
+        spritesheetPhoenixDashRunTsx
+      ];
 }
 
 class $AssetsMapObjectsGen {
@@ -370,6 +498,13 @@ class $AssetsMapTilesGen {
   /// File path: assets/map/tiles/tile_sky_v02.tsx
   String get tileSkyV02Tsx => 'assets/map/tiles/tile_sky_v02.tsx';
 
+  /// File path: assets/map/tiles/tile_treehouse.png
+  AssetGenImage get tileTreehousePng =>
+      const AssetGenImage('assets/map/tiles/tile_treehouse.png');
+
+  /// File path: assets/map/tiles/tile_treehouse.tsx
+  String get tileTreehouseTsx => 'assets/map/tiles/tile_treehouse.tsx';
+
   /// List of all assets
   List<dynamic> get values => [
         tileAtmosForest1Png,
@@ -409,7 +544,9 @@ class $AssetsMapTilesGen {
         tilePlainsHillsV01Png,
         tilePlainsHillsV01Tsx,
         tileSkyV02Png,
-        tileSkyV02Tsx
+        tileSkyV02Tsx,
+        tileTreehousePng,
+        tileTreehouseTsx
       ];
 }
 
