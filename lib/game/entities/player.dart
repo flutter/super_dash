@@ -57,7 +57,7 @@ class Player extends JumperCharacter<DashRunGame> {
     final animation = await gameRef.loadSpriteAnimation(
       'anim/spritesheet_dash_run.png',
       SpriteAnimationData.sequenced(
-        amount: 32,
+        amount: 16,
         stepTime: 0.042,
         textureSize: Vector2.all(gameRef.tileSize),
         amountPerRow: 8,
