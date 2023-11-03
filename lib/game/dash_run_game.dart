@@ -7,6 +7,7 @@ import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 
@@ -117,6 +118,12 @@ class DashRunGame extends LeapGame
         initialHealth: player.health,
       ),
     ]);
+    _addTreeHouseFrontLayer();
+  }
+
+  void _addTreeHouseFrontLayer() {
+    final layer = leapMap.tiledMap.tileMap.renderableLayers.last;
+    world.add(TreeHouseFront(renderFront: layer.render));
   }
 
   void _setSectionBackground() {
@@ -132,6 +139,10 @@ class DashRunGame extends LeapGame
     world.firstChild<Player>()?.removeFromParent();
 
     _resetEntities();
+
+    if (isLastSection || isFirstSection) {
+      _addTreeHouseFrontLayer();
+    }
 
     Future<void>.delayed(
       const Duration(seconds: 1),
@@ -151,6 +162,7 @@ class DashRunGame extends LeapGame
   void _resetEntities() {
     world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
+    world.firstChild<TreeHouseFront>()?.removeFromParent();
 
     leapMap.children
         .whereType<Enemy>()
@@ -189,6 +201,10 @@ class DashRunGame extends LeapGame
     );
 
     await _addSpawners();
+
+    if (isLastSection || isFirstSection) {
+      _addTreeHouseFrontLayer();
+    }
   }
 
   @override
@@ -200,13 +216,19 @@ class DashRunGame extends LeapGame
   void onMapLoaded() {
     player?.loadSpawnPoint();
     player?.walking = true;
+    player?.animations.paint.color = Colors.white;
     player?.isPlayerTeleporting = false;
   }
 
   void sectionCleared() {
     score += 1000 * currentLevel;
 
-    if (currentSection < _sections.length - 1) {
+    if (isLastSection) {
+      player?.animations.paint.color = Colors.transparent;
+      player?.walking = false;
+    }
+
+    if (!isLastSection) {
       currentSection++;
     } else {
       currentSection = 0;
@@ -215,6 +237,9 @@ class DashRunGame extends LeapGame
 
     _loadNewSection();
   }
+
+  bool get isLastSection => currentSection == _sections.length - 1;
+  bool get isFirstSection => currentSection == 0;
 
   void addCameraDebugger() {
     if (descendants().whereType<CameraDebugger>().isEmpty) {

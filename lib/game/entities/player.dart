@@ -169,7 +169,9 @@ class Player extends JumperCharacter<DashRunGame> {
 
     if (isPlayerTeleporting) return;
 
-    if (x >= gameRef.leapMap.width - gameRef.tileSize * 15) {
+    if ((gameRef.isLastSection && x >= gameRef.leapMap.width - tileSize) ||
+        (!gameRef.isLastSection &&
+            x >= gameRef.leapMap.width - gameRef.tileSize * 15)) {
       sectionCleared();
       return;
     }
@@ -222,6 +224,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
   void sectionCleared() {
     isPlayerTeleporting = true;
+    if (gameRef.isLastSection) {}
     gameRef.sectionCleared();
   }
 }
