@@ -18,16 +18,14 @@ class GameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 72,
-        horizontal: 24,
-      ),
+    return FractionallySizedBox(
+      heightFactor: 0.8,
+      widthFactor: context.isSmall ? 0.9 : 0.4,
       child: Card(
+        color: Colors.white24,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        color: Colors.white24,
         child: Stack(
           children: [
             Positioned(

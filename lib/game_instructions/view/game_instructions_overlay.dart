@@ -129,6 +129,12 @@ class _GameInstructionsOverlayViewState
   }
 
   @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BackdropFilter(
       filter: ui.ImageFilter.blur(sigmaX: 8, sigmaY: 8),

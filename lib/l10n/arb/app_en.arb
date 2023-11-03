@@ -55,5 +55,21 @@
     "gameInstructionsPageAvoidBugsDescription": "No one likes bugs! Jump to dodge them and avoid taking damage.",
     "@gameInstructionsPageAvoidBugsDescription": {
         "description": "Text shown in the description of the avoid bugs instruction of the Game Instructions Overlay"
+    },
+    "mobileModeUnavailable": "Mobile mode unavailable",
+    "@mobileModeUnavailable": {
+        "description": "Title shown in the Game Info Page for mobile devices joining from a browser"
+    },
+    "mobileModeUnavailableDescription": "Super Dash mobile is coming soon.\nOpen this link on a desktop web browser\nto play today.",
+    "@mobileModeUnavailableDescription": {
+        "description": "Description shown in the Game Info Page for mobile devices joining from a browser"
+    },
+    "superDash": "Super Dash",
+    "@superDash": {
+        "description": "Game name"
+    },
+    "howItsMade": "How it's made",
+    "@howItsMade": {
+        "description": "Text shown in the game info page"
     }
 }

@@ -30,9 +30,16 @@ class $AssetsImagesGen {
   AssetGenImage get gameLogo =>
       const AssetGenImage('assets/images/game_logo.png');
 
-  /// File path: assets/images/intro_background.png
-  AssetGenImage get introBackground =>
-      const AssetGenImage('assets/images/intro_background.png');
+  /// File path: assets/images/gate.png
+  AssetGenImage get gate => const AssetGenImage('assets/images/gate.png');
+
+  /// File path: assets/images/intro_background_desktop.png
+  AssetGenImage get introBackgroundDesktop =>
+      const AssetGenImage('assets/images/intro_background_desktop.png');
+
+  /// File path: assets/images/intro_background_mobile.png
+  AssetGenImage get introBackgroundMobile =>
+      const AssetGenImage('assets/images/intro_background_mobile.png');
 
   /// File path: assets/images/level_gates_instruction.png
   AssetGenImage get levelGatesInstruction =>
@@ -53,7 +60,9 @@ class $AssetsImagesGen {
         avoidBugsInstruction,
         egg,
         gameLogo,
-        introBackground,
+        gate,
+        introBackgroundDesktop,
+        introBackgroundMobile,
         levelGatesInstruction,
         powerfulWingsInstruction,
         tapToJumpInstruction
@@ -71,11 +80,26 @@ class $AssetsMapGen {
   /// File path: assets/map/flutter_runnergame_map.tmx
   String get flutterRunnergameMap => 'assets/map/flutter_runnergame_map.tmx';
 
+  /// File path: assets/map/flutter_runnergame_map_A.tmx
+  String get flutterRunnergameMapA => 'assets/map/flutter_runnergame_map_A.tmx';
+
+  /// File path: assets/map/flutter_runnergame_map_B.tmx
+  String get flutterRunnergameMapB => 'assets/map/flutter_runnergame_map_B.tmx';
+
+  /// File path: assets/map/flutter_runnergame_map_C.tmx
+  String get flutterRunnergameMapC => 'assets/map/flutter_runnergame_map_C.tmx';
+
   $AssetsMapObjectsGen get objects => const $AssetsMapObjectsGen();
   $AssetsMapTilesGen get tiles => const $AssetsMapTilesGen();
 
   /// List of all assets
-  List<String> get values => [gitignore, flutterRunnergameMap];
+  List<String> get values => [
+        gitignore,
+        flutterRunnergameMap,
+        flutterRunnergameMapA,
+        flutterRunnergameMapB,
+        flutterRunnergameMapC
+      ];
 }
 
 class $AssetsMusicGen {
@@ -146,6 +170,13 @@ class $AssetsMapObjectsGen {
   /// File path: assets/map/objects/tile_gate_lvl5.tsx
   String get tileGateLvl5Tsx => 'assets/map/objects/tile_gate_lvl5.tsx';
 
+  /// File path: assets/map/objects/tile_gate_lvl7.png
+  AssetGenImage get tileGateLvl7Png =>
+      const AssetGenImage('assets/map/objects/tile_gate_lvl7.png');
+
+  /// File path: assets/map/objects/tile_gate_lvl7.tsx
+  String get tileGateLvl7Tsx => 'assets/map/objects/tile_gate_lvl7.tsx';
+
   /// File path: assets/map/objects/tile_items_v2.png
   AssetGenImage get tileItemsV2Png =>
       const AssetGenImage('assets/map/objects/tile_items_v2.png');
@@ -179,6 +210,8 @@ class $AssetsMapObjectsGen {
         tileForestTreesFrontV02Tsx,
         tileGateLvl5Png,
         tileGateLvl5Tsx,
+        tileGateLvl7Png,
+        tileGateLvl7Tsx,
         tileItemsV2Png,
         tileItemsV2Tsx,
         tileMountainTreeV01Png,
@@ -282,6 +315,14 @@ class $AssetsMapTilesGen {
   String get tileMountainGroundV02Tsx =>
       'assets/map/tiles/tile_mountain_ground_v02.tsx';
 
+  /// File path: assets/map/tiles/tile_mountain_ground_v03.png
+  AssetGenImage get tileMountainGroundV03Png =>
+      const AssetGenImage('assets/map/tiles/tile_mountain_ground_v03.png');
+
+  /// File path: assets/map/tiles/tile_mountain_ground_v03.tsx
+  String get tileMountainGroundV03Tsx =>
+      'assets/map/tiles/tile_mountain_ground_v03.tsx';
+
   /// File path: assets/map/tiles/tile_mountain_mountains_v01.png
   AssetGenImage get tileMountainMountainsV01Png =>
       const AssetGenImage('assets/map/tiles/tile_mountain_mountains_v01.png');
@@ -305,6 +346,14 @@ class $AssetsMapTilesGen {
   /// File path: assets/map/tiles/tile_plains_ground_v02.tsx
   String get tilePlainsGroundV02Tsx =>
       'assets/map/tiles/tile_plains_ground_v02.tsx';
+
+  /// File path: assets/map/tiles/tile_plains_ground_v03.png
+  AssetGenImage get tilePlainsGroundV03Png =>
+      const AssetGenImage('assets/map/tiles/tile_plains_ground_v03.png');
+
+  /// File path: assets/map/tiles/tile_plains_ground_v03.tsx
+  String get tilePlainsGroundV03Tsx =>
+      'assets/map/tiles/tile_plains_ground_v03.tsx';
 
   /// File path: assets/map/tiles/tile_plains_hills_v01.png
   AssetGenImage get tilePlainsHillsV01Png =>
@@ -347,12 +396,16 @@ class $AssetsMapTilesGen {
         tileGroundTransitionV02Tsx,
         tileMountainGroundV02Png,
         tileMountainGroundV02Tsx,
+        tileMountainGroundV03Png,
+        tileMountainGroundV03Tsx,
         tileMountainMountainsV01Png,
         tileMountainMountainsV01Tsx,
         tileMountainStarsV01Png,
         tileMountainStarsV01Tsx,
         tilePlainsGroundV02Png,
         tilePlainsGroundV02Tsx,
+        tilePlainsGroundV03Png,
+        tilePlainsGroundV03Tsx,
         tilePlainsHillsV01Png,
         tilePlainsHillsV01Tsx,
         tileSkyV02Png,

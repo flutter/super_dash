@@ -36,19 +36,23 @@ class GameInstructionNavigationControls extends StatelessWidget {
               opacity: isFirstStep ? 0.4 : 1,
               child: GameIconButton(
                 icon: Icons.arrow_back,
-                onPressed: () => pageController.previousPage(
-                  duration: kThemeAnimationDuration,
-                  curve: Curves.easeIn,
-                ),
+                onPressed: isFirstStep
+                    ? null
+                    : () => pageController.previousPage(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeIn,
+                        ),
               ),
             ),
             const SizedBox(width: 24),
             GameIconButton(
               icon: isLastStep ? Icons.check : Icons.arrow_forward,
-              onPressed: () => pageController.nextPage(
-                duration: kThemeAnimationDuration,
-                curve: Curves.easeIn,
-              ),
+              onPressed: isLastStep
+                  ? Navigator.of(context).pop
+                  : () => pageController.nextPage(
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.easeIn,
+                      ),
             ),
           ],
         ),

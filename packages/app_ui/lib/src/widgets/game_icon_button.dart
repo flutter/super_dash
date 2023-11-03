@@ -42,11 +42,17 @@ class GameIconButton extends StatelessWidget {
     return TraslucentBackground(
       gradient: gradient ?? _defaultGradient.colors,
       border: border ?? _defaultBorder,
-      child: IconButton(
-        onPressed: onPressed,
-        icon: Icon(
-          icon,
-          color: Colors.white,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(100),
+        child: Container(
+          padding: const EdgeInsets.all(14),
+          alignment: Alignment.center,
+          child: Icon(
+            icon,
+            size: 24,
+            color: Colors.white,
+          ),
         ),
       ),
     );
