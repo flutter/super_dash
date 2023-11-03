@@ -107,7 +107,7 @@ class DashRunGame extends LeapGame
       ),
     );
 
-    await _addSpawnmers();
+    await _addSpawners();
 
     await addAll([
       input,
@@ -143,7 +143,7 @@ class DashRunGame extends LeapGame
         await world.add(newPlayer);
 
         await newPlayer.mounted;
-        await _addSpawnmers();
+        await _addSpawners();
       },
     );
   }
@@ -157,7 +157,7 @@ class DashRunGame extends LeapGame
         .forEach((enemy) => enemy.removeFromParent());
   }
 
-  Future<void> _addSpawnmers() async {
+  Future<void> _addSpawners() async {
     await addAll([
       SpriteObjectGroupBuilder(
         tilesetPath: 'objects/tile_items_v2.png',
@@ -188,7 +188,7 @@ class DashRunGame extends LeapGame
       tiledMapPath: nextSection,
     );
 
-    await _addSpawnmers();
+    await _addSpawners();
   }
 
   @override
