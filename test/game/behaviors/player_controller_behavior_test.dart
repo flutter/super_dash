@@ -34,7 +34,9 @@ class _TestPlayer extends Player {
         super(
           cameraViewport: Vector2.all(200),
           levelSize: Vector2.all(200),
-        );
+        ) {
+    animations = SpriteAnimationGroupComponent();
+  }
 
   final bool _isAlive;
   final bool _isOnGround;

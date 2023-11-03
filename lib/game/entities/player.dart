@@ -6,6 +6,14 @@ import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
 
+enum DashState {
+  idle,
+  running,
+
+  phoenixIdle,
+  phoenixRunning,
+}
+
 class Player extends JumperCharacter<DashRunGame> {
   Player({
     required this.levelSize,
@@ -21,7 +29,7 @@ class Player extends JumperCharacter<DashRunGame> {
   late final List<Vector2> respawnPoints;
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
-  late final SpriteAnimationComponent runningAnimation;
+  late final SpriteAnimationGroupComponent<DashState> animations;
 
   List<ItemType> powerUps = [];
   bool isPlayerInvincible = false;
@@ -42,6 +50,18 @@ class Player extends JumperCharacter<DashRunGame> {
   }
 
   @override
+  set walking(bool value) {
+    if (!super.walking && value) {
+      animations.current =
+          powerUps.isEmpty ? DashState.running : DashState.phoenixRunning;
+    } else if (super.walking && !value) {
+      animations.current =
+          powerUps.isEmpty ? DashState.idle : DashState.phoenixIdle;
+    }
+    super.walking = value;
+  }
+
+  @override
   Future<void> onLoad() async {
     await super.onLoad();
 
@@ -54,7 +74,18 @@ class Player extends JumperCharacter<DashRunGame> {
       levelSize: levelSize,
     );
 
-    final animation = await gameRef.loadSpriteAnimation(
+    // Normal animations
+    final idleAnimation = await gameRef.loadSpriteAnimation(
+      'anim/spritesheet_dash_idle.png',
+      SpriteAnimationData.sequenced(
+        amount: 18,
+        stepTime: 0.042,
+        textureSize: Vector2.all(gameRef.tileSize),
+        amountPerRow: 8,
+      ),
+    );
+
+    final runningAnimation = await gameRef.loadSpriteAnimation(
       'anim/spritesheet_dash_run.png',
       SpriteAnimationData.sequenced(
         amount: 16,
@@ -64,14 +95,41 @@ class Player extends JumperCharacter<DashRunGame> {
       ),
     );
 
-    runningAnimation = SpriteAnimationComponent(
+    // Phoenix animations
+    final phoenixIdleAnimation = await gameRef.loadSpriteAnimation(
+      'anim/spritesheet_phoenixDash_idle.png',
+      SpriteAnimationData.sequenced(
+        amount: 18,
+        stepTime: 0.042,
+        textureSize: Vector2.all(gameRef.tileSize),
+        amountPerRow: 8,
+      ),
+    );
+
+    final phoenixRunningAnimation = await gameRef.loadSpriteAnimation(
+      'anim/spritesheet_phoenixDash_run.png',
+      SpriteAnimationData.sequenced(
+        amount: 16,
+        stepTime: 0.042,
+        textureSize: Vector2.all(gameRef.tileSize),
+        amountPerRow: 8,
+      ),
+    );
+
+    animations = SpriteAnimationGroupComponent<DashState>(
       size: Vector2.all(gameRef.tileSize),
-      animation: animation,
+      animations: {
+        DashState.idle: idleAnimation,
+        DashState.running: runningAnimation,
+        DashState.phoenixIdle: phoenixIdleAnimation,
+        DashState.phoenixRunning: phoenixRunningAnimation,
+      },
+      current: DashState.idle,
       anchor: Anchor.center,
       position: size / 2 - Vector2(0, size.y / 2),
     );
 
-    add(runningAnimation);
+    add(animations);
     add(cameraAnchor);
     add(PlayerControllerBehavior());
 
@@ -92,6 +150,16 @@ class Player extends JumperCharacter<DashRunGame> {
     for (final object in spawnGroup.objects) {
       position = Vector2(object.x, object.y);
       spawn = position.clone();
+    }
+  }
+
+  void addPowerUp(ItemType type) {
+    powerUps.add(type);
+
+    if (animations.current == DashState.idle) {
+      animations.current = DashState.phoenixIdle;
+    } else if (animations.current == DashState.running) {
+      animations.current = DashState.phoenixRunning;
     }
   }
 
@@ -141,7 +209,7 @@ class Player extends JumperCharacter<DashRunGame> {
           case ItemType.acorn || ItemType.egg:
             game.score += collision.type.points;
           case ItemType.goldenFeather:
-            powerUps.add(ItemType.goldenFeather);
+            addPowerUp(ItemType.goldenFeather);
         }
         collision.removeFromParent();
       }
