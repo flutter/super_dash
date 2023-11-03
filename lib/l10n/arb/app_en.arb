@@ -23,5 +23,41 @@
     "howItsMade": "How it's made",
     "@howItsMade": {
         "description": "Text shown in the game info page"
+    },
+    "aboutSuperDash": "About Super Dash",
+    "@aboutSuperDash": {
+        "description": "Text shown in the game info popup"
+    },
+    "learn": "Learn ",
+    "@learn": {
+        "description": "Text shown in the game info popup"
+    },
+    "howWeBuiltSuperDash": "how we built Super Dash",
+    "@howWeBuiltSuperDash": {
+        "description": "Text shown in the game info popup"
+    },
+    "inFlutterAndGrabThe": " in Flutter and grab the ",
+    "@inFlutterAndGrabThe": {
+        "description": "Text shown in the game info popup"
+    },
+    "openSourceCode": "open source code.",
+    "@openSourceCode": {
+        "description": "Text shown in the game info popup"
+    },
+    "otherLinks": "Other Links",
+    "@otherLinks": {
+        "description": "Text shown in the game info popup"
+    },
+    "flutterGames": "Flutter Games",
+    "@flutterGames": {
+        "description": "Text shown in the game info popup"
+    },
+    "privacyPolicy": "Privacy Policy",
+    "@privacyPolicy": {
+        "description": "Text shown in the game info popup"
+    },
+    "termsOfService": "Terms of Service",
+    "@termsOfService": {
+        "description": "Text shown in the game info popup"
     }
 }
