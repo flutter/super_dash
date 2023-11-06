@@ -19,14 +19,14 @@ class PageWithBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.aspectRatio > .6) {
+    if (MediaQuery.of(context).size.aspectRatio > .56) {
       return Scaffold(
         body: Stack(
           alignment: Alignment.center,
           children: [
             background,
             AspectRatio(
-              aspectRatio: .6,
+              aspectRatio: .56,
               child: child,
             ),
           ],

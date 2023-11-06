@@ -34,6 +34,10 @@ class $AssetsImagesGen {
   AssetGenImage get gameLogo =>
       const AssetGenImage('assets/images/game_logo.png');
 
+  /// File path: assets/images/game_over_background.png
+  AssetGenImage get gameOverBackground =>
+      const AssetGenImage('assets/images/game_over_background.png');
+
   /// File path: assets/images/gate.png
   AssetGenImage get gate => const AssetGenImage('assets/images/gate.png');
 
@@ -65,6 +69,7 @@ class $AssetsImagesGen {
         egg,
         gameBackground,
         gameLogo,
+        gameOverBackground,
         gate,
         introBackgroundDesktop,
         introBackgroundMobile,

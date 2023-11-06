@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
+import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,12 @@ class GameOverPage extends StatelessWidget {
     return PageWithBackground(
       background: const GameBackground(),
       child: Container(
-        color: Colors.lightBlue,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Assets.images.gameOverBackground.provider(),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           children: [
             const Spacer(flex: 15),
