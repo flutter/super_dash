@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
+import 'package:dash_run/game_over/game_over.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -21,8 +22,8 @@ class DashRunGame extends LeapGame
           tileSize: 64,
           configuration: const LeapConfiguration(
             tiled: TiledOptions(
-              atlasMaxX: 8192,
-              atlasMaxY: 8192,
+              atlasMaxX: 4048,
+              atlasMaxY: 4048,
             ),
           ),
         );
@@ -129,6 +130,8 @@ class DashRunGame extends LeapGame
 
   void gameOver() {
     gameBloc.add(GameOver());
+    audioController.stopBackgroundSfx();
+
     world.firstChild<Player>()?.removeFromParent();
 
     _resetEntities();
@@ -150,6 +153,13 @@ class DashRunGame extends LeapGame
         await _addSpawners();
       },
     );
+
+    if (buildContext != null) {
+      final score = gameBloc.state.score;
+      Navigator.of(buildContext!).push(
+        GameOverPage.route(score: score),
+      );
+    }
   }
 
   void _resetEntities() {

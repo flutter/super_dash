@@ -55,5 +55,7 @@
  <tile id="189" type="Platform"/>
  <tile id="190" type="Platform"/>
  <tile id="191" type="Platform"/>
+ <tile id="222" type="Hazard"/>
+ <tile id="223" type="Hazard"/>
  <tile id="224" type="Hazard"/>
 </tileset>
