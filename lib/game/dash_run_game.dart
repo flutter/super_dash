@@ -35,8 +35,7 @@ class DashRunGame extends LeapGame
 
   late final SimpleCombinedInput input;
 
-  int currentLevel = 1;
-  int currentSection = 0;
+  GameState get state => gameBloc.state;
 
   static const _sections = [
     'flutter_runnergame_map_A.tmx',
@@ -111,14 +110,12 @@ class DashRunGame extends LeapGame
   void _setSectionBackground() {
     camera.backdrop = RectangleComponent(
       size: size.clone(),
-      paint: Paint()..color = _sectionsBackgroundColor[currentSection],
+      paint: Paint()..color = _sectionsBackgroundColor[state.currentSection],
     );
   }
 
   void gameOver() {
-    currentLevel = 1;
-    gameBloc.add(GameScoreReset());
-
+    gameBloc.add(GameOver());
     world.firstChild<Player>()?.removeFromParent();
 
     _resetEntities();
@@ -167,7 +164,7 @@ class DashRunGame extends LeapGame
 
   Future<void> _loadNewSection() async {
     _setSectionBackground();
-    final nextSection = _sections[currentSection];
+    final nextSection = _sections[state.currentSection];
 
     _resetEntities();
 
@@ -194,14 +191,9 @@ class DashRunGame extends LeapGame
   }
 
   void sectionCleared() {
-    gameBloc.add(GameScoreIncreased(by: 1000 * currentLevel));
-
-    if (currentSection < _sections.length - 1) {
-      currentSection++;
-    } else {
-      currentSection = 0;
-      currentLevel++;
-    }
+    gameBloc
+      ..add(GameScoreIncreased(by: 1000 * state.currentLevel))
+      ..add(GameSectionCompleted(sectionCount: _sections.length));
 
     _loadNewSection();
   }
