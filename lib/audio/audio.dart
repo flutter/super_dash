@@ -13,10 +13,13 @@ import 'package:logging/logging.dart';
 
 typedef CreateAudioPlayer = AudioPlayer Function({required String playerId});
 
-enum Sfx { jump }
+enum Sfx { jump, acornPickup, eggPickup, featherPowerup }
 
 const sfx = {
   Sfx.jump: 'sfx/jump.mp3',
+  Sfx.acornPickup: 'sfx/Dash_AcornPickup.mp3',
+  Sfx.eggPickup: 'sfx/Dash_EggPickup.mp3',
+  Sfx.featherPowerup: 'sfx/Dash_FeatherPowerup.mp3',
 };
 
 /// Allows playing music and sound. A facade to `package:audioplayers`.

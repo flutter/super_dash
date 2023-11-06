@@ -209,11 +209,17 @@ class Player extends JumperCharacter<DashRunGame> {
       if (collision is Item) {
         switch (collision.type) {
           case ItemType.acorn || ItemType.egg:
+            gameRef.audioController.playSfx(
+              collision.type == ItemType.acorn
+                  ? Sfx.acornPickup
+                  : Sfx.eggPickup,
+            );
             gameRef.gameBloc.add(
               GameScoreIncreased(by: collision.type.points),
             );
           case ItemType.goldenFeather:
             addPowerUp(ItemType.goldenFeather);
+            gameRef.audioController.playSfx(Sfx.featherPowerup);
         }
         collision.removeFromParent();
       }
