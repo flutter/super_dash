@@ -1,12 +1,13 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
+import 'package:dash_run/game_over/game_over.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 
@@ -146,6 +147,12 @@ class DashRunGame extends LeapGame
         await _addSpawners();
       },
     );
+
+    if (buildContext != null) {
+      Navigator.of(buildContext!).push(
+        GameOverPage.route(score: score),
+      );
+    }
   }
 
   void _resetEntities() {
