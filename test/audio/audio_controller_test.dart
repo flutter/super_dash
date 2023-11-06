@@ -34,6 +34,7 @@ class _MockAudioPlayerFactory {
     when(player.stop).thenAnswer((_) async {});
     when(player.pause).thenAnswer((_) async {});
     when(player.resume).thenAnswer((_) async {});
+    when(() => player.state).thenReturn(PlayerState.stopped);
 
     controllers[playerId] = streamController;
     return players[playerId] = player;
