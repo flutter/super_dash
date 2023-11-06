@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
@@ -38,8 +36,8 @@ class GameView extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           GameWidget.controlled(
-            loadingBuilder: (context) => const _GameBackground(),
-            backgroundBuilder: (context) => const _GameBackground(),
+            loadingBuilder: (context) => const GameBackground(),
+            backgroundBuilder: (context) => const GameBackground(),
             gameFactory: () => DashRunGame(
               gameBloc: context.read<GameBloc>(),
               audioController: context.read<AudioController>(),
@@ -117,30 +115,6 @@ class ScoreLabel extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _GameBackground extends StatelessWidget {
-  const _GameBackground();
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: Assets.images.gameBackground.provider(),
-          colorFilter: const ColorFilter.mode(
-            Colors.black54,
-            BlendMode.darken,
-          ),
-        ),
-      ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-        child: const SizedBox.expand(),
       ),
     );
   }

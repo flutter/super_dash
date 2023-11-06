@@ -108,6 +108,26 @@
     "@termsOfService": {
         "description": "Text shown in the game info popup"
     },
+    "gameOver": "Game over!",
+    "@gameOver": {
+        "description": "Text shown in the game over page"
+    },
+    "betterLuckNextTime": "Better luck next time.",
+    "@betterLuckNextTime": {
+        "description": "Text shown in the game over page"
+    },
+    "totalScore": "Total Score",
+    "@totalScore": {
+        "description": "Text shown in the game over page"
+    },
+    "submitScore": "Submit Score",
+    "@submitScore": {
+        "description": "Text shown in the game over page"
+    },
+    "playAgain": "Play again",
+    "@playAgain": {
+        "description": "Text shown in the game over page"
+    },
     "gameScoreLabel": "{points} Pts",
     "@gameScoreLabel": {
         "description": "Text shown on the game score label",

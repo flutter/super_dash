@@ -8,6 +8,7 @@ class GameElevatedButton extends StatelessWidget {
   GameElevatedButton({
     required String label,
     VoidCallback? onPressed,
+    this.gradient,
     super.key,
   }) : _child = ElevatedButton(
           onPressed: onPressed,
@@ -19,6 +20,7 @@ class GameElevatedButton extends StatelessWidget {
     required String label,
     required Icon icon,
     VoidCallback? onPressed,
+    this.gradient,
     super.key,
   }) : _child = ElevatedButton.icon(
           icon: icon,
@@ -28,19 +30,24 @@ class GameElevatedButton extends StatelessWidget {
 
   final Widget _child;
 
+  /// The gradient to use for the background.
+  final Gradient? gradient;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return DecoratedBox(
+    return Container(
+      width: 200,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFA7EED2),
-            Color(0xFF0ACDB3),
-          ],
-        ),
+        gradient: gradient ??
+            const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFFADD7CD),
+                Color(0xFF57AEA5),
+              ],
+            ),
         borderRadius: BorderRadius.circular(94),
       ),
       child: Theme(
@@ -48,11 +55,11 @@ class GameElevatedButton extends StatelessWidget {
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(94),
               ),
               padding: const EdgeInsets.symmetric(
-                horizontal: 72,
                 vertical: 24,
               ),
               textStyle: theme.textTheme.labelLarge?.copyWith(
