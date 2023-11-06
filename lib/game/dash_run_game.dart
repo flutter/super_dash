@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
-import 'package:dash_run/game_over/game_over.dart';
+import 'package:dash_run/score/score.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -155,7 +155,7 @@ class DashRunGame extends LeapGame
     if (buildContext != null) {
       final score = gameBloc.state.score;
       Navigator.of(buildContext!).push(
-        GameOverPage.route(score: score),
+        ScorePage.route(score: score),
       );
     }
   }

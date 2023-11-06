@@ -11,6 +11,12 @@ class ScorePage extends StatelessWidget {
     super.key,
   });
 
+  static PageRoute<void> route({required int score}) {
+    return PageRouteBuilder(
+      pageBuilder: (_, __, ___) => ScorePage(score: score),
+    );
+  }
+
   final int score;
 
   @override
@@ -30,9 +36,14 @@ class ScoreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scoreBloc = context.watch<ScoreBloc>();
     return FlowBuilder(
-      state: context.watch<ScoreBloc>().state,
-      onGeneratePages: onGenerateScorePages,
+      state: scoreBloc.state,
+      onGeneratePages: (state, pages) => onGenerateScorePages(
+        score: scoreBloc.score,
+        state: state,
+        pages: pages,
+      ),
     );
   }
 }
