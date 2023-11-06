@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="150" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="60" nextobjectid="786">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="150" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="60" nextobjectid="807">
  <tileset firstgid="1" source="tiles/tile_forest_bushes_v02.tsx"/>
  <tileset firstgid="61" source="objects/tile_forest_trees_front_v02.tsx"/>
  <tileset firstgid="64" source="objects/tile_forest_trees_back_v02.tsx"/>
@@ -22,6 +22,8 @@
  <tileset firstgid="528" source="anim/spritesheet_phoenixDash_run.tsx"/>
  <tileset firstgid="544" source="tiles/tile_treehouse.tsx"/>
  <tileset firstgid="676" source="anim/spritesheet_poof.tsx"/>
+ <tileset firstgid="696" source="anim/spritesheet_enemy_beetle.tsx"/>
+ <tileset firstgid="712" source="anim/spritesheet_enemy_butterfly.tsx"/>
  <group id="20" name="forest_BG" locked="1" offsetx="-100" offsety="0">
   <objectgroup id="23" name="forest_BG_trees" offsetx="400" offsety="140" parallaxx="0.55" parallaxy="0.7">
    <object id="182" gid="64" x="2256" y="1312" width="448" height="704"/>
@@ -146,17 +148,17 @@
   <objectgroup id="21" name="forest_FG_trees">
    <object id="169" gid="61" x="2688" y="1984" width="192" height="320"/>
    <object id="172" gid="61" x="3468.8" y="1984" width="230.4" height="384"/>
-   <object id="174" gid="63" x="2592" y="1984" width="172.8" height="288"/>
+   <object id="174" gid="63" x="2584.09" y="1984" width="134.618" height="224.364"/>
    <object id="268" gid="61" x="1920" y="1984" width="192" height="320"/>
    <object id="269" gid="61" x="4304" y="1984" width="192" height="320"/>
    <object id="270" gid="63" x="4048" y="2016" width="172.8" height="288"/>
-   <object id="271" gid="63" x="4432" y="2000" width="172.8" height="288"/>
+   <object id="271" gid="63" x="4493.82" y="2000" width="149.164" height="248.606"/>
    <object id="272" gid="63" x="5104" y="1984" width="172.8" height="288"/>
    <object id="273" gid="2147483711" x="4947.2" y="1984" width="134.4" height="224"/>
    <object id="274" gid="61" x="6016" y="1984" width="230.4" height="384"/>
    <object id="275" gid="63" x="5808" y="1904" width="172.8" height="288"/>
    <object id="276" gid="61" x="6976" y="1984" width="192" height="320"/>
-   <object id="277" gid="63" x="7136" y="1984" width="172.8" height="288"/>
+   <object id="277" gid="63" x="7148.73" y="1984" width="147.345" height="245.576"/>
    <object id="278" gid="63" x="7472" y="2128" width="172.8" height="288"/>
   </objectgroup>
  </group>
@@ -416,87 +418,87 @@
   <object id="676" gid="74" x="4704" y="1856" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="9" name="enemies">
-  <object id="689" gid="67" x="3520" y="1920" width="64" height="64">
+  <object id="786" gid="696" x="3520" y="1920" width="64" height="64">
    <properties>
     <property name="Path" value="I{1L, 1R}"/>
    </properties>
   </object>
-  <object id="690" gid="67" x="4224" y="1920" width="64" height="64"/>
-  <object id="691" gid="67" x="5056" y="1984" width="64" height="64">
+  <object id="788" gid="696" x="4224" y="1920" width="64" height="64"/>
+  <object id="789" gid="696" x="5056" y="1984" width="64" height="64">
    <properties>
     <property name="Path" value="I{1L, 1R}"/>
    </properties>
   </object>
-  <object id="692" gid="67" x="5952" y="1856" width="64" height="64">
+  <object id="793" gid="696" x="6080" y="1280" width="64" height="64">
    <properties>
     <property name="Path" value="I{1L, 1R}"/>
    </properties>
   </object>
-  <object id="693" gid="67" x="6720" y="1152" width="64" height="64"/>
-  <object id="694" gid="67" x="7168" y="1984" width="64" height="64">
+  <object id="794" gid="696" x="5888" y="1920" width="64" height="64">
+   <properties>
+    <property name="Path" value="I{1L, 1R}"/>
+   </properties>
+  </object>
+  <object id="795" gid="696" x="6720" y="1152" width="64" height="64"/>
+  <object id="796" gid="696" x="7168" y="1984" width="64" height="64">
    <properties>
     <property name="Path" value="I{2L, 2R}"/>
    </properties>
   </object>
-  <object id="695" gid="68" x="6560" y="1856" width="64" height="64" rotation="90">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="I{1T, 1B}"/>
-   </properties>
-  </object>
-  <object id="696" gid="68" x="6912" y="1856" width="64" height="64" rotation="90">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="I{1T, 1B}"/>
-   </properties>
-  </object>
-  <object id="697" gid="68" x="6208" y="1856" width="64" height="64" rotation="90">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="I{1T, 1B}"/>
-   </properties>
-  </object>
-  <object id="698" gid="68" x="4352" y="1024" width="64" height="64" rotation="90">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="I{1T, 1B}"/>
-   </properties>
-  </object>
-  <object id="699" gid="68" x="5632" y="1472" width="64" height="64">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="{10L}"/>
-   </properties>
-  </object>
-  <object id="700" gid="68" x="7744" y="1600" width="64" height="64">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="{10L}"/>
-   </properties>
-  </object>
-  <object id="701" gid="67" x="7680" y="2112" width="64" height="64">
+  <object id="797" gid="696" x="7680" y="2112" width="64" height="64">
    <properties>
     <property name="Path" value="I{1L, 1R}"/>
    </properties>
   </object>
-  <object id="727" gid="68" x="3776" y="1568" width="64" height="64">
+  <object id="798" gid="712" x="7744" y="1600" width="64" height="64">
    <properties>
     <property name="Fly" type="bool" value="true"/>
     <property name="Path" value="{10L}"/>
    </properties>
   </object>
-  <object id="728" gid="67" x="6080" y="1280" width="64" height="64">
+  <object id="799" gid="712" x="6912" y="1920" width="64" height="64">
    <properties>
-    <property name="Path" value="I{1L, 1R}"/>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="I{1T, 1B}"/>
+   </properties>
+  </object>
+  <object id="800" gid="712" x="6560" y="1920" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="I{1T, 1B}"/>
+   </properties>
+  </object>
+  <object id="802" gid="712" x="6208" y="1920" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="I{1T, 1B}"/>
+   </properties>
+  </object>
+  <object id="804" gid="712" x="5632" y="1472" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="{10L}"/>
+   </properties>
+  </object>
+  <object id="805" gid="712" x="4352" y="1088" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="I{1T, 1B}"/>
+   </properties>
+  </object>
+  <object id="806" gid="712" x="3776" y="1568" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="{10L}"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="11" name="spawn" visible="0">
+ <objectgroup id="11" name="spawn">
   <object id="163" name="Spawn" type="PlayerSpawn" x="320" y="1984">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="49" name="respawn" locked="1">
+ <objectgroup id="49" name="respawn" visible="0" locked="1">
   <object id="729" type="Respawn" x="1920" y="1984">
    <point/>
   </object>
