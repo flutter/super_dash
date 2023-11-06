@@ -169,7 +169,9 @@ class Player extends JumperCharacter<DashRunGame> {
 
     if (isPlayerTeleporting) return;
 
-    if (x >= gameRef.leapMap.width - gameRef.tileSize * 15) {
+    if ((gameRef.isLastSection && x >= gameRef.leapMap.width - tileSize) ||
+        (!gameRef.isLastSection &&
+            x >= gameRef.leapMap.width - gameRef.tileSize * 15)) {
       sectionCleared();
       return;
     }
@@ -207,7 +209,9 @@ class Player extends JumperCharacter<DashRunGame> {
       if (collision is Item) {
         switch (collision.type) {
           case ItemType.acorn || ItemType.egg:
-            game.score += collision.type.points;
+            gameRef.gameBloc.add(
+              GameScoreIncreased(by: collision.type.points),
+            );
           case ItemType.goldenFeather:
             addPowerUp(ItemType.goldenFeather);
         }

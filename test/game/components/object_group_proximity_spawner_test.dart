@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/cache.dart';
@@ -16,6 +17,9 @@ class _MockImages extends Mock implements Images {}
 
 class _MockTileset extends Mock implements Tileset {}
 
+class _MockGameBloc extends MockBloc<GameEvent, GameState>
+    implements GameBloc {}
+
 class _MockAudioController extends Mock implements AudioController {}
 
 class _MockLeapMap extends Mock implements LeapMap {}
@@ -23,9 +27,11 @@ class _MockLeapMap extends Mock implements LeapMap {}
 class _MockObjectGroup extends Mock implements ObjectGroup {}
 
 class _TestDashRunGame extends DashRunGame {
-  _TestDashRunGame({
-    this.layerObjects = const [],
-  }) : super(audioController: _MockAudioController());
+  _TestDashRunGame({this.layerObjects = const []})
+      : super(
+          gameBloc: _MockGameBloc(),
+          audioController: _MockAudioController(),
+        );
 
   final List<TiledObject> layerObjects;
 

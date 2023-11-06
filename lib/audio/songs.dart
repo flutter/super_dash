@@ -6,9 +6,9 @@ const Set<Song> songs = {
   // Filenames with whitespace break package:audioplayers on iOS
   // (as of February 2022), so we use no whitespace.
   Song(
-    'background.mp3',
-    'SuperDash',
-    artist: 'SuperDashMusic',
+    'FlutterGame_SunshineAndDewdrops_1_1.mp3',
+    'Sunshin and Dewdrops',
+    artist: 'Flutter Game',
   ),
 };
 

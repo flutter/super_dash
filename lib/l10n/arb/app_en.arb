@@ -127,5 +127,14 @@
     "playAgain": "Play again",
     "@playAgain": {
         "description": "Text shown in the game over page"
+    },
+    "gameScoreLabel": "{points} Pts",
+    "@gameScoreLabel": {
+        "description": "Text shown on the game score label",
+        "placeholders": {
+            "points": {
+                "type": "int"
+            }
+        }
     }
 }

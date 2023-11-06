@@ -7,6 +7,7 @@ import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
@@ -14,6 +15,7 @@ import 'package:leap/leap.dart';
 class DashRunGame extends LeapGame
     with TapCallbacks, HasKeyboardHandlerComponents {
   DashRunGame({
+    required this.gameBloc,
     required this.audioController,
     this.customBundle,
   }) : super(
@@ -29,12 +31,12 @@ class DashRunGame extends LeapGame
   static const prefix = 'assets/map/';
   static final _cameraViewport = Vector2(592, 1024);
 
+  final GameBloc gameBloc;
   final AssetBundle? customBundle;
-
-  late final SimpleCombinedInput input;
   final AudioController audioController;
 
-  int score = 0;
+  late final SimpleCombinedInput input;
+
   int currentLevel = 1;
   int currentSection = 0;
 
@@ -70,6 +72,10 @@ class DashRunGame extends LeapGame
   Future<void> onLoad() async {
     await super.onLoad();
 
+    if (kIsWeb && audioController.isMusicEnabled) {
+      audioController.startMusic();
+    }
+
     camera = CameraComponent.withFixedResolution(
       width: _cameraViewport.x,
       height: _cameraViewport.y,
@@ -93,11 +99,7 @@ class DashRunGame extends LeapGame
       cameraViewport: _cameraViewport,
     );
     unawaited(
-      world.addAll(
-        [
-          player,
-        ],
-      ),
+      world.addAll([player]),
     );
 
     input = SimpleCombinedInput(
@@ -108,16 +110,15 @@ class DashRunGame extends LeapGame
       ),
     );
 
+    await add(input);
     await _addSpawners();
 
-    await addAll([
-      input,
-      ScoreLabel(
-        initialScore: score,
-        initialItems: player.powerUps.length,
-        initialHealth: player.health,
-      ),
-    ]);
+    _addTreeHouseFrontLayer();
+  }
+
+  void _addTreeHouseFrontLayer() {
+    final layer = leapMap.tiledMap.tileMap.renderableLayers.last;
+    world.add(TreeHouseFront(renderFront: layer.render));
   }
 
   void _setSectionBackground() {
@@ -128,11 +129,16 @@ class DashRunGame extends LeapGame
   }
 
   void gameOver() {
-    score = 0;
     currentLevel = 1;
+    gameBloc.add(GameScoreReset());
+
     world.firstChild<Player>()?.removeFromParent();
 
     _resetEntities();
+
+    if (isLastSection || isFirstSection) {
+      _addTreeHouseFrontLayer();
+    }
 
     Future<void>.delayed(
       const Duration(seconds: 1),
@@ -149,6 +155,7 @@ class DashRunGame extends LeapGame
     );
 
     if (buildContext != null) {
+      final score = gameBloc.state.score;
       Navigator.of(buildContext!).push(
         GameOverPage.route(score: score),
       );
@@ -158,6 +165,7 @@ class DashRunGame extends LeapGame
   void _resetEntities() {
     world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
+    world.firstChild<TreeHouseFront>()?.removeFromParent();
 
     leapMap.children
         .whereType<Enemy>()
@@ -196,6 +204,10 @@ class DashRunGame extends LeapGame
     );
 
     await _addSpawners();
+
+    if (isLastSection || isFirstSection) {
+      _addTreeHouseFrontLayer();
+    }
   }
 
   @override
@@ -207,13 +219,19 @@ class DashRunGame extends LeapGame
   void onMapLoaded() {
     player?.loadSpawnPoint();
     player?.walking = true;
+    player?.animations.paint.color = Colors.white;
     player?.isPlayerTeleporting = false;
   }
 
   void sectionCleared() {
-    score += 1000 * currentLevel;
+    gameBloc.add(GameScoreIncreased(by: 1000 * currentLevel));
 
-    if (currentSection < _sections.length - 1) {
+    if (isLastSection) {
+      player?.animations.paint.color = Colors.transparent;
+      player?.walking = false;
+    }
+
+    if (!isLastSection) {
       currentSection++;
     } else {
       currentSection = 0;
@@ -222,6 +240,9 @@ class DashRunGame extends LeapGame
 
     _loadNewSection();
   }
+
+  bool get isLastSection => currentSection == _sections.length - 1;
+  bool get isFirstSection => currentSection == 0;
 
   void addCameraDebugger() {
     if (descendants().whereType<CameraDebugger>().isEmpty) {
