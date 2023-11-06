@@ -60,12 +60,16 @@ class GameOverPage extends StatelessWidget {
             const Spacer(flex: 4),
             GameElevatedButton(
               label: l10n.submitScore,
-              onPressed: () {},
+              onPressed: () {
+                // TODO(all): navigate to score submission.
+              },
             ),
             const Spacer(flex: 3),
             GameElevatedButton(
               label: l10n.playAgain,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
               gradient: const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -108,7 +112,7 @@ class _ScoreWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.star, color: Colors.amber),
+          Assets.images.trophy.image(width: 40, height: 40),
           const SizedBox(width: 8),
           RichText(
             text: TextSpan(
