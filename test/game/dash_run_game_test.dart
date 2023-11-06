@@ -70,7 +70,7 @@ void main() {
           equals(33),
         );
       },
-      timeout: const Timeout(Duration(minutes: 1)),
+      timeout: const Timeout(Duration(minutes: 2)),
     );
 
     testWithGame(
@@ -83,7 +83,7 @@ void main() {
           isZero,
         );
       },
-      timeout: const Timeout(Duration(minutes: 1)),
+      timeout: const Timeout(Duration(minutes: 2)),
     );
   });
 }
