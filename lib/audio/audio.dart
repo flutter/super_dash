@@ -154,7 +154,7 @@ class AudioController {
 
   void stopBackgroundSfx() {
     if (_backgroundSfxPlayer.state == PlayerState.playing) {
-      _log.info('starting background sfx');
+      _log.info('pausing background sfx');
       _backgroundSfxPlayer.pause();
     }
   }
