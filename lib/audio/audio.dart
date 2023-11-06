@@ -18,6 +18,9 @@ enum Sfx {
   run,
   doubleJump,
   phoenixJump,
+  acornPickup,
+  eggPickup,
+  featherPowerup
 }
 
 const sfx = {
@@ -25,6 +28,9 @@ const sfx = {
   Sfx.run: 'sfx/Dash_Footstep_Run.mp3',
   Sfx.doubleJump: 'sfx/Phoenix_DOUBLEJump.wav',
   Sfx.phoenixJump: 'sfx/Phoenix_Jump.wav',
+  Sfx.acornPickup: 'sfx/Dash_AcornPickup.mp3',
+  Sfx.eggPickup: 'sfx/Dash_EggPickup.mp3',
+  Sfx.featherPowerup: 'sfx/Dash_FeatherPowerup.mp3',
 };
 
 /// Allows playing music and sound. A facade to `package:audioplayers`.

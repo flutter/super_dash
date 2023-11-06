@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="spritesheet_phoenixDash_jump" tilewidth="64" tileheight="128" tilecount="16" columns="8">
- <image source="spritesheet_phoenixDash_jump.png" width="512" height="256"/>
+<tileset version="1.10" tiledversion="1.10.2" name="spritesheet_poof" tilewidth="192" tileheight="192" tilecount="20" columns="5">
+ <image source="spritesheet_poof.png" width="960" height="768"/>
  <tile id="0">
   <animation>
    <frame tileid="0" duration="42"/>
@@ -19,6 +19,10 @@
    <frame tileid="13" duration="42"/>
    <frame tileid="14" duration="42"/>
    <frame tileid="15" duration="42"/>
+   <frame tileid="16" duration="42"/>
+   <frame tileid="17" duration="42"/>
+   <frame tileid="18" duration="42"/>
+   <frame tileid="19" duration="42"/>
   </animation>
  </tile>
 </tileset>

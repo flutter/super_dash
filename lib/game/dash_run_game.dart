@@ -21,8 +21,8 @@ class DashRunGame extends LeapGame
           tileSize: 64,
           configuration: const LeapConfiguration(
             tiled: TiledOptions(
-              atlasMaxX: 8192,
-              atlasMaxY: 8192,
+              atlasMaxX: 4048,
+              atlasMaxY: 4048,
             ),
           ),
         );
