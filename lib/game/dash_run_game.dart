@@ -110,9 +110,7 @@ class DashRunGame extends LeapGame
     );
     await add(input);
 
-    await add(input);
     await _addSpawners();
-
     _addTreeHouseFrontLayer();
   }
 
@@ -129,7 +127,7 @@ class DashRunGame extends LeapGame
   }
 
   void gameOver() {
-    gameBloc.add(GameOver());
+    gameBloc.add(const GameOver());
     audioController.stopBackgroundSfx();
 
     world.firstChild<Player>()?.removeFromParent();

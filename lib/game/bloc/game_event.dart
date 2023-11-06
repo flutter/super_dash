@@ -1,6 +1,6 @@
 part of 'game_bloc.dart';
 
-sealed class GameEvent extends Equatable {
+abstract class GameEvent extends Equatable {
   const GameEvent();
 
   @override
