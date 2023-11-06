@@ -7,6 +7,7 @@ import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 
@@ -68,6 +69,10 @@ class DashRunGame extends LeapGame
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    if (kIsWeb && audioController.isMusicEnabled) {
+      audioController.startMusic();
+    }
 
     camera = CameraComponent.withFixedResolution(
       width: _cameraViewport.x,
