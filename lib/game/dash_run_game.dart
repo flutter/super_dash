@@ -14,6 +14,7 @@ import 'package:leap/leap.dart';
 class DashRunGame extends LeapGame
     with TapCallbacks, HasKeyboardHandlerComponents {
   DashRunGame({
+    required this.gameBloc,
     required this.audioController,
     this.customBundle,
   }) : super(
@@ -29,12 +30,12 @@ class DashRunGame extends LeapGame
   static const prefix = 'assets/map/';
   static final _cameraViewport = Vector2(592, 1024);
 
+  final GameBloc gameBloc;
   final AssetBundle? customBundle;
-
-  late final SimpleCombinedInput input;
   final AudioController audioController;
 
-  int score = 0;
+  late final SimpleCombinedInput input;
+
   int currentLevel = 1;
   int currentSection = 0;
 
@@ -97,11 +98,7 @@ class DashRunGame extends LeapGame
       cameraViewport: _cameraViewport,
     );
     unawaited(
-      world.addAll(
-        [
-          player,
-        ],
-      ),
+      world.addAll([player]),
     );
 
     input = SimpleCombinedInput(
@@ -112,16 +109,9 @@ class DashRunGame extends LeapGame
       ),
     );
 
+    await add(input);
     await _addSpawners();
 
-    await addAll([
-      input,
-      ScoreLabel(
-        initialScore: score,
-        initialItems: player.powerUps.length,
-        initialHealth: player.health,
-      ),
-    ]);
     _addTreeHouseFrontLayer();
   }
 
@@ -138,8 +128,9 @@ class DashRunGame extends LeapGame
   }
 
   void gameOver() {
-    score = 0;
     currentLevel = 1;
+    gameBloc.add(GameScoreReset());
+
     world.firstChild<Player>()?.removeFromParent();
 
     _resetEntities();
@@ -225,7 +216,7 @@ class DashRunGame extends LeapGame
   }
 
   void sectionCleared() {
-    score += 1000 * currentLevel;
+    gameBloc.add(GameScoreIncreased(by: 1000 * currentLevel));
 
     if (isLastSection) {
       player?.animations.paint.color = Colors.transparent;

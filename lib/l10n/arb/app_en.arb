@@ -107,5 +107,14 @@
     "termsOfService": "Terms of Service",
     "@termsOfService": {
         "description": "Text shown in the game info popup"
+    },
+    "gameScoreLabel": "{points} Pts",
+    "@gameScoreLabel": {
+        "description": "Text shown on the game score label",
+        "placeholders": {
+            "points": {
+                "type": "int"
+            }
+        }
     }
 }
