@@ -7,6 +7,7 @@ import 'dart:collection';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dash_run/audio/songs.dart';
 import 'package:dash_run/settings/settings_controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 
@@ -94,10 +95,14 @@ class AudioController {
     settingsController.musicOn.addListener(_musicOnHandler);
     settingsController.soundsOn.addListener(_soundsOnHandler);
 
-    if (!settingsController.muted.value && settingsController.musicOn.value) {
-      _startMusic();
+    if (!kIsWeb &&
+        (!settingsController.muted.value && settingsController.musicOn.value)) {
+      startMusic();
     }
   }
+
+  bool get isMusicEnabled =>
+      _settings?.muted.value == false && (_settings?.musicOn.value ?? false);
 
   void dispose() {
     _lifecycleNotifier?.removeListener(_handleAppLifecycle);
@@ -242,9 +247,11 @@ class AudioController {
     }
   }
 
-  void _startMusic() {
-    _log.info('starting music');
-    _playFirstSongInPlaylist();
+  void startMusic() {
+    if (_musicPlayer.state != PlayerState.playing) {
+      _log.info('starting music');
+      _playFirstSongInPlaylist();
+    }
   }
 
   void _stopAllSound() {
