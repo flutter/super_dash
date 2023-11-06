@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
@@ -7,6 +6,8 @@ import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 
@@ -69,6 +70,10 @@ class DashRunGame extends LeapGame
   Future<void> onLoad() async {
     await super.onLoad();
 
+    if (kIsWeb && audioController.isMusicEnabled) {
+      audioController.startMusic();
+    }
+
     camera = CameraComponent.withFixedResolution(
       width: _cameraViewport.x,
       height: _cameraViewport.y,
@@ -104,7 +109,15 @@ class DashRunGame extends LeapGame
     );
     await add(input);
 
+    await add(input);
     await _addSpawners();
+
+    _addTreeHouseFrontLayer();
+  }
+
+  void _addTreeHouseFrontLayer() {
+    final layer = leapMap.tiledMap.tileMap.renderableLayers.last;
+    world.add(TreeHouseFront(renderFront: layer.render));
   }
 
   void _setSectionBackground() {
@@ -119,6 +132,10 @@ class DashRunGame extends LeapGame
     world.firstChild<Player>()?.removeFromParent();
 
     _resetEntities();
+
+    if (isLastSection || isFirstSection) {
+      _addTreeHouseFrontLayer();
+    }
 
     Future<void>.delayed(
       const Duration(seconds: 1),
@@ -138,6 +155,7 @@ class DashRunGame extends LeapGame
   void _resetEntities() {
     world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
+    world.firstChild<TreeHouseFront>()?.removeFromParent();
 
     leapMap.children
         .whereType<Enemy>()
@@ -176,6 +194,10 @@ class DashRunGame extends LeapGame
     );
 
     await _addSpawners();
+
+    if (isLastSection || isFirstSection) {
+      _addTreeHouseFrontLayer();
+    }
   }
 
   @override
@@ -187,6 +209,7 @@ class DashRunGame extends LeapGame
   void onMapLoaded() {
     player?.loadSpawnPoint();
     player?.walking = true;
+    player?.animations.paint.color = Colors.white;
     player?.isPlayerTeleporting = false;
   }
 
@@ -197,6 +220,9 @@ class DashRunGame extends LeapGame
 
     _loadNewSection();
   }
+
+  bool get isLastSection => state.currentSection == _sections.length - 1;
+  bool get isFirstSection => state.currentSection == 0;
 
   void addCameraDebugger() {
     if (descendants().whereType<CameraDebugger>().isEmpty) {
