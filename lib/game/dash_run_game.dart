@@ -129,6 +129,7 @@ class DashRunGame extends LeapGame
   }
 
   void gameOver() {
+    audioController.stopBackgroundSfx();
     currentLevel = 1;
     gameBloc.add(GameScoreReset());
 
