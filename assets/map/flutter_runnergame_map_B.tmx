@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="150" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="56" nextobjectid="814">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="150" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="56" nextobjectid="828">
  <tileset firstgid="1" source="tiles/tile_clouds_v02.tsx"/>
  <tileset firstgid="73" source="objects/tile_enemies_v2.tsx"/>
  <tileset firstgid="79" source="objects/tile_items_v2.tsx"/>
@@ -13,13 +13,14 @@
  <tileset firstgid="480" source="anim/spritesheet_dash_slide.tsx"/>
  <tileset firstgid="496" source="anim/spritesheet_dash_idle.tsx"/>
  <tileset firstgid="520" source="anim/spritesheet_phoenixDash_jump.tsx"/>
- <tileset firstgid="544" source="anim/spritesheet_dash_edgeGrab.tsx"/>
- <tileset firstgid="576" source="anim/spritesheet_dash_deathFaint.tsx"/>
- <tileset firstgid="608" source="anim/spritesheet_phoenixDash_run.tsx"/>
- <tileset firstgid="624" source="anim/spritesheet_phoenixDash_doublejump.tsx"/>
- <tileset firstgid="648" source="anim/spritesheet_dash_flap.tsx"/>
- <tileset firstgid="664" source="anim/spritesheet_dash_deathPit.tsx"/>
- <tileset firstgid="688" source="anim/spritesheet_dash_jump.tsx"/>
+ <tileset firstgid="536" source="anim/spritesheet_dash_edgeGrab.tsx"/>
+ <tileset firstgid="560" source="anim/spritesheet_dash_deathFaint.tsx"/>
+ <tileset firstgid="584" source="anim/spritesheet_phoenixDash_run.tsx"/>
+ <tileset firstgid="600" source="anim/spritesheet_phoenixDash_doublejump.tsx"/>
+ <tileset firstgid="616" source="anim/spritesheet_dash_flap.tsx"/>
+ <tileset firstgid="628" source="anim/spritesheet_dash_deathPit.tsx"/>
+ <tileset firstgid="652" source="anim/spritesheet_dash_jump.tsx"/>
+ <tileset firstgid="668" source="anim/spritesheet_poof.tsx"/>
  <group id="31" name="plains_BG" offsetx="-3520" offsety="0">
   <layer id="40" name="plains_BG_clouds" width="150" height="40" parallaxx="0.5" parallaxy="0.5">
    <data encoding="csv">
@@ -501,18 +502,19 @@
   </object>
  </objectgroup>
  <objectgroup id="45" name="Dash">
-  <object id="801" gid="192" x="576" y="2240" width="64" height="64"/>
-  <object id="802" gid="376" x="128" y="2240" width="64" height="64"/>
-  <object id="803" gid="576" x="192" y="2240" width="64" height="64"/>
-  <object id="804" gid="664" x="256" y="2240" width="64" height="64"/>
-  <object id="805" gid="544" x="320" y="2240" width="64" height="64"/>
-  <object id="806" gid="648" x="384" y="2240" width="64" height="64"/>
-  <object id="807" gid="496" x="448" y="2240" width="64" height="64"/>
-  <object id="808" gid="688" x="512" y="2240" width="64" height="64"/>
-  <object id="809" gid="480" x="640" y="2240" width="64" height="64"/>
-  <object id="810" gid="624" x="704" y="2240" width="64" height="64"/>
-  <object id="811" gid="456" x="768" y="2240" width="64" height="64"/>
-  <object id="812" gid="520" x="832" y="2304" width="64" height="128"/>
-  <object id="813" gid="608" x="896" y="2240" width="64" height="64"/>
+  <object id="814" gid="192" x="640" y="2240" width="64" height="64"/>
+  <object id="815" gid="376" x="192" y="2240" width="64" height="64"/>
+  <object id="816" gid="560" x="256" y="2240" width="64" height="64"/>
+  <object id="817" gid="628" x="320" y="2240" width="64" height="64"/>
+  <object id="818" gid="536" x="384" y="2240" width="64" height="64"/>
+  <object id="819" gid="616" x="448" y="2240" width="64" height="64"/>
+  <object id="820" gid="496" x="512" y="2240" width="64" height="64"/>
+  <object id="821" gid="652" x="576" y="2240" width="64" height="64"/>
+  <object id="822" gid="480" x="704" y="2240" width="64" height="64"/>
+  <object id="823" gid="600" x="768" y="2240" width="64" height="64"/>
+  <object id="824" gid="456" x="832" y="2240" width="64" height="64"/>
+  <object id="825" gid="520" x="896" y="2304" width="64" height="128"/>
+  <object id="826" gid="584" x="960" y="2240" width="64" height="64"/>
+  <object id="827" gid="668" x="448" y="2304" width="192" height="192"/>
  </objectgroup>
 </map>
