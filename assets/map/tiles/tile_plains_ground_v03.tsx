@@ -65,6 +65,8 @@
  <tile id="130" type="Platform"/>
  <tile id="131" type="Platform"/>
  <tile id="145" type="Hazard"/>
+ <tile id="151" type="Hazard"/>
+ <tile id="152" type="Hazard"/>
  <tile id="153" type="Platform"/>
  <tile id="154" type="Platform"/>
  <tile id="155" type="Hazard"/>

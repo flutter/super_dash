@@ -4,7 +4,7 @@ version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: '>=3.0.0 <4.0.0'
   flutter: 3.13.2
 
 dependencies:
@@ -35,6 +35,7 @@ dependencies:
 dev_dependencies:
   bloc_test: ^9.1.2
   flame_test: ^1.13.2
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.0
@@ -64,3 +65,21 @@ flutter:
     - assets/map/objects/
     - assets/music/
     - assets/sfx/
+
+flutter_launcher_icons:
+  android: 'launcher_icon'
+  ios: true
+  image_path: 'icon.png'
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: 'icon.png'
+    background_color: '#0046a3'
+    theme_color: '#5ec7db'
+  windows:
+    generate: true
+    image_path: 'icon.png'
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: 'icon.png'

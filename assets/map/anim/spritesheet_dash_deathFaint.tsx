@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="spritesheet_dash_deathFaint" tilewidth="64" tileheight="64" tilecount="32" columns="8">
- <image source="spritesheet_dash_deathFaint.png" width="512" height="256"/>
+<tileset version="1.10" tiledversion="1.10.2" name="spritesheet_dash_deathFaint" tilewidth="64" tileheight="64" tilecount="24" columns="8">
+ <image source="spritesheet_dash_deathFaint.png" width="512" height="192"/>
  <tile id="0">
   <animation>
    <frame tileid="0" duration="42"/>
@@ -27,9 +27,6 @@
    <frame tileid="21" duration="42"/>
    <frame tileid="22" duration="42"/>
    <frame tileid="23" duration="42"/>
-   <frame tileid="24" duration="42"/>
-   <frame tileid="25" duration="42"/>
-   <frame tileid="26" duration="42"/>
   </animation>
  </tile>
 </tileset>
