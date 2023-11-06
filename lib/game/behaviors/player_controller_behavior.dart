@@ -37,7 +37,7 @@ class PlayerControllerBehavior extends Behavior<Player> {
             parent.jumping = true;
           } else if (!parent.isOnGround &&
               (parent.doubleJumpEnabled && !doubleJumpUsed)) {
-            parent.jumping = true;
+            parent.doubleJump();
             doubleJumpUsed = true;
           }
         } else {

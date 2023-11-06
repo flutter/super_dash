@@ -43,10 +43,16 @@ class Player extends JumperCharacter<DashRunGame> {
   @override
   set jumping(bool value) {
     if (!super.jumping && value) {
-      gameRef.audioController.playSfx(Sfx.jump);
+      final jumpSound = doubleJumpEnabled ? Sfx.phoenixJump : Sfx.jump;
+      gameRef.audioController.playSfx(jumpSound);
     }
 
     super.jumping = value;
+  }
+
+  void doubleJump() {
+    super.jumping = true;
+    gameRef.audioController.playSfx(Sfx.doubleJump);
   }
 
   @override
@@ -58,6 +64,7 @@ class Player extends JumperCharacter<DashRunGame> {
       animations.current =
           powerUps.isEmpty ? DashState.idle : DashState.phoenixIdle;
     }
+
     super.walking = value;
   }
 
@@ -168,6 +175,12 @@ class Player extends JumperCharacter<DashRunGame> {
     super.update(dt);
 
     if (isPlayerTeleporting) return;
+
+    if (collisionInfo.downCollision != null && velocity.x > 0) {
+      gameRef.audioController.startBackgroundSfx();
+    } else {
+      gameRef.audioController.stopBackgroundSfx();
+    }
 
     if ((gameRef.isLastSection && x >= gameRef.leapMap.width - tileSize) ||
         (!gameRef.isLastSection &&

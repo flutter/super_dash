@@ -13,10 +13,18 @@ import 'package:logging/logging.dart';
 
 typedef CreateAudioPlayer = AudioPlayer Function({required String playerId});
 
-enum Sfx { jump }
+enum Sfx {
+  jump,
+  run,
+  doubleJump,
+  phoenixJump,
+}
 
 const sfx = {
-  Sfx.jump: 'sfx/jump.mp3',
+  Sfx.jump: 'sfx/Dash_Jump.mp3',
+  Sfx.run: 'sfx/Dash_Footstep_Run.mp3',
+  Sfx.doubleJump: 'sfx/Phoenix_DOUBLEJump.wav',
+  Sfx.phoenixJump: 'sfx/Phoenix_Jump.wav',
 };
 
 /// Allows playing music and sound. A facade to `package:audioplayers`.
@@ -35,6 +43,10 @@ class AudioController {
     CreateAudioPlayer createPlayer = AudioPlayer.new,
   })  : assert(polyphony >= 1, 'polyphony must be bigger or equals than 1'),
         _musicPlayer = createPlayer(playerId: 'musicPlayer'),
+        _backgroundSfxPlayer = createPlayer(playerId: 'backgroundSfxPlayer')
+          ..setReleaseMode(
+            ReleaseMode.loop,
+          ),
         _sfxPlayers = Iterable.generate(
           polyphony,
           (i) => createPlayer(playerId: 'sfxPlayer#$i'),
@@ -45,6 +57,8 @@ class AudioController {
   static final _log = Logger('AudioController');
 
   final AudioPlayer _musicPlayer;
+
+  final AudioPlayer _backgroundSfxPlayer;
 
   /// This is a list of [AudioPlayer] instances which are rotated to play
   /// sound effects.
@@ -108,6 +122,7 @@ class AudioController {
     _lifecycleNotifier?.removeListener(_handleAppLifecycle);
     _stopAllSound();
     _musicPlayer.dispose();
+    _backgroundSfxPlayer.dispose();
     for (final player in _sfxPlayers) {
       player.dispose();
     }
@@ -120,7 +135,22 @@ class AudioController {
     // If there are hundreds of long sound effect files, it's better
     // to be more selective when preloading.
 
+    await _backgroundSfxPlayer.setSource(AssetSource(sfx[Sfx.run]!));
+
     await AudioCache.instance.loadAll(sfx.values.toList());
+  }
+
+  void startBackgroundSfx() {
+    if (_backgroundSfxPlayer.state != PlayerState.playing) {
+      _backgroundSfxPlayer.resume();
+    }
+  }
+
+  void stopBackgroundSfx() {
+    if (_backgroundSfxPlayer.state == PlayerState.playing) {
+      _log.info('starting background sfx');
+      _backgroundSfxPlayer.pause();
+    }
   }
 
   /// Plays a single sound effect.
@@ -128,7 +158,7 @@ class AudioController {
   /// The controller will ignore this call when the attached settings'
   /// [SettingsController.muted] is `true` or if its
   /// [SettingsController.soundsOn] is `false`.
-  void playSfx(Sfx current) {
+  void playSfx(Sfx current, {bool background = false}) {
     final muted = _settings?.muted.value ?? true;
     if (muted) {
       _log.info(() => 'Ignoring playing sound ($sfx) because audio is muted.');
@@ -144,10 +174,14 @@ class AudioController {
 
     _log.info(() => 'Playing sound: $sfx');
 
-    _sfxPlayers[_currentSfxPlayer].play(
-      AssetSource(sfx[current]!),
-    );
-    _currentSfxPlayer = (_currentSfxPlayer + 1) % _sfxPlayers.length;
+    if (background) {
+      _backgroundSfxPlayer.play(AssetSource(sfx[current]!));
+    } else {
+      _sfxPlayers[_currentSfxPlayer].play(
+        AssetSource(sfx[current]!),
+      );
+      _currentSfxPlayer = (_currentSfxPlayer + 1) % _sfxPlayers.length;
+    }
   }
 
   void _changeSong(void _) {
@@ -166,6 +200,7 @@ class AudioController {
       case AppLifecycleState.resumed:
         if (!_settings!.muted.value && _settings!.musicOn.value) {
           _resumeMusic();
+          _backgroundSfxPlayer.resume();
         }
       case AppLifecycleState.inactive:
       case AppLifecycleState.hidden:
@@ -257,6 +292,9 @@ class AudioController {
   void _stopAllSound() {
     if (_musicPlayer.state == PlayerState.playing) {
       _musicPlayer.pause();
+    }
+    if (_backgroundSfxPlayer.state == PlayerState.playing) {
+      _backgroundSfxPlayer.stop();
     }
     for (final player in _sfxPlayers) {
       player.stop();
