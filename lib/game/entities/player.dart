@@ -31,6 +31,8 @@ class Player extends JumperCharacter<DashRunGame> {
 
   double? _respawnTimer;
 
+  double? _hasJumpedTimer;
+
   @override
   int get priority => 1;
 
@@ -44,6 +46,8 @@ class Player extends JumperCharacter<DashRunGame> {
       final newJumpState =
           powerUps.isEmpty ? DashState.jump : DashState.phoenixJump;
       findBehavior<PlayerStateBehavior>().state = newJumpState;
+
+      _hasJumpedTimer = .4;
     }
 
     super.jumping = value;
@@ -52,6 +56,7 @@ class Player extends JumperCharacter<DashRunGame> {
   void doubleJump() {
     super.jumping = true;
     gameRef.audioController.playSfx(Sfx.doubleJump);
+    findBehavior<PlayerStateBehavior>().state = DashState.phoenixDoubleJump;
   }
 
   @override
@@ -129,6 +134,16 @@ class Player extends JumperCharacter<DashRunGame> {
     }
 
     if (isPlayerTeleporting) return;
+
+    if (_hasJumpedTimer != null) {
+      _hasJumpedTimer = _hasJumpedTimer! - dt;
+
+      if (_hasJumpedTimer! <= 0 && collisionInfo.downCollision != null) {
+        findBehavior<PlayerStateBehavior>().state =
+            powerUps.isEmpty ? DashState.running : DashState.phoenixRunning;
+        _hasJumpedTimer = null;
+      }
+    }
 
     if (collisionInfo.downCollision != null && velocity.x > 0) {
       gameRef.audioController.startBackgroundSfx();

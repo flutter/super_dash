@@ -28,6 +28,14 @@ class PlayerStateBehavior extends Behavior<Player> {
 
   DashState get state => _state ?? DashState.idle;
 
+  static const _needResetStates = {
+    DashState.deathPit,
+    DashState.deathFaint,
+    DashState.jump,
+    DashState.phoenixJump,
+    DashState.phoenixDoubleJump,
+  };
+
   void updateSpritePaintColor(Color color) {
     for (final component in _stateMap.values) {
       if (component is HasPaint) {
@@ -38,7 +46,17 @@ class PlayerStateBehavior extends Behavior<Player> {
 
   set state(DashState state) {
     if (state != _state) {
-      _stateMap[_state]?.removeFromParent();
+      final current = _stateMap[_state];
+
+      if (current != null) {
+        current.removeFromParent();
+
+        if (_needResetStates.contains(_state)) {
+          if (current is SpriteAnimationComponent) {
+            current.animationTicker?.reset();
+          }
+        }
+      }
 
       final replacement = _stateMap[state];
       if (replacement != null) {
