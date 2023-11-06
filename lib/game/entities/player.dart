@@ -224,7 +224,6 @@ class Player extends JumperCharacter<DashRunGame> {
 
   void sectionCleared() {
     isPlayerTeleporting = true;
-    if (gameRef.isLastSection) {}
     gameRef.sectionCleared();
   }
 }
