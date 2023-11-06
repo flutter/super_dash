@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="58" nextobjectid="855">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="160" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="58" nextobjectid="869">
  <tileset firstgid="1" source="tiles/tile_clouds_v02.tsx"/>
  <tileset firstgid="73" source="objects/tile_enemies_v2.tsx"/>
  <tileset firstgid="79" source="objects/tile_items_v2.tsx"/>
@@ -16,13 +16,14 @@
  <tileset firstgid="634" source="anim/spritesheet_dash_slide.tsx"/>
  <tileset firstgid="650" source="anim/spritesheet_dash_idle.tsx"/>
  <tileset firstgid="674" source="anim/spritesheet_phoenixDash_jump.tsx"/>
- <tileset firstgid="698" source="anim/spritesheet_dash_edgeGrab.tsx"/>
- <tileset firstgid="730" source="anim/spritesheet_dash_deathFaint.tsx"/>
- <tileset firstgid="762" source="anim/spritesheet_phoenixDash_run.tsx"/>
- <tileset firstgid="778" source="anim/spritesheet_phoenixDash_doublejump.tsx"/>
- <tileset firstgid="802" source="anim/spritesheet_dash_flap.tsx"/>
- <tileset firstgid="818" source="anim/spritesheet_dash_deathPit.tsx"/>
- <tileset firstgid="842" source="anim/spritesheet_dash_jump.tsx"/>
+ <tileset firstgid="690" source="anim/spritesheet_dash_edgeGrab.tsx"/>
+ <tileset firstgid="714" source="anim/spritesheet_dash_deathFaint.tsx"/>
+ <tileset firstgid="738" source="anim/spritesheet_phoenixDash_run.tsx"/>
+ <tileset firstgid="754" source="anim/spritesheet_phoenixDash_doublejump.tsx"/>
+ <tileset firstgid="770" source="anim/spritesheet_dash_flap.tsx"/>
+ <tileset firstgid="782" source="anim/spritesheet_dash_deathPit.tsx"/>
+ <tileset firstgid="806" source="anim/spritesheet_dash_jump.tsx"/>
+ <tileset firstgid="822" source="anim/spritesheet_poof.tsx"/>
  <group id="26" name="mountain_BG" locked="1">
   <layer id="27" name="mountain_BG_stars" width="160" height="40" parallaxx="0.5" parallaxy="0">
    <data encoding="csv">
@@ -544,19 +545,20 @@
   </object>
  </objectgroup>
  <objectgroup id="45" name="Dash">
-  <object id="842" gid="157" x="576" y="2240" width="64" height="64"/>
-  <object id="843" gid="530" x="128" y="2240" width="64" height="64"/>
-  <object id="844" gid="730" x="192" y="2240" width="64" height="64"/>
-  <object id="845" gid="818" x="256" y="2240" width="64" height="64"/>
-  <object id="846" gid="698" x="320" y="2240" width="64" height="64"/>
-  <object id="847" gid="802" x="384" y="2240" width="64" height="64"/>
-  <object id="848" gid="650" x="448" y="2240" width="64" height="64"/>
-  <object id="849" gid="842" x="512" y="2240" width="64" height="64"/>
-  <object id="850" gid="634" x="640" y="2240" width="64" height="64"/>
-  <object id="851" gid="778" x="704" y="2240" width="64" height="64"/>
-  <object id="852" gid="610" x="768" y="2240" width="64" height="64"/>
-  <object id="853" gid="674" x="832" y="2304" width="64" height="128"/>
-  <object id="854" gid="762" x="896" y="2240" width="64" height="64"/>
+  <object id="855" gid="157" x="640" y="2240" width="64" height="64"/>
+  <object id="856" gid="530" x="192" y="2240" width="64" height="64"/>
+  <object id="857" gid="714" x="256" y="2240" width="64" height="64"/>
+  <object id="858" gid="782" x="320" y="2240" width="64" height="64"/>
+  <object id="859" gid="690" x="384" y="2240" width="64" height="64"/>
+  <object id="860" gid="770" x="448" y="2240" width="64" height="64"/>
+  <object id="861" gid="650" x="512" y="2240" width="64" height="64"/>
+  <object id="862" gid="806" x="576" y="2240" width="64" height="64"/>
+  <object id="863" gid="634" x="704" y="2240" width="64" height="64"/>
+  <object id="864" gid="754" x="768" y="2240" width="64" height="64"/>
+  <object id="865" gid="610" x="832" y="2240" width="64" height="64"/>
+  <object id="866" gid="674" x="896" y="2304" width="64" height="128"/>
+  <object id="867" gid="738" x="960" y="2240" width="64" height="64"/>
+  <object id="868" gid="822" x="448" y="2304" width="192" height="192"/>
  </objectgroup>
  <layer id="56" name="treehouse_front" width="160" height="40">
   <data encoding="csv">
