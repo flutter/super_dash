@@ -23,8 +23,16 @@ class $AssetsImagesGen {
   AssetGenImage get avoidBugsInstruction =>
       const AssetGenImage('assets/images/avoid_bugs_instruction.png');
 
+  /// File path: assets/images/dash_fainted.png
+  AssetGenImage get dashFainted =>
+      const AssetGenImage('assets/images/dash_fainted.png');
+
   /// File path: assets/images/egg.png
   AssetGenImage get egg => const AssetGenImage('assets/images/egg.png');
+
+  /// File path: assets/images/floating_island.png
+  AssetGenImage get floatingIsland =>
+      const AssetGenImage('assets/images/floating_island.png');
 
   /// File path: assets/images/game_background.png
   AssetGenImage get gameBackground =>
@@ -37,6 +45,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/gate.png
   AssetGenImage get gate => const AssetGenImage('assets/images/gate.png');
 
+  /// File path: assets/images/input_initials_bg.png
+  AssetGenImage get inputInitialsBg =>
+      const AssetGenImage('assets/images/input_initials_bg.png');
+
   /// File path: assets/images/intro_background_desktop.png
   AssetGenImage get introBackgroundDesktop =>
       const AssetGenImage('assets/images/intro_background_desktop.png');
@@ -44,6 +56,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/intro_background_mobile.png
   AssetGenImage get introBackgroundMobile =>
       const AssetGenImage('assets/images/intro_background_mobile.png');
+
+  /// File path: assets/images/leaderboard_bg.png
+  AssetGenImage get leaderboardBg =>
+      const AssetGenImage('assets/images/leaderboard_bg.png');
 
   /// File path: assets/images/level_gates_instruction.png
   AssetGenImage get levelGatesInstruction =>
@@ -57,20 +73,28 @@ class $AssetsImagesGen {
   AssetGenImage get tapToJumpInstruction =>
       const AssetGenImage('assets/images/tap_to_jump_instruction.png');
 
+  /// File path: assets/images/trophy.png
+  AssetGenImage get trophy => const AssetGenImage('assets/images/trophy.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         acorn,
         autoRunInstruction,
         avoidBugsInstruction,
+        dashFainted,
         egg,
+        floatingIsland,
         gameBackground,
         gameLogo,
         gate,
+        inputInitialsBg,
         introBackgroundDesktop,
         introBackgroundMobile,
+        leaderboardBg,
         levelGatesInstruction,
         powerfulWingsInstruction,
-        tapToJumpInstruction
+        tapToJumpInstruction,
+        trophy
       ];
 }
 
