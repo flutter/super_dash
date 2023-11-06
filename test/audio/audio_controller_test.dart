@@ -31,6 +31,7 @@ class _MockAudioPlayerFactory {
     when(() => player.onPlayerComplete).thenAnswer(
       (_) => streamController.stream,
     );
+    when(() => player.setReleaseMode(any())).thenAnswer((_) async {});
     when(player.stop).thenAnswer((_) async {});
     when(player.pause).thenAnswer((_) async {});
     when(player.resume).thenAnswer((_) async {});
@@ -62,6 +63,7 @@ void main() {
 
     setUpAll(() {
       registerFallbackValue(AssetSource(''));
+      registerFallbackValue(ReleaseMode.loop);
     });
 
     setUp(() {
@@ -175,7 +177,7 @@ void main() {
         ).captured;
         final source = captured.first;
         expect(source, isA<AssetSource>());
-        expect((source as AssetSource).path, 'sfx/jump.mp3');
+        expect((source as AssetSource).path, 'sfx/Dash_Jump.mp3');
       });
 
       test("doesn't play when is muted", () {
