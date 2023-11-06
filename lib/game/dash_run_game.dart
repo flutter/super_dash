@@ -220,7 +220,7 @@ class DashRunGame extends LeapGame
   void onMapLoaded() {
     player?.loadSpawnPoint();
     player?.walking = true;
-    player?.animations.paint.color = Colors.white;
+    player?.spritePaintColor(Colors.white);
     player?.isPlayerTeleporting = false;
   }
 
@@ -228,7 +228,7 @@ class DashRunGame extends LeapGame
     gameBloc.add(GameScoreIncreased(by: 1000 * currentLevel));
 
     if (isLastSection) {
-      player?.animations.paint.color = Colors.transparent;
+      player?.spritePaintColor(Colors.transparent);
       player?.walking = false;
     }
 
