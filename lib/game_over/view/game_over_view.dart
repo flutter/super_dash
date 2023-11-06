@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
+import 'package:dash_run/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class GameOverPage extends StatelessWidget {
@@ -16,6 +17,8 @@ class GameOverPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return PageWithBackground(
       background: const GameBackground(),
       child: Container(
@@ -23,16 +26,16 @@ class GameOverPage extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(flex: 15),
-            const Text('Game over!'),
-            const Text('Better luck next time.'),
+            Text(l10n.gameOver),
+            Text(l10n.betterLuckNextTime),
             const Spacer(flex: 4),
-            const Text('Total Score'),
+            Text(l10n.totalScore),
             const Spacer(flex: 2),
             GameElevatedButton(label: '$score Pts'),
             const Spacer(flex: 4),
-            GameElevatedButton(label: 'Submit score'),
+            GameElevatedButton(label: l10n.submitScore),
             const Spacer(flex: 3),
-            GameElevatedButton(label: 'Play again'),
+            GameElevatedButton(label: l10n.playAgain),
             const Spacer(flex: 40),
             const BottomBar(),
             const SizedBox(height: 16),
