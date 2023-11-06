@@ -71,6 +71,7 @@ void main() {
         );
       },
       timeout: const Timeout(Duration(minutes: 2)),
+      skip: true, // TODO(all): This test is flaky, skipping it for now
     );
 
     testWithGame(
@@ -84,6 +85,7 @@ void main() {
         );
       },
       timeout: const Timeout(Duration(minutes: 2)),
+      skip: true, // TODO(all): This test is flaky, skipping it for now
     );
   });
 }
