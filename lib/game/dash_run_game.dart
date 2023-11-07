@@ -190,7 +190,11 @@ class DashRunGame extends LeapGame
 
   Future<void> _loadNewSection() async {
     _setSectionBackground();
-    final nextSection = _sections[state.currentSection];
+    final nextSectionIndex = state.currentSection + 1 < _sections.length
+        ? state.currentSection + 1
+        : 0;
+
+    final nextSection = _sections[nextSectionIndex];
 
     _resetEntities();
 
@@ -227,11 +231,11 @@ class DashRunGame extends LeapGame
       player?.walking = false;
     }
 
+    _loadNewSection();
+
     gameBloc
       ..add(GameScoreIncreased(by: 1000 * state.currentLevel))
       ..add(GameSectionCompleted(sectionCount: _sections.length));
-
-    _loadNewSection();
   }
 
   bool get isLastSection => state.currentSection == _sections.length - 1;
