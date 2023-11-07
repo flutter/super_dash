@@ -9,7 +9,6 @@ import 'package:ordered_set/ordered_set.dart';
 
 typedef ObjectGroupProximitySpawner = PositionComponent Function({
   required TiledObject tiledObject,
-  required int firstGid,
 });
 
 class ObjectGroupProximityBuilder<Reference extends PositionComponent>
@@ -19,9 +18,8 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
     required this.tileLayerName,
     required this.tileset,
     required this.componentBuilder,
-  }) : firstGid = tileset.firstGid ?? 0;
+  });
 
-  final int firstGid;
   final double proximity;
   final String tileLayerName;
   final Tileset tileset;
@@ -111,7 +109,6 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
 
         final component = componentBuilder(
           tiledObject: object,
-          firstGid: firstGid,
         );
 
         _spawnedComponents[object.id] = component;
