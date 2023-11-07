@@ -421,75 +421,96 @@
   <object id="786" gid="696" x="3904" y="1920" width="64" height="64">
    <properties>
     <property name="Path" value="I{1L, 1R}"/>
+    <property name="Type" value="Beetle"/>
    </properties>
   </object>
-  <object id="788" gid="696" x="4608" y="1920" width="64" height="64"/>
+  <object id="788" gid="696" x="4608" y="1920" width="64" height="64">
+   <properties>
+    <property name="Type" value="Beetle"/>
+   </properties>
+  </object>
   <object id="789" gid="696" x="5440" y="1984" width="64" height="64">
    <properties>
     <property name="Path" value="I{1L, 1R}"/>
+    <property name="Type" value="Beetle"/>
    </properties>
   </object>
   <object id="793" gid="696" x="6464" y="1280" width="64" height="64">
    <properties>
     <property name="Path" value="I{1L, 1R}"/>
+    <property name="Type" value="Beetle"/>
    </properties>
   </object>
   <object id="794" gid="696" x="6272" y="1920" width="64" height="64">
    <properties>
     <property name="Path" value="I{1L, 1R}"/>
+    <property name="Type" value="Beetle"/>
    </properties>
   </object>
-  <object id="795" gid="696" x="7104" y="1152" width="64" height="64"/>
+  <object id="795" gid="696" x="7104" y="1152" width="64" height="64">
+   <properties>
+    <property name="Type" value="Beetle"/>
+   </properties>
+  </object>
   <object id="796" gid="696" x="7552" y="1984" width="64" height="64">
    <properties>
     <property name="Path" value="I{2L, 2R}"/>
+    <property name="Type" value="Beetle"/>
    </properties>
   </object>
   <object id="797" gid="696" x="8064" y="2112" width="64" height="64">
    <properties>
     <property name="Path" value="I{1L, 1R}"/>
+    <property name="Type" value="Beetle"/>
    </properties>
   </object>
   <object id="798" gid="712" x="8128" y="1600" width="64" height="64">
    <properties>
     <property name="Fly" type="bool" value="true"/>
     <property name="Path" value="{10L}"/>
+    <property name="Type" value="Butterfly"/>
    </properties>
   </object>
   <object id="799" gid="712" x="7296" y="1920" width="64" height="64">
    <properties>
     <property name="Fly" type="bool" value="true"/>
     <property name="Path" value="I{1T, 1B}"/>
+    <property name="Type" value="Butterfly"/>
    </properties>
   </object>
   <object id="800" gid="712" x="6944" y="1920" width="64" height="64">
    <properties>
     <property name="Fly" type="bool" value="true"/>
     <property name="Path" value="I{1T, 1B}"/>
+    <property name="Type" value="Butterfly"/>
    </properties>
   </object>
   <object id="802" gid="712" x="6592" y="1920" width="64" height="64">
    <properties>
     <property name="Fly" type="bool" value="true"/>
     <property name="Path" value="I{1T, 1B}"/>
+    <property name="Type" value="Butterfly"/>
    </properties>
   </object>
   <object id="804" gid="712" x="6016" y="1472" width="64" height="64">
    <properties>
     <property name="Fly" type="bool" value="true"/>
     <property name="Path" value="{10L}"/>
+    <property name="Type" value="Butterfly"/>
    </properties>
   </object>
   <object id="805" gid="712" x="4736" y="1088" width="64" height="64">
    <properties>
     <property name="Fly" type="bool" value="true"/>
     <property name="Path" value="I{1T, 1B}"/>
+    <property name="Type" value="Butterfly"/>
    </properties>
   </object>
   <object id="806" gid="712" x="4160" y="1568" width="64" height="64">
    <properties>
     <property name="Fly" type="bool" value="true"/>
     <property name="Path" value="{10L}"/>
+    <property name="Type" value="Butterfly"/>
    </properties>
   </object>
  </objectgroup>
