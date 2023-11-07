@@ -24,6 +24,10 @@
     "@gameInstructionsPageTapToJumpDescription": {
         "description": "Text shown in the description of the tap to jump instruction of the Game Instructions Overlay"
     },
+    "gameInstructionsPageTapToJumpDescriptionDesktop": "Press spacebar to make Dash jump.",
+    "@gameInstructionsPageTapToJumpDescriptionDesktop": {
+        "description": "Text shown in the description of the tap to jump instruction of the Game Instructions Overlay"
+    },
     "gameInstructionsPageCollectEggsAcornsTitle": "Collect Eggs & Acorns",
     "@gameInstructionsPageCollectEggsAcornsTitle": {
         "description": "Text shown in the title of the collect eggs and acorns instruction of the Game Instructions Overlay"

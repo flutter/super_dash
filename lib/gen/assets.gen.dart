@@ -73,6 +73,10 @@ class $AssetsImagesGen {
   AssetGenImage get tapToJumpInstruction =>
       const AssetGenImage('assets/images/tap_to_jump_instruction.png');
 
+  /// File path: assets/images/tap_to_jump_spacebar.png
+  AssetGenImage get tapToJumpSpacebar =>
+      const AssetGenImage('assets/images/tap_to_jump_spacebar.png');
+
   /// File path: assets/images/trophy.png
   AssetGenImage get trophy => const AssetGenImage('assets/images/trophy.png');
 
@@ -94,6 +98,7 @@ class $AssetsImagesGen {
         levelGatesInstruction,
         powerfulWingsInstruction,
         tapToJumpInstruction,
+        tapToJumpSpacebar,
         trophy
       ];
 }
@@ -253,6 +258,30 @@ class $AssetsMapAnimGen {
   String get spritesheetDashSlideTsx =>
       'assets/map/anim/spritesheet_dash_slide.tsx';
 
+  /// File path: assets/map/anim/spritesheet_enemy_bee.png
+  AssetGenImage get spritesheetEnemyBeePng =>
+      const AssetGenImage('assets/map/anim/spritesheet_enemy_bee.png');
+
+  /// File path: assets/map/anim/spritesheet_enemy_bee.tsx
+  String get spritesheetEnemyBeeTsx =>
+      'assets/map/anim/spritesheet_enemy_bee.tsx';
+
+  /// File path: assets/map/anim/spritesheet_enemy_beetle.png
+  AssetGenImage get spritesheetEnemyBeetlePng =>
+      const AssetGenImage('assets/map/anim/spritesheet_enemy_beetle.png');
+
+  /// File path: assets/map/anim/spritesheet_enemy_beetle.tsx
+  String get spritesheetEnemyBeetleTsx =>
+      'assets/map/anim/spritesheet_enemy_beetle.tsx';
+
+  /// File path: assets/map/anim/spritesheet_enemy_butterfly.png
+  AssetGenImage get spritesheetEnemyButterflyPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_enemy_butterfly.png');
+
+  /// File path: assets/map/anim/spritesheet_enemy_butterfly.tsx
+  String get spritesheetEnemyButterflyTsx =>
+      'assets/map/anim/spritesheet_enemy_butterfly.tsx';
+
   /// File path: assets/map/anim/spritesheet_phoenixDash_doublejump.png
   AssetGenImage get spritesheetPhoenixDashDoublejumpPng => const AssetGenImage(
       'assets/map/anim/spritesheet_phoenixDash_doublejump.png');
@@ -312,6 +341,12 @@ class $AssetsMapAnimGen {
         spritesheetDashRunTsx,
         spritesheetDashSlidePng,
         spritesheetDashSlideTsx,
+        spritesheetEnemyBeePng,
+        spritesheetEnemyBeeTsx,
+        spritesheetEnemyBeetlePng,
+        spritesheetEnemyBeetleTsx,
+        spritesheetEnemyButterflyPng,
+        spritesheetEnemyButterflyTsx,
         spritesheetPhoenixDashDoublejumpPng,
         spritesheetPhoenixDashDoublejumpTsx,
         spritesheetPhoenixDashIdlePng,
@@ -432,6 +467,13 @@ class $AssetsMapTilesGen {
 
   /// File path: assets/map/tiles/tile_atmos_forest_3.tsx
   String get tileAtmosForest3Tsx => 'assets/map/tiles/tile_atmos_forest_3.tsx';
+
+  /// File path: assets/map/tiles/tile_clouds_BG.png
+  AssetGenImage get tileCloudsBGPng =>
+      const AssetGenImage('assets/map/tiles/tile_clouds_BG.png');
+
+  /// File path: assets/map/tiles/tile_clouds_BG.tsx
+  String get tileCloudsBGTsx => 'assets/map/tiles/tile_clouds_BG.tsx';
 
   /// File path: assets/map/tiles/tile_clouds_v02.png
   AssetGenImage get tileCloudsV02Png =>
@@ -573,6 +615,8 @@ class $AssetsMapTilesGen {
         tileAtmosForest2Tsx,
         tileAtmosForest3Png,
         tileAtmosForest3Tsx,
+        tileCloudsBGPng,
+        tileCloudsBGTsx,
         tileCloudsV02Png,
         tileCloudsV02Tsx,
         tileDecorationsV01Png,
