@@ -222,18 +222,9 @@ class DashRunGame extends LeapGame
   }
 
   void sectionCleared() {
-    gameBloc.add(GameScoreIncreased(by: 1000 * currentLevel));
-
     if (isLastSection) {
       player?.spritePaintColor(Colors.transparent);
       player?.walking = false;
-    }
-
-    if (!isLastSection) {
-      currentSection++;
-    } else {
-      currentSection = 0;
-      currentLevel++;
     }
 
     gameBloc
