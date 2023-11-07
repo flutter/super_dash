@@ -1,7 +1,6 @@
-import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
-import 'package:dash_run/settings/settings.dart';
+import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,27 +46,9 @@ class GameView extends StatelessWidget {
           ),
           const Positioned(
             bottom: 12,
-            child: SoundControl(),
+            child: SafeArea(child: AudioButton()),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class SoundControl extends StatelessWidget {
-  const SoundControl({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final settingsController = context.watch<SettingsController>();
-    return SafeArea(
-      child: ValueListenableBuilder<bool>(
-        valueListenable: settingsController.muted,
-        builder: (context, muted, child) => GameIconButton(
-          icon: muted ? Icons.volume_up : Icons.volume_off,
-          onPressed: context.read<SettingsController>().toggleMuted,
-        ),
       ),
     );
   }
