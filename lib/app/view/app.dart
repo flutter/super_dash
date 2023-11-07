@@ -4,14 +4,16 @@ import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/map_tester/map_tester.dart';
-import 'package:dash_run/settings/settings_controller.dart';
+import 'package:dash_run/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:leaderboard_repository/leaderboard_repository.dart';
 
 class App extends StatelessWidget {
   const App({
     required this.audioController,
     required this.settingsController,
+    required this.leaderboardRepository,
     this.isTesting = false,
     super.key,
   });
@@ -19,15 +21,13 @@ class App extends StatelessWidget {
   final bool isTesting;
   final AudioController audioController;
   final SettingsController settingsController;
+  final LeaderboardRepository leaderboardRepository;
 
   @override
   Widget build(BuildContext context) {
     return AppLifecycleObserver(
       child: MultiRepositoryProvider(
         providers: [
-          RepositoryProvider<SettingsController>.value(
-            value: settingsController,
-          ),
           RepositoryProvider<AudioController>(
             create: (context) {
               final lifecycleNotifier =
@@ -35,6 +35,12 @@ class App extends StatelessWidget {
               return audioController
                 ..attachLifecycleNotifier(lifecycleNotifier);
             },
+          ),
+          RepositoryProvider<SettingsController>.value(
+            value: settingsController,
+          ),
+          RepositoryProvider<LeaderboardRepository>.value(
+            value: leaderboardRepository,
           ),
         ],
         child: MaterialApp(

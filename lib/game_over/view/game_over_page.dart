@@ -3,7 +3,10 @@ import 'package:dash_run/game/game.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
+import 'package:dash_run/score/score.dart';
+import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class GameOverPage extends StatelessWidget {
@@ -11,20 +14,21 @@ class GameOverPage extends StatelessWidget {
 
   final int score;
 
-  static PageRoute<void> route({required int score}) {
-    return PageRouteBuilder(
-      pageBuilder: (_, __, ___) => GameOverPage(score: score),
+  static Page<void> page({required int score}) {
+    return MaterialPage(
+      child: GameOverPage(score: score),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final textTheme = Theme.of(context).textTheme;
     const titleColor = Color(0xFF18274C);
 
     return PageWithBackground(
       background: const GameBackground(),
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: Assets.images.gameOverBackground.provider(),
@@ -36,24 +40,24 @@ class GameOverPage extends StatelessWidget {
             const Spacer(flex: 15),
             Text(
               l10n.gameOver,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: titleColor,
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: textTheme.headlineMedium?.copyWith(
+                color: titleColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(
               l10n.betterLuckNextTime,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: titleColor,
-                  ),
+              style: textTheme.bodyLarge?.copyWith(
+                color: titleColor,
+              ),
             ),
             const Spacer(flex: 4),
             Text(
               l10n.totalScore,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: titleColor,
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: textTheme.bodyLarge?.copyWith(
+                color: titleColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const Spacer(flex: 2),
             _ScoreWidget(score),
@@ -61,15 +65,13 @@ class GameOverPage extends StatelessWidget {
             GameElevatedButton(
               label: l10n.submitScore,
               onPressed: () {
-                // TODO(all): navigate to score submission.
+                context.read<ScoreBloc>().add(const ScoreSubmitted());
               },
             ),
             const Spacer(flex: 3),
             GameElevatedButton(
               label: l10n.playAgain,
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: context.flow<ScoreState>().complete,
               gradient: const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -96,6 +98,8 @@ class _ScoreWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
@@ -116,10 +120,10 @@ class _ScoreWidget extends StatelessWidget {
           const SizedBox(width: 8),
           RichText(
             text: TextSpan(
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: const Color(0xFF4D5B92),
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: textTheme.headlineMedium?.copyWith(
+                color: const Color(0xFF4D5B92),
+                fontWeight: FontWeight.bold,
+              ),
               children: [
                 TextSpan(text: '${formatScore(score)} '),
                 const TextSpan(
