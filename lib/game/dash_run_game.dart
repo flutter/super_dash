@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
-import 'package:dash_run/game_over/game_over.dart';
+import 'package:dash_run/score/score.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -37,8 +37,7 @@ class DashRunGame extends LeapGame
 
   late final SimpleCombinedInput input;
 
-  int currentLevel = 1;
-  int currentSection = 0;
+  GameState get state => gameBloc.state;
 
   static const _sections = [
     'flutter_runnergame_map_A.tmx',
@@ -109,10 +108,9 @@ class DashRunGame extends LeapGame
         },
       ),
     );
-
     await add(input);
-    await _addSpawners();
 
+    await _addSpawners();
     _addTreeHouseFrontLayer();
   }
 
@@ -124,14 +122,13 @@ class DashRunGame extends LeapGame
   void _setSectionBackground() {
     camera.backdrop = RectangleComponent(
       size: size.clone(),
-      paint: Paint()..color = _sectionsBackgroundColor[currentSection],
+      paint: Paint()..color = _sectionsBackgroundColor[state.currentSection],
     );
   }
 
   void gameOver() {
+    gameBloc.add(const GameOver());
     audioController.stopBackgroundSfx();
-    currentLevel = 1;
-    gameBloc.add(GameScoreReset());
 
     world.firstChild<Player>()?.removeFromParent();
 
@@ -158,7 +155,7 @@ class DashRunGame extends LeapGame
     if (buildContext != null) {
       final score = gameBloc.state.score;
       Navigator.of(buildContext!).push(
-        GameOverPage.route(score: score),
+        ScorePage.route(score: score),
       );
     }
   }
@@ -193,7 +190,7 @@ class DashRunGame extends LeapGame
 
   Future<void> _loadNewSection() async {
     _setSectionBackground();
-    final nextSection = _sections[currentSection];
+    final nextSection = _sections[state.currentSection];
 
     _resetEntities();
 
@@ -239,11 +236,15 @@ class DashRunGame extends LeapGame
       currentLevel++;
     }
 
+    gameBloc
+      ..add(GameScoreIncreased(by: 1000 * state.currentLevel))
+      ..add(GameSectionCompleted(sectionCount: _sections.length));
+
     _loadNewSection();
   }
 
-  bool get isLastSection => currentSection == _sections.length - 1;
-  bool get isFirstSection => currentSection == 0;
+  bool get isLastSection => state.currentSection == _sections.length - 1;
+  bool get isFirstSection => state.currentSection == 0;
 
   void addCameraDebugger() {
     if (descendants().whereType<CameraDebugger>().isEmpty) {
