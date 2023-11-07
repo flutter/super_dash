@@ -39,9 +39,7 @@ class _TestPlayer extends Player {
         super(
           cameraViewport: Vector2.all(200),
           levelSize: Vector2.all(200),
-        ) {
-    animations = SpriteAnimationGroupComponent();
-  }
+        );
 
   final bool _isAlive;
   final bool _isOnGround;
@@ -63,6 +61,29 @@ class _TestPlayer extends Player {
   @override
   Future<void> onLoad() async {
     // Noop
+  }
+
+  var _walking = false;
+  @override
+  set walking(bool value) {
+    _walking = value;
+  }
+
+  @override
+  bool get walking => _walking;
+
+  var _jumping = false;
+  @override
+  set jumping(bool value) {
+    _jumping = value;
+  }
+
+  @override
+  bool get jumping => _jumping;
+
+  @override
+  void doubleJump() {
+    _jumping = true;
   }
 }
 

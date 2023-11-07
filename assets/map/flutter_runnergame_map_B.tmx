@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="150" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="56" nextobjectid="828">
- <tileset firstgid="1" source="tiles/tile_clouds_v02.tsx"/>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="150" height="40" tilewidth="64" tileheight="64" infinite="0" nextlayerid="56" nextobjectid="833">
+ <tileset firstgid="1" source="tiles/tile_clouds_BG.tsx"/>
  <tileset firstgid="73" source="objects/tile_enemies_v2.tsx"/>
  <tileset firstgid="79" source="objects/tile_items_v2.tsx"/>
  <tileset firstgid="83" source="tiles/tile_plains_hills_v01.tsx"/>
@@ -21,7 +21,8 @@
  <tileset firstgid="628" source="anim/spritesheet_dash_deathPit.tsx"/>
  <tileset firstgid="652" source="anim/spritesheet_dash_jump.tsx"/>
  <tileset firstgid="668" source="anim/spritesheet_poof.tsx"/>
- <group id="31" name="plains_BG" offsetx="-3520" offsety="0">
+ <tileset firstgid="688" source="anim/spritesheet_enemy_bee.tsx"/>
+ <group id="31" name="plains_BG" locked="1" offsetx="-3520" offsety="0">
   <layer id="40" name="plains_BG_clouds" width="150" height="40" parallaxx="0.5" parallaxy="0.5">
    <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -173,7 +174,6 @@
 </data>
   </layer>
  </group>
- <objectgroup id="44" name="gate" visible="0" locked="1"/>
  <layer id="42" name="decorations_terrain" width="150" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -404,36 +404,6 @@
     <property name="Path" value="I{1L, 1R}"/>
    </properties>
   </object>
-  <object id="704" gid="76" x="3904" y="1728" width="64" height="64">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="{10L}"/>
-   </properties>
-  </object>
-  <object id="705" gid="76" x="4416" y="1984" width="64" height="64">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="{10L}"/>
-   </properties>
-  </object>
-  <object id="706" gid="76" x="5632" y="1152" width="64" height="64">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="{10L}"/>
-   </properties>
-  </object>
-  <object id="707" gid="76" x="6656" y="1472" width="64" height="64">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="{10L}"/>
-   </properties>
-  </object>
-  <object id="708" gid="76" x="7616" y="1664" width="64" height="64">
-   <properties>
-    <property name="Fly" type="bool" value="true"/>
-    <property name="Path" value="{10L}"/>
-   </properties>
-  </object>
   <object id="709" gid="75" x="7808" y="2112" width="64" height="64">
    <properties>
     <property name="Path" value="I{2L, 2R}"/>
@@ -454,13 +424,43 @@
     <property name="Path" value="I{1L, 1R}"/>
    </properties>
   </object>
+  <object id="828" gid="688" x="3904" y="1728" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="{10L}"/>
+   </properties>
+  </object>
+  <object id="829" gid="688" x="4416" y="1984" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="{10L}"/>
+   </properties>
+  </object>
+  <object id="830" gid="688" x="5632" y="1152" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="{10L}"/>
+   </properties>
+  </object>
+  <object id="831" gid="688" x="6656" y="1472" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="{10L}"/>
+   </properties>
+  </object>
+  <object id="832" gid="688" x="7616" y="1664" width="64" height="64">
+   <properties>
+    <property name="Fly" type="bool" value="true"/>
+    <property name="Path" value="{10L}"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="11" name="spawn">
   <object id="787" name="Spawn" type="PlayerSpawn" x="320" y="2240">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="49" name="respawn">
+ <objectgroup id="49" name="respawn" visible="0">
   <object id="737" type="Respawn" x="2304" y="2240">
    <point/>
   </object>
