@@ -4,4 +4,5 @@ linter:
     public_member_api_docs: false
 analyzer:
   exclude:
-    - lib/firebase_options.dart
+    - lib/firebase_options_dev.dart
+    - lib/firebase_options_prod.dart
