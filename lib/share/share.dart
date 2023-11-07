@@ -2,6 +2,8 @@ import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+// TODO(all): Update architecture to use a bloc and be able to pass l10n
+// strings. Having this controller as a dependency in the bloc.
 class ShareController {
   ShareController({required this.gameUrl});
 
