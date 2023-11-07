@@ -11,11 +11,23 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
     required LeaderboardRepository leaderboardRepository,
   })  : _leaderboardRepository = leaderboardRepository,
         super(const ScoreState()) {
+    on<ScoreSubmitted>(_onScoreSubmitted);
     on<ScoreInitialsSubmitted>(_onScoreInitialsSubmitted);
   }
 
   final int score;
   final LeaderboardRepository _leaderboardRepository;
+
+  void _onScoreSubmitted(
+    ScoreSubmitted event,
+    Emitter<ScoreState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        status: ScoreStatus.inputInitials,
+      ),
+    );
+  }
 
   Future<void> _onScoreInitialsSubmitted(
     ScoreInitialsSubmitted event,

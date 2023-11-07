@@ -14,6 +14,14 @@ class ScoreState extends Equatable {
 
   final ScoreStatus status;
 
+  ScoreState copyWith({
+    ScoreStatus? status,
+  }) {
+    return ScoreState(
+      status: status ?? this.status,
+    );
+  }
+
   @override
   List<Object> get props => [status];
 }

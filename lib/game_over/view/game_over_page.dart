@@ -6,6 +6,7 @@ import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/score/score.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class GameOverPage extends StatelessWidget {
@@ -63,9 +64,9 @@ class GameOverPage extends StatelessWidget {
             const Spacer(flex: 4),
             GameElevatedButton(
               label: l10n.submitScore,
-              onPressed: () => Navigator.of(context).push(
-                ScorePage.route(score: score),
-              ),
+              onPressed: () {
+                context.read<ScoreBloc>().add(const ScoreSubmitted());
+              },
             ),
             const Spacer(flex: 3),
             GameElevatedButton(

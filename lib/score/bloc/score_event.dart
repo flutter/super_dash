@@ -7,6 +7,10 @@ sealed class ScoreEvent extends Equatable {
   List<Object> get props => [];
 }
 
+final class ScoreSubmitted extends ScoreEvent {
+  const ScoreSubmitted();
+}
+
 final class ScoreInitialsSubmitted extends ScoreEvent {
   const ScoreInitialsSubmitted({required this.initials});
 
