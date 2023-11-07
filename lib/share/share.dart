@@ -1,10 +1,13 @@
-import 'package:dash_run/constants/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-class ShareService {
-  static String _postContent(int score) {
+class ShareController {
+  ShareController({required this.gameUrl});
+
+  final String gameUrl;
+
+  String _postContent(int score) {
     final formatter = NumberFormat('#,###');
     final scoreFormatted = formatter.format(score);
 
@@ -12,28 +15,28 @@ class ShareService {
         '#SuperDash. Can you beat my score?';
   }
 
-  static String _twitterUrl(String content) =>
-      'https://twitter.com/intent/tweet?text=$content ${Urls.game}';
+  String _twitterUrl(String content) =>
+      'https://twitter.com/intent/tweet?text=$content $gameUrl';
 
-  static String facebookUrl(String content) =>
-      'https://www.facebook.com/sharer.php?u=${Urls.game}';
+  String facebookUrl(String content) =>
+      'https://www.facebook.com/sharer.php?u=$gameUrl';
 
-  static String _encode(String content) =>
+  String _encode(String content) =>
       content.replaceAll(' ', '%20').replaceAll('#', '%23');
 
-  static Future<bool> shareOnTwitter(int score) async {
+  Future<bool> shareOnTwitter(int score) async {
     final content = _postContent(score);
     final url = _encode(_twitterUrl(content));
     return launchUrlString(url);
   }
 
-  static Future<bool> shareOnFacebook(int score) async {
+  Future<bool> shareOnFacebook(int score) async {
     final content = _postContent(score);
     final url = _encode(facebookUrl(content));
     return launchUrlString(url);
   }
 
-  static Future<void> shareMobile(int score) async {
+  Future<void> shareMobile(int score) async {
     final content = _postContent(score);
     await Share.share(content);
   }

@@ -1,7 +1,4 @@
 class Urls {
-  // TODO(all): update url once is in prod
-  static const String game = 'https://endless-runner-9481713-383737.web.app/';
-
   // TODO(all): confirm url once is in google's org
   static const String githubRepo = 'https://github.com/flutter/super_dash';
 

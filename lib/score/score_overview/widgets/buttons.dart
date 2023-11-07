@@ -1,6 +1,7 @@
 import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/score/score.dart';
+import 'package:dash_run/share/share.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,7 @@ class WebButtons extends StatelessWidget {
               ),
               onPressed: () {
                 final score = context.read<ScoreBloc>().score;
-                ShareService.shareOnTwitter(score);
+                context.read<ShareController>().shareMobile(score);
               },
             ),
             const SizedBox(width: 16),
@@ -48,7 +49,7 @@ class WebButtons extends StatelessWidget {
               ),
               onPressed: () {
                 final score = context.read<ScoreBloc>().score;
-                ShareService.shareOnFacebook(score);
+                context.read<ShareController>().shareMobile(score);
               },
             ),
           ],
@@ -79,7 +80,7 @@ class MobileButtons extends StatelessWidget {
           gradient: _gradient,
           onPressed: () {
             final score = context.read<ScoreBloc>().score;
-            ShareService.shareMobile(score);
+            context.read<ShareController>().shareMobile(score);
           },
         ),
         const SizedBox(height: 24),
