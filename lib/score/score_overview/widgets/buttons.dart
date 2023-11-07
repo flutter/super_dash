@@ -3,6 +3,7 @@ import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/score/score.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const _gradient = LinearGradient(
@@ -34,7 +35,8 @@ class WebButtons extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                // TODO(all): share on twitter
+                final score = context.read<ScoreBloc>().score;
+                ShareService.shareOnTwitter(score);
               },
             ),
             const SizedBox(width: 16),
@@ -45,7 +47,8 @@ class WebButtons extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                // TODO(all): share on facebook
+                final score = context.read<ScoreBloc>().score;
+                ShareService.shareOnFacebook(score);
               },
             ),
           ],
