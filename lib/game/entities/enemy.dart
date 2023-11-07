@@ -6,8 +6,8 @@ import 'package:pathxp/pathxp.dart';
 
 class Enemy extends PhysicalEntity<DashRunGame> {
   Enemy({
-    required this.sprite,
     required this.tiledObject,
+    required this.firstGid,
     this.enemyDamage = 1,
   }) : super(
           collisionType: CollisionType.standard,
@@ -15,6 +15,7 @@ class Enemy extends PhysicalEntity<DashRunGame> {
         );
 
   final int enemyDamage;
+  final int firstGid;
   late final Sprite sprite;
   late final TiledObject tiledObject;
 
@@ -34,15 +35,43 @@ class Enemy extends PhysicalEntity<DashRunGame> {
       add(FollowPathBehavior(pathXp));
     }
 
-    add(
-      SpriteComponent(
-        size: Vector2.all(gameRef.tileSize),
-        sprite: sprite,
-        anchor: Anchor.center,
-        position: size / 2 - Vector2(0, size.y / 2),
-      ),
-    );
+          final spritePosition = size / 2 - Vector2(0, size.y / 2);
+
+    print('${tiledObject.gid} - ${firstGid}');
+    if (tiledObject.gid == firstGid) {
+      // Bettle
+      final bettleAnimation = await gameRef.loadSpriteAnimation(
+        'anim/spritesheet_enemy_bettle.png',
+        SpriteAnimationData.sequenced(
+          amount: 16,
+          amountPerRow: 8,
+          textureSize: Vector2.all(64),
+          stepTime: .04,
+        ),
+      );
+
+      add(
+        SpriteAnimationComponent(
+          size: Vector2.all(gameRef.tileSize),
+          animation: bettleAnimation,
+          anchor: Anchor.center,
+          position: spritePosition,
+        ),
+      );
+    } else if (tiledObject.gid == firstGid + 1) {
+      // Butterfly
+    } else if (tiledObject.gid == firstGid + 2) {
+      // Grasshopper
+    } else if (tiledObject.gid == firstGid + 3) {
+      // Bee
+    } else if (tiledObject.gid == firstGid + 4) {
+      // Ant
+    } else if (tiledObject.gid == firstGid + 5) {
+      // Firefly
+    }
 
     return super.onLoad();
   }
+
+  void _spriteFallback() {}
 }

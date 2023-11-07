@@ -180,7 +180,6 @@ class DashRunGame extends LeapGame
       ),
       ObjectGroupProximityBuilder<Player>(
         proximity: _cameraViewport.x * 1.5,
-        tilesetPath: 'objects/tile_enemies_v2.png',
         tileLayerName: 'enemies',
         tileset: enemiesTileset,
         componentBuilder: Enemy.new,

@@ -3,19 +3,21 @@ import 'dart:ui';
 
 import 'package:dash_run/game/dash_run_game.dart';
 import 'package:flame/components.dart';
+import 'package:flame/sprite.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:ordered_set/comparing.dart';
 import 'package:ordered_set/ordered_set.dart';
 
 typedef ObjectGroupProximitySpawner = PositionComponent Function({
   required TiledObject tiledObject,
-  required int firstGid,
+  required Sprite sprite,
 });
 
 class ObjectGroupProximityBuilder<Reference extends PositionComponent>
     extends Component with HasGameRef<DashRunGame> {
   ObjectGroupProximityBuilder({
     required this.proximity,
+    required this.tilesetPath,
     required this.tileLayerName,
     required this.tileset,
     required this.componentBuilder,
@@ -23,10 +25,12 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
 
   final int firstGid;
   final double proximity;
+  final String tilesetPath;
   final String tileLayerName;
   final Tileset tileset;
   final ObjectGroupProximitySpawner componentBuilder;
 
+  late SpriteSheet spritesheet;
   late final Image tiles;
 
   final _objects = OrderedSet<TiledObject>(
@@ -48,6 +52,12 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
     currentReference = game.world.firstChild<Reference>();
 
     final layer = gameRef.leapMap.getTileLayer<ObjectGroup>(tileLayerName);
+    tiles = await gameRef.images.load(tilesetPath);
+
+    spritesheet = SpriteSheet(
+      image: tiles,
+      srcSize: Vector2.all(gameRef.tileSize),
+    );
 
     _objects.addAll(layer.objects);
 
@@ -111,7 +121,9 @@ class ObjectGroupProximityBuilder<Reference extends PositionComponent>
 
         final component = componentBuilder(
           tiledObject: object,
-          firstGid: firstGid,
+          sprite: spritesheet.getSpriteById(
+            (object.gid ?? 0) - firstGid,
+          ),
         );
 
         _spawnedComponents[object.id] = component;
