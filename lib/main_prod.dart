@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_run/app/app.dart';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/bootstrap.dart';
-import 'package:dash_run/firebase_options_dev.dart';
+import 'package:dash_run/firebase_options_prod.dart';
 import 'package:dash_run/settings/persistence/persistence.dart';
 import 'package:dash_run/settings/settings.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,7 +33,6 @@ void main() async {
   unawaited(
     bootstrap(
       () => App(
-        isTesting: true,
         audioController: audio,
         settingsController: settings,
         leaderboardRepository: leaderboardRepository,
