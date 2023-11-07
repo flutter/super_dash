@@ -98,6 +98,7 @@ class _ScoreWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
@@ -126,9 +127,9 @@ class _ScoreWidget extends StatelessWidget {
               ),
               children: [
                 TextSpan(text: '${formatScore(score)} '),
-                const TextSpan(
-                  text: 'Pts',
-                  style: TextStyle(fontSize: 24),
+                TextSpan(
+                  text: l10n.pts,
+                  style: const TextStyle(fontSize: 24),
                 ),
               ],
             ),
