@@ -217,11 +217,16 @@ class DashRunGame extends LeapGame
   void onMapLoaded() {
     player?.loadSpawnPoint();
     player?.walking = true;
-    player?.animations.paint.color = Colors.white;
+    player?.spritePaintColor(Colors.white);
     player?.isPlayerTeleporting = false;
   }
 
   void sectionCleared() {
+    if (isLastSection) {
+      player?.spritePaintColor(Colors.transparent);
+      player?.walking = false;
+    }
+
     gameBloc
       ..add(GameScoreIncreased(by: 1000 * state.currentLevel))
       ..add(GameSectionCompleted(sectionCount: _sections.length));
