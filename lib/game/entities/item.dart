@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:dash_run/game/dash_run_game.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
 enum ItemType {
@@ -53,6 +55,21 @@ class Item extends PhysicalEntity<DashRunGame> {
       SpriteComponent(
         size: size,
         sprite: sprite,
+        children: [
+          SequenceEffect(
+            [
+              MoveEffect.by(
+                -Vector2(0, gameRef.tileSize / 2),
+                CurvedEffectController(.8, Curves.easeIn),
+              ),
+              MoveEffect.by(
+                Vector2(0, gameRef.tileSize / 2),
+                CurvedEffectController(.8, Curves.easeOut),
+              ),
+            ],
+            infinite: true,
+          ),
+        ],
       ),
     );
 
