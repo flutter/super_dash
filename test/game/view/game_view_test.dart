@@ -52,7 +52,7 @@ void main() {
     }
 
     testWidgets('renders score', (tester) async {
-      when(() => gameBloc.state).thenReturn(GameState(score: 100));
+      when(() => gameBloc.state).thenReturn(GameState.initial());
 
       await tester.pumpApp(
         buildSubject(),

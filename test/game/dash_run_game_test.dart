@@ -17,10 +17,20 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('DashRunGame', () {
+    late GameBloc gameBloc;
+    late AudioController audioController;
+
+    setUp(() {
+      gameBloc = _MockGameBloc();
+      audioController = _MockAudioController();
+
+      when(() => gameBloc.state).thenReturn(const GameState.initial());
+    });
+
     DashRunGame createGame() {
       return DashRunGame(
-        gameBloc: _MockGameBloc(),
-        audioController: _MockAudioController(),
+        gameBloc: gameBloc,
+        audioController: audioController,
       );
     }
 
@@ -29,8 +39,8 @@ void main() {
     flameTester.testGameWidget(
       'starts with score 0',
       setUp: (game, tester) async {
-        await game.ready();
         when(() => game.gameBloc.state).thenReturn(const GameState.initial());
+        await game.ready();
       },
       verify: (game, tester) async => expect(
         game.gameBloc.state.score,
