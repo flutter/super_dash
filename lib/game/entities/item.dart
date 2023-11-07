@@ -31,12 +31,10 @@ enum ItemType {
 
 class Item extends PhysicalEntity<DashRunGame> {
   Item({
-    required this.sprite,
     required this.tiledObject,
   }) : super(static: true, collisionType: CollisionType.standard);
 
   late final ItemType type;
-  late final Sprite sprite;
   late final TiledObject tiledObject;
 
   @override
@@ -48,13 +46,16 @@ class Item extends PhysicalEntity<DashRunGame> {
       tiledObject.gid ?? 0,
       gameRef.itemsTileset.firstGid ?? 0,
     );
-    size = sprite.srcSize;
+
+    size = Vector2.all(gameRef.tileSize);
     position = Vector2(tiledObject.x, tiledObject.y);
 
     add(
       SpriteComponent(
         size: size,
-        sprite: sprite,
+        sprite: gameRef.itemsSpritesheet.getSpriteById(
+          (tiledObject.gid ?? 0) - gameRef.itemsTileset.firstGid!,
+        ),
         children: [
           SequenceEffect(
             [

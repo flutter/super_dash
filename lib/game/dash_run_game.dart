@@ -6,6 +6,7 @@ import 'package:dash_run/score/score.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/sprite.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class DashRunGame extends LeapGame
           ),
         );
 
+  late final SpriteSheet itemsSpritesheet;
   static const prefix = 'assets/map/';
   static final _cameraViewport = Vector2(592, 1024);
 
@@ -83,6 +85,11 @@ class DashRunGame extends LeapGame
     images = Images(
       prefix: prefix,
       bundle: customBundle,
+    );
+
+    itemsSpritesheet = SpriteSheet(
+      image: await images.load('objects/tile_items_v2.png'),
+      srcSize: Vector2.all(tileSize),
     );
 
     await loadWorldAndMap(
@@ -161,19 +168,21 @@ class DashRunGame extends LeapGame
   }
 
   void _resetEntities() {
-    world.firstChild<SpriteObjectGroupBuilder>()?.removeFromParent();
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
     world.firstChild<TreeHouseFront>()?.removeFromParent();
 
     leapMap.children
         .whereType<Enemy>()
         .forEach((enemy) => enemy.removeFromParent());
+    leapMap.children
+        .whereType<Item>()
+        .forEach((enemy) => enemy.removeFromParent());
   }
 
   Future<void> _addSpawners() async {
     await addAll([
-      SpriteObjectGroupBuilder(
-        tilesetPath: 'objects/tile_items_v2.png',
+      ObjectGroupProximityBuilder<Player>(
+        proximity: _cameraViewport.x * 1.5,
         tileLayerName: 'items',
         tileset: itemsTileset,
         componentBuilder: Item.new,
