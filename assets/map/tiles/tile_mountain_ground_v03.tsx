@@ -1,33 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.10.2" name="tile_mountain_ground_v03" tilewidth="64" tileheight="64" tilecount="225" columns="15">
  <image source="tile_mountain_ground_v03.png" width="960" height="960"/>
- <tile id="16" type="Platform"/>
- <tile id="17" type="Platform"/>
- <tile id="18" type="Platform"/>
- <tile id="19" type="Hazard"/>
- <tile id="20" type="Platform"/>
- <tile id="21" type="Platform"/>
- <tile id="23" type="Platform"/>
- <tile id="24" type="Platform"/>
- <tile id="25" type="Platform"/>
- <tile id="26" type="Platform"/>
- <tile id="27" type="Platform"/>
- <tile id="28" type="Platform"/>
- <tile id="30" type="Platform"/>
- <tile id="76" type="Platform"/>
- <tile id="77" type="Platform"/>
- <tile id="78" type="Platform"/>
- <tile id="79" type="Platform"/>
- <tile id="80" type="Platform"/>
- <tile id="81" type="Platform"/>
- <tile id="82" type="Platform"/>
- <tile id="83" type="Platform"/>
- <tile id="84" type="Platform"/>
- <tile id="85" type="Platform"/>
- <tile id="86" type="Platform"/>
- <tile id="87" type="Platform"/>
- <tile id="88" type="Platform"/>
- <tile id="89" type="Platform"/>
+ <tile id="54" type="Hazard"/>
+ <tile id="55" type="Hazard"/>
+ <tile id="56" type="Hazard"/>
+ <tile id="57" type="Hazard"/>
  <tile id="94" type="Hazard"/>
  <tile id="124" type="Hazard"/>
  <tile id="128" type="Slope">
@@ -36,6 +13,10 @@
    <property name="RightTop" type="int" value="0"/>
   </properties>
  </tile>
+ <tile id="131" type="Platform"/>
+ <tile id="132" type="Platform"/>
+ <tile id="133" type="Platform"/>
+ <tile id="134" type="Platform"/>
  <tile id="139" type="Hazard"/>
  <tile id="144" type="Slope">
   <properties>
@@ -43,6 +24,10 @@
    <property name="RightTop" type="int" value="0"/>
   </properties>
  </tile>
+ <tile id="153" type="Hazard"/>
+ <tile id="154" type="Hazard"/>
+ <tile id="155" type="Hazard"/>
+ <tile id="156" type="Hazard"/>
  <tile id="180" type="Platform"/>
  <tile id="181" type="Platform"/>
  <tile id="182" type="Platform"/>
