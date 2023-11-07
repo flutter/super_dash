@@ -78,7 +78,8 @@ class MobileButtons extends StatelessWidget {
           label: l10n.share,
           gradient: _gradient,
           onPressed: () {
-            // TODO(all): open mobile share menu
+            final score = context.read<ScoreBloc>().score;
+            ShareService.shareMobile(score);
           },
         ),
         const SizedBox(height: 24),
