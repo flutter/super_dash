@@ -23,16 +23,12 @@ class $AssetsImagesGen {
   AssetGenImage get avoidBugsInstruction =>
       const AssetGenImage('assets/images/avoid_bugs_instruction.png');
 
-  /// File path: assets/images/dash_fainted.png
-  AssetGenImage get dashFainted =>
-      const AssetGenImage('assets/images/dash_fainted.png');
+  /// File path: assets/images/dash_wins.png
+  AssetGenImage get dashWins =>
+      const AssetGenImage('assets/images/dash_wins.png');
 
   /// File path: assets/images/egg.png
   AssetGenImage get egg => const AssetGenImage('assets/images/egg.png');
-
-  /// File path: assets/images/floating_island.png
-  AssetGenImage get floatingIsland =>
-      const AssetGenImage('assets/images/floating_island.png');
 
   /// File path: assets/images/game_background.png
   AssetGenImage get gameBackground =>
@@ -85,9 +81,8 @@ class $AssetsImagesGen {
         acorn,
         autoRunInstruction,
         avoidBugsInstruction,
-        dashFainted,
+        dashWins,
         egg,
-        floatingIsland,
         gameBackground,
         gameLogo,
         gameOverBackground,
@@ -139,21 +134,48 @@ class $AssetsMapGen {
 class $AssetsMusicGen {
   const $AssetsMusicGen();
 
-  /// File path: assets/music/background.mp3
-  String get background => 'assets/music/background.mp3';
+  /// File path: assets/music/FlutterGame_SunshineAndDewdrops_1_1.mp3
+  String get flutterGameSunshineAndDewdrops11 =>
+      'assets/music/FlutterGame_SunshineAndDewdrops_1_1.mp3';
 
   /// List of all assets
-  List<String> get values => [background];
+  List<String> get values => [flutterGameSunshineAndDewdrops11];
 }
 
 class $AssetsSfxGen {
   const $AssetsSfxGen();
 
-  /// File path: assets/sfx/jump.mp3
-  String get jump => 'assets/sfx/jump.mp3';
+  /// File path: assets/sfx/Dash_AcornPickup.mp3
+  String get dashAcornPickup => 'assets/sfx/Dash_AcornPickup.mp3';
+
+  /// File path: assets/sfx/Dash_EggPickup.mp3
+  String get dashEggPickup => 'assets/sfx/Dash_EggPickup.mp3';
+
+  /// File path: assets/sfx/Dash_FeatherPowerup.mp3
+  String get dashFeatherPowerup => 'assets/sfx/Dash_FeatherPowerup.mp3';
+
+  /// File path: assets/sfx/Dash_Footstep_Run.mp3
+  String get dashFootstepRun => 'assets/sfx/Dash_Footstep_Run.mp3';
+
+  /// File path: assets/sfx/Dash_Jump.mp3
+  String get dashJump => 'assets/sfx/Dash_Jump.mp3';
+
+  /// File path: assets/sfx/Phoenix_DOUBLEJump.wav
+  String get phoenixDOUBLEJump => 'assets/sfx/Phoenix_DOUBLEJump.wav';
+
+  /// File path: assets/sfx/Phoenix_Jump.wav
+  String get phoenixJump => 'assets/sfx/Phoenix_Jump.wav';
 
   /// List of all assets
-  List<String> get values => [jump];
+  List<String> get values => [
+        dashAcornPickup,
+        dashEggPickup,
+        dashFeatherPowerup,
+        dashFootstepRun,
+        dashJump,
+        phoenixDOUBLEJump,
+        phoenixJump
+      ];
 }
 
 class $AssetsMapAnimGen {
@@ -263,6 +285,13 @@ class $AssetsMapAnimGen {
   String get spritesheetPhoenixDashRunTsx =>
       'assets/map/anim/spritesheet_phoenixDash_run.tsx';
 
+  /// File path: assets/map/anim/spritesheet_poof.png
+  AssetGenImage get spritesheetPoofPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_poof.png');
+
+  /// File path: assets/map/anim/spritesheet_poof.tsx
+  String get spritesheetPoofTsx => 'assets/map/anim/spritesheet_poof.tsx';
+
   /// List of all assets
   List<dynamic> get values => [
         spritesheetDashDeathDrownPng,
@@ -290,7 +319,9 @@ class $AssetsMapAnimGen {
         spritesheetPhoenixDashJumpPng,
         spritesheetPhoenixDashJumpTsx,
         spritesheetPhoenixDashRunPng,
-        spritesheetPhoenixDashRunTsx
+        spritesheetPhoenixDashRunTsx,
+        spritesheetPoofPng,
+        spritesheetPoofTsx
       ];
 }
 

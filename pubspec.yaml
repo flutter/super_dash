@@ -25,6 +25,7 @@ dependencies:
   flutter_bloc: ^8.1.3
   flutter_localizations:
     sdk: flutter
+  font_awesome_flutter: ^10.6.0
   intl: ^0.18.0
   leaderboard_repository:
     path: packages/leaderboard_repository
