@@ -124,6 +124,9 @@ class AudioController {
   bool get isMusicEnabled =>
       _settings?.muted.value == false && (_settings?.musicOn.value ?? false);
 
+  bool get isSoundsEnabled =>
+      _settings?.muted.value == false && (_settings?.soundsOn.value ?? false);
+
   void dispose() {
     _lifecycleNotifier?.removeListener(_handleAppLifecycle);
     _stopAllSound();
@@ -148,7 +151,9 @@ class AudioController {
 
   void startBackgroundSfx() {
     if (_backgroundSfxPlayer.state != PlayerState.playing) {
-      _backgroundSfxPlayer.resume();
+      if (isSoundsEnabled) {
+        _backgroundSfxPlayer.resume();
+      }
     }
   }
 
