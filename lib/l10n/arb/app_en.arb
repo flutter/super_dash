@@ -108,6 +108,22 @@
     "@termsOfService": {
         "description": "Text shown in the game info popup"
     },
+    "shareYourScore": "Share your Super Dash score and challenge your friends to do more!",
+    "@shareYourScore": {
+        "description": "Text shown in the share page"
+    },
+    "shareOn": "Share on:",
+    "@shareOn": {
+        "description": "Text shown in the share page"
+    },
+    "share": "Share",
+    "@share": {
+        "description": "Text shown in the share page"
+    },
+    "seeTheRanking": "See the ranking",
+    "@seeTheRanking": {
+        "description": "Text shown in the share page"
+    },
     "gameOver": "Game over!",
     "@gameOver": {
         "description": "Text shown in the game over page"
