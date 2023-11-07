@@ -1,4 +1,4 @@
-import 'package:dash_run/game_over/game_over.dart';
+import 'package:dash_run/score/game_over/game_over.dart';
 import 'package:dash_run/score/score.dart';
 import 'package:flutter/material.dart';
 
