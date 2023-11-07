@@ -68,7 +68,7 @@ class _GameInstructionsOverlayViewState
           height: 190,
         ),
       ),
-      if (kIsWeb)
+      if (isDesktop)
         GameInstruction(
           title: l10n.gameInstructionsPageTapToJumpTitle,
           description: l10n.gameInstructionsPageTapToJumpDescriptionDesktop,
@@ -136,6 +136,11 @@ class _GameInstructionsOverlayViewState
       ),
     ];
   }
+
+  bool get isDesktop =>
+      defaultTargetPlatform == TargetPlatform.macOS ||
+      defaultTargetPlatform == TargetPlatform.windows ||
+      defaultTargetPlatform == TargetPlatform.linux;
 
   @override
   void initState() {
