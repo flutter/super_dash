@@ -173,7 +173,6 @@ class Player extends JumperCharacter<DashRunGame> {
         findBehavior<PlayerStateBehavior>().state = DashState.deathPit;
         _respawnTimer = 1.4;
         return;
-        //return game.gameOver();
       }
 
       // If player has a golden feather, use it to avoid death.
