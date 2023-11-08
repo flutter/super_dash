@@ -214,6 +214,12 @@ class Player extends JumperCharacter<DashRunGame> {
             addPowerUp(ItemType.goldenFeather);
             gameRef.audioController.playSfx(Sfx.featherPowerup);
         }
+        gameRef.world.add(
+          ItemEffect(
+            type: collision.type,
+            position: collision.position.clone(),
+          ),
+        );
         collision.removeFromParent();
       }
 
