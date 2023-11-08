@@ -125,7 +125,7 @@ class Enemy extends PhysicalEntity<DashRunGame> {
         ),
       );
     } else if (type == EnemyType.grasshopper) {
-      final butterflyAnimation = await gameRef.loadSpriteAnimation(
+      final grasshopperAnimation = await gameRef.loadSpriteAnimation(
         'anim/spritesheet_enemy_grasshopper.png',
         SpriteAnimationData.sequenced(
           amount: 22,
@@ -138,7 +138,7 @@ class Enemy extends PhysicalEntity<DashRunGame> {
       add(
         SpriteAnimationComponent(
           size: Vector2.all(gameRef.tileSize),
-          animation: butterflyAnimation,
+          animation: grasshopperAnimation,
           anchor: Anchor.center,
           position: spritePosition,
         ),
