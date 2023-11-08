@@ -21,7 +21,6 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
   // ignore: unused_field
   final LeaderboardRepository _leaderboardRepository;
 
-  final blacklist = ['WTF'];
   final initialsRegex = RegExp('[A-Z]{3}');
 
   void _onScoreSubmitted(
@@ -79,6 +78,25 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
   }
 
   bool _isInitialsBlacklisted() {
-    return blacklist.contains(state.initials.join());
+    return _blacklist.contains(state.initials.join());
   }
 }
+
+const _blacklist = [
+  'FUK',
+  'FUC',
+  'COK',
+  'DIK',
+  'KKK',
+  'SHT',
+  'CNT',
+  'ASS',
+  'CUM',
+  'FAG',
+  'GAY',
+  'GOD',
+  'JEW',
+  'SEX',
+  'TIT',
+  'WTF',
+];
