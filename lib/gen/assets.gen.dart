@@ -57,9 +57,9 @@ class $AssetsImagesGen {
   AssetGenImage get leaderboardBg =>
       const AssetGenImage('assets/images/leaderboard_bg.png');
 
-  /// File path: assets/images/level_gates_instruction.png
-  AssetGenImage get levelGatesInstruction =>
-      const AssetGenImage('assets/images/level_gates_instruction.png');
+  /// File path: assets/images/portalInstruction.png
+  AssetGenImage get portalInstruction =>
+      const AssetGenImage('assets/images/portalInstruction.png');
 
   /// File path: assets/images/powerful_wings_instruction.png
   AssetGenImage get powerfulWingsInstruction =>
@@ -90,7 +90,7 @@ class $AssetsImagesGen {
         introBackgroundDesktop,
         introBackgroundMobile,
         leaderboardBg,
-        levelGatesInstruction,
+        portalInstruction,
         powerfulWingsInstruction,
         tapToJumpInstruction,
         tapToJumpSpacebar,
