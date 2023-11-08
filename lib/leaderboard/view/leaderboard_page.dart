@@ -43,7 +43,7 @@ class LeaderboardPage extends StatelessWidget {
           Positioned(
             left: 0,
             right: 0,
-            top: MediaQuery.sizeOf(context).height * .38,
+            top: MediaQuery.sizeOf(context).height * .3,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -92,33 +92,38 @@ class Leaderboard extends StatelessWidget {
 class _LeaderboardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final theme = Theme.of(context);
+    final listTileTheme = theme.listTileTheme;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Leaderboard',
+            l10n.leaderboardPageLeaderboardHeadline,
             style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 20),
           Flexible(
-            child: ListView.separated(
+            child: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
                 return ListTile(
-                  contentPadding: EdgeInsets.zero,
                   leading: Text('#$index'),
-                  title: Text('Player $index'),
-                  trailing: Text('${index * 100} Pts'),
+                  title: Text('$index'),
+                  trailing: Text(l10n.gameScoreLabel(index * 1000)),
+                  titleTextStyle: listTileTheme.titleTextStyle?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  leadingAndTrailingTextStyle:
+                      listTileTheme.leadingAndTrailingTextStyle?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 );
               },
-              separatorBuilder: (context, index) => const Divider(
-                color: Colors.grey,
-              ),
             ),
           ),
         ],
