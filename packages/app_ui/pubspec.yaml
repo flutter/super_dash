@@ -22,3 +22,5 @@ flutter:
     - family: Google Sans
       fonts:
         - asset: assets/fonts/GoogleSansText-Regular.ttf
+        - asset: assets/fonts/GoogleSansText-Bold.ttf
+          weight: 700
