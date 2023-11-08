@@ -4,6 +4,7 @@ import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/score/score.dart';
+import 'package:dash_run/utils/utils.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,8 +32,10 @@ class GameOverPage extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: Assets.images.gameOverBackground.provider(),
+            image: Assets.images.gameOverBg.provider(),
             fit: BoxFit.cover,
+            alignment:
+                isDesktop ? const Alignment(0, -.5) : Alignment.topCenter,
           ),
         ),
         child: Column(
