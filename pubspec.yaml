@@ -11,10 +11,13 @@ dependencies:
   app_ui:
     path: packages/app_ui
   audioplayers: ^5.2.0
+  authentication_repository:
+    path: packages/authentication_repository
   bloc: ^8.1.2
   cloud_firestore: ^4.12.2
   equatable: ^2.0.5
   file_selector: ^1.0.1
+  firebase_auth: ^4.12.1
   firebase_core: ^2.21.0
   flame: ^1.10.0
   flame_behaviors: ^1.0.0
