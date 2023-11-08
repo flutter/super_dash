@@ -21,6 +21,8 @@ class _InitialsFormViewState extends State<InitialsFormView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return BlocConsumer<ScoreBloc, ScoreState>(
       listener: (context, state) {
         if (state.initialsStatus == InitialsFormStatus.blacklisted) {
@@ -78,16 +80,16 @@ class _InitialsFormViewState extends State<InitialsFormView> {
               const CircularProgressIndicator(color: Colors.white)
             else
               GameElevatedButton(
-                label: 'Enter',
+                label: l10n.enter,
                 onPressed: () {
                   context.read<ScoreBloc>().add(const ScoreInitialsSubmitted());
                 },
               ),
             const SizedBox(height: 16),
             if (state.initialsStatus == InitialsFormStatus.blacklisted)
-              const _ErrorTextWidget('Keep it PG, use different initials')
+              _ErrorTextWidget(l10n.initialsBlacklistedMessage)
             else if (state.initialsStatus == InitialsFormStatus.invalid)
-              const _ErrorTextWidget('Please enter three initials'),
+              _ErrorTextWidget(l10n.initialsErrorMessage),
           ],
         );
       },
@@ -254,7 +256,7 @@ class _ErrorBody extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 40),
-        const _ErrorTextWidget('There was an error submitting your score'),
+        _ErrorTextWidget(l10n.scoreSubmissionErrorMessage),
         const SizedBox(height: 32),
         GameElevatedButton(
           label: l10n.playAgain,

@@ -112,6 +112,22 @@
     "@termsOfService": {
         "description": "Text shown in the game info popup"
     },
+    "enter": "Enter",
+    "@enter": {
+        "description": "Text shown in the score submission page"
+    },
+    "initialsBlacklistedMessage": "Keep it PG, use different initials",
+    "@initialsBlacklistedMessage": {
+        "description": "Text shown in the score submission page"
+    },
+    "initialsErrorMessage": "Please enter three initials",
+    "@initialsErrorMessage": {
+        "description": "Text shown in the score submission page"
+    },
+    "scoreSubmissionErrorMessage": "There was an error submitting your score",
+    "@scoreSubmissionErrorMessage": {
+        "description": "Text shown in the score submission page"
+    },
     "shareYourScore": "Share your Super Dash score and challenge your friends to do more!",
     "@shareYourScore": {
         "description": "Text shown in the share page"
