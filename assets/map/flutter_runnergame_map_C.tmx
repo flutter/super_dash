@@ -132,7 +132,6 @@
    <object id="827" gid="125" x="3404.12" y="1089.33" width="256" height="320"/>
    <object id="828" gid="125" x="2972.12" y="1025.33" width="256" height="320"/>
    <object id="829" gid="125" x="3036.12" y="1217.33" width="332.291" height="415.364"/>
-   <object id="830" gid="125" x="2300.12" y="971.334" width="212.073" height="265.091"/>
    <object id="831" gid="125" x="1395.12" y="1910.33" width="223" height="277"/>
    <object id="832" gid="125" x="1288.12" y="1947.33" width="191" height="238.75"/>
    <object id="833" gid="125" x="2790.12" y="1177.33" width="256" height="320"/>
@@ -144,7 +143,7 @@
    <object id="839" gid="125" x="1848.12" y="1643.33" width="271.709" height="339.636"/>
    <object id="840" gid="125" x="2198.12" y="1488.81" width="241.309" height="301.636"/>
   </objectgroup>
-  <objectgroup id="30" name="mountain_FG_trees" locked="1">
+  <objectgroup id="30" name="mountain_FG_trees">
    <object id="412" gid="124" x="4416" y="1152" width="256" height="320"/>
    <object id="413" gid="124" x="4560" y="1152" width="179.2" height="224"/>
    <object id="414" gid="124" x="6960" y="1152" width="179.2" height="224"/>
