@@ -5,6 +5,7 @@ import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/score/score.dart';
 import 'package:dash_run/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InputInitialsPage extends StatelessWidget {
   const InputInitialsPage({super.key});
@@ -28,19 +29,39 @@ class InputInitialsPage extends StatelessWidget {
                 isDesktop ? const Alignment(0, .7) : Alignment.bottomCenter,
           ),
         ),
-        child: const Center(
+        child: Center(
           child: Column(
             children: [
-              Spacer(flex: 3),
-              Text(
+              const Spacer(flex: 3),
+              SizedBox(
+                height: 52,
+                width: 52,
+                child: TraslucentBackground(
+                  gradient: const [
+                    Color(0xFFB1B1B1),
+                    Color(0xFF363567),
+                  ],
+                  border: Border.all(color: Colors.white),
+                  child: const Align(
+                    alignment: Alignment(-0.06, 0),
+                    child: Icon(
+                      FontAwesomeIcons.trophy,
+                      size: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
                 'Enter your initials for\nthe leaderboard',
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 24),
-              InitialsFormView(),
-              Spacer(),
-              BottomBar(),
-              SizedBox(height: 16),
+              const SizedBox(height: 24),
+              const InitialsFormView(),
+              const Spacer(),
+              const BottomBar(),
+              const SizedBox(height: 16),
             ],
           ),
         ),
