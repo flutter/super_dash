@@ -20,7 +20,6 @@ class Player extends JumperCharacter<DashRunGame> {
   final Vector2 cameraViewport;
   late Vector2 spawn;
   late final List<Vector2> respawnPoints;
-  late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
 
   List<ItemType> powerUps = [];
@@ -31,30 +30,22 @@ class Player extends JumperCharacter<DashRunGame> {
 
   double? _respawnTimer;
 
-  double? _hasJumpedTimer;
+  bool get isRespawning => _respawnTimer != null;
 
   @override
   int get priority => 1;
 
-  @override
-  set jumping(bool value) {
-    if (!super.jumping && value) {
-      final jumpSound = doubleJumpEnabled ? Sfx.phoenixJump : Sfx.jump;
-      gameRef.audioController.playSfx(jumpSound);
-      gameRef.audioController.playSfx(Sfx.jump);
+  void jumpEffects() {
+    final jumpSound = doubleJumpEnabled ? Sfx.phoenixJump : Sfx.jump;
+    gameRef.audioController.playSfx(jumpSound);
+    gameRef.audioController.playSfx(Sfx.jump);
 
-      final newJumpState =
-          powerUps.isEmpty ? DashState.jump : DashState.phoenixJump;
-      findBehavior<PlayerStateBehavior>().state = newJumpState;
-
-      _hasJumpedTimer = .4;
-    }
-
-    super.jumping = value;
+    final newJumpState =
+        powerUps.isEmpty ? DashState.jump : DashState.phoenixJump;
+    findBehavior<PlayerStateBehavior>().state = newJumpState;
   }
 
-  void doubleJump() {
-    super.jumping = true;
+  void doubleJumpEffects() {
     gameRef.audioController.playSfx(Sfx.doubleJump);
     findBehavior<PlayerStateBehavior>().state = DashState.phoenixDoubleJump;
   }
@@ -62,21 +53,33 @@ class Player extends JumperCharacter<DashRunGame> {
   @override
   set walking(bool value) {
     if (!super.walking && value) {
-      findBehavior<PlayerStateBehavior>().state =
-          powerUps.isEmpty ? DashState.running : DashState.phoenixRunning;
+      setRunningState();
     } else if (super.walking && !value) {
-      findBehavior<PlayerStateBehavior>().state =
-          powerUps.isEmpty ? DashState.idle : DashState.phoenixIdle;
+      setIdleState();
     }
 
     super.walking = value;
+  }
+
+  void setRunningState() {
+    final behavior = findBehavior<PlayerStateBehavior>();
+    if (behavior.state != DashState.running &&
+        behavior.state != DashState.phoenixRunning) {
+      final newRunState =
+          powerUps.isEmpty ? DashState.running : DashState.phoenixRunning;
+      behavior.state = newRunState;
+    }
+  }
+
+  void setIdleState() {
+    findBehavior<PlayerStateBehavior>().state =
+        powerUps.isEmpty ? DashState.idle : DashState.phoenixIdle;
   }
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    input = gameRef.input;
     size = Vector2.all(gameRef.tileSize * .5);
     walkSpeed = gameRef.tileSize * 5;
     minJumpImpulse = world.gravity * 0.5;
@@ -134,16 +137,6 @@ class Player extends JumperCharacter<DashRunGame> {
     }
 
     if (isPlayerTeleporting) return;
-
-    if (_hasJumpedTimer != null) {
-      _hasJumpedTimer = _hasJumpedTimer! - dt;
-
-      if (_hasJumpedTimer! <= 0 && collisionInfo.downCollision != null) {
-        findBehavior<PlayerStateBehavior>().state =
-            powerUps.isEmpty ? DashState.running : DashState.phoenixRunning;
-        _hasJumpedTimer = null;
-      }
-    }
 
     // Removed since the result didn't ended up good.
     // Leaving in comment if we decide to bring it back.
