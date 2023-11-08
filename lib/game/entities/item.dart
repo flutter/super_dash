@@ -16,16 +16,13 @@ enum ItemType {
 
   final int points;
 
-  static ItemType fromGid(int gid, int initialGid) {
-    if (gid == initialGid) {
+  static ItemType fromType(String? type) {
+    if (type == 'Egg') {
       return ItemType.egg;
-    } else if (gid == initialGid + 1) {
-      return ItemType.acorn;
-    } else if (gid == initialGid + 3) {
+    } else if (type == 'Feather') {
       return ItemType.goldenFeather;
-    } else {
-      return ItemType.egg;
     }
+    return ItemType.acorn;
   }
 }
 
@@ -42,38 +39,70 @@ class Item extends PhysicalEntity<DashRunGame> {
 
   @override
   Future<void> onLoad() async {
-    type = ItemType.fromGid(
-      tiledObject.gid ?? 0,
-      gameRef.itemsTileset.firstGid ?? 0,
+    await super.onLoad();
+    type = ItemType.fromType(
+      (tiledObject.properties.byName['Type'] as StringProperty?)?.value,
     );
 
     size = Vector2.all(gameRef.tileSize);
     position = Vector2(tiledObject.x, tiledObject.y);
 
-    add(
-      SpriteComponent(
-        size: size,
-        sprite: gameRef.itemsSpritesheet.getSpriteById(
-          (tiledObject.gid ?? 0) - gameRef.itemsTileset.firstGid!,
+    if (type == ItemType.egg) {
+      final eggAnimation = await gameRef.loadSpriteAnimation(
+        'anim/spritesheet_item_egg.png',
+        SpriteAnimationData.sequenced(
+          amount: 48,
+          amountPerRow: 8,
+          textureSize: Vector2.all(gameRef.tileSize),
+          stepTime: .042,
         ),
-        children: [
-          SequenceEffect(
-            [
-              MoveEffect.by(
-                -Vector2(0, gameRef.tileSize / 2),
-                CurvedEffectController(.8, Curves.easeIn),
-              ),
-              MoveEffect.by(
-                Vector2(0, gameRef.tileSize / 2),
-                CurvedEffectController(.8, Curves.easeOut),
-              ),
-            ],
-            infinite: true,
+      );
+      add(
+        SpriteAnimationComponent(
+          animation: eggAnimation,
+          size: size,
+        ),
+      );
+    } else if (type == ItemType.goldenFeather) {
+      final featherAnimation = await gameRef.loadSpriteAnimation(
+        'anim/spritesheet_item_feather.png',
+        SpriteAnimationData.sequenced(
+          amount: 30,
+          amountPerRow: 6,
+          textureSize: Vector2.all(gameRef.tileSize),
+          stepTime: .042,
+        ),
+      );
+      add(
+        SpriteAnimationComponent(
+          animation: featherAnimation,
+          size: size,
+        ),
+      );
+    } else {
+      add(
+        SpriteComponent(
+          size: size,
+          sprite: gameRef.itemsSpritesheet.getSpriteById(
+            (tiledObject.gid ?? 0) - gameRef.itemsTileset.firstGid!,
           ),
-        ],
-      ),
-    );
-
-    return super.onLoad();
+          children: [
+            SequenceEffect(
+              [
+                MoveEffect.by(
+                  -Vector2(0, gameRef.tileSize / 2),
+                  CurvedEffectController(.8, Curves.easeIn),
+                ),
+                MoveEffect.by(
+                  Vector2(0, gameRef.tileSize / 2),
+                  CurvedEffectController(.8, Curves.easeOut),
+                ),
+              ],
+              infinite: true,
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

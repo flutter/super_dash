@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dash_run/game/game.dart';
 
 import 'package:flame_behaviors/flame_behaviors.dart';
@@ -7,51 +9,87 @@ class PlayerControllerBehavior extends Behavior<Player> {
   @visibleForTesting
   bool doubleJumpUsed = false;
 
+  double _jumpTimer = 0;
+
+  @override
+  FutureOr<void> onLoad() async {
+    await super.onLoad();
+
+    parent.gameRef.addInputListener(_handleInput);
+  }
+
+  @override
+  void onRemove() {
+    super.onRemove();
+
+    parent.gameRef.removeInputListener(_handleInput);
+  }
+
+  void _handleInput() {
+    if (parent.isDead || parent.isPlayerTeleporting || parent.isRespawning) {
+      return;
+    }
+
+    // Do nothing when there is a jump cool down
+    if (_jumpTimer >= 0) {
+      return;
+    }
+
+    // If is no walking, start walking
+    if (!parent.walking) {
+      parent.walking = true;
+      return;
+    }
+
+    // If is walking, jump
+    if (parent.walking && parent.isOnGround) {
+      parent
+        ..jumpEffects()
+        ..jumping = true;
+      _jumpTimer = 0.04;
+      return;
+    }
+
+    // If is walking and double jump is enabled, double jump
+    if (parent.walking &&
+        !parent.isOnGround &&
+        parent.doubleJumpEnabled &&
+        !doubleJumpUsed) {
+      parent
+        ..doubleJumpEffects()
+        ..jumping = true;
+      _jumpTimer = 0.06;
+      doubleJumpUsed = true;
+      return;
+    }
+  }
+
   @override
   void update(double dt) {
     super.update(dt);
 
-    if (parent.isPlayerTeleporting) return;
-
-    // Reset the double jump.
-    if (doubleJumpUsed && parent.isOnGround) {
-      doubleJumpUsed = false;
+    if (parent.isDead && parent.jumping) {
+      parent.jumping = false;
     }
 
-    if (parent.isAlive) {
-      // Keep jumping if started.
-      if (parent.jumping && parent.input.isPressed && parent.isOnGround) {
-        parent.jumping = true;
-      } else {
+    if (parent.isDead || parent.isPlayerTeleporting || parent.isRespawning) {
+      return;
+    }
+
+    if (_jumpTimer >= 0) {
+      _jumpTimer -= dt;
+
+      if (_jumpTimer <= 0) {
         parent.jumping = false;
       }
     }
 
-    if (!parent.input.justPressed) return;
+    if (_jumpTimer <= 0 && parent.isOnGround) {
+      parent.setRunningState();
+    }
 
-    if (parent.input.isPressedRight) {
-      // Tapped right.
-      if (parent.walking) {
-        if (!parent.faceLeft) {
-          if (parent.isOnGround) {
-            parent.jumping = true;
-          } else if (!parent.isOnGround &&
-              (parent.doubleJumpEnabled && !doubleJumpUsed)) {
-            parent.doubleJump();
-            doubleJumpUsed = true;
-          }
-        } else {
-          // Moving left, stop.
-          parent
-            ..walking = false
-            ..faceLeft = false;
-        }
-      } else {
-        // Standing still.
-        parent
-          ..walking = true
-          ..faceLeft = false;
-      }
+    if (doubleJumpUsed && parent.isOnGround) {
+      doubleJumpUsed = false;
     }
   }
 }
