@@ -11,13 +11,16 @@ final class ScoreSubmitted extends ScoreEvent {
   const ScoreSubmitted();
 }
 
+final class ScoreInitialsUpdated extends ScoreEvent {
+  const ScoreInitialsUpdated({required this.character, required this.index});
+
+  final String character;
+
+  final int index;
+}
+
 final class ScoreInitialsSubmitted extends ScoreEvent {
-  const ScoreInitialsSubmitted({required this.initials});
-
-  final String initials;
-
-  @override
-  List<Object> get props => [initials];
+  const ScoreInitialsSubmitted();
 }
 
 final class ScoreLeaderboardRequested extends ScoreEvent {
