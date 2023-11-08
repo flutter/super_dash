@@ -29,29 +29,27 @@ class DashRunGame extends LeapGame
           ),
         );
 
-  late final SpriteSheet itemsSpritesheet;
-  static const prefix = 'assets/map/';
   static final _cameraViewport = Vector2(592, 1024);
+  static const prefix = 'assets/map/';
+  static const _sections = [
+    'flutter_runnergame_map_A.tmx',
+    'flutter_runnergame_map_B.tmx',
+    'flutter_runnergame_map_C.tmx',
+  ];
+  static const _sectionsBackgroundColor = [
+    Color(0xffe9e9df),
+    Color(0xffdae2ee),
+    Color(0xff0353b0),
+  ];
 
   final GameBloc gameBloc;
   final AssetBundle? customBundle;
   final AudioController audioController;
 
   late final SimpleCombinedInput input;
+  late final SpriteSheet itemsSpritesheet;
 
   GameState get state => gameBloc.state;
-
-  static const _sections = [
-    'flutter_runnergame_map_A.tmx',
-    'flutter_runnergame_map_B.tmx',
-    'flutter_runnergame_map_C.tmx',
-  ];
-
-  static const _sectionsBackgroundColor = [
-    Color(0xffe9e9df),
-    Color(0xffdae2ee),
-    Color(0xff0353b0),
-  ];
 
   Player? get player => world.firstChild<Player>();
 
