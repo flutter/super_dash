@@ -8,7 +8,7 @@
       "name": "Launch game",
       "request": "launch",
       "type": "dart",
-      "program": "lib/main.dart",
+      "program": "lib/main_dev.dart",
     },
     {
       "name": "Launch game tester",
