@@ -121,7 +121,7 @@ class _GameInstructionsOverlayViewState
       GameInstruction(
         title: l10n.gameInstructionsPageLevelGatesTitle,
         description: l10n.gameInstructionsPageLevelGatesDescription,
-        image: Assets.images.levelGatesInstruction.image(
+        image: Assets.images.portalInstruction.image(
           width: 190,
           height: 190,
         ),
