@@ -73,7 +73,7 @@ class _TestDashRunGame extends DashRunGame {
 class _ReferenceComponent extends PositionComponent {}
 
 class _SpawnedComponent extends PositionComponent {
-  _SpawnedComponent(this.tiledObject);
+  _SpawnedComponent({required this.tiledObject});
   final TiledObject tiledObject;
 }
 
@@ -100,12 +100,10 @@ void main() {
       await game.ensureAdd(
         ObjectGroupProximityBuilder<_ReferenceComponent>(
           proximity: 200,
-          tilesetPath: '',
           tileLayerName: '',
           tileset: _MockTileset(),
           componentBuilder: ({
             required TiledObject tiledObject,
-            required Sprite sprite,
           }) =>
               PositionComponent(),
         ),
@@ -122,14 +120,9 @@ void main() {
         final proximityBuilder =
             ObjectGroupProximityBuilder<_ReferenceComponent>(
           proximity: 200,
-          tilesetPath: '',
           tileLayerName: '',
           tileset: _MockTileset(),
-          componentBuilder: ({
-            required TiledObject tiledObject,
-            required Sprite sprite,
-          }) =>
-              _SpawnedComponent(tiledObject),
+          componentBuilder: _SpawnedComponent.new,
         );
         await game.ensureAdd(proximityBuilder);
 
@@ -153,14 +146,9 @@ void main() {
         final proximityBuilder =
             ObjectGroupProximityBuilder<_ReferenceComponent>(
           proximity: 200,
-          tilesetPath: '',
           tileLayerName: '',
           tileset: _MockTileset(),
-          componentBuilder: ({
-            required TiledObject tiledObject,
-            required Sprite sprite,
-          }) =>
-              _SpawnedComponent(tiledObject),
+          componentBuilder: _SpawnedComponent.new,
         );
         await game.ensureAdd(proximityBuilder);
 

@@ -1,18 +1,11 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:leap/leap.dart';
-
-enum DashState {
-  idle,
-  running,
-
-  phoenixIdle,
-  phoenixRunning,
-}
 
 class Player extends JumperCharacter<DashRunGame> {
   Player({
@@ -29,13 +22,16 @@ class Player extends JumperCharacter<DashRunGame> {
   late final List<Vector2> respawnPoints;
   late final SimpleCombinedInput input;
   late final PlayerCameraAnchor cameraAnchor;
-  late final SpriteAnimationGroupComponent<DashState> animations;
 
   List<ItemType> powerUps = [];
   bool isPlayerInvincible = false;
   bool isPlayerTeleporting = false;
 
   bool get doubleJumpEnabled => powerUps.contains(ItemType.goldenFeather);
+
+  double? _respawnTimer;
+
+  double? _hasJumpedTimer;
 
   @override
   int get priority => 1;
@@ -45,6 +41,13 @@ class Player extends JumperCharacter<DashRunGame> {
     if (!super.jumping && value) {
       final jumpSound = doubleJumpEnabled ? Sfx.phoenixJump : Sfx.jump;
       gameRef.audioController.playSfx(jumpSound);
+      gameRef.audioController.playSfx(Sfx.jump);
+
+      final newJumpState =
+          powerUps.isEmpty ? DashState.jump : DashState.phoenixJump;
+      findBehavior<PlayerStateBehavior>().state = newJumpState;
+
+      _hasJumpedTimer = .4;
     }
 
     super.jumping = value;
@@ -53,15 +56,16 @@ class Player extends JumperCharacter<DashRunGame> {
   void doubleJump() {
     super.jumping = true;
     gameRef.audioController.playSfx(Sfx.doubleJump);
+    findBehavior<PlayerStateBehavior>().state = DashState.phoenixDoubleJump;
   }
 
   @override
   set walking(bool value) {
     if (!super.walking && value) {
-      animations.current =
+      findBehavior<PlayerStateBehavior>().state =
           powerUps.isEmpty ? DashState.running : DashState.phoenixRunning;
     } else if (super.walking && !value) {
-      animations.current =
+      findBehavior<PlayerStateBehavior>().state =
           powerUps.isEmpty ? DashState.idle : DashState.phoenixIdle;
     }
 
@@ -81,64 +85,9 @@ class Player extends JumperCharacter<DashRunGame> {
       levelSize: levelSize,
     );
 
-    // Normal animations
-    final idleAnimation = await gameRef.loadSpriteAnimation(
-      'anim/spritesheet_dash_idle.png',
-      SpriteAnimationData.sequenced(
-        amount: 18,
-        stepTime: 0.042,
-        textureSize: Vector2.all(gameRef.tileSize),
-        amountPerRow: 8,
-      ),
-    );
-
-    final runningAnimation = await gameRef.loadSpriteAnimation(
-      'anim/spritesheet_dash_run.png',
-      SpriteAnimationData.sequenced(
-        amount: 16,
-        stepTime: 0.042,
-        textureSize: Vector2.all(gameRef.tileSize),
-        amountPerRow: 8,
-      ),
-    );
-
-    // Phoenix animations
-    final phoenixIdleAnimation = await gameRef.loadSpriteAnimation(
-      'anim/spritesheet_phoenixDash_idle.png',
-      SpriteAnimationData.sequenced(
-        amount: 18,
-        stepTime: 0.042,
-        textureSize: Vector2.all(gameRef.tileSize),
-        amountPerRow: 8,
-      ),
-    );
-
-    final phoenixRunningAnimation = await gameRef.loadSpriteAnimation(
-      'anim/spritesheet_phoenixDash_run.png',
-      SpriteAnimationData.sequenced(
-        amount: 16,
-        stepTime: 0.042,
-        textureSize: Vector2.all(gameRef.tileSize),
-        amountPerRow: 8,
-      ),
-    );
-
-    animations = SpriteAnimationGroupComponent<DashState>(
-      size: Vector2.all(gameRef.tileSize),
-      animations: {
-        DashState.idle: idleAnimation,
-        DashState.running: runningAnimation,
-        DashState.phoenixIdle: phoenixIdleAnimation,
-        DashState.phoenixRunning: phoenixRunningAnimation,
-      },
-      current: DashState.idle,
-      anchor: Anchor.center,
-      position: size / 2 - Vector2(0, size.y / 2),
-    );
-
-    add(animations);
     add(cameraAnchor);
     add(PlayerControllerBehavior());
+    add(PlayerStateBehavior());
 
     gameRef.camera.follow(cameraAnchor);
 
@@ -163,10 +112,11 @@ class Player extends JumperCharacter<DashRunGame> {
   void addPowerUp(ItemType type) {
     powerUps.add(type);
 
-    if (animations.current == DashState.idle) {
-      animations.current = DashState.phoenixIdle;
-    } else if (animations.current == DashState.running) {
-      animations.current = DashState.phoenixRunning;
+    final behavior = findBehavior<PlayerStateBehavior>();
+    if (behavior.state == DashState.idle) {
+      behavior.state = DashState.phoenixIdle;
+    } else if (behavior.state == DashState.running) {
+      behavior.state = DashState.phoenixRunning;
     }
   }
 
@@ -174,13 +124,34 @@ class Player extends JumperCharacter<DashRunGame> {
   void update(double dt) {
     super.update(dt);
 
+    if (_respawnTimer != null) {
+      _respawnTimer = _respawnTimer! - dt;
+      if (_respawnTimer! <= 0) {
+        _respawnTimer = null;
+        gameRef.gameOver();
+      }
+      return;
+    }
+
     if (isPlayerTeleporting) return;
 
-    if (collisionInfo.downCollision != null && velocity.x > 0) {
-      gameRef.audioController.startBackgroundSfx();
-    } else {
-      gameRef.audioController.stopBackgroundSfx();
+    if (_hasJumpedTimer != null) {
+      _hasJumpedTimer = _hasJumpedTimer! - dt;
+
+      if (_hasJumpedTimer! <= 0 && collisionInfo.downCollision != null) {
+        findBehavior<PlayerStateBehavior>().state =
+            powerUps.isEmpty ? DashState.running : DashState.phoenixRunning;
+        _hasJumpedTimer = null;
+      }
     }
+
+    // Removed since the result didn't ended up good.
+    // Leaving in comment if we decide to bring it back.
+    // if (collisionInfo.downCollision != null && velocity.x > 0) {
+    //   gameRef.audioController.startBackgroundSfx();
+    // } else {
+    //   gameRef.audioController.stopBackgroundSfx();
+    // }
 
     if ((gameRef.isLastSection && x >= gameRef.leapMap.width - tileSize) ||
         (!gameRef.isLastSection &&
@@ -189,13 +160,22 @@ class Player extends JumperCharacter<DashRunGame> {
       return;
     }
 
-    if (isDead) return game.gameOver();
+    if (isDead) {
+      findBehavior<PlayerStateBehavior>().state = DashState.deathFaint;
+      super.walking = false;
+      _respawnTimer = 1.4;
+      return;
+    }
 
     // Player falls in a hazard zone.
     if ((collisionInfo.downCollision?.tags.contains('hazard') ?? false) &&
         !isPlayerInvincible) {
       // If player has no golden feathers, game over.
-      if (powerUps.isEmpty) return game.gameOver();
+      if (powerUps.isEmpty) {
+        findBehavior<PlayerStateBehavior>().state = DashState.deathPit;
+        _respawnTimer = 1.4;
+        return;
+      }
 
       // If player has a golden feather, use it to avoid death.
       powerUps.removeLast();
@@ -241,6 +221,10 @@ class Player extends JumperCharacter<DashRunGame> {
         health -= collision.enemyDamage;
       }
     }
+  }
+
+  void spritePaintColor(Color color) {
+    findBehavior<PlayerStateBehavior>().updateSpritePaintColor(color);
   }
 
   void sectionCleared() {

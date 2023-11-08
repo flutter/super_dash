@@ -40,5 +40,12 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
         score: score,
       ),
     );
+
+    emit(
+      state.copyWith(
+        status: ScoreStatus.scoreOverview,
+        initials: event.initials,
+      ),
+    );
   }
 }

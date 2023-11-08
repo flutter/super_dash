@@ -25,12 +25,6 @@
    <property name="RightTop" type="int" value="0"/>
   </properties>
  </tile>
- <tile id="36" type="Platform"/>
- <tile id="37" type="Platform"/>
- <tile id="38" type="Platform"/>
- <tile id="39" type="Platform"/>
- <tile id="40" type="Platform"/>
- <tile id="41" type="Platform"/>
  <tile id="43" type="Slope">
   <properties>
    <property name="LeftTop" type="int" value="0"/>
@@ -45,13 +39,8 @@
  </tile>
  <tile id="45" type="Platform"/>
  <tile id="46" type="Platform"/>
- <tile id="80" type="Platform"/>
- <tile id="81" type="Platform"/>
- <tile id="84" type="Platform"/>
- <tile id="85" type="Platform"/>
- <tile id="87" type="Platform"/>
- <tile id="89" type="Platform"/>
- <tile id="90" type="Platform"/>
+ <tile id="93" type="Hazard"/>
+ <tile id="94" type="Hazard"/>
  <tile id="105" type="Hazard"/>
  <tile id="106" type="Hazard"/>
  <tile id="108" type="Platform"/>

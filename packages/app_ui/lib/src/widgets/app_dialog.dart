@@ -20,6 +20,7 @@ class AppDialog extends StatelessWidget {
       ],
       stops: [0.05, 0.5, 1],
     ),
+    this.borderRadius = const BorderRadius.all(Radius.circular(24)),
     this.border,
     super.key,
   });
@@ -36,49 +37,41 @@ class AppDialog extends StatelessWidget {
   /// The gradient of the dialog. Shown on top of the [backgroundColor].
   final LinearGradient? gradient;
 
+  /// The border radius of the dialog.
+  final BorderRadius borderRadius;
+
   /// The border of the dialog.
   final BoxBorder? border;
 
   @override
   Widget build(BuildContext context) {
-    const borderRadius = BorderRadius.all(Radius.circular(24));
-
     return Dialog(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      shape: const RoundedRectangleBorder(borderRadius: borderRadius),
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 328, maxHeight: 624),
-        decoration: BoxDecoration(
-          borderRadius: borderRadius,
-          border: border,
-          color: backgroundColor,
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: borderRadius,
-            gradient: gradient,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                if (showCloseButton) ...[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GameIconButton(
-                        icon: Icons.close,
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                    ],
-                  ),
-                ],
-                child,
+      shape: RoundedRectangleBorder(borderRadius: borderRadius),
+      child: AppCard(
+        border: border,
+        gradient: gradient,
+        backgroundColor: backgroundColor,
+        borderRadius: borderRadius,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (showCloseButton) ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GameIconButton(
+                      icon: Icons.close,
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
               ],
-            ),
+              child,
+            ],
           ),
         ),
       ),

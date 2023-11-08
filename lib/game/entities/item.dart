@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:dash_run/game/dash_run_game.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/material.dart';
 import 'package:leap/leap.dart';
 
 enum ItemType {
@@ -29,12 +31,10 @@ enum ItemType {
 
 class Item extends PhysicalEntity<DashRunGame> {
   Item({
-    required this.sprite,
     required this.tiledObject,
   }) : super(static: true, collisionType: CollisionType.standard);
 
   late final ItemType type;
-  late final Sprite sprite;
   late final TiledObject tiledObject;
 
   @override
@@ -46,13 +46,31 @@ class Item extends PhysicalEntity<DashRunGame> {
       tiledObject.gid ?? 0,
       gameRef.itemsTileset.firstGid ?? 0,
     );
-    size = sprite.srcSize;
+
+    size = Vector2.all(gameRef.tileSize);
     position = Vector2(tiledObject.x, tiledObject.y);
 
     add(
       SpriteComponent(
         size: size,
-        sprite: sprite,
+        sprite: gameRef.itemsSpritesheet.getSpriteById(
+          (tiledObject.gid ?? 0) - gameRef.itemsTileset.firstGid!,
+        ),
+        children: [
+          SequenceEffect(
+            [
+              MoveEffect.by(
+                -Vector2(0, gameRef.tileSize / 2),
+                CurvedEffectController(.8, Curves.easeIn),
+              ),
+              MoveEffect.by(
+                Vector2(0, gameRef.tileSize / 2),
+                CurvedEffectController(.8, Curves.easeOut),
+              ),
+            ],
+            infinite: true,
+          ),
+        ],
       ),
     );
 

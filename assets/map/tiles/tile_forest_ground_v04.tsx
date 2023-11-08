@@ -33,12 +33,6 @@
    <property name="RightTop" type="int" value="0"/>
   </properties>
  </tile>
- <tile id="33" type="Platform"/>
- <tile id="34" type="Platform"/>
- <tile id="35" type="Platform"/>
- <tile id="36" type="Platform"/>
- <tile id="37" type="Platform"/>
- <tile id="38" type="Platform"/>
  <tile id="41" type="Slope">
   <properties>
    <property name="LeftTop" type="int" value="0"/>
@@ -51,26 +45,24 @@
    <property name="RightTop" type="int" value="64"/>
   </properties>
  </tile>
- <tile id="43" type="Platform"/>
  <tile id="51" type="Slope">
   <properties>
    <property name="LeftTop" type="int" value="0"/>
    <property name="RightTop" type="int" value="64"/>
   </properties>
  </tile>
- <tile id="74" type="Platform"/>
- <tile id="75" type="Platform">
+ <tile id="75">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="35" height="61"/>
   </objectgroup>
  </tile>
  <tile id="81" type="Platform"/>
- <tile id="86">
+ <tile id="86" type="Hazard">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="17" width="64" height="47"/>
   </objectgroup>
  </tile>
- <tile id="87">
+ <tile id="87" type="Hazard">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="17" width="64" height="47"/>
   </objectgroup>

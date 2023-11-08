@@ -1,5 +1,6 @@
 import 'package:dash_run/filesytem_asset_bundle/filesystem_asset_bundle.dart';
 import 'package:dash_run/game/game.dart';
+import 'package:dash_run/settings/settings_controller.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
@@ -105,6 +106,13 @@ class _MapTesterViewState extends State<MapTesterView> {
                       game?.player?.addPowerUp(ItemType.goldenFeather);
                     },
                     child: const Text('Add powerup'),
+                  ),
+                  const SizedBox(width: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<SettingsController>().toggleMuted();
+                    },
+                    child: const Text('Toggle sound'),
                   ),
                 ],
               ),
