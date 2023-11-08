@@ -164,5 +164,13 @@
     "leaderboardPageLeaderboardHeadline": "Leaderboard",
     "@leaderboardPageLeaderboardHeadline": {
         "description": "Text shown in the leaderboard page headline"
+    },
+    "leaderboardPageLeaderboardErrorText": "There was an error while fetching the leaderboard.",
+    "@leaderboardPageLeaderboardErrorText": {
+        "description": "Text shown in the leaderboard page when there is an error"
+    },
+    "leaderboardPageLeaderboardNoEntries": "No entries",
+    "@leaderboardPageLeaderboardNoEntries": {
+        "description": "Text shown in the leaderboard page when there are no entries"
     }
 }

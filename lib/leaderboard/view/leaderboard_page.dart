@@ -145,7 +145,7 @@ class _ErrorWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        const Text('There was an error while fetching the leaderboard.'),
+        Text(context.l10n.leaderboardPageLeaderboardErrorText),
       ],
     );
   }
@@ -195,7 +195,7 @@ class _LeaderboardContent extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           if (entries.isEmpty)
-            const Center(child: Text('No entries'))
+            Center(child: Text(l10n.leaderboardPageLeaderboardNoEntries))
           else
             Flexible(
               child: ListView.builder(
