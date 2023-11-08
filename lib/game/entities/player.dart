@@ -138,11 +138,13 @@ class Player extends JumperCharacter<DashRunGame> {
 
     if (isPlayerTeleporting) return;
 
-    if (collisionInfo.downCollision != null && velocity.x > 0) {
-      gameRef.audioController.startBackgroundSfx();
-    } else {
-      gameRef.audioController.stopBackgroundSfx();
-    }
+    // Removed since the result didn't ended up good.
+    // Leaving in comment if we decide to bring it back.
+    // if (collisionInfo.downCollision != null && velocity.x > 0) {
+    //   gameRef.audioController.startBackgroundSfx();
+    // } else {
+    //   gameRef.audioController.stopBackgroundSfx();
+    // }
 
     if ((gameRef.isLastSection && x >= gameRef.leapMap.width - tileSize) ||
         (!gameRef.isLastSection &&

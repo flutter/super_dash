@@ -163,7 +163,9 @@ class DashRunGame extends LeapGame
 
   void gameOver() {
     gameBloc.add(const GameOver());
-    audioController.stopBackgroundSfx();
+    // Removed since the result didn't ended up good.
+    // Leaving in comment if we decide to bring it back.
+    //audioController.stopBackgroundSfx();
 
     world.firstChild<Player>()?.removeFromParent();
 
