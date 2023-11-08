@@ -4,8 +4,8 @@ import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
+import 'package:dash_run/utils/utils.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -136,11 +136,6 @@ class _GameInstructionsOverlayViewState
       ),
     ];
   }
-
-  bool get isDesktop =>
-      defaultTargetPlatform == TargetPlatform.macOS ||
-      defaultTargetPlatform == TargetPlatform.windows ||
-      defaultTargetPlatform == TargetPlatform.linux;
 
   @override
   void initState() {
