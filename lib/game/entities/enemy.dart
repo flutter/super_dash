@@ -144,7 +144,7 @@ class Enemy extends PhysicalEntity<DashRunGame> {
         ),
       );
     } else if (type == EnemyType.ant) {
-      final butterflyAnimation = await gameRef.loadSpriteAnimation(
+      final antAnimation = await gameRef.loadSpriteAnimation(
         'anim/spritesheet_enemy_ant.png',
         SpriteAnimationData.sequenced(
           amount: 12,
@@ -157,7 +157,7 @@ class Enemy extends PhysicalEntity<DashRunGame> {
       add(
         SpriteAnimationComponent(
           size: Vector2.all(gameRef.tileSize),
-          animation: butterflyAnimation,
+          animation: antAnimation,
           anchor: Anchor.center,
           position: spritePosition,
         ),
