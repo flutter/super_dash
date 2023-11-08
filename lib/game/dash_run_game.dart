@@ -167,6 +167,9 @@ class DashRunGame extends LeapGame
     // Leaving in comment if we decide to bring it back.
     //audioController.stopBackgroundSfx();
 
+
+    audioController.playEndGameSfx();
+
     world.firstChild<Player>()?.removeFromParent();
 
     _resetEntities();

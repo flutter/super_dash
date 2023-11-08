@@ -20,7 +20,9 @@ enum Sfx {
   phoenixJump,
   acornPickup,
   eggPickup,
-  featherPowerup
+  featherPowerup,
+  endGameA,
+  endGameB,
 }
 
 const sfx = {
@@ -31,6 +33,8 @@ const sfx = {
   Sfx.acornPickup: 'sfx/Dash_AcornPickup.mp3',
   Sfx.eggPickup: 'sfx/Dash_EggPickup.mp3',
   Sfx.featherPowerup: 'sfx/Dash_FeatherPowerup.mp3',
+  Sfx.endGameA: 'sfx/EndGame_1.wav',
+  Sfx.endGameB: 'sfx/EndGame_2.wav',
 };
 
 /// Allows playing music and sound. A facade to `package:audioplayers`.
@@ -162,6 +166,18 @@ class AudioController {
       _log.info('pausing background sfx');
       _backgroundSfxPlayer.pause();
     }
+  }
+
+  var _lastEndGameSfx = Sfx.endGameB;
+
+  /// Plays a variation of the end game.
+  void playEndGameSfx() {
+    _stopMusic();
+    final current =
+        _lastEndGameSfx == Sfx.endGameA ? Sfx.endGameB : Sfx.endGameA;
+    playSfx(current);
+
+    _lastEndGameSfx = current;
   }
 
   /// Plays a single sound effect.
