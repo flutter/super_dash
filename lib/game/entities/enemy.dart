@@ -124,7 +124,44 @@ class Enemy extends PhysicalEntity<DashRunGame> {
           position: spritePosition,
         ),
       );
-      // Firefly
+    } else if (type == EnemyType.grasshopper) {
+      final butterflyAnimation = await gameRef.loadSpriteAnimation(
+        'anim/spritesheet_enemy_grasshopper.png',
+        SpriteAnimationData.sequenced(
+          amount: 22,
+          amountPerRow: 11,
+          textureSize: Vector2.all(64),
+          stepTime: .04,
+        ),
+      );
+
+      add(
+        SpriteAnimationComponent(
+          size: Vector2.all(gameRef.tileSize),
+          animation: butterflyAnimation,
+          anchor: Anchor.center,
+          position: spritePosition,
+        ),
+      );
+    } else if (type == EnemyType.ant) {
+      final butterflyAnimation = await gameRef.loadSpriteAnimation(
+        'anim/spritesheet_enemy_ant.png',
+        SpriteAnimationData.sequenced(
+          amount: 12,
+          amountPerRow: 6,
+          textureSize: Vector2.all(64),
+          stepTime: .04,
+        ),
+      );
+
+      add(
+        SpriteAnimationComponent(
+          size: Vector2.all(gameRef.tileSize),
+          animation: butterflyAnimation,
+          anchor: Anchor.center,
+          position: spritePosition,
+        ),
+      );
     } else {
       add(
         RectangleComponent(
