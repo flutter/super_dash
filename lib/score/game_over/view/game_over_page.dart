@@ -10,13 +10,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class GameOverPage extends StatelessWidget {
-  const GameOverPage({required this.score, super.key});
+  const GameOverPage({super.key});
 
-  final int score;
-
-  static Page<void> page({required int score}) {
-    return MaterialPage(
-      child: GameOverPage(score: score),
+  static Page<void> page() {
+    return const MaterialPage(
+      child: GameOverPage(),
     );
   }
 
@@ -60,7 +58,7 @@ class GameOverPage extends StatelessWidget {
               ),
             ),
             const Spacer(flex: 2),
-            _ScoreWidget(score),
+            const _ScoreWidget(),
             const Spacer(flex: 4),
             GameElevatedButton(
               label: l10n.submitScore,
@@ -92,14 +90,13 @@ class GameOverPage extends StatelessWidget {
 }
 
 class _ScoreWidget extends StatelessWidget {
-  const _ScoreWidget(this.score);
-
-  final int score;
+  const _ScoreWidget();
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
+    final score = context.select((ScoreBloc bloc) => bloc.score);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),

@@ -139,9 +139,6 @@ class _TestDashRunGame extends DashRunGame {
 
     return _leapMap!;
   }
-
-  @override
-  SimpleCombinedInput get input => SimpleCombinedInput();
 }
 
 void main() {
