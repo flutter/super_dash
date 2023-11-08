@@ -1,9 +1,11 @@
 import 'dart:ui' as ui;
+
 import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -66,14 +68,24 @@ class _GameInstructionsOverlayViewState
           height: 190,
         ),
       ),
-      GameInstruction(
-        title: l10n.gameInstructionsPageTapToJumpTitle,
-        description: l10n.gameInstructionsPageTapToJumpDescription,
-        image: Assets.images.tapToJumpInstruction.image(
-          width: 190,
-          height: 190,
+      if (isDesktop)
+        GameInstruction(
+          title: l10n.gameInstructionsPageTapToJumpTitle,
+          description: l10n.gameInstructionsPageTapToJumpDescriptionDesktop,
+          image: Assets.images.tapToJumpSpacebar.image(
+            width: 190,
+            height: 190,
+          ),
+        )
+      else
+        GameInstruction(
+          title: l10n.gameInstructionsPageTapToJumpTitle,
+          description: l10n.gameInstructionsPageTapToJumpDescription,
+          image: Assets.images.tapToJumpInstruction.image(
+            width: 190,
+            height: 190,
+          ),
         ),
-      ),
       GameInstruction(
         title: l10n.gameInstructionsPageCollectEggsAcornsTitle,
         description: l10n.gameInstructionsPageCollectEggsAcornsDescription,
@@ -124,6 +136,11 @@ class _GameInstructionsOverlayViewState
       ),
     ];
   }
+
+  bool get isDesktop =>
+      defaultTargetPlatform == TargetPlatform.macOS ||
+      defaultTargetPlatform == TargetPlatform.windows ||
+      defaultTargetPlatform == TargetPlatform.linux;
 
   @override
   void initState() {

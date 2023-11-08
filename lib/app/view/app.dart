@@ -5,6 +5,7 @@ import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:dash_run/map_tester/map_tester.dart';
 import 'package:dash_run/settings/settings.dart';
+import 'package:dash_run/share/share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leaderboard_repository/leaderboard_repository.dart';
@@ -13,6 +14,7 @@ class App extends StatelessWidget {
   const App({
     required this.audioController,
     required this.settingsController,
+    required this.shareController,
     required this.leaderboardRepository,
     this.isTesting = false,
     super.key,
@@ -21,6 +23,7 @@ class App extends StatelessWidget {
   final bool isTesting;
   final AudioController audioController;
   final SettingsController settingsController;
+  final ShareController shareController;
   final LeaderboardRepository leaderboardRepository;
 
   @override
@@ -38,6 +41,9 @@ class App extends StatelessWidget {
           ),
           RepositoryProvider<SettingsController>.value(
             value: settingsController,
+          ),
+          RepositoryProvider<ShareController>.value(
+            value: shareController,
           ),
           RepositoryProvider<LeaderboardRepository>.value(
             value: leaderboardRepository,

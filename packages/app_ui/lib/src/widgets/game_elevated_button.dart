@@ -48,6 +48,7 @@ class GameElevatedButton extends StatelessWidget {
                 Color(0xFF57AEA5),
               ],
             ),
+        border: Border.all(color: Colors.white24),
         borderRadius: BorderRadius.circular(94),
       ),
       child: Theme(
@@ -59,9 +60,7 @@ class GameElevatedButton extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(94),
               ),
-              padding: const EdgeInsets.symmetric(
-                vertical: 24,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 22),
               textStyle: theme.textTheme.labelLarge?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
