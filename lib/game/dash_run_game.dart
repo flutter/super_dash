@@ -136,12 +136,12 @@ class DashRunGame extends LeapGame
       KeyboardListenerComponent(
         keyDown: {
           LogicalKeyboardKey.space: (_) {
+            _triggerInputListeners();
             return false;
           },
         },
         keyUp: {
           LogicalKeyboardKey.space: (_) {
-            _triggerInputListeners();
             return false;
           },
         },
