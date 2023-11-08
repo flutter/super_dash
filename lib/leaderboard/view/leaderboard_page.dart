@@ -20,15 +20,19 @@ class LeaderboardPage extends StatelessWidget {
     super.key,
   });
 
-  static Page<void> page() {
-    return const MaterialPage(
-      child: LeaderboardPage(),
+  static Page<void> page([
+    LeaderboardStep step = LeaderboardStep.gameScore,
+  ]) {
+    return MaterialPage(
+      child: LeaderboardPage(step: step),
     );
   }
 
-  static PageRoute<void> route() {
+  static PageRoute<void> route([
+    LeaderboardStep step = LeaderboardStep.gameIntro,
+  ]) {
     return PageRouteBuilder(
-      pageBuilder: (_, __, ___) => const LeaderboardPage(),
+      pageBuilder: (_, __, ___) => LeaderboardPage(step: step),
     );
   }
 
@@ -74,12 +78,25 @@ class LeaderboardView extends StatelessWidget {
               children: [
                 const Leaderboard(),
                 const SizedBox(height: 20),
-                if (step == LeaderboardStep.gameScore)
-                  GameElevatedButton.icon(
-                    label: l10n.playAgain,
-                    icon: const Icon(Icons.replay),
-                    onPressed: () => context.flow<ScoreState>().complete,
-                  ),
+                switch (step) {
+                  LeaderboardStep.gameIntro => GameElevatedButton(
+                      label: l10n.leaderboardPageGoBackButton,
+                      onPressed: Navigator.of(context).pop,
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xFFA6C3DF),
+                          Color(0xFF79AACA),
+                        ],
+                      ),
+                    ),
+                  LeaderboardStep.gameScore => GameElevatedButton.icon(
+                      label: l10n.playAgain,
+                      icon: const Icon(Icons.replay),
+                      onPressed: context.flow<ScoreState>().complete,
+                    ),
+                },
               ],
             ),
           ),
@@ -94,9 +111,8 @@ class Leaderboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
     return Container(
-      height: size.height * .5,
+      height: MediaQuery.sizeOf(context).height * .5,
       margin: const EdgeInsets.symmetric(horizontal: 60),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),

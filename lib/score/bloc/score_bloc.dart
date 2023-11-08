@@ -13,6 +13,7 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
         super(const ScoreState()) {
     on<ScoreSubmitted>(_onScoreSubmitted);
     on<ScoreInitialsSubmitted>(_onScoreInitialsSubmitted);
+    on<ScoreLeaderboardRequested>(_onScoreLeaderboardRequested);
   }
 
   final int score;
@@ -45,6 +46,17 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
       state.copyWith(
         status: ScoreStatus.scoreOverview,
         initials: event.initials,
+      ),
+    );
+  }
+
+  void _onScoreLeaderboardRequested(
+    ScoreLeaderboardRequested event,
+    Emitter<ScoreState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        status: ScoreStatus.leaderboard,
       ),
     );
   }
