@@ -88,7 +88,7 @@ class _Content extends StatelessWidget {
           ),
         ),
         const Spacer(flex: 2),
-        const _ScoreWidget(12345),
+        const _ScoreWidget(),
         const Spacer(flex: 4),
         if (kIsWeb) const WebButtons() else const MobileButtons(),
         const SizedBox(height: 16),
@@ -98,13 +98,12 @@ class _Content extends StatelessWidget {
 }
 
 class _ScoreWidget extends StatelessWidget {
-  const _ScoreWidget(this.score);
-
-  final int score;
+  const _ScoreWidget();
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final score = context.select((ScoreBloc bloc) => bloc.score);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

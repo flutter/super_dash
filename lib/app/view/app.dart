@@ -1,4 +1,5 @@
 import 'package:app_ui/app_ui.dart';
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:dash_run/app_lifecycle/app_lifecycle.dart';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
     required this.audioController,
     required this.settingsController,
     required this.shareController,
+    required this.authenticationRepository,
     required this.leaderboardRepository,
     this.isTesting = false,
     super.key,
@@ -24,6 +26,7 @@ class App extends StatelessWidget {
   final AudioController audioController;
   final SettingsController settingsController;
   final ShareController shareController;
+  final AuthenticationRepository authenticationRepository;
   final LeaderboardRepository leaderboardRepository;
 
   @override
@@ -44,6 +47,9 @@ class App extends StatelessWidget {
           ),
           RepositoryProvider<ShareController>.value(
             value: shareController,
+          ),
+          RepositoryProvider<AuthenticationRepository>.value(
+            value: authenticationRepository,
           ),
           RepositoryProvider<LeaderboardRepository>.value(
             value: leaderboardRepository,

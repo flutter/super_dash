@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_run/app/app.dart';
 import 'package:dash_run/audio/audio.dart';
@@ -37,12 +38,21 @@ void main() async {
 
   unawaited(
     bootstrap(
-      () => App(
-        audioController: audio,
-        settingsController: settings,
-        shareController: share,
-        leaderboardRepository: leaderboardRepository,
-      ),
+      (firebaseAuth) async {
+        final authenticationRepository = AuthenticationRepository(
+          firebaseAuth: firebaseAuth,
+        );
+
+        await authenticationRepository.signInAnonymously();
+
+        return App(
+          audioController: audio,
+          settingsController: settings,
+          shareController: share,
+          authenticationRepository: authenticationRepository,
+          leaderboardRepository: leaderboardRepository,
+        );
+      },
     ),
   );
 }

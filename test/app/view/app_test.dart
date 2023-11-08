@@ -1,3 +1,4 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:dash_run/app/app.dart';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
@@ -14,6 +15,9 @@ class _MockSettingsController extends Mock implements SettingsController {}
 
 class _MockShareController extends Mock implements ShareController {}
 
+class _MockAuthenticationRepository extends Mock
+    implements AuthenticationRepository {}
+
 class _MockLeaderboardRepository extends Mock
     implements LeaderboardRepository {}
 
@@ -22,12 +26,14 @@ void main() {
     late AudioController audioController;
     late SettingsController settingsController;
     late ShareController shareController;
+    late AuthenticationRepository authenticationRepository;
     late LeaderboardRepository leaderboardRepository;
 
     setUp(() {
       audioController = _MockAudioController();
       settingsController = _MockSettingsController();
       shareController = _MockShareController();
+      authenticationRepository = _MockAuthenticationRepository();
       leaderboardRepository = _MockLeaderboardRepository();
 
       when(() => settingsController.muted).thenReturn(ValueNotifier(true));
@@ -39,6 +45,7 @@ void main() {
           audioController: audioController,
           settingsController: settingsController,
           shareController: shareController,
+          authenticationRepository: authenticationRepository,
           leaderboardRepository: leaderboardRepository,
         ),
       );
