@@ -23,4 +23,4 @@ flutter:
       fonts:
         - asset: assets/fonts/GoogleSansText-Regular.ttf
         - asset: assets/fonts/GoogleSansText-Bold.ttf
-          style: bold
+          weight: 700
