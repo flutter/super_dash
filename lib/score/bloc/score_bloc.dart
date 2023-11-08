@@ -66,7 +66,8 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
         );
 
         emit(state.copyWith(status: ScoreStatus.scoreOverview));
-      } catch (e) {
+      } catch (e, s) {
+        addError(e, s);
         emit(state.copyWith(initialsStatus: InitialsFormStatus.failure));
       }
     }
