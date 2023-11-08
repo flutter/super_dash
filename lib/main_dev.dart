@@ -7,6 +7,7 @@ import 'package:dash_run/bootstrap.dart';
 import 'package:dash_run/firebase_options_dev.dart';
 import 'package:dash_run/settings/persistence/persistence.dart';
 import 'package:dash_run/settings/settings.dart';
+import 'package:dash_run/share/share.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:leaderboard_repository/leaderboard_repository.dart';
@@ -26,6 +27,10 @@ void main() async {
 
   await audio.initialize();
 
+  final share = ShareController(
+    gameUrl: 'https://endless-runner-9481713-383737.web.app/',
+  );
+
   final leaderboardRepository = LeaderboardRepository(
     FirebaseFirestore.instance,
   );
@@ -35,6 +40,7 @@ void main() async {
       () => App(
         audioController: audio,
         settingsController: settings,
+        shareController: share,
         leaderboardRepository: leaderboardRepository,
       ),
     ),
