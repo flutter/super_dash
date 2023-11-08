@@ -128,18 +128,20 @@ class Leaderboard extends StatelessWidget {
       child: BlocBuilder<LeaderboardBloc, LeaderboardState>(
         builder: (context, state) => switch (state) {
           LeaderboardInitial() => const SizedBox.shrink(),
-          LeaderboardLoading() => const Center(child: _LoadingWidget()),
-          LeaderboardError() => const Center(child: _ErrorWidget()),
+          LeaderboardLoading() =>
+            const Center(child: LeaderboardLoadingWidget()),
+          LeaderboardError() => const Center(child: LeaderboardErrorWidget()),
           LeaderboardLoaded(entries: final entries) =>
-            _LeaderboardContent(entries: entries),
+            LeaderboardContent(entries: entries),
         },
       ),
     );
   }
 }
 
-class _ErrorWidget extends StatelessWidget {
-  const _ErrorWidget();
+@visibleForTesting
+class LeaderboardErrorWidget extends StatelessWidget {
+  const LeaderboardErrorWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -167,8 +169,9 @@ class _ErrorWidget extends StatelessWidget {
   }
 }
 
-class _LoadingWidget extends StatelessWidget {
-  const _LoadingWidget();
+@visibleForTesting
+class LeaderboardLoadingWidget extends StatelessWidget {
+  const LeaderboardLoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -188,8 +191,12 @@ class _LoadingWidget extends StatelessWidget {
   }
 }
 
-class _LeaderboardContent extends StatelessWidget {
-  const _LeaderboardContent({required this.entries});
+@visibleForTesting
+class LeaderboardContent extends StatelessWidget {
+  const LeaderboardContent({
+    required this.entries,
+    super.key,
+  });
 
   final List<LeaderboardEntryData> entries;
 
