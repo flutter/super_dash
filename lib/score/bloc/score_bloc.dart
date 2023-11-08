@@ -56,19 +56,19 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
     } else if (_isInitialsBlacklisted()) {
       emit(state.copyWith(initialsStatus: InitialsFormStatus.blacklisted));
     } else {
-      // TODO(all): submit score to firestore
-      // await _leaderboardRepository.addLeaderboardEntry(
-      //   LeaderboardEntryData(
-      //     playerInitials: state.initials.join(),
-      //     score: score,
-      //   ),
-      // );
+      emit(state.copyWith(initialsStatus: InitialsFormStatus.loading));
+      try {
+        await _leaderboardRepository.addLeaderboardEntry(
+          LeaderboardEntryData(
+            playerInitials: state.initials.join(),
+            score: score,
+          ),
+        );
 
-      emit(
-        state.copyWith(
-          status: ScoreStatus.scoreOverview,
-        ),
-      );
+        emit(state.copyWith(status: ScoreStatus.scoreOverview));
+      } catch (e) {
+        emit(state.copyWith(initialsStatus: InitialsFormStatus.failure));
+      }
     }
   }
 
