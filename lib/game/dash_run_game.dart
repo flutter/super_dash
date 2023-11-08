@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 
 class DashRunGame extends LeapGame
-    with TapCallbacks, HasKeyboardHandlerComponents {
+    with TapDetector, HasKeyboardHandlerComponents {
   DashRunGame({
     required this.gameBloc,
     required this.audioController,
@@ -37,9 +37,9 @@ class DashRunGame extends LeapGame
   final AssetBundle? customBundle;
   final AudioController audioController;
 
-  late final SimpleCombinedInput input;
-
   GameState get state => gameBloc.state;
+
+  final List<VoidCallback> _inputListener = [];
 
   static const _sections = [
     'flutter_runnergame_map_A.tmx',
@@ -67,6 +67,27 @@ class DashRunGame extends LeapGame
     return tilesets.firstWhere(
       (tileset) => tileset.name == 'tile_enemies_v2',
     );
+  }
+
+  void addInputListener(VoidCallback listener) {
+    _inputListener.add(listener);
+  }
+
+  void removeInputListener(VoidCallback listener) {
+    _inputListener.remove(listener);
+  }
+
+  void _triggerInputListeners() {
+    for (final listener in _inputListener) {
+      listener();
+    }
+  }
+
+  @override
+  void onTapUp(TapUpInfo info) {
+    super.onTapUp(info);
+
+    _triggerInputListeners();
   }
 
   @override
@@ -108,17 +129,24 @@ class DashRunGame extends LeapGame
       world.addAll([player]),
     );
 
-    input = SimpleCombinedInput(
-      keyboardInput: SimpleKeyboardInput(
-        rightKeys: {
-          PhysicalKeyboardKey.space,
+    await _addSpawners();
+    _addTreeHouseFrontLayer();
+
+    add(
+      KeyboardListenerComponent(
+        keyDown: {
+          LogicalKeyboardKey.space: (_) {
+            return false;
+          },
+        },
+        keyUp: {
+          LogicalKeyboardKey.space: (_) {
+            _triggerInputListeners();
+            return false;
+          },
         },
       ),
     );
-    await add(input);
-
-    await _addSpawners();
-    _addTreeHouseFrontLayer();
   }
 
   void _addTreeHouseFrontLayer() {
