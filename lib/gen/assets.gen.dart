@@ -38,16 +38,12 @@ class $AssetsImagesGen {
   AssetGenImage get gameLogo =>
       const AssetGenImage('assets/images/game_logo.png');
 
-  /// File path: assets/images/game_over_background.png
-  AssetGenImage get gameOverBackground =>
-      const AssetGenImage('assets/images/game_over_background.png');
+  /// File path: assets/images/game_over_bg.png
+  AssetGenImage get gameOverBg =>
+      const AssetGenImage('assets/images/game_over_bg.png');
 
   /// File path: assets/images/gate.png
   AssetGenImage get gate => const AssetGenImage('assets/images/gate.png');
-
-  /// File path: assets/images/input_initials_bg.png
-  AssetGenImage get inputInitialsBg =>
-      const AssetGenImage('assets/images/input_initials_bg.png');
 
   /// File path: assets/images/intro_background_desktop.png
   AssetGenImage get introBackgroundDesktop =>
@@ -89,9 +85,8 @@ class $AssetsImagesGen {
         egg,
         gameBackground,
         gameLogo,
-        gameOverBackground,
+        gameOverBg,
         gate,
-        inputInitialsBg,
         introBackgroundDesktop,
         introBackgroundMobile,
         leaderboardBg,
@@ -258,6 +253,14 @@ class $AssetsMapAnimGen {
   String get spritesheetDashSlideTsx =>
       'assets/map/anim/spritesheet_dash_slide.tsx';
 
+  /// File path: assets/map/anim/spritesheet_enemy_ant.png
+  AssetGenImage get spritesheetEnemyAntPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_enemy_ant.png');
+
+  /// File path: assets/map/anim/spritesheet_enemy_ant.tsx
+  String get spritesheetEnemyAntTsx =>
+      'assets/map/anim/spritesheet_enemy_ant.tsx';
+
   /// File path: assets/map/anim/spritesheet_enemy_bee.png
   AssetGenImage get spritesheetEnemyBeePng =>
       const AssetGenImage('assets/map/anim/spritesheet_enemy_bee.png');
@@ -281,6 +284,46 @@ class $AssetsMapAnimGen {
   /// File path: assets/map/anim/spritesheet_enemy_butterfly.tsx
   String get spritesheetEnemyButterflyTsx =>
       'assets/map/anim/spritesheet_enemy_butterfly.tsx';
+
+  /// File path: assets/map/anim/spritesheet_enemy_grasshopper.png
+  AssetGenImage get spritesheetEnemyGrasshopperPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_enemy_grasshopper.png');
+
+  /// File path: assets/map/anim/spritesheet_enemy_grasshopper.tsx
+  String get spritesheetEnemyGrasshopperTsx =>
+      'assets/map/anim/spritesheet_enemy_grasshopper.tsx';
+
+  /// File path: assets/map/anim/spritesheet_fx_large.png
+  AssetGenImage get spritesheetFxLargePng =>
+      const AssetGenImage('assets/map/anim/spritesheet_fx_large.png');
+
+  /// File path: assets/map/anim/spritesheet_fx_large.tsx
+  String get spritesheetFxLargeTsx =>
+      'assets/map/anim/spritesheet_fx_large.tsx';
+
+  /// File path: assets/map/anim/spritesheet_fx_small.png
+  AssetGenImage get spritesheetFxSmallPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_fx_small.png');
+
+  /// File path: assets/map/anim/spritesheet_fx_small.tsx
+  String get spritesheetFxSmallTsx =>
+      'assets/map/anim/spritesheet_fx_small.tsx';
+
+  /// File path: assets/map/anim/spritesheet_item_egg.png
+  AssetGenImage get spritesheetItemEggPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_item_egg.png');
+
+  /// File path: assets/map/anim/spritesheet_item_egg.tsx
+  String get spritesheetItemEggTsx =>
+      'assets/map/anim/spritesheet_item_egg.tsx';
+
+  /// File path: assets/map/anim/spritesheet_item_feather.png
+  AssetGenImage get spritesheetItemFeatherPng =>
+      const AssetGenImage('assets/map/anim/spritesheet_item_feather.png');
+
+  /// File path: assets/map/anim/spritesheet_item_feather.tsx
+  String get spritesheetItemFeatherTsx =>
+      'assets/map/anim/spritesheet_item_feather.tsx';
 
   /// File path: assets/map/anim/spritesheet_phoenixDash_doublejump.png
   AssetGenImage get spritesheetPhoenixDashDoublejumpPng => const AssetGenImage(
@@ -321,6 +364,14 @@ class $AssetsMapAnimGen {
   /// File path: assets/map/anim/spritesheet_poof.tsx
   String get spritesheetPoofTsx => 'assets/map/anim/spritesheet_poof.tsx';
 
+  /// File path: assets/map/anim/spritesheet_poof_orange.png
+  AssetGenImage get spritesheetPoofOrangePng =>
+      const AssetGenImage('assets/map/anim/spritesheet_poof_orange.png');
+
+  /// File path: assets/map/anim/spritesheet_poof_orange.tsx
+  String get spritesheetPoofOrangeTsx =>
+      'assets/map/anim/spritesheet_poof_orange.tsx';
+
   /// List of all assets
   List<dynamic> get values => [
         spritesheetDashDeathDrownPng,
@@ -341,12 +392,24 @@ class $AssetsMapAnimGen {
         spritesheetDashRunTsx,
         spritesheetDashSlidePng,
         spritesheetDashSlideTsx,
+        spritesheetEnemyAntPng,
+        spritesheetEnemyAntTsx,
         spritesheetEnemyBeePng,
         spritesheetEnemyBeeTsx,
         spritesheetEnemyBeetlePng,
         spritesheetEnemyBeetleTsx,
         spritesheetEnemyButterflyPng,
         spritesheetEnemyButterflyTsx,
+        spritesheetEnemyGrasshopperPng,
+        spritesheetEnemyGrasshopperTsx,
+        spritesheetFxLargePng,
+        spritesheetFxLargeTsx,
+        spritesheetFxSmallPng,
+        spritesheetFxSmallTsx,
+        spritesheetItemEggPng,
+        spritesheetItemEggTsx,
+        spritesheetItemFeatherPng,
+        spritesheetItemFeatherTsx,
         spritesheetPhoenixDashDoublejumpPng,
         spritesheetPhoenixDashDoublejumpTsx,
         spritesheetPhoenixDashIdlePng,
@@ -356,7 +419,9 @@ class $AssetsMapAnimGen {
         spritesheetPhoenixDashRunPng,
         spritesheetPhoenixDashRunTsx,
         spritesheetPoofPng,
-        spritesheetPoofTsx
+        spritesheetPoofTsx,
+        spritesheetPoofOrangePng,
+        spritesheetPoofOrangeTsx
       ];
 }
 
