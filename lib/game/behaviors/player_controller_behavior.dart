@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dash_run/game/game.dart';
-
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/widgets.dart';
 
@@ -26,7 +25,9 @@ class PlayerControllerBehavior extends Behavior<Player> {
   }
 
   void _handleInput() {
-    if (parent.isDead || parent.isPlayerTeleporting || parent.isRespawning) {
+    if (parent.isDead ||
+        parent.isPlayerTeleporting ||
+        parent.isGoingToGameOver) {
       return;
     }
 
@@ -72,7 +73,9 @@ class PlayerControllerBehavior extends Behavior<Player> {
       parent.jumping = false;
     }
 
-    if (parent.isDead || parent.isPlayerTeleporting || parent.isRespawning) {
+    if (parent.isDead ||
+        parent.isPlayerTeleporting ||
+        parent.isGoingToGameOver) {
       return;
     }
 
