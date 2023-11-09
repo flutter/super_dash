@@ -63,45 +63,42 @@ class LeaderboardView extends StatelessWidget {
     final l10n = context.l10n;
     return PageWithBackground(
       background: const GameBackground(),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Assets.images.leaderboardBg.image(
-              fit: BoxFit.fill,
-            ),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Assets.images.leaderboardBg.provider(),
+            fit: BoxFit.fitHeight,
           ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: MediaQuery.sizeOf(context).height * .3,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Leaderboard(),
-                const SizedBox(height: 20),
-                switch (step) {
-                  LeaderboardStep.gameIntro => GameElevatedButton(
-                      label: l10n.leaderboardPageGoBackButton,
-                      onPressed: Navigator.of(context).pop,
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color(0xFFA6C3DF),
-                          Color(0xFF79AACA),
-                        ],
-                      ),
-                    ),
-                  LeaderboardStep.gameScore => GameElevatedButton.icon(
-                      label: l10n.playAgain,
-                      icon: const Icon(Icons.refresh, size: 16),
-                      onPressed: context.flow<ScoreState>().complete,
-                    ),
-                },
-              ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height * .3,
             ),
-          ),
-        ],
+            const Leaderboard(),
+            const SizedBox(height: 20),
+            switch (step) {
+              LeaderboardStep.gameIntro => GameElevatedButton(
+                  label: l10n.leaderboardPageGoBackButton,
+                  onPressed: Navigator.of(context).pop,
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFFA6C3DF),
+                      Color(0xFF79AACA),
+                    ],
+                  ),
+                ),
+              LeaderboardStep.gameScore => GameElevatedButton.icon(
+                  label: l10n.playAgain,
+                  icon: const Icon(Icons.refresh, size: 16),
+                  onPressed: context.flow<ScoreState>().complete,
+                ),
+            },
+          ],
+        ),
       ),
     );
   }
@@ -233,7 +230,7 @@ class LeaderboardContent extends StatelessWidget {
         Positioned(
           bottom: 0,
           child: Container(
-            height: 130,
+            height: 60,
             width: Leaderboard.width,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.vertical(
