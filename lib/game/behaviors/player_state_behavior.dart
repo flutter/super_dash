@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 
 enum DashState {
@@ -44,6 +45,30 @@ class PlayerStateBehavior extends Behavior<Player> {
     }
   }
 
+  void fadeOut({VoidCallback? onComplete}) {
+    final component = _stateMap[state];
+    if (component != null && component is HasPaint) {
+      component.add(
+        OpacityEffect.fadeOut(
+          EffectController(duration: .5),
+          onComplete: onComplete,
+        ),
+      );
+    }
+  }
+
+  void fadeIn({VoidCallback? onComplete}) {
+    final component = _stateMap[state];
+    if (component != null && component is HasPaint) {
+      component.add(
+        OpacityEffect.fadeIn(
+          EffectController(duration: .5, startDelay: .8),
+          onComplete: onComplete,
+        ),
+      );
+    }
+  }
+
   set state(DashState state) {
     if (state != _state) {
       final current = _stateMap[_state];
@@ -60,6 +85,7 @@ class PlayerStateBehavior extends Behavior<Player> {
 
       final replacement = _stateMap[state];
       if (replacement != null) {
+        print(state);
         parent.add(replacement);
       }
       _state = state;
