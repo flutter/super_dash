@@ -41,6 +41,7 @@ class App extends StatelessWidget {
               return audioController
                 ..attachLifecycleNotifier(lifecycleNotifier);
             },
+            lazy: false,
           ),
           RepositoryProvider<SettingsController>.value(
             value: settingsController,
