@@ -13,15 +13,15 @@ class GameInstruction extends Equatable {
   const GameInstruction({
     required this.title,
     required this.description,
-    required this.image,
+    required this.assetPath,
   });
 
   final String title;
   final String description;
-  final Widget image;
+  final String assetPath;
 
   @override
-  List<Object> get props => [title, description, image];
+  List<Object> get props => [title, description, assetPath];
 }
 
 class GameInstructionsOverlay extends StatelessWidget {
@@ -63,76 +63,39 @@ class _GameInstructionsOverlayViewState
       GameInstruction(
         title: l10n.gameInstructionsPageAutoRunTitle,
         description: l10n.gameInstructionsPageAutoRunDescription,
-        image: Assets.images.autoRunInstruction.image(
-          width: 190,
-          height: 190,
-        ),
+        assetPath: Assets.images.autoRunInstruction.path,
       ),
       if (isDesktop)
         GameInstruction(
           title: l10n.gameInstructionsPageTapToJumpTitle,
           description: l10n.gameInstructionsPageTapToJumpDescriptionDesktop,
-          image: Assets.images.tapToJumpSpacebar.image(
-            width: 190,
-            height: 190,
-          ),
+          assetPath: Assets.images.tapToJumpSpacebar.path,
         )
       else
         GameInstruction(
           title: l10n.gameInstructionsPageTapToJumpTitle,
           description: l10n.gameInstructionsPageTapToJumpDescription,
-          image: Assets.images.tapToJumpInstruction.image(
-            width: 190,
-            height: 190,
-          ),
+          assetPath: Assets.images.tapToJumpInstruction.path,
         ),
       GameInstruction(
         title: l10n.gameInstructionsPageCollectEggsAcornsTitle,
         description: l10n.gameInstructionsPageCollectEggsAcornsDescription,
-        image: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: -10,
-              child: Assets.images.acorn.image(
-                width: 190,
-                height: 190,
-              ),
-            ),
-            Positioned(
-              right: -15,
-              bottom: 0,
-              child: Assets.images.egg.image(
-                width: 190,
-                height: 190,
-              ),
-            ),
-          ],
-        ),
+        assetPath: Assets.images.collectEggsAcornsInstruction.path,
       ),
       GameInstruction(
         title: l10n.gameInstructionsPagePowerfulWingsTitle,
         description: l10n.gameInstructionsPagePowerfulWingsDescription,
-        image: Assets.images.powerfulWingsInstruction.image(
-          width: 190,
-          height: 190,
-        ),
+        assetPath: Assets.images.powerfulWingsInstruction.path,
       ),
       GameInstruction(
         title: l10n.gameInstructionsPageLevelGatesTitle,
         description: l10n.gameInstructionsPageLevelGatesDescription,
-        image: Assets.images.portalInstruction.image(
-          width: 190,
-          height: 190,
-        ),
+        assetPath: Assets.images.portalInstruction.path,
       ),
       GameInstruction(
         title: l10n.gameInstructionsPageAvoidBugsTitle,
         description: l10n.gameInstructionsPageAvoidBugsDescription,
-        image: Assets.images.avoidBugsInstruction.image(
-          width: 190,
-          height: 190,
-        ),
+        assetPath: Assets.images.avoidBugsInstruction.path,
       ),
     ];
   }
@@ -151,56 +114,37 @@ class _GameInstructionsOverlayViewState
 
   @override
   Widget build(BuildContext context) {
-    return FractionallySizedBox(
-      heightFactor: 0.8,
-      widthFactor: context.isSmall ? 0.9 : 0.3,
-      child: Card(
-        color: Colors.white24,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Flexible(
-                  child: PageView.builder(
-                    controller: pageController,
-                    onPageChanged:
-                        context.read<GameInstructionsCubit>().updateStep,
-                    itemCount: instructions.length,
-                    itemBuilder: (context, index) {
-                      final instruction = instructions.elementAt(index);
-                      return _CardContent(
-                        title: instruction.title,
-                        description: instruction.description,
-                        image: instruction.image,
-                        pageController: pageController,
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 32),
-                  child: GameInstructionNavigationControls(
-                    pageController: pageController,
-                  ),
-                ),
-              ],
+    return AppDialog(
+      border: Border.all(color: Colors.white24),
+      backgroundColor: Colors.white24,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 390,
+            height: MediaQuery.sizeOf(context).height * 0.45,
+            child: PageView.builder(
+              controller: pageController,
+              onPageChanged: context.read<GameInstructionsCubit>().updateStep,
+              itemCount: instructions.length,
+              itemBuilder: (context, index) {
+                final instruction = instructions.elementAt(index);
+                return _CardContent(
+                  title: instruction.title,
+                  description: instruction.description,
+                  assetPath: instruction.assetPath,
+                  pageController: pageController,
+                );
+              },
             ),
-            Positioned(
-              top: 16,
-              right: 16,
-              child: GameIconButton(
-                icon: Icons.close,
-                onPressed: Navigator.of(context).pop,
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: GameInstructionNavigationControls(
+              pageController: pageController,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -210,11 +154,11 @@ class _CardContent extends StatelessWidget {
   const _CardContent({
     required this.title,
     required this.description,
-    required this.image,
+    required this.assetPath,
     required this.pageController,
   });
 
-  final Widget image;
+  final String assetPath;
   final String title;
   final String description;
   final PageController pageController;
@@ -224,16 +168,16 @@ class _CardContent extends StatelessWidget {
     final theme = Theme.of(context);
     return Column(
       children: [
-        const Spacer(),
-        _CardImage(image: image),
-        const Spacer(),
+        _CardImage(assetPath: assetPath),
+        const SizedBox(height: 24),
         Text(
           title,
           style: theme.textTheme.headlineSmall?.copyWith(
             color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        const Spacer(),
+        const SizedBox(height: 12),
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 24,
@@ -246,16 +190,15 @@ class _CardContent extends StatelessWidget {
             ),
           ),
         ),
-        const Spacer(flex: 3),
       ],
     );
   }
 }
 
 class _CardImage extends StatelessWidget {
-  const _CardImage({required this.image});
+  const _CardImage({required this.assetPath});
 
-  final Widget image;
+  final String assetPath;
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +215,13 @@ class _CardImage extends StatelessWidget {
           Color(0xFFE2F8FA),
           Colors.white38,
         ],
-        child: Positioned.fill(child: image),
+        child: Positioned.fill(
+          child: Image.asset(
+            assetPath,
+            width: 190,
+            height: 190,
+          ),
+        ),
       ),
     );
   }
