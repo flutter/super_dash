@@ -36,7 +36,7 @@ class ScoreView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlowBuilder(
+    return FlowBuilder<ScoreState>(
       state: context.select((ScoreBloc bloc) => bloc.state),
       onGeneratePages: onGenerateScorePages,
     );

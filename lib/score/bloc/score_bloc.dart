@@ -14,6 +14,7 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
     on<ScoreSubmitted>(_onScoreSubmitted);
     on<ScoreInitialsUpdated>(_onScoreInitialsUpdated);
     on<ScoreInitialsSubmitted>(_onScoreInitialsSubmitted);
+    on<ScoreLeaderboardRequested>(_onScoreLeaderboardRequested);
   }
 
   final int score;
@@ -80,6 +81,17 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
 
   bool _isInitialsBlacklisted() {
     return _blacklist.contains(state.initials.join());
+  }
+
+  void _onScoreLeaderboardRequested(
+    ScoreLeaderboardRequested event,
+    Emitter<ScoreState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        status: ScoreStatus.leaderboard,
+      ),
+    );
   }
 }
 
