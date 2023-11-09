@@ -147,7 +147,7 @@ class _SeeTheRankingButton extends StatelessWidget {
     return GameElevatedButton(
       label: context.l10n.seeTheRanking,
       onPressed: () {
-        // TODO(all): add navigation to leaderboard
+        context.read<ScoreBloc>().add(const ScoreLeaderboardRequested());
       },
     );
   }

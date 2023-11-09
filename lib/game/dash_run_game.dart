@@ -29,29 +29,28 @@ class DashRunGame extends LeapGame
           ),
         );
 
-  late final SpriteSheet itemsSpritesheet;
-  static const prefix = 'assets/map/';
   static final _cameraViewport = Vector2(592, 1024);
-
-  final GameBloc gameBloc;
-  final AssetBundle? customBundle;
-  final AudioController audioController;
-
-  GameState get state => gameBloc.state;
-
-  final List<VoidCallback> _inputListener = [];
-
+  static const prefix = 'assets/map/';
   static const _sections = [
     'flutter_runnergame_map_A.tmx',
     'flutter_runnergame_map_B.tmx',
     'flutter_runnergame_map_C.tmx',
   ];
-
   static const _sectionsBackgroundColor = [
     Color(0xffe9e9df),
     Color(0xffdae2ee),
     Color(0xff0353b0),
   ];
+
+  final GameBloc gameBloc;
+  final AssetBundle? customBundle;
+  final AudioController audioController;
+  final List<VoidCallback> _inputListener = [];
+
+  late final SimpleCombinedInput input;
+  late final SpriteSheet itemsSpritesheet;
+
+  GameState get state => gameBloc.state;
 
   Player? get player => world.firstChild<Player>();
 
@@ -165,7 +164,7 @@ class DashRunGame extends LeapGame
     gameBloc.add(const GameOver());
     // Removed since the result didn't ended up good.
     // Leaving in comment if we decide to bring it back.
-    //audioController.stopBackgroundSfx();
+    // audioController.stopBackgroundSfx();
 
     world.firstChild<Player>()?.removeFromParent();
 
