@@ -3,7 +3,9 @@
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/dash_run_game.dart';
 import 'package:dash_run/map_tester/map_tester.dart';
+import 'package:dash_run/settings/settings_controller.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -12,10 +14,24 @@ import '../../helpers/helpers.dart';
 
 class _MockAudioController extends Mock implements AudioController {}
 
+class _MockSettingsController extends Mock implements SettingsController {}
+
 void main() {
   group('MapTesterView', () {
+    late SettingsController settingsController;
+
+    setUp(() {
+      settingsController = _MockSettingsController();
+      when(() => settingsController.muted).thenReturn(ValueNotifier(true));
+      when(() => settingsController.musicOn).thenReturn(ValueNotifier(false));
+      when(() => settingsController.soundsOn).thenReturn(ValueNotifier(false));
+    });
+
     testWidgets('renders', (tester) async {
-      await tester.pumpApp(MapTesterView());
+      await tester.pumpSubject(
+        () async => '',
+        settingsController: settingsController,
+      );
 
       expect(find.byType(MapTesterView), findsOneWidget);
     });
@@ -25,7 +41,10 @@ void main() {
 
       Future<String> getDirectoryPath() async => '.';
 
-      await tester.pumpSubject(getDirectoryPath);
+      await tester.pumpSubject(
+        getDirectoryPath,
+        settingsController: settingsController,
+      );
 
       await tester.tap(find.text('Load folder'));
       await tester.pump();
@@ -40,7 +59,10 @@ void main() {
       tester.setViewSize();
       Future<String> getDirectoryPath() async => '.';
 
-      await tester.pumpSubject(getDirectoryPath);
+      await tester.pumpSubject(
+        getDirectoryPath,
+        settingsController: settingsController,
+      );
 
       await tester.tap(find.text('Load folder'));
       await tester.pump();
@@ -63,7 +85,10 @@ void main() {
       tester.setViewSize();
       Future<String> getDirectoryPath() async => '.';
 
-      await tester.pumpSubject(getDirectoryPath);
+      await tester.pumpSubject(
+        getDirectoryPath,
+        settingsController: settingsController,
+      );
 
       await tester.tap(find.text('Load folder'));
       await tester.pump();
@@ -93,10 +118,18 @@ extension on WidgetTester {
   Future<void> pumpSubject(
     Future<String> Function() getDirectoryPath, {
     AudioController? audioController,
+    SettingsController? settingsController,
   }) async {
     await pumpApp(
-      RepositoryProvider.value(
-        value: audioController ?? _MockAudioController(),
+      MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider.value(
+            value: audioController ?? _MockAudioController(),
+          ),
+          RepositoryProvider.value(
+            value: settingsController ?? _MockSettingsController(),
+          ),
+        ],
         child: MapTesterView(
           selectGameFolder: getDirectoryPath,
         ),
