@@ -94,7 +94,7 @@ class LeaderboardView extends StatelessWidget {
                     ),
                   LeaderboardStep.gameScore => GameElevatedButton.icon(
                       label: l10n.playAgain,
-                      icon: const Icon(Icons.replay),
+                      icon: const Icon(Icons.refresh, size: 16),
                       onPressed: context.flow<ScoreState>().complete,
                     ),
                 },

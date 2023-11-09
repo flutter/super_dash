@@ -128,10 +128,7 @@ class _PlayAgainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GameElevatedButton.icon(
-      icon: const Icon(
-        Icons.replay,
-        size: 16,
-      ),
+      icon: const Icon(Icons.refresh, size: 16),
       label: context.l10n.playAgain,
       gradient: _gradient,
       onPressed: context.flow<ScoreState>().complete,

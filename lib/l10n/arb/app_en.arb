@@ -160,7 +160,7 @@
     "@totalScore": {
         "description": "Text shown in the game over page"
     },
-    "submitScore": "Submit Score",
+    "submitScore": "Submit score",
     "@submitScore": {
         "description": "Text shown in the game over page"
     },

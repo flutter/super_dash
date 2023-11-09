@@ -12,9 +12,6 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/acorn.png
-  AssetGenImage get acorn => const AssetGenImage('assets/images/acorn.png');
-
   /// File path: assets/images/auto_run_instruction.png
   AssetGenImage get autoRunInstruction =>
       const AssetGenImage('assets/images/auto_run_instruction.png');
@@ -23,12 +20,13 @@ class $AssetsImagesGen {
   AssetGenImage get avoidBugsInstruction =>
       const AssetGenImage('assets/images/avoid_bugs_instruction.png');
 
+  /// File path: assets/images/collect_eggs_acorns_instruction.png
+  AssetGenImage get collectEggsAcornsInstruction =>
+      const AssetGenImage('assets/images/collect_eggs_acorns_instruction.png');
+
   /// File path: assets/images/dash_wins.png
   AssetGenImage get dashWins =>
       const AssetGenImage('assets/images/dash_wins.png');
-
-  /// File path: assets/images/egg.png
-  AssetGenImage get egg => const AssetGenImage('assets/images/egg.png');
 
   /// File path: assets/images/game_background.png
   AssetGenImage get gameBackground =>
@@ -78,11 +76,10 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        acorn,
         autoRunInstruction,
         avoidBugsInstruction,
+        collectEggsAcornsInstruction,
         dashWins,
-        egg,
         gameBackground,
         gameLogo,
         gameOverBg,
