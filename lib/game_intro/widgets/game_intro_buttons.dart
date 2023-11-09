@@ -4,6 +4,7 @@ import 'package:dash_run/leaderboard/leaderboard.dart';
 import 'package:dash_run/settings/settings_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AudioButton extends StatelessWidget {
   const AudioButton({super.key});
@@ -27,7 +28,9 @@ class LeaderboardButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GameIconButton(
-      icon: Icons.leaderboard,
+      icon: FontAwesomeIcons.trophy,
+      size: 18,
+      alignment: const Alignment(-0.3, 0),
       onPressed: () => Navigator.of(context).push(LeaderboardPage.route()),
     );
   }
