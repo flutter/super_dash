@@ -85,7 +85,6 @@ class PlayerStateBehavior extends Behavior<Player> {
 
       final replacement = _stateMap[state];
       if (replacement != null) {
-        print(state);
         parent.add(replacement);
       }
       _state = state;
