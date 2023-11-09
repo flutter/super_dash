@@ -59,8 +59,8 @@ dependency_overrides:
       path: packages/flame_test
   leap:
     git:
-      url: https://github.com/kurtome/leap.git
-      ref: feat/map-transition
+      url: https://github.com/VeryGoodOpenSource/leap.git
+      ref: feat/map-transition-ground-improv
       path: packages/leap
 
 flutter:

@@ -21,7 +21,7 @@ void main() {
       _TestGame.new,
       (game) async {
         final pathxp = Pathxp('{L, R}');
-        final parent = LeapMapGroundTile(Tile(localId: 0), 0, 0);
+        final parent = LeapMapGroundTile(Tile(localId: 0), 0, 0, 0);
         final behavior = FollowPathBehavior(pathxp);
 
         await game.ensureAdd(parent);
@@ -45,7 +45,7 @@ void main() {
       _TestGame.new,
       (game) async {
         final pathxp = Pathxp('{2L, R}');
-        final parent = LeapMapGroundTile(Tile(localId: 0), 0, 0);
+        final parent = LeapMapGroundTile(Tile(localId: 0), 0, 0, 0);
         final behavior = FollowPathBehavior(pathxp);
 
         await game.ensureAdd(parent);
@@ -69,7 +69,7 @@ void main() {
       _TestGame.new,
       (game) async {
         final pathxp = Pathxp('{L, R}');
-        final parent = LeapMapGroundTile(Tile(localId: 0), 0, 0);
+        final parent = LeapMapGroundTile(Tile(localId: 0), 0, 0, 0);
         final behavior = FollowPathBehavior(pathxp);
 
         await game.ensureAdd(parent);
