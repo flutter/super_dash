@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:dash_run/filesytem_asset_bundle/filesystem_asset_bundle.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/settings/settings_controller.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,6 +37,52 @@ class _MapTesterViewState extends State<MapTesterView> {
     settings.soundsOn.value = false;
   }
 
+  Future<void> _createGame() async {
+    if (!kIsWeb && Platform.isMacOS) {
+      final directory = await widget.selectGameFolder();
+      if (directory != null) {
+        setState(() {
+          rootPath = directory;
+          game = DashRunGame(
+            gameBloc: GameBloc(),
+            customBundle: FileSystemAssetBundle(directory),
+            audioController: context.read(),
+            inMapTester: true,
+          );
+        });
+      }
+    } else {
+      setState(() {
+        game = DashRunGame(
+          gameBloc: GameBloc(),
+          audioController: context.read(),
+          inMapTester: true,
+        );
+      });
+    }
+  }
+
+  Future<void> _reload() async {
+    if (!kIsWeb && Platform.isMacOS) {
+      setState(() {
+        game = DashRunGame(
+          gameBloc: GameBloc(),
+          audioController: context.read(),
+          customBundle: FileSystemAssetBundle(rootPath!),
+          inMapTester: true,
+        );
+      });
+    } else {
+      setState(() {
+        game = DashRunGame(
+          gameBloc: GameBloc(),
+          audioController: context.read(),
+          inMapTester: true,
+        );
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,20 +92,8 @@ class _MapTesterViewState extends State<MapTesterView> {
             const SizedBox(height: 16),
             if (game == null)
               ElevatedButton(
-                onPressed: () async {
-                  final directory = await widget.selectGameFolder();
-                  if (directory != null) {
-                    setState(() {
-                      rootPath = directory;
-                      game = DashRunGame(
-                        gameBloc: GameBloc(),
-                        customBundle: FileSystemAssetBundle(directory),
-                        audioController: context.read(),
-                      );
-                    });
-                  }
-                },
-                child: const Text('Load folder'),
+                onPressed: _createGame,
+                child: const Text('Load'),
               )
             else
               Wrap(
@@ -71,15 +108,7 @@ class _MapTesterViewState extends State<MapTesterView> {
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        game = DashRunGame(
-                          gameBloc: GameBloc(),
-                          audioController: context.read(),
-                          customBundle: FileSystemAssetBundle(rootPath!),
-                        );
-                      });
-                    },
+                    onPressed: _reload,
                     child: const Text('Reload'),
                   ),
                   const SizedBox(width: 16),
