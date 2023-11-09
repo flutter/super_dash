@@ -25,6 +25,16 @@ class _MapTesterViewState extends State<MapTesterView> {
   String? rootPath;
 
   @override
+  void initState() {
+    super.initState();
+
+    final settings = context.read<SettingsController>();
+    settings.muted.value = true;
+    settings.musicOn.value = false;
+    settings.soundsOn.value = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
