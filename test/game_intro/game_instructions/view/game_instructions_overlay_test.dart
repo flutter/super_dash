@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../helpers/helpers.dart';
+import '../../../helpers/helpers.dart';
 
 class _MockGameInstructionsCubit extends MockCubit<GameInstructionsState>
     implements GameInstructionsCubit {}
@@ -56,7 +56,7 @@ void main() {
       await tester.pumpApp(buildSubject());
 
       expect(find.byType(PageView), findsOneWidget);
-      expect(find.byType(Card), findsOneWidget);
+      expect(find.byType(AppCard), findsOneWidget);
     });
   });
 }
