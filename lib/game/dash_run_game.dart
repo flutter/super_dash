@@ -177,6 +177,12 @@ class DashRunGame extends LeapGame
     Future<void>.delayed(
       const Duration(seconds: 1),
       () async {
+        await loadWorldAndMap(
+          images: images,
+          prefix: prefix,
+          bundle: customBundle,
+          tiledMapPath: _sections.first,
+        );
         final newPlayer = Player(
           levelSize: leapMap.tiledMap.size.clone(),
           cameraViewport: _cameraViewport,
