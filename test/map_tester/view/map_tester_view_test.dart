@@ -46,7 +46,7 @@ void main() {
         settingsController: settingsController,
       );
 
-      await tester.tap(find.text('Load folder'));
+      await tester.tap(find.text('Load'));
       await tester.pump();
 
       expect(
@@ -64,7 +64,7 @@ void main() {
         settingsController: settingsController,
       );
 
-      await tester.tap(find.text('Load folder'));
+      await tester.tap(find.text('Load'));
       await tester.pump();
 
       expect(
@@ -90,7 +90,7 @@ void main() {
         settingsController: settingsController,
       );
 
-      await tester.tap(find.text('Load folder'));
+      await tester.tap(find.text('Load'));
       await tester.pump();
 
       var widget = tester.widget<GameWidget<DashRunGame>>(
