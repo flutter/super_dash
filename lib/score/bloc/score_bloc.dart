@@ -18,8 +18,6 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
   }
 
   final int score;
-  // TODO(all): remove when used
-  // ignore: unused_field
   final LeaderboardRepository _leaderboardRepository;
 
   final initialsRegex = RegExp('[A-Z]{3}');

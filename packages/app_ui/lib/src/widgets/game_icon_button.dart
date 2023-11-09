@@ -11,6 +11,8 @@ class GameIconButton extends StatelessWidget {
     this.onPressed,
     this.gradient,
     this.border,
+    this.size,
+    this.alignment,
     super.key,
   });
 
@@ -25,6 +27,12 @@ class GameIconButton extends StatelessWidget {
 
   /// The border to use for the button.
   final Border? border;
+
+  /// The size of the icon.
+  final double? size;
+
+  /// The alignment of the icon.
+  final Alignment? alignment;
 
   static const _defaultGradient = LinearGradient(
     colors: [
@@ -46,11 +54,13 @@ class GameIconButton extends StatelessWidget {
         onTap: onPressed,
         borderRadius: BorderRadius.circular(100),
         child: Container(
+          width: 52,
+          height: 52,
           padding: const EdgeInsets.all(14),
-          alignment: Alignment.center,
+          alignment: alignment ?? Alignment.center,
           child: Icon(
             icon,
-            size: 24,
+            size: size ?? 24,
             color: Colors.white,
           ),
         ),
