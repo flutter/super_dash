@@ -70,8 +70,9 @@ class GameOverPage extends StatelessWidget {
               },
             ),
             const Spacer(flex: 3),
-            GameElevatedButton(
+            GameElevatedButton.icon(
               label: l10n.playAgain,
+              icon: const Icon(Icons.refresh, size: 16),
               onPressed: context.flow<ScoreState>().complete,
               gradient: const LinearGradient(
                 begin: Alignment.topCenter,
