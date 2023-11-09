@@ -25,7 +25,7 @@ class BottomBar extends StatelessWidget {
                 l10n.superDash,
                 style: theme.textTheme.titleMedium?.copyWith(
                   color: Colors.white,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 4),
