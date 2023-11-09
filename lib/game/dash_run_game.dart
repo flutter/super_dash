@@ -170,10 +170,6 @@ class DashRunGame extends LeapGame
 
     _resetEntities();
 
-    if (isLastSection || isFirstSection) {
-      _addTreeHouseFrontLayer();
-    }
-
     Future<void>.delayed(
       const Duration(seconds: 1),
       () async {
@@ -183,6 +179,9 @@ class DashRunGame extends LeapGame
           bundle: customBundle,
           tiledMapPath: _sections.first,
         );
+        if (isLastSection || isFirstSection) {
+          _addTreeHouseFrontLayer();
+        }
         final newPlayer = Player(
           levelSize: leapMap.tiledMap.size.clone(),
           cameraViewport: _cameraViewport,

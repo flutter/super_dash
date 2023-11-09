@@ -30,6 +30,9 @@ class Player extends JumperCharacter<DashRunGame> {
 
   double? _respawnTimer;
 
+  double? _stuckTimer;
+  double _lastCameraPosition = 0;
+
   bool get isRespawning => _respawnTimer != null;
 
   @override
@@ -136,6 +139,8 @@ class Player extends JumperCharacter<DashRunGame> {
       return;
     }
 
+    _checkPlayerStuck(dt);
+
     if (isPlayerTeleporting) return;
 
     // Removed since the result didn't ended up good.
@@ -154,9 +159,7 @@ class Player extends JumperCharacter<DashRunGame> {
     }
 
     if (isDead) {
-      findBehavior<PlayerStateBehavior>().state = DashState.deathFaint;
-      super.walking = false;
-      _respawnTimer = 1.4;
+      _animateToGameOver();
       return;
     }
 
@@ -165,8 +168,7 @@ class Player extends JumperCharacter<DashRunGame> {
         !isPlayerInvincible) {
       // If player has no golden feathers, game over.
       if (powerUps.isEmpty) {
-        findBehavior<PlayerStateBehavior>().state = DashState.deathPit;
-        _respawnTimer = 1.4;
+        _animateToGameOver(DashState.deathPit);
         return;
       }
 
@@ -220,6 +222,29 @@ class Player extends JumperCharacter<DashRunGame> {
         health -= collision.enemyDamage;
       }
     }
+  }
+
+  void _checkPlayerStuck(double dt) {
+    final currentCameraPosition = cameraAnchor.position.x;
+    final isPlayerStopped = currentCameraPosition == _lastCameraPosition;
+    // Player is set as walking but is not moving.
+    if (walking && isPlayerStopped) {
+      _stuckTimer ??= 1;
+      _stuckTimer = _stuckTimer! - dt;
+      if (_stuckTimer! <= 0) {
+        _stuckTimer = null;
+        health = 0;
+      }
+    } else {
+      _stuckTimer = null;
+    }
+    _lastCameraPosition = currentCameraPosition;
+  }
+
+  void _animateToGameOver([DashState deathState = DashState.deathFaint]) {
+    findBehavior<PlayerStateBehavior>().state = deathState;
+    super.walking = false;
+    _respawnTimer = 1.4;
   }
 
   void spritePaintColor(Color color) {
