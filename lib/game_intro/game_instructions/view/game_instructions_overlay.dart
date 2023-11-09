@@ -122,7 +122,7 @@ class _GameInstructionsOverlayViewState
         children: [
           SizedBox(
             width: 390,
-            height: MediaQuery.sizeOf(context).height * 0.45,
+            height: 400,
             child: PageView.builder(
               controller: pageController,
               onPageChanged: context.read<GameInstructionsCubit>().updateStep,
