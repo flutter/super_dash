@@ -39,6 +39,10 @@ class GameView extends StatelessWidget {
               gameBloc: context.read<GameBloc>(),
               audioController: context.read<AudioController>(),
             ),
+            overlayBuilderMap: {
+              'tapToJump': (context, game) => const TapToJumpOverlay(),
+            },
+            initialActiveOverlays: const ['tapToJump'],
           ),
           const Positioned(
             top: 12,
