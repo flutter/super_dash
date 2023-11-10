@@ -11,13 +11,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 typedef GetDirectoryPath = Future<String?> Function();
 
+Future<void> _defaultTimer() {
+  return Future<void>.delayed(const Duration(milliseconds: 800));
+}
+
 class MapTesterView extends StatefulWidget {
   const MapTesterView({
     this.selectGameFolder = getDirectoryPath,
+    this.timer = _defaultTimer,
     super.key,
   });
 
   final GetDirectoryPath selectGameFolder;
+  final Future<void> Function() timer;
 
   @override
   State<MapTesterView> createState() => _MapTesterViewState();
@@ -87,7 +93,7 @@ class _MapTesterViewState extends State<MapTesterView> {
     });
 
     // So we know for sure that everything is loaded and added.
-    await Future<void>.delayed(const Duration(milliseconds: 800));
+    await widget.timer();
 
     if (speed != null) {
       _setSpeed(speed!);
