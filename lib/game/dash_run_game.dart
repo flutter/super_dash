@@ -14,6 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 
+bool _tsxPackingFilter(Tileset tileset) {
+  return !(tileset.source ?? '').startsWith('anim');
+}
+
 class DashRunGame extends LeapGame
     with TapDetector, HasKeyboardHandlerComponents {
   DashRunGame({
@@ -27,6 +31,7 @@ class DashRunGame extends LeapGame
             tiled: TiledOptions(
               atlasMaxX: 4048,
               atlasMaxY: 4048,
+              tsxPackingFilter: _tsxPackingFilter,
             ),
           ),
         );
