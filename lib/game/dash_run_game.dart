@@ -7,6 +7,7 @@ import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/sprite.dart';
+import 'package:flame/text.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class DashRunGame extends LeapGame
     required this.gameBloc,
     required this.audioController,
     this.customBundle,
+    this.inMapTester = false,
   }) : super(
           tileSize: 64,
           configuration: const LeapConfiguration(
@@ -49,6 +51,7 @@ class DashRunGame extends LeapGame
 
   late final SimpleCombinedInput input;
   late final SpriteSheet itemsSpritesheet;
+  final bool inMapTester;
 
   GameState get state => gameBloc.state;
 
@@ -92,6 +95,10 @@ class DashRunGame extends LeapGame
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    if (inMapTester) {
+      _addMapTesterFeatures();
+    }
 
     if (kIsWeb && audioController.isMusicEnabled) {
       audioController.startMusic();
@@ -170,10 +177,6 @@ class DashRunGame extends LeapGame
 
     _resetEntities();
 
-    if (isLastSection || isFirstSection) {
-      _addTreeHouseFrontLayer();
-    }
-
     Future<void>.delayed(
       const Duration(seconds: 1),
       () async {
@@ -183,6 +186,9 @@ class DashRunGame extends LeapGame
           bundle: customBundle,
           tiledMapPath: _sections.first,
         );
+        if (isLastSection || isFirstSection) {
+          _addTreeHouseFrontLayer();
+        }
         final newPlayer = Player(
           levelSize: leapMap.tiledMap.size.clone(),
           cameraViewport: _cameraViewport,
@@ -325,5 +331,20 @@ class DashRunGame extends LeapGame
           (element) => element is Player || element is Item || element is Enemy,
         )
         .forEach((entity) => entity.debugMode = true);
+  }
+
+  void _addMapTesterFeatures() {
+    add(FpsComponent());
+    add(
+      FpsTextComponent(
+        position: Vector2(0, 0),
+        textRenderer: TextPaint(
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
+        ),
+      ),
+    );
   }
 }

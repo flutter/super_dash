@@ -28,9 +28,12 @@ class Player extends JumperCharacter<DashRunGame> {
 
   bool get doubleJumpEnabled => powerUps.contains(ItemType.goldenFeather);
 
-  double? _respawnTimer;
+  double? _gameOverTimer;
 
-  bool get isRespawning => _respawnTimer != null;
+  double? _stuckTimer;
+  double _lastCameraPosition = 0;
+
+  bool get isGoingToGameOver => _gameOverTimer != null;
 
   @override
   int get priority => 1;
@@ -82,7 +85,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
     size = Vector2.all(gameRef.tileSize * .5);
     walkSpeed = gameRef.tileSize * 5;
-    minJumpImpulse = world.gravity * 0.5;
+    minJumpImpulse = world.gravity * 0.6;
     cameraAnchor = PlayerCameraAnchor(
       cameraViewport: cameraViewport,
       levelSize: levelSize,
@@ -127,14 +130,16 @@ class Player extends JumperCharacter<DashRunGame> {
   void update(double dt) {
     super.update(dt);
 
-    if (_respawnTimer != null) {
-      _respawnTimer = _respawnTimer! - dt;
-      if (_respawnTimer! <= 0) {
-        _respawnTimer = null;
+    if (_gameOverTimer != null) {
+      _gameOverTimer = _gameOverTimer! - dt;
+      if (_gameOverTimer! <= 0) {
+        _gameOverTimer = null;
         gameRef.gameOver();
       }
       return;
     }
+
+    _checkPlayerStuck(dt);
 
     if (isPlayerTeleporting) return;
 
@@ -154,10 +159,7 @@ class Player extends JumperCharacter<DashRunGame> {
     }
 
     if (isDead) {
-      findBehavior<PlayerStateBehavior>().state = DashState.deathFaint;
-      super.walking = false;
-      _respawnTimer = 1.4;
-      return;
+      return _animateToGameOver();
     }
 
     // Player falls in a hazard zone.
@@ -165,26 +167,13 @@ class Player extends JumperCharacter<DashRunGame> {
         !isPlayerInvincible) {
       // If player has no golden feathers, game over.
       if (powerUps.isEmpty) {
-        findBehavior<PlayerStateBehavior>().state = DashState.deathPit;
-        _respawnTimer = 1.4;
+        _animateToGameOver(DashState.deathPit);
         return;
       }
 
       // If player has a golden feather, use it to avoid death.
       powerUps.removeLast();
-
-      // Get the position of the tile below the player that cause them to die.
-      final hazardPosition = collisionInfo.downCollision!.position;
-
-      // Get closest value to gridX and gridY in respawnPoints.
-      final closestRespawn = respawnPoints.reduce((a, b) {
-        return (a - hazardPosition).length2 < (b - hazardPosition).length2
-            ? a
-            : b;
-      });
-
-      // Set player position to closest respawn point.
-      return hazardPosition.setValues(closestRespawn.x, closestRespawn.y);
+      return _respawn();
     }
 
     final collisions = collisionInfo.otherCollisions ?? const [];
@@ -217,9 +206,48 @@ class Player extends JumperCharacter<DashRunGame> {
       }
 
       if (collision is Enemy && !isPlayerInvincible) {
-        health -= collision.enemyDamage;
+        // If player has no golden feathers, game over.
+        if (powerUps.isEmpty) {
+          health -= collision.enemyDamage;
+          return;
+        }
+
+        // If player has a golden feather, use it to avoid death.
+        powerUps.removeLast();
+        return _respawn();
       }
     }
+  }
+
+  void _checkPlayerStuck(double dt) {
+    final currentCameraPosition = cameraAnchor.position.x;
+    final isPlayerStopped = currentCameraPosition == _lastCameraPosition;
+    // Player is set as walking but is not moving.
+    if (walking && isPlayerStopped) {
+      _stuckTimer ??= 1;
+      _stuckTimer = _stuckTimer! - dt;
+      if (_stuckTimer! <= 0) {
+        _stuckTimer = null;
+        health = 0;
+      }
+    } else {
+      _stuckTimer = null;
+    }
+    _lastCameraPosition = currentCameraPosition;
+  }
+
+  void _animateToGameOver([DashState deathState = DashState.deathFaint]) {
+    findBehavior<PlayerStateBehavior>().state = deathState;
+    super.walking = false;
+    _gameOverTimer = 1.4;
+  }
+
+  void _respawn() {
+    // Get closest value to gridX and gridY in respawnPoints.
+    final closestRespawn = respawnPoints.reduce((a, b) {
+      return (a - position).length2 < (b - position).length2 ? a : b;
+    });
+    position = closestRespawn.clone();
   }
 
   void spritePaintColor(Color color) {
