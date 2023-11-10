@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.10.2" name="tile_mountain_ground_v03" tilewidth="64" tileheight="64" tilecount="225" columns="15">
  <image source="tile_mountain_ground_v03.png" width="960" height="960"/>
+ <tile id="19" type="Hazard"/>
  <tile id="54" type="Hazard"/>
  <tile id="55" type="Hazard"/>
  <tile id="56" type="Hazard"/>
  <tile id="57" type="Hazard"/>
+ <tile id="79" type="Hazard"/>
  <tile id="94" type="Hazard"/>
  <tile id="124" type="Hazard"/>
  <tile id="128" type="Slope">
