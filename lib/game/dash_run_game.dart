@@ -95,6 +95,7 @@ class DashRunGame extends LeapGame
     super.onTapDown(info);
 
     _triggerInputListeners();
+    overlays.remove('tapToJump');
   }
 
   @override
@@ -148,6 +149,7 @@ class DashRunGame extends LeapGame
         keyDown: {
           LogicalKeyboardKey.space: (_) {
             _triggerInputListeners();
+            overlays.remove('tapToJump');
             return false;
           },
         },
@@ -202,6 +204,7 @@ class DashRunGame extends LeapGame
 
         await newPlayer.mounted;
         await _addSpawners();
+        overlays.add('tapToJump');
       },
     );
 

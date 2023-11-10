@@ -192,5 +192,9 @@
     "leaderboardPageGoBackButton": "Go back",
     "@leaderboardPageGoBackButton": {
         "description": "Text shown in the leaderboard page go back button"
+    },
+    "tapToStart": "Tap/press Space to start",
+    "@tapToStart": {
+        "description": "Text shown in the game page"
     }
 }
