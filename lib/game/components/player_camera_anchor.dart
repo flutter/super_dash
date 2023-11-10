@@ -23,7 +23,7 @@ class PlayerCameraAnchor extends Component
     levelSize.y - cameraViewport.y / 2,
   );
 
-  late final _cameraXOffset = cameraViewport.x * .4;
+  late final _cameraXOffset = cameraViewport.x * .3;
   late final _cameraYOffset = cameraViewport.y * .2;
 
   @override

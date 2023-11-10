@@ -243,7 +243,6 @@ class DashRunGame extends LeapGame
   }
 
   Future<void> _loadNewSection() async {
-    _setSectionBackground();
     final nextSectionIndex = state.currentSection + 1 < _sections.length
         ? state.currentSection + 1
         : 0;
@@ -277,6 +276,8 @@ class DashRunGame extends LeapGame
     player?.walking = true;
     player?.spritePaintColor(Colors.white);
     player?.isPlayerTeleporting = false;
+
+    _setSectionBackground();
   }
 
   void sectionCleared() {
@@ -326,7 +327,10 @@ class DashRunGame extends LeapGame
   }
 
   void teleportPlayerToEnd() {
-    player?.x = leapMap.tiledMap.size.x - (player?.size.x ?? 0) * 40;
+    player?.x = leapMap.tiledMap.size.x - (player?.size.x ?? 0) * 10 * 4;
+    if (state.currentSection == 2) {
+      player?.y = (player?.y ?? 0) - (tileSize * 4);
+    }
   }
 
   void showHitBoxes() {
