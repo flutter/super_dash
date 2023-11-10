@@ -326,7 +326,10 @@ class DashRunGame extends LeapGame
   }
 
   void teleportPlayerToEnd() {
-    player?.x = leapMap.tiledMap.size.x - (player?.size.x ?? 0) * 40;
+    player?.x = leapMap.tiledMap.size.x - (player?.size.x ?? 0) * 10 * 4;
+    if (state.currentSection == 2) {
+      player?.y = (player?.y ?? 0) - (tileSize * 4);
+    }
   }
 
   void showHitBoxes() {
