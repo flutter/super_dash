@@ -27,6 +27,9 @@ class _MapTesterViewState extends State<MapTesterView> {
   DashRunGame? game;
   String? rootPath;
 
+  double? speed;
+  double? jumpImpulse;
+
   @override
   void initState() {
     super.initState();
@@ -63,24 +66,61 @@ class _MapTesterViewState extends State<MapTesterView> {
   }
 
   Future<void> _reload() async {
+    late DashRunGame newGame;
     if (!kIsWeb && Platform.isMacOS) {
-      setState(() {
-        game = DashRunGame(
-          gameBloc: GameBloc(),
-          audioController: context.read(),
-          customBundle: FileSystemAssetBundle(rootPath!),
-          inMapTester: true,
-        );
-      });
+      newGame = DashRunGame(
+        gameBloc: GameBloc(),
+        audioController: context.read(),
+        customBundle: FileSystemAssetBundle(rootPath!),
+        inMapTester: true,
+      );
     } else {
-      setState(() {
-        game = DashRunGame(
-          gameBloc: GameBloc(),
-          audioController: context.read(),
-          inMapTester: true,
-        );
-      });
+      newGame = DashRunGame(
+        gameBloc: GameBloc(),
+        audioController: context.read(),
+        inMapTester: true,
+      );
     }
+
+    setState(() {
+      game = newGame;
+    });
+
+    // So we know for sure that everything is loaded and added.
+    await Future<void>.delayed(const Duration(milliseconds: 800));
+
+    if (speed != null) {
+      _setSpeed(speed!);
+    }
+
+    if (jumpImpulse != null) {
+      _setJumpImpulse(jumpImpulse!);
+    }
+  }
+
+  void _updateSpeed(double value) {
+    setState(() {
+      final newValue = (speed ?? Player.speed) + value;
+      speed = newValue;
+      _setSpeed(newValue);
+    });
+  }
+
+  void _setSpeed(double newValue) {
+    game?.player?.walkSpeed = newValue * (game?.tileSize ?? 0);
+  }
+
+  void _updateJumpImpulse(double value) {
+    setState(() {
+      final newValue = (jumpImpulse ?? Player.jumpImpulse) + value;
+      jumpImpulse = newValue;
+      _setJumpImpulse(newValue);
+    });
+  }
+
+  void _setJumpImpulse(double newValue) {
+    game?.player?.minJumpImpulse =
+        (game?.player?.world.gravity ?? 0) * newValue;
   }
 
   @override
@@ -89,6 +129,11 @@ class _MapTesterViewState extends State<MapTesterView> {
       body: Center(
         child: Column(
           children: [
+            Expanded(
+              child: game == null
+                  ? const SizedBox.shrink()
+                  : GameWidget(game: game!),
+            ),
             const SizedBox(height: 16),
             if (game == null)
               ElevatedButton(
@@ -96,74 +141,147 @@ class _MapTesterViewState extends State<MapTesterView> {
                 child: const Text('Load'),
               )
             else
-              Wrap(
+              Column(
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        game = null;
-                      });
-                    },
-                    child: const Text('Unload'),
+                  Wrap(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            game = null;
+                          });
+                        },
+                        child: const Text('Unload'),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: _reload,
+                        child: const Text('Reload'),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          game?.addCameraDebugger();
+                        },
+                        child: const Text('Seize camera control'),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          game?.toggleInvincibility();
+                        },
+                        child: const Text('Toggle invincibility'),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          game?.teleportPlayerToEnd();
+                        },
+                        child: const Text('Teleport to end'),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          game?.showHitBoxes();
+                        },
+                        child: const Text('Show hitboxes'),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          game?.player?.addPowerUp(ItemType.goldenFeather);
+                        },
+                        child: const Text('Add powerup'),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<SettingsController>().toggleMuted();
+                        },
+                        child: const Text('Toggle sound'),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: _reload,
-                    child: const Text('Reload'),
-                  ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      game?.addCameraDebugger();
-                    },
-                    child: const Text('Seize camera control'),
-                  ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      game?.toggleInvincibility();
-                    },
-                    child: const Text('Toggle invincibility'),
-                  ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      game?.teleportPlayerToEnd();
-                    },
-                    child: const Text('Teleport to end'),
-                  ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      game?.showHitBoxes();
-                    },
-                    child: const Text('Show hitboxes'),
-                  ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      game?.player?.addPowerUp(ItemType.goldenFeather);
-                    },
-                    child: const Text('Add powerup'),
-                  ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.read<SettingsController>().toggleMuted();
-                    },
-                    child: const Text('Toggle sound'),
+                  const Divider(),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              _updateSpeed(.2);
+                            },
+                            child: const Text('+'),
+                          ),
+                          _SpeedLabel(speed: speed),
+                          ElevatedButton(
+                            onPressed: () {
+                              _updateSpeed(-.2);
+                            },
+                            child: const Text('-'),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              _updateJumpImpulse(.2);
+                            },
+                            child: const Text('+'),
+                          ),
+                          _JumpImpulseLabel(jumpImpulse: jumpImpulse),
+                          ElevatedButton(
+                            onPressed: () {
+                              _updateJumpImpulse(-.2);
+                            },
+                            child: const Text('-'),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
             const SizedBox(height: 16),
-            Expanded(
-              child: game == null
-                  ? const SizedBox.shrink()
-                  : GameWidget(game: game!),
-            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _SpeedLabel extends StatelessWidget {
+  const _SpeedLabel({
+    required this.speed,
+  });
+
+  final double? speed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '${(speed ?? Player.speed).toStringAsFixed(2)}'
+      ' (Tiles per second)',
+      style: const TextStyle(color: Colors.black),
+    );
+  }
+}
+
+class _JumpImpulseLabel extends StatelessWidget {
+  const _JumpImpulseLabel({
+    required this.jumpImpulse,
+  });
+
+  final double? jumpImpulse;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '${(jumpImpulse ?? Player.jumpImpulse).toStringAsFixed(2)}'
+      ' (Gravity %)',
+      style: const TextStyle(color: Colors.black),
     );
   }
 }
