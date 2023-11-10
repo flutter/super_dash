@@ -10,6 +10,7 @@ import 'package:flame/widgets.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leaderboard_repository/leaderboard_repository.dart';
 
 enum LeaderboardStep { gameIntro, gameScore }
@@ -62,45 +63,42 @@ class LeaderboardView extends StatelessWidget {
     final l10n = context.l10n;
     return PageWithBackground(
       background: const GameBackground(),
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Assets.images.leaderboardBg.image(
-              fit: BoxFit.fitHeight,
-            ),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Assets.images.leaderboardBg.provider(),
+            fit: BoxFit.fitHeight,
           ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: MediaQuery.sizeOf(context).height * .3,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Leaderboard(),
-                const SizedBox(height: 20),
-                switch (step) {
-                  LeaderboardStep.gameIntro => GameElevatedButton(
-                      label: l10n.leaderboardPageGoBackButton,
-                      onPressed: Navigator.of(context).pop,
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color(0xFFA6C3DF),
-                          Color(0xFF79AACA),
-                        ],
-                      ),
-                    ),
-                  LeaderboardStep.gameScore => GameElevatedButton.icon(
-                      label: l10n.playAgain,
-                      icon: const Icon(Icons.refresh, size: 16),
-                      onPressed: context.flow<ScoreState>().complete,
-                    ),
-                },
-              ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height * .3,
             ),
-          ),
-        ],
+            const Leaderboard(),
+            const SizedBox(height: 20),
+            switch (step) {
+              LeaderboardStep.gameIntro => GameElevatedButton(
+                  label: l10n.leaderboardPageGoBackButton,
+                  onPressed: Navigator.of(context).pop,
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFFA6C3DF),
+                      Color(0xFF79AACA),
+                    ],
+                  ),
+                ),
+              LeaderboardStep.gameScore => GameElevatedButton.icon(
+                  label: l10n.playAgain,
+                  icon: const Icon(Icons.refresh, size: 16),
+                  onPressed: context.flow<ScoreState>().complete,
+                ),
+            },
+          ],
+        ),
       ),
     );
   }
@@ -109,11 +107,13 @@ class LeaderboardView extends StatelessWidget {
 class Leaderboard extends StatelessWidget {
   const Leaderboard({super.key});
 
+  static const width = 360.0;
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: width,
       height: MediaQuery.sizeOf(context).height * .5,
-      margin: const EdgeInsets.symmetric(horizontal: 60),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         gradient: const LinearGradient(
@@ -204,44 +204,102 @@ class LeaderboardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
-    final listTileTheme = theme.listTileTheme;
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            l10n.leaderboardPageLeaderboardHeadline,
-            style: theme.textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                l10n.leaderboardPageLeaderboardHeadline,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              if (entries.isEmpty)
+                Center(child: Text(l10n.leaderboardPageLeaderboardNoEntries))
+              else
+                Flexible(
+                  child: _LeaderboardEntries(entries: entries),
+                ),
+            ],
           ),
-          const SizedBox(height: 20),
-          if (entries.isEmpty)
-            Center(child: Text(l10n.leaderboardPageLeaderboardNoEntries))
-          else
-            Flexible(
-              child: ListView.builder(
-                itemCount: entries.length,
-                itemBuilder: (context, index) {
-                  final entry = entries.elementAt(index);
-                  return ListTile(
-                    leading: Text('#${index + 1}'),
-                    title: Text(entry.playerInitials),
-                    trailing: Text(l10n.gameScoreLabel(entry.score)),
-                    titleTextStyle: listTileTheme.titleTextStyle?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                    leadingAndTrailingTextStyle:
-                        listTileTheme.leadingAndTrailingTextStyle?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                },
+        ),
+        Positioned(
+          bottom: 0,
+          child: Container(
+            height: 60,
+            width: Leaderboard.width,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(24),
+              ),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.0, 0.8],
+                colors: [
+                  Colors.transparent,
+                  Color(0xFF1B1B36),
+                ],
               ),
             ),
-        ],
-      ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _LeaderboardEntries extends StatelessWidget {
+  const _LeaderboardEntries({required this.entries});
+
+  final List<LeaderboardEntryData> entries;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    return ListView.separated(
+      separatorBuilder: (context, index) => const Divider(color: Colors.grey),
+      itemCount: entries.length,
+      itemBuilder: (context, index) {
+        final entry = entries.elementAt(index);
+        return ListTile(
+          dense: true,
+          minVerticalPadding: 0,
+          contentPadding: EdgeInsets.zero,
+          leading: Text('#${index + 1}'),
+          title: Text(entry.playerInitials),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if ([0, 1, 2].contains(index)) ...[
+                Icon(
+                  FontAwesomeIcons.trophy,
+                  size: 20,
+                  color: switch (index) {
+                    0 => const Color(0xFFD4AF37),
+                    1 => const Color(0xFFC0C0C0),
+                    _ => const Color(0xFFCD7F32),
+                  },
+                ),
+                const SizedBox(width: 10),
+              ],
+              Text(l10n.gameScoreLabel(entry.score)),
+            ],
+          ),
+          titleTextStyle: textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+          leadingAndTrailingTextStyle: textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        );
+      },
     );
   }
 }
