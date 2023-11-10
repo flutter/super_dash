@@ -143,6 +143,7 @@ class DashRunGame extends LeapGame
 
     await _addSpawners();
     _addTreeHouseFrontLayer();
+    _addTreeHouseSign();
 
     add(
       KeyboardListenerComponent(
@@ -158,6 +159,17 @@ class DashRunGame extends LeapGame
             return false;
           },
         },
+      ),
+    );
+  }
+
+  void _addTreeHouseSign() {
+    world.add(
+      TreeSign(
+        position: Vector2(
+          448,
+          1862,
+        ),
       ),
     );
   }
@@ -196,6 +208,10 @@ class DashRunGame extends LeapGame
         if (isLastSection || isFirstSection) {
           _addTreeHouseFrontLayer();
         }
+
+        if (isFirstSection) {
+          _addTreeHouseSign();
+        }
         final newPlayer = Player(
           levelSize: leapMap.tiledMap.size.clone(),
           cameraViewport: _cameraViewport,
@@ -219,6 +235,7 @@ class DashRunGame extends LeapGame
   void _resetEntities() {
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
     world.firstChild<TreeHouseFront>()?.removeFromParent();
+    world.firstChild<TreeSign>()?.removeFromParent();
 
     leapMap.children
         .whereType<Enemy>()
