@@ -101,7 +101,7 @@ void main() {
       expect(originalGame, isNotNull);
 
       await tester.tap(find.text('Reload'));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       widget = tester.widget<GameWidget<DashRunGame>>(
         find.byType(GameWidget<DashRunGame>),
@@ -132,6 +132,7 @@ extension on WidgetTester {
         ],
         child: MapTesterView(
           selectGameFolder: getDirectoryPath,
+          timer: Future.value,
         ),
       ),
     );

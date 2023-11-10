@@ -16,6 +16,8 @@ class Player extends JumperCharacter<DashRunGame> {
   });
 
   static const initialHealth = 1;
+  static const speed = 5.0;
+  static const jumpImpulse = .6;
 
   final Vector2 levelSize;
   final Vector2 cameraViewport;
@@ -89,8 +91,8 @@ class Player extends JumperCharacter<DashRunGame> {
     await super.onLoad();
 
     size = Vector2.all(gameRef.tileSize * .5);
-    walkSpeed = gameRef.tileSize * 5;
-    minJumpImpulse = world.gravity * 0.6;
+    walkSpeed = gameRef.tileSize * speed;
+    minJumpImpulse = world.gravity * jumpImpulse;
     cameraAnchor = PlayerCameraAnchor(
       cameraViewport: cameraViewport,
       levelSize: levelSize,
