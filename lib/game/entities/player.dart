@@ -1,10 +1,11 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/widgets.dart';
 import 'package:leap/leap.dart';
 
 class Player extends JumperCharacter<DashRunGame> {
@@ -21,6 +22,8 @@ class Player extends JumperCharacter<DashRunGame> {
   late Vector2 spawn;
   late final List<Vector2> respawnPoints;
   late final PlayerCameraAnchor cameraAnchor;
+  late final PlayerStateBehavior stateBehavior =
+      findBehavior<PlayerStateBehavior>();
 
   List<ItemType> powerUps = [];
   bool isPlayerInvincible = false;
@@ -45,12 +48,12 @@ class Player extends JumperCharacter<DashRunGame> {
 
     final newJumpState =
         powerUps.isEmpty ? DashState.jump : DashState.phoenixJump;
-    findBehavior<PlayerStateBehavior>().state = newJumpState;
+    stateBehavior.state = newJumpState;
   }
 
   void doubleJumpEffects() {
     gameRef.audioController.playSfx(Sfx.doubleJump);
-    findBehavior<PlayerStateBehavior>().state = DashState.phoenixDoubleJump;
+    stateBehavior.state = DashState.phoenixDoubleJump;
   }
 
   @override
@@ -65,17 +68,19 @@ class Player extends JumperCharacter<DashRunGame> {
   }
 
   void setRunningState() {
-    final behavior = findBehavior<PlayerStateBehavior>();
+    final behavior = stateBehavior;
     if (behavior.state != DashState.running &&
         behavior.state != DashState.phoenixRunning) {
       final newRunState =
           powerUps.isEmpty ? DashState.running : DashState.phoenixRunning;
-      behavior.state = newRunState;
+      if (behavior.state != newRunState) {
+        behavior.state = newRunState;
+      }
     }
   }
 
   void setIdleState() {
-    findBehavior<PlayerStateBehavior>().state =
+    stateBehavior.state =
         powerUps.isEmpty ? DashState.idle : DashState.phoenixIdle;
   }
 
@@ -118,11 +123,10 @@ class Player extends JumperCharacter<DashRunGame> {
   void addPowerUp(ItemType type) {
     powerUps.add(type);
 
-    final behavior = findBehavior<PlayerStateBehavior>();
-    if (behavior.state == DashState.idle) {
-      behavior.state = DashState.phoenixIdle;
-    } else if (behavior.state == DashState.running) {
-      behavior.state = DashState.phoenixRunning;
+    if (stateBehavior.state == DashState.idle) {
+      stateBehavior.state = DashState.phoenixIdle;
+    } else if (stateBehavior.state == DashState.running) {
+      stateBehavior.state = DashState.phoenixRunning;
     }
   }
 
@@ -172,7 +176,7 @@ class Player extends JumperCharacter<DashRunGame> {
       }
 
       // If player has a golden feather, use it to avoid death.
-      powerUps.removeLast();
+      powerUps.clear();
       return _respawn();
     }
 
@@ -213,7 +217,7 @@ class Player extends JumperCharacter<DashRunGame> {
         }
 
         // If player has a golden feather, use it to avoid death.
-        powerUps.removeLast();
+        powerUps.clear();
         return _respawn();
       }
     }
@@ -237,7 +241,7 @@ class Player extends JumperCharacter<DashRunGame> {
   }
 
   void _animateToGameOver([DashState deathState = DashState.deathFaint]) {
-    findBehavior<PlayerStateBehavior>().state = deathState;
+    stateBehavior.state = deathState;
     super.walking = false;
     _gameOverTimer = 1.4;
   }
@@ -247,11 +251,30 @@ class Player extends JumperCharacter<DashRunGame> {
     final closestRespawn = respawnPoints.reduce((a, b) {
       return (a - position).length2 < (b - position).length2 ? a : b;
     });
-    position = closestRespawn.clone();
+
+    isPlayerInvincible = true;
+    walking = false;
+    final behavior = stateBehavior..fadeOut();
+    add(
+      MoveToEffect(
+        closestRespawn.clone(),
+        EffectController(
+          curve: Curves.easeInOut,
+          startDelay: .2,
+          duration: .8,
+        ),
+      ),
+    );
+    behavior.fadeIn(
+      onComplete: () {
+        isPlayerInvincible = false;
+        walking = true;
+      },
+    );
   }
 
   void spritePaintColor(Color color) {
-    findBehavior<PlayerStateBehavior>().updateSpritePaintColor(color);
+    stateBehavior.updateSpritePaintColor(color);
   }
 
   void sectionCleared() {

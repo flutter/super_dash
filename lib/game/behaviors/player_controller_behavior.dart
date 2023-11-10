@@ -87,7 +87,7 @@ class PlayerControllerBehavior extends Behavior<Player> {
       }
     }
 
-    if (_jumpTimer <= 0 && parent.isOnGround) {
+    if (_jumpTimer <= 0 && parent.isOnGround && parent.walking) {
       parent.setRunningState();
     }
 
