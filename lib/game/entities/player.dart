@@ -89,7 +89,7 @@ class Player extends JumperCharacter<DashRunGame> {
     await super.onLoad();
 
     size = Vector2.all(gameRef.tileSize * .5);
-    walkSpeed = gameRef.tileSize * 4.6;
+    walkSpeed = gameRef.tileSize * 5;
     minJumpImpulse = world.gravity * 0.6;
     cameraAnchor = PlayerCameraAnchor(
       cameraViewport: cameraViewport,
