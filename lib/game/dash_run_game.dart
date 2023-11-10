@@ -91,8 +91,8 @@ class DashRunGame extends LeapGame
   }
 
   @override
-  void onTapUp(TapUpInfo info) {
-    super.onTapUp(info);
+  void onTapDown(TapDownInfo info) {
+    super.onTapDown(info);
 
     _triggerInputListeners();
   }
