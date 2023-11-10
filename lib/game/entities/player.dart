@@ -22,7 +22,8 @@ class Player extends JumperCharacter<DashRunGame> {
   late Vector2 spawn;
   late final List<Vector2> respawnPoints;
   late final PlayerCameraAnchor cameraAnchor;
-  late final PlayerStateBehavior stateBehavior;
+  late final PlayerStateBehavior stateBehavior =
+      findBehavior<PlayerStateBehavior>();
 
   List<ItemType> powerUps = [];
   bool isPlayerInvincible = false;
@@ -94,11 +95,10 @@ class Player extends JumperCharacter<DashRunGame> {
       cameraViewport: cameraViewport,
       levelSize: levelSize,
     );
-    stateBehavior = PlayerStateBehavior();
 
     add(cameraAnchor);
     add(PlayerControllerBehavior());
-    add(stateBehavior);
+    add(PlayerStateBehavior());
 
     gameRef.camera.follow(cameraAnchor);
 
