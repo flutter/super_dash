@@ -176,7 +176,7 @@ class Player extends JumperCharacter<DashRunGame> {
       }
 
       // If player has a golden feather, use it to avoid death.
-      powerUps.removeLast();
+      powerUps.clear();
       return _respawn();
     }
 
@@ -217,7 +217,7 @@ class Player extends JumperCharacter<DashRunGame> {
         }
 
         // If player has a golden feather, use it to avoid death.
-        powerUps.removeLast();
+        powerUps.clear();
         return _respawn();
       }
     }
