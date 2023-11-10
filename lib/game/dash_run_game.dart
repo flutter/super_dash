@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' as ui;
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
@@ -44,9 +45,9 @@ class DashRunGame extends LeapGame
     'flutter_runnergame_map_C.tmx',
   ];
   static const _sectionsBackgroundColor = [
-    Color(0xffe9e9df),
-    Color(0xffdae2ee),
-    Color(0xff0353b0),
+    (Color(0xFFDADEF6), Color(0xFFEAF0E3)),
+    (Color(0xFFEBD6E1), Color(0xFFC9C8E9)),
+    (Color(0xFF002052), Color(0xFF0055B4)),
   ];
 
   final GameBloc gameBloc;
@@ -168,9 +169,18 @@ class DashRunGame extends LeapGame
   }
 
   void _setSectionBackground() {
+    final colors = _sectionsBackgroundColor[state.currentSection];
     camera.backdrop = RectangleComponent(
       size: size.clone(),
-      paint: Paint()..color = _sectionsBackgroundColor[state.currentSection],
+      paint: Paint()
+        ..shader = ui.Gradient.linear(
+          Offset.zero,
+          Offset(size.x, size.y),
+          [
+            colors.$1,
+            colors.$2,
+          ],
+        ),
     );
   }
 
