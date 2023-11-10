@@ -50,7 +50,7 @@ class App extends StatelessWidget {
             value: shareController,
           ),
           RepositoryProvider<AuthenticationRepository>.value(
-            value: authenticationRepository,
+            value: authenticationRepository..signInAnonymously(),
           ),
           RepositoryProvider<LeaderboardRepository>.value(
             value: leaderboardRepository,
