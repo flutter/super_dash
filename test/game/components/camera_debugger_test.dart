@@ -29,7 +29,10 @@ void main() {
     test('has the correct initial values', () {
       final cameraDebugger = CameraDebugger();
       expect(cameraDebugger.size, equals(Vector2.all(150)));
-      expect(cameraDebugger.paint.color.value, equals(Colors.pink.value));
+      expect(
+        cameraDebugger.paint.color.value,
+        equals(Colors.pink.withOpacity(0.5).value),
+      );
       expect(cameraDebugger.priority, equals(100));
     });
 
