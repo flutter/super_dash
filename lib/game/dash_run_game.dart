@@ -243,7 +243,6 @@ class DashRunGame extends LeapGame
   }
 
   Future<void> _loadNewSection() async {
-    _setSectionBackground();
     final nextSectionIndex = state.currentSection + 1 < _sections.length
         ? state.currentSection + 1
         : 0;
@@ -277,6 +276,8 @@ class DashRunGame extends LeapGame
     player?.walking = true;
     player?.spritePaintColor(Colors.white);
     player?.isPlayerTeleporting = false;
+
+    _setSectionBackground();
   }
 
   void sectionCleared() {
