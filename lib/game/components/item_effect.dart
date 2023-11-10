@@ -55,4 +55,14 @@ class ItemEffect extends SpriteAnimationComponent with HasGameRef<DashRunGame> {
       size = Vector2.all(64);
     }
   }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    final player = gameRef.player;
+    if (player == null) return;
+
+    position = player.position;
+  }
 }
