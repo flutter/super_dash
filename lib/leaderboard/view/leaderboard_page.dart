@@ -67,36 +67,38 @@ class LeaderboardView extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: Assets.images.leaderboardBg.provider(),
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.fill,
           ),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
               height: MediaQuery.sizeOf(context).height * .3,
             ),
             const Leaderboard(),
             const SizedBox(height: 20),
-            switch (step) {
-              LeaderboardStep.gameIntro => GameElevatedButton(
-                  label: l10n.leaderboardPageGoBackButton,
-                  onPressed: Navigator.of(context).pop,
-                  gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFFA6C3DF),
-                      Color(0xFF79AACA),
-                    ],
+            Align(
+              child: switch (step) {
+                LeaderboardStep.gameIntro => GameElevatedButton(
+                    label: l10n.leaderboardPageGoBackButton,
+                    onPressed: Navigator.of(context).pop,
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color(0xFFA6C3DF),
+                        Color(0xFF79AACA),
+                      ],
+                    ),
                   ),
-                ),
-              LeaderboardStep.gameScore => GameElevatedButton.icon(
-                  label: l10n.playAgain,
-                  icon: const Icon(Icons.refresh, size: 16),
-                  onPressed: context.flow<ScoreState>().complete,
-                ),
-            },
+                LeaderboardStep.gameScore => GameElevatedButton.icon(
+                    label: l10n.playAgain,
+                    icon: const Icon(Icons.refresh, size: 16),
+                    onPressed: context.flow<ScoreState>().complete,
+                  ),
+              },
+            ),
           ],
         ),
       ),
@@ -108,12 +110,14 @@ class Leaderboard extends StatelessWidget {
   const Leaderboard({super.key});
 
   static const width = 360.0;
+  static const height = 420.0;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: MediaQuery.sizeOf(context).height * .5,
+      height: height,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         gradient: const LinearGradient(
@@ -224,19 +228,20 @@ class LeaderboardContent extends StatelessWidget {
                 Flexible(
                   child: _LeaderboardEntries(entries: entries),
                 ),
+              const SizedBox(height: 30),
             ],
           ),
         ),
         Positioned(
+          left: 0,
+          right: 0,
           bottom: 0,
           child: Container(
-            height: 60,
             width: Leaderboard.width,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(24),
-              ),
-              gradient: LinearGradient(
+            height: Leaderboard.height * .2,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: [0.0, 0.8],
@@ -264,6 +269,7 @@ class _LeaderboardEntries extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     return ListView.separated(
+      padding: EdgeInsets.zero,
       separatorBuilder: (context, index) => const Divider(color: Colors.grey),
       itemCount: entries.length,
       itemBuilder: (context, index) {
