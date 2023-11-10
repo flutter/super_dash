@@ -34,7 +34,7 @@ class Player extends JumperCharacter<DashRunGame> {
   double? _gameOverTimer;
 
   double? _stuckTimer;
-  double _lastCameraPosition = 0;
+  double _dashPosition = 0;
 
   bool get isGoingToGameOver => _gameOverTimer != null;
 
@@ -224,8 +224,8 @@ class Player extends JumperCharacter<DashRunGame> {
   }
 
   void _checkPlayerStuck(double dt) {
-    final currentCameraPosition = cameraAnchor.position.x;
-    final isPlayerStopped = currentCameraPosition == _lastCameraPosition;
+    final currentDashPosition = position.x;
+    final isPlayerStopped = currentDashPosition == _dashPosition;
     // Player is set as walking but is not moving.
     if (walking && isPlayerStopped) {
       _stuckTimer ??= 1;
@@ -237,7 +237,7 @@ class Player extends JumperCharacter<DashRunGame> {
     } else {
       _stuckTimer = null;
     }
-    _lastCameraPosition = currentCameraPosition;
+    _dashPosition = currentDashPosition;
   }
 
   void _animateToGameOver([DashState deathState = DashState.deathFaint]) {
