@@ -30,6 +30,7 @@ class Player extends JumperCharacter<DashRunGame> {
   List<ItemType> powerUps = [];
   bool isPlayerInvincible = false;
   bool isPlayerTeleporting = false;
+  bool isPlayerRespawning = false;
 
   bool get doubleJumpEnabled => powerUps.contains(ItemType.goldenFeather);
 
@@ -246,9 +247,10 @@ class Player extends JumperCharacter<DashRunGame> {
       return (a - position).length2 < (b - position).length2 ? a : b;
     });
 
+    isPlayerRespawning = true;
     isPlayerInvincible = true;
     walking = false;
-    final behavior = stateBehavior..fadeOut();
+    stateBehavior.fadeOut();
     add(
       MoveToEffect(
         closestRespawn.clone(),
@@ -259,8 +261,9 @@ class Player extends JumperCharacter<DashRunGame> {
         ),
       ),
     );
-    behavior.fadeIn(
+    stateBehavior.fadeIn(
       onComplete: () {
+        isPlayerRespawning = false;
         isPlayerInvincible = false;
         walking = true;
       },
