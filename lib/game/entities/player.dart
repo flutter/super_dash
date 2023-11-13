@@ -16,6 +16,8 @@ class Player extends JumperCharacter<DashRunGame> {
   });
 
   static const initialHealth = 1;
+  static const speed = 5.0;
+  static const jumpImpulse = .6;
 
   final Vector2 levelSize;
   final Vector2 cameraViewport;
@@ -34,7 +36,7 @@ class Player extends JumperCharacter<DashRunGame> {
   double? _gameOverTimer;
 
   double? _stuckTimer;
-  double _lastCameraPosition = 0;
+  double _dashPosition = 0;
 
   bool get isGoingToGameOver => _gameOverTimer != null;
 
@@ -89,8 +91,8 @@ class Player extends JumperCharacter<DashRunGame> {
     await super.onLoad();
 
     size = Vector2.all(gameRef.tileSize * .5);
-    walkSpeed = gameRef.tileSize * 4;
-    minJumpImpulse = world.gravity * 0.6;
+    walkSpeed = gameRef.tileSize * speed;
+    minJumpImpulse = world.gravity * jumpImpulse;
     cameraAnchor = PlayerCameraAnchor(
       cameraViewport: cameraViewport,
       levelSize: levelSize,
@@ -146,14 +148,6 @@ class Player extends JumperCharacter<DashRunGame> {
     _checkPlayerStuck(dt);
 
     if (isPlayerTeleporting) return;
-
-    // Removed since the result didn't ended up good.
-    // Leaving in comment if we decide to bring it back.
-    // if (collisionInfo.downCollision != null && velocity.x > 0) {
-    //   gameRef.audioController.startBackgroundSfx();
-    // } else {
-    //   gameRef.audioController.stopBackgroundSfx();
-    // }
 
     if ((gameRef.isLastSection && x >= gameRef.leapMap.width - tileSize) ||
         (!gameRef.isLastSection &&
@@ -224,8 +218,8 @@ class Player extends JumperCharacter<DashRunGame> {
   }
 
   void _checkPlayerStuck(double dt) {
-    final currentCameraPosition = cameraAnchor.position.x;
-    final isPlayerStopped = currentCameraPosition == _lastCameraPosition;
+    final currentDashPosition = position.x;
+    final isPlayerStopped = currentDashPosition == _dashPosition;
     // Player is set as walking but is not moving.
     if (walking && isPlayerStopped) {
       _stuckTimer ??= 1;
@@ -237,7 +231,7 @@ class Player extends JumperCharacter<DashRunGame> {
     } else {
       _stuckTimer = null;
     }
-    _lastCameraPosition = currentCameraPosition;
+    _dashPosition = currentDashPosition;
   }
 
   void _animateToGameOver([DashState deathState = DashState.deathFaint]) {

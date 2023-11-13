@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' as ui;
 
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
@@ -14,6 +15,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 
+bool _tsxPackingFilter(Tileset tileset) {
+  return !(tileset.source ?? '').startsWith('anim');
+}
+
 class DashRunGame extends LeapGame
     with TapDetector, HasKeyboardHandlerComponents {
   DashRunGame({
@@ -27,6 +32,7 @@ class DashRunGame extends LeapGame
             tiled: TiledOptions(
               atlasMaxX: 4048,
               atlasMaxY: 4048,
+              tsxPackingFilter: _tsxPackingFilter,
             ),
           ),
         );
@@ -39,9 +45,9 @@ class DashRunGame extends LeapGame
     'flutter_runnergame_map_C.tmx',
   ];
   static const _sectionsBackgroundColor = [
-    Color(0xffe9e9df),
-    Color(0xffdae2ee),
-    Color(0xff0353b0),
+    (Color(0xFFDADEF6), Color(0xFFEAF0E3)),
+    (Color(0xFFEBD6E1), Color(0xFFC9C8E9)),
+    (Color(0xFF002052), Color(0xFF0055B4)),
   ];
 
   final GameBloc gameBloc;
@@ -86,10 +92,11 @@ class DashRunGame extends LeapGame
   }
 
   @override
-  void onTapUp(TapUpInfo info) {
-    super.onTapUp(info);
+  void onTapDown(TapDownInfo info) {
+    super.onTapDown(info);
 
     _triggerInputListeners();
+    overlays.remove('tapToJump');
   }
 
   @override
@@ -137,12 +144,14 @@ class DashRunGame extends LeapGame
 
     await _addSpawners();
     _addTreeHouseFrontLayer();
+    _addTreeHouseSign();
 
     add(
       KeyboardListenerComponent(
         keyDown: {
           LogicalKeyboardKey.space: (_) {
             _triggerInputListeners();
+            overlays.remove('tapToJump');
             return false;
           },
         },
@@ -155,15 +164,35 @@ class DashRunGame extends LeapGame
     );
   }
 
+  void _addTreeHouseSign() {
+    world.add(
+      TreeSign(
+        position: Vector2(
+          448,
+          1862,
+        ),
+      ),
+    );
+  }
+
   void _addTreeHouseFrontLayer() {
     final layer = leapMap.tiledMap.tileMap.renderableLayers.last;
     world.add(TreeHouseFront(renderFront: layer.render));
   }
 
   void _setSectionBackground() {
+    final colors = _sectionsBackgroundColor[state.currentSection];
     camera.backdrop = RectangleComponent(
       size: size.clone(),
-      paint: Paint()..color = _sectionsBackgroundColor[state.currentSection],
+      paint: Paint()
+        ..shader = ui.Gradient.linear(
+          Offset.zero,
+          Offset(size.x, size.y),
+          [
+            colors.$1,
+            colors.$2,
+          ],
+        ),
     );
   }
 
@@ -189,6 +218,10 @@ class DashRunGame extends LeapGame
         if (isLastSection || isFirstSection) {
           _addTreeHouseFrontLayer();
         }
+
+        if (isFirstSection) {
+          _addTreeHouseSign();
+        }
         final newPlayer = Player(
           levelSize: leapMap.tiledMap.size.clone(),
           cameraViewport: _cameraViewport,
@@ -197,6 +230,7 @@ class DashRunGame extends LeapGame
 
         await newPlayer.mounted;
         await _addSpawners();
+        overlays.add('tapToJump');
       },
     );
 
@@ -211,6 +245,7 @@ class DashRunGame extends LeapGame
   void _resetEntities() {
     world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
     world.firstChild<TreeHouseFront>()?.removeFromParent();
+    world.firstChild<TreeSign>()?.removeFromParent();
 
     leapMap.children
         .whereType<Enemy>()
@@ -238,7 +273,6 @@ class DashRunGame extends LeapGame
   }
 
   Future<void> _loadNewSection() async {
-    _setSectionBackground();
     final nextSectionIndex = state.currentSection + 1 < _sections.length
         ? state.currentSection + 1
         : 0;
@@ -272,6 +306,8 @@ class DashRunGame extends LeapGame
     player?.walking = true;
     player?.spritePaintColor(Colors.white);
     player?.isPlayerTeleporting = false;
+
+    _setSectionBackground();
   }
 
   void sectionCleared() {
@@ -321,7 +357,10 @@ class DashRunGame extends LeapGame
   }
 
   void teleportPlayerToEnd() {
-    player?.x = leapMap.tiledMap.size.x - (player?.size.x ?? 0) * 40;
+    player?.x = leapMap.tiledMap.size.x - (player?.size.x ?? 0) * 10 * 4;
+    if (state.currentSection == 2) {
+      player?.y = (player?.y ?? 0) - (tileSize * 4);
+    }
   }
 
   void showHitBoxes() {

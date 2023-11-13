@@ -8,12 +8,14 @@ class CameraDebugger extends RectangleComponent {
   CameraDebugger({
     super.position,
   }) : super(
-          paint: Paint()..color = Colors.pink,
+          paint: Paint()..color = Colors.pink.withOpacity(0.5),
           size: Vector2.all(150),
           priority: 100,
+          anchor: Anchor.center,
         );
 
   final _direction = Vector2.zero();
+  late final TextComponent _text;
   double _speed = 300;
 
   double get speed => _speed;
@@ -23,11 +25,20 @@ class CameraDebugger extends RectangleComponent {
     super.update(dt);
 
     position += _direction * _speed * dt;
+
+    _text.text = 'Camera: $position';
   }
 
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
+
+    add(
+      _text = TextComponent(
+        anchor: Anchor.center,
+        position: size / 2,
+      ),
+    );
 
     add(
       KeyboardListenerComponent(
