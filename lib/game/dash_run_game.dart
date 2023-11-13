@@ -243,7 +243,9 @@ class DashRunGame extends LeapGame
   }
 
   void _resetEntities() {
-    world.firstChild<ObjectGroupProximityBuilder<Player>>()?.removeFromParent();
+    children.whereType<ObjectGroupProximityBuilder<Player>>().forEach(
+          (spawner) => spawner.removeFromParent(),
+        );
     world.firstChild<TreeHouseFront>()?.removeFromParent();
     world.firstChild<TreeSign>()?.removeFromParent();
 
@@ -364,12 +366,24 @@ class DashRunGame extends LeapGame
   }
 
   void showHitBoxes() {
-    descendants()
-        .whereType<PhysicalEntity>()
-        .where(
-          (element) => element is Player || element is Item || element is Enemy,
-        )
-        .forEach((entity) => entity.debugMode = true);
+    void show() {
+      descendants()
+          .whereType<PhysicalEntity>()
+          .where(
+            (element) =>
+                element is Player || element is Item || element is Enemy,
+          )
+          .forEach((entity) => entity.debugMode = true);
+    }
+
+    show();
+    add(
+      TimerComponent(
+        period: 1,
+        repeat: true,
+        onTick: show,
+      ),
+    );
   }
 
   void _addMapTesterFeatures() {
