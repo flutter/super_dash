@@ -71,10 +71,11 @@ class LeaderboardView extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
-              height: MediaQuery.sizeOf(context).height * .3,
+              height: MediaQuery.sizeOf(context).height * .15,
             ),
             const Leaderboard(),
             const SizedBox(height: 20),
