@@ -45,7 +45,6 @@ class Player extends JumperCharacter<DashRunGame> {
   void jumpEffects() {
     final jumpSound = hasGoldenFeather ? Sfx.phoenixJump : Sfx.jump;
     gameRef.audioController.playSfx(jumpSound);
-    gameRef.audioController.playSfx(Sfx.jump);
 
     final newJumpState =
         hasGoldenFeather ? DashState.phoenixJump : DashState.jump;
@@ -53,7 +52,7 @@ class Player extends JumperCharacter<DashRunGame> {
   }
 
   void doubleJumpEffects() {
-    gameRef.audioController.playSfx(Sfx.doubleJump);
+    gameRef.audioController.playSfx(Sfx.phoenixJump);
     stateBehavior.state = DashState.phoenixDoubleJump;
   }
 
