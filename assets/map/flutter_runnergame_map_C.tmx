@@ -588,13 +588,10 @@
   <object id="746" type="Respawn" x="2496" y="1856">
    <point/>
   </object>
-  <object id="747" type="Respawn" x="2176" y="1472">
+  <object id="747" type="Respawn" x="2176" y="1408">
    <point/>
   </object>
   <object id="748" type="Respawn" x="2880" y="1728">
-   <point/>
-  </object>
-  <object id="749" type="Respawn" x="3488" y="1536">
    <point/>
   </object>
   <object id="750" type="Respawn" x="4672" y="1152">
@@ -612,10 +609,10 @@
   <object id="754" type="Respawn" x="8256" y="1664">
    <point/>
   </object>
-  <object id="761" type="Respawn" x="2528" y="1152">
+  <object id="761" type="Respawn" x="2560" y="1088">
    <point/>
   </object>
-  <object id="762" type="Respawn" x="3520" y="960">
+  <object id="762" type="Respawn" x="3520" y="896">
    <point/>
   </object>
   <object id="763" type="Respawn" x="3840" y="1280">
@@ -631,7 +628,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="45" name="Dash" visible="0">
+ <objectgroup id="45" name="Dash">
   <object id="855" gid="157" x="640" y="2240" width="64" height="64"/>
   <object id="856" gid="530" x="192" y="2240" width="64" height="64"/>
   <object id="857" gid="714" x="256" y="2240" width="64" height="64"/>
