@@ -305,6 +305,7 @@ class DashRunGame extends LeapGame
   @override
   void onMapLoaded() {
     player?.loadSpawnPoint();
+    player?.loadRespawnPoints();
     player?.walking = true;
     player?.spritePaintColor(Colors.white);
     player?.isPlayerTeleporting = false;

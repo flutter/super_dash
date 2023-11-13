@@ -22,7 +22,7 @@ class Player extends JumperCharacter<DashRunGame> {
   final Vector2 levelSize;
   final Vector2 cameraViewport;
   late Vector2 spawn;
-  late final List<Vector2> respawnPoints;
+  late List<Vector2> respawnPoints;
   late final PlayerCameraAnchor cameraAnchor;
   late final PlayerStateBehavior stateBehavior =
       findBehavior<PlayerStateBehavior>();
@@ -104,7 +104,10 @@ class Player extends JumperCharacter<DashRunGame> {
     gameRef.camera.follow(cameraAnchor);
 
     loadSpawnPoint();
+    loadRespawnPoints();
+  }
 
+  void loadRespawnPoints() {
     final respawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('respawn');
     respawnPoints = [
       ...respawnGroup.objects.map(
