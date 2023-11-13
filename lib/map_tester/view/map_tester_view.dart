@@ -195,7 +195,7 @@ class _MapTesterViewState extends State<MapTesterView> {
                       const SizedBox(width: 16),
                       ElevatedButton(
                         onPressed: () {
-                          game?.player?.addPowerUp(ItemType.goldenFeather);
+                          game?.player?.addPowerUp();
                         },
                         child: const Text('Add powerup'),
                       ),

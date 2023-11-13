@@ -55,7 +55,7 @@ class PlayerControllerBehavior extends Behavior<Player> {
     // If is walking and double jump is enabled, double jump
     if (parent.walking &&
         !parent.isOnGround &&
-        parent.doubleJumpEnabled &&
+        parent.hasGoldenFeather &&
         !doubleJumpUsed) {
       parent
         ..doubleJumpEffects()
