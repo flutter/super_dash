@@ -172,7 +172,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
       // If player has a golden feather, use it to avoid death.
       hasGoldenFeather = false;
-      return _respawn();
+      return respawn();
     }
 
     final collisions = collisionInfo.otherCollisions ?? const [];
@@ -213,7 +213,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
         // If player has a golden feather, use it to avoid death.
         hasGoldenFeather = false;
-        return _respawn();
+        return respawn();
       }
     }
   }
@@ -241,7 +241,7 @@ class Player extends JumperCharacter<DashRunGame> {
     _gameOverTimer = 1.4;
   }
 
-  void _respawn() {
+  void respawn() {
     // Get closest value to gridX and gridY in respawnPoints.
     final closestRespawn = respawnPoints.reduce((a, b) {
       return (a - position).length2 < (b - position).length2 ? a : b;
