@@ -290,11 +290,15 @@ class DashRunGame extends LeapGame
       tiledMapPath: nextSection,
     );
 
-    await _addSpawners();
+    if (isFirstSection) {
+      _addTreeHouseSign();
+    }
 
     if (isLastSection || isFirstSection) {
       _addTreeHouseFrontLayer();
     }
+
+    await _addSpawners();
   }
 
   @override
