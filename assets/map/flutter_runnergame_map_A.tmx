@@ -502,9 +502,6 @@
   <object id="667" gid="74" x="6176" y="1152" width="64" height="64"/>
   <object id="675" gid="74" x="2912" y="1984" width="64" height="64"/>
   <object id="676" gid="74" x="5088" y="1856" width="64" height="64"/>
-  <object id="814" gid="804" x="768" y="1728" width="64" height="64"/>
-  <object id="815" gid="813" x="1024" y="1792" width="192" height="192"/>
-  <object id="816" gid="833" x="832" y="1792" width="192" height="192"/>
   <object id="817" gid="726" x="3968" y="1408" width="64" height="64">
    <properties>
     <property name="Type" value="Egg"/>
