@@ -37,6 +37,9 @@ void main() {
       leaderboardRepository = _MockLeaderboardRepository();
 
       when(() => settingsController.muted).thenReturn(ValueNotifier(true));
+      when(authenticationRepository.signInAnonymously).thenAnswer(
+        (_) => Future.value(),
+      );
     });
 
     testWidgets('renders GameIntroPage', (tester) async {

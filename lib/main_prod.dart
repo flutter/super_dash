@@ -43,8 +43,6 @@ void main() async {
           firebaseAuth: firebaseAuth,
         );
 
-        await authenticationRepository.signInAnonymously();
-
         return App(
           audioController: audio,
           settingsController: settings,
