@@ -27,6 +27,7 @@ class PlayerControllerBehavior extends Behavior<Player> {
   void _handleInput() {
     if (parent.isDead ||
         parent.isPlayerTeleporting ||
+        parent.isPlayerRespawning ||
         parent.isGoingToGameOver) {
       return;
     }
@@ -54,7 +55,7 @@ class PlayerControllerBehavior extends Behavior<Player> {
     // If is walking and double jump is enabled, double jump
     if (parent.walking &&
         !parent.isOnGround &&
-        parent.doubleJumpEnabled &&
+        parent.hasGoldenFeather &&
         !doubleJumpUsed) {
       parent
         ..doubleJumpEffects()

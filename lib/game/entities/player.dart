@@ -27,11 +27,10 @@ class Player extends JumperCharacter<DashRunGame> {
   late final PlayerStateBehavior stateBehavior =
       findBehavior<PlayerStateBehavior>();
 
-  List<ItemType> powerUps = [];
+  bool hasGoldenFeather = false;
   bool isPlayerInvincible = false;
   bool isPlayerTeleporting = false;
-
-  bool get doubleJumpEnabled => powerUps.contains(ItemType.goldenFeather);
+  bool isPlayerRespawning = false;
 
   double? _gameOverTimer;
 
@@ -44,12 +43,12 @@ class Player extends JumperCharacter<DashRunGame> {
   int get priority => 1;
 
   void jumpEffects() {
-    final jumpSound = doubleJumpEnabled ? Sfx.phoenixJump : Sfx.jump;
+    final jumpSound = hasGoldenFeather ? Sfx.phoenixJump : Sfx.jump;
     gameRef.audioController.playSfx(jumpSound);
     gameRef.audioController.playSfx(Sfx.jump);
 
     final newJumpState =
-        powerUps.isEmpty ? DashState.jump : DashState.phoenixJump;
+        hasGoldenFeather ? DashState.phoenixJump : DashState.jump;
     stateBehavior.state = newJumpState;
   }
 
@@ -74,7 +73,7 @@ class Player extends JumperCharacter<DashRunGame> {
     if (behavior.state != DashState.running &&
         behavior.state != DashState.phoenixRunning) {
       final newRunState =
-          powerUps.isEmpty ? DashState.running : DashState.phoenixRunning;
+          hasGoldenFeather ? DashState.phoenixRunning : DashState.running;
       if (behavior.state != newRunState) {
         behavior.state = newRunState;
       }
@@ -83,7 +82,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
   void setIdleState() {
     stateBehavior.state =
-        powerUps.isEmpty ? DashState.idle : DashState.phoenixIdle;
+        hasGoldenFeather ? DashState.phoenixIdle : DashState.idle;
   }
 
   @override
@@ -122,8 +121,8 @@ class Player extends JumperCharacter<DashRunGame> {
     }
   }
 
-  void addPowerUp(ItemType type) {
-    powerUps.add(type);
+  void addPowerUp() {
+    hasGoldenFeather = true;
 
     if (stateBehavior.state == DashState.idle) {
       stateBehavior.state = DashState.phoenixIdle;
@@ -164,13 +163,13 @@ class Player extends JumperCharacter<DashRunGame> {
     if ((collisionInfo.downCollision?.tags.contains('hazard') ?? false) &&
         !isPlayerInvincible) {
       // If player has no golden feathers, game over.
-      if (powerUps.isEmpty) {
+      if (!hasGoldenFeather) {
         _animateToGameOver(DashState.deathPit);
         return;
       }
 
       // If player has a golden feather, use it to avoid death.
-      powerUps.clear();
+      hasGoldenFeather = false;
       return _respawn();
     }
 
@@ -191,7 +190,7 @@ class Player extends JumperCharacter<DashRunGame> {
               GameScoreIncreased(by: collision.type.points),
             );
           case ItemType.goldenFeather:
-            addPowerUp(ItemType.goldenFeather);
+            addPowerUp();
             gameRef.audioController.playSfx(Sfx.featherPowerup);
         }
         gameRef.world.add(
@@ -205,13 +204,13 @@ class Player extends JumperCharacter<DashRunGame> {
 
       if (collision is Enemy && !isPlayerInvincible) {
         // If player has no golden feathers, game over.
-        if (powerUps.isEmpty) {
+        if (!hasGoldenFeather) {
           health -= collision.enemyDamage;
           return;
         }
 
         // If player has a golden feather, use it to avoid death.
-        powerUps.clear();
+        hasGoldenFeather = false;
         return _respawn();
       }
     }
@@ -246,9 +245,10 @@ class Player extends JumperCharacter<DashRunGame> {
       return (a - position).length2 < (b - position).length2 ? a : b;
     });
 
+    isPlayerRespawning = true;
     isPlayerInvincible = true;
     walking = false;
-    final behavior = stateBehavior..fadeOut();
+    stateBehavior.fadeOut();
     add(
       MoveToEffect(
         closestRespawn.clone(),
@@ -259,8 +259,9 @@ class Player extends JumperCharacter<DashRunGame> {
         ),
       ),
     );
-    behavior.fadeIn(
+    stateBehavior.fadeIn(
       onComplete: () {
+        isPlayerRespawning = false;
         isPlayerInvincible = false;
         walking = true;
       },
