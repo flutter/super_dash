@@ -27,6 +27,7 @@ class PlayerControllerBehavior extends Behavior<Player> {
   void _handleInput() {
     if (parent.isDead ||
         parent.isPlayerTeleporting ||
+        parent.isPlayerRespawning ||
         parent.isGoingToGameOver) {
       return;
     }
