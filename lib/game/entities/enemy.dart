@@ -162,6 +162,25 @@ class Enemy extends PhysicalEntity<DashRunGame> {
           position: spritePosition,
         ),
       );
+    } else if (type == EnemyType.firefly) {
+      final fireflyAnimation = await gameRef.loadSpriteAnimation(
+        'anim/spritesheet_enemy_dragonfly.png',
+        SpriteAnimationData.sequenced(
+          amount: 32,
+          amountPerRow: 8,
+          textureSize: Vector2.all(64),
+          stepTime: .04,
+        ),
+      );
+
+      add(
+        SpriteAnimationComponent(
+          size: Vector2.all(gameRef.tileSize),
+          animation: fireflyAnimation,
+          anchor: Anchor.center,
+          position: spritePosition,
+        ),
+      );
     } else {
       add(
         RectangleComponent(
