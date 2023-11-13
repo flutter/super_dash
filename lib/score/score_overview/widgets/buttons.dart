@@ -37,7 +37,7 @@ class WebButtons extends StatelessWidget {
               ),
               onPressed: () {
                 final score = context.read<ScoreBloc>().score;
-                context.read<ShareController>().shareMobile(score);
+                context.read<ShareController>().shareOnTwitter(score);
               },
             ),
             const SizedBox(width: 16),
@@ -49,7 +49,7 @@ class WebButtons extends StatelessWidget {
               ),
               onPressed: () {
                 final score = context.read<ScoreBloc>().score;
-                context.read<ShareController>().shareMobile(score);
+                context.read<ShareController>().shareOnFacebook(score);
               },
             ),
           ],
