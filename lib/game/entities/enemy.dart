@@ -90,8 +90,8 @@ class Enemy extends PhysicalEntity<DashRunGame> {
       final beeAnimation = await gameRef.loadSpriteAnimation(
         'anim/spritesheet_enemy_bee.png',
         SpriteAnimationData.sequenced(
-          amount: 16,
-          amountPerRow: 8,
+          amount: 14,
+          amountPerRow: 7,
           textureSize: Vector2.all(64),
           stepTime: .04,
         ),
@@ -158,6 +158,25 @@ class Enemy extends PhysicalEntity<DashRunGame> {
         SpriteAnimationComponent(
           size: Vector2.all(gameRef.tileSize),
           animation: antAnimation,
+          anchor: Anchor.center,
+          position: spritePosition,
+        ),
+      );
+    } else if (type == EnemyType.firefly) {
+      final fireflyAnimation = await gameRef.loadSpriteAnimation(
+        'anim/spritesheet_enemy_dragonfly.png',
+        SpriteAnimationData.sequenced(
+          amount: 32,
+          amountPerRow: 8,
+          textureSize: Vector2.all(64),
+          stepTime: .04,
+        ),
+      );
+
+      add(
+        SpriteAnimationComponent(
+          size: Vector2.all(gameRef.tileSize),
+          animation: fireflyAnimation,
           anchor: Anchor.center,
           position: spritePosition,
         ),

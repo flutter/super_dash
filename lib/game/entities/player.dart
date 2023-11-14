@@ -22,7 +22,7 @@ class Player extends JumperCharacter<DashRunGame> {
   final Vector2 levelSize;
   final Vector2 cameraViewport;
   late Vector2 spawn;
-  late final List<Vector2> respawnPoints;
+  late List<Vector2> respawnPoints;
   late final PlayerCameraAnchor cameraAnchor;
   late final PlayerStateBehavior stateBehavior =
       findBehavior<PlayerStateBehavior>();
@@ -45,7 +45,6 @@ class Player extends JumperCharacter<DashRunGame> {
   void jumpEffects() {
     final jumpSound = hasGoldenFeather ? Sfx.phoenixJump : Sfx.jump;
     gameRef.audioController.playSfx(jumpSound);
-    gameRef.audioController.playSfx(Sfx.jump);
 
     final newJumpState =
         hasGoldenFeather ? DashState.phoenixJump : DashState.jump;
@@ -53,7 +52,7 @@ class Player extends JumperCharacter<DashRunGame> {
   }
 
   void doubleJumpEffects() {
-    gameRef.audioController.playSfx(Sfx.doubleJump);
+    gameRef.audioController.playSfx(Sfx.phoenixJump);
     stateBehavior.state = DashState.phoenixDoubleJump;
   }
 
@@ -104,7 +103,10 @@ class Player extends JumperCharacter<DashRunGame> {
     gameRef.camera.follow(cameraAnchor);
 
     loadSpawnPoint();
+    loadRespawnPoints();
+  }
 
+  void loadRespawnPoints() {
     final respawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('respawn');
     respawnPoints = [
       ...respawnGroup.objects.map(
@@ -170,7 +172,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
       // If player has a golden feather, use it to avoid death.
       hasGoldenFeather = false;
-      return _respawn();
+      return respawn();
     }
 
     final collisions = collisionInfo.otherCollisions ?? const [];
@@ -211,7 +213,7 @@ class Player extends JumperCharacter<DashRunGame> {
 
         // If player has a golden feather, use it to avoid death.
         hasGoldenFeather = false;
-        return _respawn();
+        return respawn();
       }
     }
   }
@@ -239,7 +241,7 @@ class Player extends JumperCharacter<DashRunGame> {
     _gameOverTimer = 1.4;
   }
 
-  void _respawn() {
+  void respawn() {
     // Get closest value to gridX and gridY in respawnPoints.
     final closestRespawn = respawnPoints.reduce((a, b) {
       return (a - position).length2 < (b - position).length2 ? a : b;

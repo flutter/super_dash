@@ -206,6 +206,13 @@ class _MapTesterViewState extends State<MapTesterView> {
                         },
                         child: const Text('Toggle sound'),
                       ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          game?.player?.respawn();
+                        },
+                        child: const Text('Respawn'),
+                      ),
                     ],
                   ),
                   const Divider(),

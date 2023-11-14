@@ -561,7 +561,7 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="49" name="respawn" visible="0">
+ <objectgroup id="49" name="respawn">
   <object id="737" type="Respawn" x="2304" y="2240">
    <point/>
   </object>
@@ -571,7 +571,7 @@
   <object id="739" type="Respawn" x="4416" y="2240">
    <point/>
   </object>
-  <object id="740" type="Respawn" x="5024" y="2112">
+  <object id="740" type="Respawn" x="5056" y="1984">
    <point/>
   </object>
   <object id="741" type="Respawn" x="6016" y="2240">
