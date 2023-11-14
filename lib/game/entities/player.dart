@@ -243,9 +243,18 @@ class Player extends JumperCharacter<DashRunGame> {
 
   void respawn() {
     // Get closest value to gridX and gridY in respawnPoints.
-    final closestRespawn = respawnPoints.reduce((a, b) {
-      return (a - position).length2 < (b - position).length2 ? a : b;
+    final respawnPointsBehind = respawnPoints.where((point) {
+      return point.x < position.x;
     });
+
+    Vector2 closestRespawn;
+    if (respawnPointsBehind.isEmpty) {
+      closestRespawn = spawn;
+    } else {
+      closestRespawn = respawnPointsBehind.reduce((a, b) {
+        return (a - position).length2 < (b - position).length2 ? a : b;
+      });
+    }
 
     isPlayerRespawning = true;
     isPlayerInvincible = true;
