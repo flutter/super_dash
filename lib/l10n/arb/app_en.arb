@@ -60,11 +60,19 @@
     "@gameInstructionsPageAvoidBugsDescription": {
         "description": "Text shown in the description of the avoid bugs instruction of the Game Instructions Overlay"
     },
-    "mobileModeUnavailable": "Mobile mode unavailable",
-    "@mobileModeUnavailable": {
+    "mobileAppsComingSoon": "Mobile Apps Coming Soon",
+    "@mobileAppsComingSoon": {
         "description": "Title shown in the Game Info Page for mobile devices joining from a browser"
     },
-    "mobileModeUnavailableDescription": "Super Dash mobile is coming soon.\nOpen this link on a desktop web browser\nto play today.",
+    "mobileAppsComingSoonGrabThe": "Grab the ",
+    "@mobileAppsComingSoonGrabThe": {
+        "description": "Description shown in the Game Info Page for mobile devices joining from a browser"
+    },
+    "mobileAppsComingSoonMobileSourceCode": "mobile source code ",
+    "@mobileAppsComingSoonMobileSourceCode": {
+        "description": "Description shown in the Game Info Page for mobile devices joining from a browser"
+    },
+    "mobileAppsComingSoonDescription": "in the repo and look for the apps available for download in stores soon! Open this link on a desktop web browser to play today.",
     "@mobileModeUnavailableDescription": {
         "description": "Description shown in the Game Info Page for mobile devices joining from a browser"
     },
