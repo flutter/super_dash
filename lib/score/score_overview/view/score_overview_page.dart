@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:app_ui/app_ui.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
@@ -30,27 +28,28 @@ class ScoreOverviewPage extends StatelessWidget {
           image: DecorationImage(
             image: Assets.images.gameOverBg.provider(),
             fit: BoxFit.cover,
+            colorFilter: const ColorFilter.mode(
+              Colors.black38,
+              BlendMode.darken,
+            ),
             alignment:
                 isDesktop ? const Alignment(0, .7) : Alignment.bottomCenter,
           ),
         ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-          child: Column(
-            children: [
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: AppCard(
-                  border: Border.all(color: Colors.white30),
-                  child: const _Content(),
-                ),
+        child: Column(
+          children: [
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: AppCard(
+                border: Border.all(color: Colors.white30),
+                child: const _Content(),
               ),
-              const Spacer(),
-              const BottomBar(),
-              const SizedBox(height: 16),
-            ],
-          ),
+            ),
+            const Spacer(),
+            const BottomBar(),
+            const SizedBox(height: 16),
+          ],
         ),
       ),
     );

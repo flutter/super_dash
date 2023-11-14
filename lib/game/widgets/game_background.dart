@@ -8,20 +8,14 @@ class GameBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: Assets.images.gameBackground.provider(),
+    return SizedBox.expand(
+      child: ImageFiltered(
+        imageFilter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+        child: Assets.images.gameBackground.image(
           fit: BoxFit.cover,
-          colorFilter: const ColorFilter.mode(
-            Colors.black54,
-            BlendMode.darken,
-          ),
+          color: Colors.black54,
+          colorBlendMode: BlendMode.darken,
         ),
-      ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-        child: const SizedBox.expand(),
       ),
     );
   }
