@@ -7,6 +7,5 @@ class Urls {
 
   static const String termsOfService = 'https://policies.google.com/terms';
 
-  // TODO(all): replace with final url!
-  static const String howWeBuilt = 'https://flutter.dev';
+  static const String howWeBuilt = 'https://medium.com/flutter/9c7aa2a5ad31';
 }
