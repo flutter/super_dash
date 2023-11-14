@@ -1,10 +1,13 @@
 import 'package:app_ui/app_ui.dart';
+import 'package:dash_run/constants/constants.dart';
 import 'package:dash_run/game/game.dart';
 import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class GameIntroPage extends StatefulWidget {
   const GameIntroPage({super.key});
@@ -103,6 +106,14 @@ class _MobileWebNotAvailableIntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final descriptionTextStyle = textTheme.headlineSmall?.copyWith(
+      color: Colors.white,
+      fontWeight: FontWeight.bold,
+    );
+    final linkStyle = descriptionTextStyle?.copyWith(
+      decoration: TextDecoration.underline,
+    );
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 390),
@@ -125,20 +136,28 @@ class _MobileWebNotAvailableIntroPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             Text(
-              l10n.mobileModeUnavailable,
+              l10n.mobileAppsComingSoon,
               textAlign: TextAlign.center,
-              style: theme.textTheme.headlineSmall?.copyWith(
+              style: textTheme.headlineSmall?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 24),
-            Text(
-              l10n.mobileModeUnavailableDescription,
+            RichText(
               textAlign: TextAlign.center,
-              style: theme.textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+              text: TextSpan(
+                style: descriptionTextStyle,
+                children: [
+                  TextSpan(text: l10n.mobileAppsComingSoonGrabThe),
+                  TextSpan(
+                    text: l10n.mobileAppsComingSoonMobileSourceCode,
+                    style: linkStyle,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => launchUrlString(Urls.githubRepo),
+                  ),
+                  TextSpan(text: l10n.mobileAppsComingSoonDescription),
+                ],
               ),
             ),
             const Spacer(),
