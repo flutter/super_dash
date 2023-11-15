@@ -19,6 +19,12 @@ bool _tsxPackingFilter(Tileset tileset) {
   return !(tileset.source ?? '').startsWith('anim');
 }
 
+Paint _layerPaintFactory(double opacity) {
+  return Paint()
+    ..color = Color.fromRGBO(255, 255, 255, opacity)
+    ..isAntiAlias = false;
+}
+
 class DashRunGame extends LeapGame
     with TapDetector, HasKeyboardHandlerComponents {
   DashRunGame({
@@ -33,6 +39,8 @@ class DashRunGame extends LeapGame
               atlasMaxX: 4048,
               atlasMaxY: 4048,
               tsxPackingFilter: _tsxPackingFilter,
+              useAtlas: !kIsWeb,
+              layerPaintFactory: _layerPaintFactory,
             ),
           ),
         );
@@ -302,12 +310,12 @@ class DashRunGame extends LeapGame
   }
 
   @override
-  void onMapUnload() {
+  void onMapUnload(LeapMap map) {
     player?.velocity.setZero();
   }
 
   @override
-  void onMapLoaded() {
+  void onMapLoaded(LeapMap map) {
     player?.loadSpawnPoint();
     player?.loadRespawnPoints();
     player?.walking = true;
