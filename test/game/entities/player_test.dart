@@ -54,8 +54,7 @@ class _TestDashRunGame extends DashRunGame {
     AssetBundle? bundle,
     Images? images,
     Map<String, TiledObjectHandler> tiledObjectHandlers = const {},
-    LeapMapTransition Function(LeapGame p1) mapTransitionFactory =
-        LeapMapTransition.defaultFactory,
+    LeapMapTransition? transitionComponent,
   }) async {
     // noop
   }
