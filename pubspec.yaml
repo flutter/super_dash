@@ -44,7 +44,7 @@ dependencies:
 
 dev_dependencies:
   bloc_test: ^9.1.2
-  flame_test: ^1.13.2
+  flame_test: ^1.14.0
   flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
@@ -52,11 +52,6 @@ dev_dependencies:
   very_good_analysis: ^5.0.0
 
 dependency_overrides:
-  flame_test:
-    git:
-      url: https://github.com/flame-engine/flame.git
-      ref: main
-      path: packages/flame_test
   flame_tiled:
     git:
       url: https://github.com/flame-engine/flame.git
@@ -64,8 +59,8 @@ dependency_overrides:
       path: packages/flame_tiled
   leap:
     git:
-      url: https://github.com/VeryGoodOpenSource/leap.git
-      ref: feat/map-transition-ground-improv
+      url: https://github.com/kurtome/leap.git
+      ref: feat/tiled-options-use-atlas
       path: packages/leap
 
 flutter:
