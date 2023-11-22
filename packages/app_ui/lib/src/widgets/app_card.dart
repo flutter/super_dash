@@ -20,6 +20,7 @@ class AppCard extends StatelessWidget {
     ),
     this.borderRadius = const BorderRadius.all(Radius.circular(24)),
     this.border,
+    this.imageProvider,
     super.key,
   });
 
@@ -38,20 +39,32 @@ class AppCard extends StatelessWidget {
   /// The border of the card.
   final BoxBorder? border;
 
+  /// The background image of the card. Setting the image makes the [gradient]
+  /// and [backgroundColor] invisible. Also removes the border.
+  final ImageProvider<Object>? imageProvider;
+
   @override
   Widget build(BuildContext context) {
+    final showImage = imageProvider != null;
+
     return Container(
       constraints: const BoxConstraints(maxWidth: 328, maxHeight: 624),
       decoration: BoxDecoration(
         borderRadius: borderRadius,
-        border: border,
-        color: backgroundColor,
+        border: showImage ? null : border,
+        color: showImage ? null : backgroundColor,
       ),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: borderRadius,
-          gradient: gradient,
+          gradient: showImage ? null : gradient,
+          image: showImage
+              ? DecorationImage(
+                  image: imageProvider!,
+                  fit: BoxFit.cover,
+                )
+              : null,
         ),
         child: child,
       ),
