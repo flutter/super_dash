@@ -22,6 +22,7 @@ class AppDialog extends StatelessWidget {
     ),
     this.borderRadius = const BorderRadius.all(Radius.circular(24)),
     this.border,
+    this.imageProvider,
     super.key,
   });
 
@@ -43,6 +44,10 @@ class AppDialog extends StatelessWidget {
   /// The border of the dialog.
   final BoxBorder? border;
 
+  /// The background image of the dialog. Setting the image makes the [gradient]
+  /// and [backgroundColor] invisible. Also removes the border.
+  final ImageProvider<Object>? imageProvider;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -54,6 +59,7 @@ class AppDialog extends StatelessWidget {
         gradient: gradient,
         backgroundColor: backgroundColor,
         borderRadius: borderRadius,
+        imageProvider: imageProvider,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,

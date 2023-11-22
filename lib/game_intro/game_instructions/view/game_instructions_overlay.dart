@@ -117,6 +117,7 @@ class _GameInstructionsOverlayViewState
     return AppDialog(
       border: Border.all(color: Colors.white24),
       backgroundColor: Colors.white24,
+      imageProvider: Assets.images.instructionsBackground.provider(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -138,12 +139,11 @@ class _GameInstructionsOverlayViewState
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            child: GameInstructionNavigationControls(
-              pageController: pageController,
-            ),
+          const SizedBox(height: 24),
+          GameInstructionNavigationControls(
+            pageController: pageController,
           ),
+          const SizedBox(height: 16),
         ],
       ),
     );
