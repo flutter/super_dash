@@ -3,9 +3,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dash_run/audio/audio.dart';
 import 'package:dash_run/game/game.dart';
+import 'package:flame/components.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:leap/leap.dart';
 import 'package:mocktail/mocktail.dart';
 
 class _MockGameBloc extends MockBloc<GameEvent, GameState>
@@ -65,7 +65,7 @@ void main() {
         await game.ready();
       },
       verify: (game, tester) async => expect(
-        game.descendants().whereType<SimpleCombinedInput>(),
+        game.descendants().whereType<KeyboardListenerComponent>(),
         isNotNull,
       ),
     );
