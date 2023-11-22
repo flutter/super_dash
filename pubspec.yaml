@@ -60,7 +60,7 @@ dependency_overrides:
   leap:
     git:
       url: https://github.com/kurtome/leap.git
-      ref: feat/tiled-options-use-atlas
+      ref: main
       path: packages/leap
 
 flutter:
