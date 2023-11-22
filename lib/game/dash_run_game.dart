@@ -63,7 +63,6 @@ class DashRunGame extends LeapGame
   final AudioController audioController;
   final List<VoidCallback> _inputListener = [];
 
-  late final SimpleCombinedInput input;
   late final SpriteSheet itemsSpritesheet;
   final bool inMapTester;
 
