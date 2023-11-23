@@ -160,7 +160,7 @@ void main() {
       expect(finalPosition.x, equals(updatedPosition.x));
     });
 
-    testWithGame('increases speed when space is pressed', _TestGame.new,
+    testWithGame('increases speed when M is pressed', _TestGame.new,
         (game) async {
       final cameraDebugger = CameraDebugger();
       await game.ensureAdd(cameraDebugger);
@@ -169,7 +169,7 @@ void main() {
           cameraDebugger.firstChild<KeyboardListenerComponent>()!;
 
       final keyDown = _MockRawKeyDownEvent();
-      when(() => keyDown.logicalKey).thenReturn(LogicalKeyboardKey.space);
+      when(() => keyDown.logicalKey).thenReturn(LogicalKeyboardKey.keyM);
 
       controller.onKeyEvent(keyDown, {LogicalKeyboardKey.space});
 
@@ -179,9 +179,9 @@ void main() {
 
       // Should not move anymore when the key is released
       final keyUp = _MockRawKeyUpEvent();
-      when(() => keyUp.logicalKey).thenReturn(LogicalKeyboardKey.space);
+      when(() => keyUp.logicalKey).thenReturn(LogicalKeyboardKey.keyM);
 
-      controller.onKeyEvent(keyUp, {LogicalKeyboardKey.space});
+      controller.onKeyEvent(keyUp, {LogicalKeyboardKey.keyM});
       cameraDebugger.update(0.1);
 
       expect(cameraDebugger.speed, equals(300));
