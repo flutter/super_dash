@@ -233,7 +233,7 @@ class _InitialFormFieldState extends State<_InitialFormField> {
           }),
           EmptyCharacterAtEndFormatter(),
         ],
-        style: textTheme.headlineLarge,
+        style: textTheme.displayMedium,
         textCapitalization: TextCapitalization.characters,
         decoration: const InputDecoration(
           border: InputBorder.none,
