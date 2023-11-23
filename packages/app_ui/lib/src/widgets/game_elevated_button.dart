@@ -10,7 +10,7 @@ class GameElevatedButton extends StatelessWidget {
     VoidCallback? onPressed,
     this.gradient,
     super.key,
-  }) : _child = ElevatedButton(
+  }) : _child = FilledButton(
           onPressed: onPressed,
           child: Text(label),
         );
@@ -22,7 +22,7 @@ class GameElevatedButton extends StatelessWidget {
     VoidCallback? onPressed,
     this.gradient,
     super.key,
-  }) : _child = ElevatedButton.icon(
+  }) : _child = FilledButton.icon(
           icon: icon,
           label: Text(label),
           onPressed: onPressed,
@@ -53,8 +53,8 @@ class GameElevatedButton extends StatelessWidget {
       ),
       child: Theme(
         data: theme.copyWith(
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
+          filledButtonTheme: FilledButtonThemeData(
+            style: FilledButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
               shape: RoundedRectangleBorder(
