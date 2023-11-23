@@ -31,6 +31,7 @@ class AppTextStyles {
     fontFamily: 'Google Sans',
     color: Colors.white,
     package: package,
+    decorationColor: Colors.white,
   );
 
   /// Display large text style.

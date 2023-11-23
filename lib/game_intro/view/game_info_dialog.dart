@@ -24,9 +24,11 @@ class GameInfoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final bodyStyle = AppTextStyles.bodyLarge;
+    const highlightColor = Color(0xFF9CECCD);
     final linkStyle = AppTextStyles.bodyLarge.copyWith(
-      color: const Color(0xFF9CECCD),
+      color: highlightColor,
       decoration: TextDecoration.underline,
+      decorationColor: highlightColor,
     );
     return AppDialog(
       border: Border.all(color: Colors.white24),
