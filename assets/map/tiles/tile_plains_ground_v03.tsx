@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="tile_plains_ground_v03" tilewidth="64" tileheight="64" tilecount="168" columns="12">
- <image source="tile_plains_ground_v03.png" width="768" height="896"/>
+<tileset version="1.10" tiledversion="1.10.2" name="tile_plains_ground_v03" tilewidth="64" tileheight="64" spacing="4" tilecount="168" columns="12">
+ <image source="tile_plains_ground_v03.png" width="816" height="952"/>
  <tile id="12" type="Platform"/>
  <tile id="13" type="Platform"/>
  <tile id="14" type="Platform"/>
