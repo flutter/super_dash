@@ -39,7 +39,6 @@ class DashRunGame extends LeapGame
               atlasMaxX: 4048,
               atlasMaxY: 4048,
               tsxPackingFilter: _tsxPackingFilter,
-              useAtlas: !kIsWeb,
               layerPaintFactory: _layerPaintFactory,
             ),
           ),
