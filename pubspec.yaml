@@ -55,12 +55,12 @@ dependency_overrides:
   flame_tiled:
     git:
       url: https://github.com/flame-engine/flame.git
-      ref: main
+      ref: erick.tile-atlas-padding
       path: packages/flame_tiled
   leap:
     git:
-      url: https://github.com/kurtome/leap.git
-      ref: 02f2be0c9d47cf2ce51ee2109fbe21a42dcd7457
+      url: https://github.com/VeryGoodOpenSource/leap.git
+      ref: vgv
       path: packages/leap
 
 flutter:

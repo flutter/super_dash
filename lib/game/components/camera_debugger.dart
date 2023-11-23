@@ -26,7 +26,9 @@ class CameraDebugger extends RectangleComponent {
 
     position += _direction * _speed * dt;
 
-    _text.text = 'Camera: $position';
+    _text.text = 'X: ${position.x.toStringAsFixed(2)}'
+        '\nY: ${position.y.toStringAsFixed(2)}'
+        '\nSpeed: $speed';
   }
 
   @override
@@ -59,7 +61,7 @@ class CameraDebugger extends RectangleComponent {
             _direction.x = 1;
             return false;
           },
-          LogicalKeyboardKey.space: (_) {
+          LogicalKeyboardKey.keyM: (_) {
             _speed = 900;
             return false;
           },
@@ -89,7 +91,7 @@ class CameraDebugger extends RectangleComponent {
             }
             return false;
           },
-          LogicalKeyboardKey.space: (_) {
+          LogicalKeyboardKey.keyM: (_) {
             _speed = 300;
             return false;
           },

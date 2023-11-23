@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="tile_forest_ground_v04" tilewidth="64" tileheight="64" tilecount="132" columns="11">
- <image source="tile_forest_ground_v04.png" width="704" height="768"/>
+<tileset version="1.10" tiledversion="1.10.2" name="tile_forest_ground_v04" tilewidth="64" tileheight="64" spacing="4" tilecount="132" columns="11">
+ <image source="tile_forest_ground_v04.png" width="748" height="816"/>
  <tile id="11" type="Platform">
   <objectgroup draworder="index" id="2">
    <object id="1" x="37" y="0" width="27" height="38"/>
