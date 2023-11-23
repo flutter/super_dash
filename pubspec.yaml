@@ -55,7 +55,7 @@ dependency_overrides:
   flame_tiled:
     git:
       url: https://github.com/flame-engine/flame.git
-      ref: main
+      ref: erick.flame-tiled-component-atlases
       path: packages/flame_tiled
   leap:
     git:

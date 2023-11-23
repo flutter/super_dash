@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dash_run/filesytem_asset_bundle/filesystem_asset_bundle.dart';
 import 'package:dash_run/game/game.dart';
+import 'package:dash_run/map_tester/map_tester.dart';
 import 'package:dash_run/settings/settings_controller.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flame/game.dart';
@@ -212,6 +213,21 @@ class _MapTesterViewState extends State<MapTesterView> {
                           game?.player?.respawn();
                         },
                         child: const Text('Respawn'),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          final atlases = game?.leapMap.tiledMap.atlases();
+                          if (atlases != null) {
+                            showDialog<void>(
+                              context: context,
+                              builder: (_) {
+                                return AtlasesView(atlases: atlases);
+                              },
+                            );
+                          }
+                        },
+                        child: const Text('View Atlases'),
                       ),
                     ],
                   ),
