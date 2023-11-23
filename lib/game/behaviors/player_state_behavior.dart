@@ -113,7 +113,6 @@ class PlayerStateBehavior extends Behavior<Player> {
             amount: 18,
             stepTime: 0.042,
             textureSize: Vector2.all(parent.gameRef.tileSize),
-            amountPerRow: 8,
           ),
         ),
         parent.gameRef.loadSpriteAnimation(
@@ -122,7 +121,6 @@ class PlayerStateBehavior extends Behavior<Player> {
             amount: 16,
             stepTime: 0.042,
             textureSize: Vector2.all(parent.gameRef.tileSize),
-            amountPerRow: 8,
           ),
         ),
         parent.gameRef.loadSpriteAnimation(
@@ -131,7 +129,6 @@ class PlayerStateBehavior extends Behavior<Player> {
             amount: 18,
             stepTime: 0.042,
             textureSize: Vector2.all(parent.gameRef.tileSize),
-            amountPerRow: 8,
           ),
         ),
         parent.gameRef.loadSpriteAnimation(
@@ -140,7 +137,6 @@ class PlayerStateBehavior extends Behavior<Player> {
             amount: 16,
             stepTime: 0.042,
             textureSize: Vector2.all(parent.gameRef.tileSize),
-            amountPerRow: 8,
           ),
         ),
         parent.gameRef.loadSpriteAnimation(
@@ -169,7 +165,6 @@ class PlayerStateBehavior extends Behavior<Player> {
             amount: 16,
             stepTime: 0.042,
             textureSize: Vector2.all(parent.gameRef.tileSize),
-            amountPerRow: 8,
             loop: false,
           ),
         ),
@@ -192,12 +187,13 @@ class PlayerStateBehavior extends Behavior<Player> {
             amount: 16,
             stepTime: 0.042,
             textureSize: Vector2.all(parent.gameRef.tileSize),
-            amountPerRow: 8,
             loop: false,
           ),
         ),
       ],
     );
+
+    final paint = Paint()..isAntiAlias = false;
 
     final centerPosition = parent.size / 2 - Vector2(0, parent.size.y / 2);
     _stateMap = {
@@ -205,46 +201,55 @@ class PlayerStateBehavior extends Behavior<Player> {
         animation: idleAnimation,
         anchor: Anchor.center,
         position: centerPosition.clone(),
+        paint: paint,
       ),
       DashState.running: SpriteAnimationComponent(
         animation: runningAnimation,
         anchor: Anchor.center,
         position: centerPosition.clone(),
+        paint: paint,
       ),
       DashState.phoenixIdle: SpriteAnimationComponent(
         animation: phoenixIdleAnimation,
         anchor: Anchor.center,
         position: centerPosition.clone(),
+        paint: paint,
       ),
       DashState.phoenixRunning: SpriteAnimationComponent(
         animation: phoenixRunningAnimation,
         anchor: Anchor.center,
         position: centerPosition.clone(),
+        paint: paint,
       ),
       DashState.deathPit: SpriteAnimationComponent(
         animation: deathPitAnimation,
         anchor: Anchor.center,
         position: centerPosition.clone(),
+        paint: paint,
       ),
       DashState.deathFaint: SpriteAnimationComponent(
         animation: deathFaintAnimation,
         anchor: Anchor.center,
         position: centerPosition.clone(),
+        paint: paint,
       ),
       DashState.jump: SpriteAnimationComponent(
         animation: jumpAnimation,
         anchor: Anchor.center,
         position: centerPosition.clone(),
+        paint: paint,
       ),
       DashState.phoenixJump: SpriteAnimationComponent(
         animation: phoenixJumpAnimation,
         anchor: Anchor.center,
         position: centerPosition.clone(),
+        paint: paint,
       ),
       DashState.phoenixDoubleJump: SpriteAnimationComponent(
         animation: phoenixDoubleJumpAnimation,
         anchor: Anchor.center,
         position: centerPosition.clone(),
+        paint: paint,
       ),
     };
 
