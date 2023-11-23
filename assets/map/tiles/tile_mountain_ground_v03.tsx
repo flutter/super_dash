@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="tile_mountain_ground_v03" tilewidth="64" tileheight="64" tilecount="225" columns="15">
- <image source="tile_mountain_ground_v03.png" width="960" height="960"/>
+<tileset version="1.10" tiledversion="1.10.2" name="tile_mountain_ground_v03" tilewidth="64" tileheight="64" spacing="2" tilecount="225" columns="15">
+ <image source="tile_mountain_ground_v03.png" width="990" height="990"/>
  <tile id="19" type="Hazard"/>
  <tile id="54" type="Hazard"/>
  <tile id="55" type="Hazard"/>
