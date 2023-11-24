@@ -17,6 +17,7 @@ dependencies:
   cloud_firestore: ^4.12.2
   equatable: ^2.0.5
   file_selector: ^1.0.1
+  firebase_analytics: ^10.7.1
   firebase_auth: ^4.12.1
   firebase_core: ^2.21.0
   flame: ^1.10.0
