@@ -126,3 +126,5 @@ app.*.map.json
 !.idea/runConfigurations/
 
 .firebase
+
+secrets
