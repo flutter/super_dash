@@ -1,8 +1,8 @@
-import 'package:dash_run/constants/constants.dart';
-import 'package:dash_run/game_intro/game_intro.dart';
-import 'package:dash_run/l10n/l10n.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:super_dash/constants/constants.dart';
+import 'package:super_dash/game_intro/game_intro.dart';
+import 'package:super_dash/l10n/l10n.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class BottomBar extends StatelessWidget {

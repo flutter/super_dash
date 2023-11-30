@@ -1,7 +1,7 @@
-import 'package:dash_run/leaderboard/leaderboard.dart';
-import 'package:dash_run/score/game_over/game_over.dart';
-import 'package:dash_run/score/score.dart';
 import 'package:flutter/material.dart';
+import 'package:super_dash/leaderboard/leaderboard.dart';
+import 'package:super_dash/score/game_over/game_over.dart';
+import 'package:super_dash/score/score.dart';
 
 List<Page<void>> onGenerateScorePages(
   ScoreState state,

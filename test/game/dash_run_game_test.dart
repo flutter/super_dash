@@ -1,12 +1,12 @@
 // ignore_for_file: cascade_invocations
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/audio/audio.dart';
+import 'package:super_dash/game/game.dart';
 
 class _MockGameBloc extends MockBloc<GameEvent, GameState>
     implements GameBloc {}
@@ -16,7 +16,7 @@ class _MockAudioController extends Mock implements AudioController {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  group('DashRunGame', () {
+  group('SuperDashGame', () {
     late GameBloc gameBloc;
     late AudioController audioController;
 
@@ -27,8 +27,8 @@ void main() {
       when(() => gameBloc.state).thenReturn(const GameState.initial());
     });
 
-    DashRunGame createGame() {
-      return DashRunGame(
+    SuperDashGame createGame() {
+      return SuperDashGame(
         gameBloc: gameBloc,
         audioController: audioController,
       );

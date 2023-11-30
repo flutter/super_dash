@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dash_run/leaderboard/bloc/leaderboard_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leaderboard_repository/leaderboard_repository.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/leaderboard/bloc/leaderboard_bloc.dart';
 
 class _MockLeaderboardRepository extends Mock
     implements LeaderboardRepository {}

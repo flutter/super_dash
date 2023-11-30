@@ -2,11 +2,11 @@
 
 import 'package:app_ui/app_ui.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dash_run/game_intro/game_instructions/game_instructions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/game_intro/game_instructions/game_instructions.dart';
 
 import '../../../helpers/helpers.dart';
 

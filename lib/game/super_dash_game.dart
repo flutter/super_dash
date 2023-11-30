@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
-import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/game/game.dart';
-import 'package:dash_run/score/score.dart';
 import 'package:flame/cache.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -14,6 +11,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
+import 'package:super_dash/audio/audio.dart';
+import 'package:super_dash/game/game.dart';
+import 'package:super_dash/score/score.dart';
 
 bool _tsxPackingFilter(Tileset tileset) {
   return !(tileset.source ?? '').startsWith('anim');
@@ -25,9 +25,9 @@ Paint _layerPaintFactory(double opacity) {
     ..isAntiAlias = false;
 }
 
-class DashRunGame extends LeapGame
+class SuperDashGame extends LeapGame
     with TapDetector, HasKeyboardHandlerComponents {
-  DashRunGame({
+  SuperDashGame({
     required this.gameBloc,
     required this.audioController,
     this.customBundle,

@@ -1,5 +1,5 @@
-import 'package:dash_run/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:super_dash/l10n/l10n.dart';
 
 class TapToJumpOverlay extends StatelessWidget {
   const TapToJumpOverlay({super.key});
