@@ -5,9 +5,8 @@ import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:dash_run/gen/assets.gen.dart';
 import 'package:dash_run/l10n/l10n.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GameIntroPage extends StatefulWidget {
   const GameIntroPage({super.key});
@@ -23,6 +22,11 @@ class _GameIntroPageState extends State<GameIntroPage> {
     precacheImage(Assets.images.gameBackground.provider(), context);
   }
 
+  void _onDownload() {
+    final isAndroid = defaultTargetPlatform == TargetPlatform.android;
+    launchUrl(Uri.parse(isAndroid ? Urls.playStoreLink : Urls.appStoreLink));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +40,7 @@ class _GameIntroPageState extends State<GameIntroPage> {
           ),
         ),
         child: isMobileWeb
-            ? const _MobileWebNotAvailableIntroPage()
+            ? _MobileWebNotAvailableIntroPage(onDownload: _onDownload)
             : const _IntroPage(),
       ),
     );
@@ -100,20 +104,17 @@ class _IntroPage extends StatelessWidget {
 }
 
 class _MobileWebNotAvailableIntroPage extends StatelessWidget {
-  const _MobileWebNotAvailableIntroPage();
+  const _MobileWebNotAvailableIntroPage({
+    required this.onDownload,
+  });
+
+  final VoidCallback onDownload;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-    final descriptionTextStyle = textTheme.headlineSmall?.copyWith(
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
-    );
-    final linkStyle = descriptionTextStyle?.copyWith(
-      decoration: TextDecoration.underline,
-    );
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 390),
@@ -122,43 +123,22 @@ class _MobileWebNotAvailableIntroPage extends StatelessWidget {
             const Spacer(),
             Assets.images.gameLogo.image(width: 282),
             const Spacer(flex: 4),
-            Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0xFF0046ab),
-              ),
-              padding: const EdgeInsets.all(12),
-              child: const Icon(
-                Icons.mobile_off,
-                size: 24,
-                color: Colors.white,
-              ),
-            ),
             const SizedBox(height: 24),
             Text(
-              l10n.mobileAppsComingSoon,
+              l10n.downloadAppMessage,
               textAlign: TextAlign.center,
               style: textTheme.headlineSmall?.copyWith(
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 24),
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                style: descriptionTextStyle,
-                children: [
-                  TextSpan(text: l10n.mobileAppsComingSoonGrabThe),
-                  TextSpan(
-                    text: l10n.mobileAppsComingSoonMobileSourceCode,
-                    style: linkStyle,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => launchUrlString(Urls.githubRepo),
-                  ),
-                  TextSpan(text: l10n.mobileAppsComingSoonDescription),
-                ],
+            GameElevatedButton.icon(
+              label: l10n.downloadAppLabel,
+              icon: const Icon(
+                Icons.download,
+                color: Colors.white,
               ),
+              onPressed: onDownload,
             ),
             const Spacer(),
             const BottomBar(),
