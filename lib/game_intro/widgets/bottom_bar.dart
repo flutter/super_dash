@@ -12,39 +12,41 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const AudioButton(),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                l10n.superDash,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 4),
-              RichText(
-                text: TextSpan(
-                  text: l10n.howItsMade,
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const AudioButton(),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  l10n.superDash,
                   style: theme.textTheme.titleMedium?.copyWith(
                     color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.bold,
                   ),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => launchUrlString(Urls.howWeBuilt),
                 ),
-              ),
-            ],
-          ),
-          const InfoButton(),
-        ],
+                const SizedBox(height: 4),
+                RichText(
+                  text: TextSpan(
+                    text: l10n.howItsMade,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      decoration: TextDecoration.underline,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => launchUrlString(Urls.howWeBuilt),
+                  ),
+                ),
+              ],
+            ),
+            const InfoButton(),
+          ],
+        ),
       ),
     );
   }
