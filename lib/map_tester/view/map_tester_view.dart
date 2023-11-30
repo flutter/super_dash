@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import 'package:dash_run/filesytem_asset_bundle/filesystem_asset_bundle.dart';
-import 'package:dash_run/game/game.dart';
-import 'package:dash_run/map_tester/map_tester.dart';
-import 'package:dash_run/settings/settings_controller.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_dash/filesytem_asset_bundle/filesystem_asset_bundle.dart';
+import 'package:super_dash/game/game.dart';
+import 'package:super_dash/map_tester/map_tester.dart';
+import 'package:super_dash/settings/settings_controller.dart';
 
 typedef GetDirectoryPath = Future<String?> Function();
 
@@ -31,7 +31,7 @@ class MapTesterView extends StatefulWidget {
 }
 
 class _MapTesterViewState extends State<MapTesterView> {
-  DashRunGame? game;
+  SuperDashGame? game;
   String? rootPath;
 
   double? speed;
@@ -53,7 +53,7 @@ class _MapTesterViewState extends State<MapTesterView> {
       if (directory != null) {
         setState(() {
           rootPath = directory;
-          game = DashRunGame(
+          game = SuperDashGame(
             gameBloc: GameBloc(),
             customBundle: FileSystemAssetBundle(directory),
             audioController: context.read(),
@@ -63,7 +63,7 @@ class _MapTesterViewState extends State<MapTesterView> {
       }
     } else {
       setState(() {
-        game = DashRunGame(
+        game = SuperDashGame(
           gameBloc: GameBloc(),
           audioController: context.read(),
           inMapTester: true,
@@ -73,16 +73,16 @@ class _MapTesterViewState extends State<MapTesterView> {
   }
 
   Future<void> _reload() async {
-    late DashRunGame newGame;
+    late SuperDashGame newGame;
     if (!kIsWeb && Platform.isMacOS) {
-      newGame = DashRunGame(
+      newGame = SuperDashGame(
         gameBloc: GameBloc(),
         audioController: context.read(),
         customBundle: FileSystemAssetBundle(rootPath!),
         inMapTester: true,
       );
     } else {
-      newGame = DashRunGame(
+      newGame = SuperDashGame(
         gameBloc: GameBloc(),
         audioController: context.read(),
         inMapTester: true,

@@ -1,9 +1,9 @@
-import 'package:dash_run/score/bloc/score_bloc.dart';
-import 'package:dash_run/score/routes/routes.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:leaderboard_repository/leaderboard_repository.dart';
+import 'package:super_dash/score/bloc/score_bloc.dart';
+import 'package:super_dash/score/routes/routes.dart';
 
 class ScorePage extends StatelessWidget {
   const ScorePage({

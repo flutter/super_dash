@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:dash_run/leaderboard/bloc/leaderboard_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:super_dash/leaderboard/bloc/leaderboard_bloc.dart';
 
 void main() {
   group('LeaderboardTop10Requested', () {

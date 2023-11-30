@@ -1,7 +1,7 @@
 import 'package:app_ui/app_ui.dart';
-import 'package:dash_run/game_intro/game_instructions/game_instructions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_dash/game_intro/game_instructions/game_instructions.dart';
 
 class GameInstructionNavigationControls extends StatelessWidget {
   const GameInstructionNavigationControls({

@@ -1,9 +1,9 @@
-import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/game/game.dart';
-import 'package:dash_run/game_intro/game_intro.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:super_dash/audio/audio.dart';
+import 'package:super_dash/game/game.dart';
+import 'package:super_dash/game_intro/game_intro.dart';
 
 class Game extends StatelessWidget {
   const Game({super.key});
@@ -35,7 +35,7 @@ class GameView extends StatelessWidget {
           GameWidget.controlled(
             loadingBuilder: (context) => const GameBackground(),
             backgroundBuilder: (context) => const GameBackground(),
-            gameFactory: () => DashRunGame(
+            gameFactory: () => SuperDashGame(
               gameBloc: context.read<GameBloc>(),
               audioController: context.read<AudioController>(),
             ),

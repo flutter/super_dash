@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:dash_run/game/dash_run_game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/text.dart';
+import 'package:super_dash/game/super_dash_game.dart';
 
-class TreeSign extends TextComponent with HasGameRef<DashRunGame> {
+class TreeSign extends TextComponent with HasGameRef<SuperDashGame> {
   TreeSign({
     super.position,
   }) : super(

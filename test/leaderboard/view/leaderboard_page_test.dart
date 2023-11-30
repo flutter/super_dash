@@ -1,15 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dash_run/l10n/l10n.dart';
-import 'package:dash_run/leaderboard/leaderboard.dart';
-import 'package:dash_run/score/score.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leaderboard_repository/leaderboard_repository.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/l10n/l10n.dart';
+import 'package:super_dash/leaderboard/leaderboard.dart';
+import 'package:super_dash/score/score.dart';
 
 import '../../helpers/helpers.dart';
 

@@ -1,15 +1,15 @@
 import 'dart:ui';
 
-import 'package:dash_run/game/dash_run_game.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:super_dash/game/super_dash_game.dart';
 
 typedef TreeHouseFrontRender = void Function(
   Canvas canvas,
   CameraComponent camera,
 );
 
-class TreeHouseFront extends PositionComponent with HasGameRef<DashRunGame> {
+class TreeHouseFront extends PositionComponent with HasGameRef<SuperDashGame> {
   TreeHouseFront({
     required this.renderFront,
   }) : super(priority: 1000, position: Vector2(0, 0));

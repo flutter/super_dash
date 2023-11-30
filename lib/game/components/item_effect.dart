@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:dash_run/game/game.dart';
 import 'package:flame/components.dart';
+import 'package:super_dash/game/game.dart';
 
-class ItemEffect extends SpriteAnimationComponent with HasGameRef<DashRunGame> {
+class ItemEffect extends SpriteAnimationComponent
+    with HasGameRef<SuperDashGame> {
   ItemEffect({
     required this.type,
     super.position,

@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dash_run/game/bloc/game_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:super_dash/game/bloc/game_bloc.dart';
 
 void main() {
   group('GameBloc', () {

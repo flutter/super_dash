@@ -1,5 +1,5 @@
-import 'package:dash_run/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:super_dash/gen/assets.gen.dart';
 
 class GameBackground extends StatelessWidget {
   const GameBackground({super.key});

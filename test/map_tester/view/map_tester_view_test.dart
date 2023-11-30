@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:dash_run/audio/audio.dart';
-import 'package:dash_run/game/dash_run_game.dart';
-import 'package:dash_run/map_tester/map_tester.dart';
-import 'package:dash_run/settings/settings_controller.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:super_dash/audio/audio.dart';
+import 'package:super_dash/game/super_dash_game.dart';
+import 'package:super_dash/map_tester/map_tester.dart';
+import 'package:super_dash/settings/settings_controller.dart';
 
 import '../../helpers/helpers.dart';
 
@@ -50,7 +50,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byType(GameWidget<DashRunGame>),
+        find.byType(GameWidget<SuperDashGame>),
         findsOneWidget,
       );
     });
@@ -68,7 +68,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byType(GameWidget<DashRunGame>),
+        find.byType(GameWidget<SuperDashGame>),
         findsOneWidget,
       );
 
@@ -76,7 +76,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.byType(GameWidget<DashRunGame>),
+        find.byType(GameWidget<SuperDashGame>),
         findsNothing,
       );
     });
@@ -93,8 +93,8 @@ void main() {
       await tester.tap(find.text('Load'));
       await tester.pump();
 
-      var widget = tester.widget<GameWidget<DashRunGame>>(
-        find.byType(GameWidget<DashRunGame>),
+      var widget = tester.widget<GameWidget<SuperDashGame>>(
+        find.byType(GameWidget<SuperDashGame>),
       );
 
       final originalGame = widget.game;
@@ -103,8 +103,8 @@ void main() {
       await tester.tap(find.text('Reload'));
       await tester.pumpAndSettle();
 
-      widget = tester.widget<GameWidget<DashRunGame>>(
-        find.byType(GameWidget<DashRunGame>),
+      widget = tester.widget<GameWidget<SuperDashGame>>(
+        find.byType(GameWidget<SuperDashGame>),
       );
 
       final updatedGame = widget.game;
