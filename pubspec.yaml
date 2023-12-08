@@ -22,7 +22,7 @@ dependencies:
   firebase_core: ^2.21.0
   flame: ^1.10.0
   flame_behaviors: ^1.0.0
-  flame_tiled: ^1.17.0
+  flame_tiled: ^1.15.0
   flow_builder: ^0.0.9
   flutter:
     sdk: flutter
