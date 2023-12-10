@@ -1,0 +1,216 @@
+{
+    "@@locale": "pt",
+    "gameIntroPageHeadline": "Voe no Super Dash, evite os bugs, colete pontos e veja o quão longe você pode ir!",
+    "@gameIntroPageHeadline": {
+        "description": "Texto exibido no cabeçalho da página de informações do jogo"
+    },
+    "gameIntroPagePlayButtonText": "Jogar",
+    "@gameIntroPagePlayButtonText": {
+        "description": "Texto exibido no botão Jogar da página de informações do jogo"
+    },
+    "gameInstructionsPageAutoRunTitle": "Corrida Automática do Dash",
+    "@gameInstructionsPageAutoRunTitle": {
+        "description": "Texto exibido no título da instrução de corrida automática da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageAutoRunDescription": "Bem-vindo ao Super Dash. Neste jogo, o Dash corre automaticamente.",
+    "@gameInstructionsPageAutoRunDescription": {
+        "description": "Texto exibido na descrição da instrução de corrida automática da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageTapToJumpTitle": "Toque para Pular",
+    "@gameInstructionsPageTapToJumpTitle": {
+        "description": "Texto exibido no título da instrução de toque para pular da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageTapToJumpDescription": "Toque na tela para fazer o Dash pular.",
+    "@gameInstructionsPageTapToJumpDescription": {
+        "description": "Texto exibido na descrição da instrução de toque para pular da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageTapToJumpDescriptionDesktop": "Pressione a barra de espaço para fazer o Dash pular.",
+    "@gameInstructionsPageTapToJumpDescriptionDesktop": {
+        "description": "Texto exibido na descrição da instrução de toque para pular da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageCollectEggsAcornsTitle": "Colete Ovos e Bolotas",
+    "@gameInstructionsPageCollectEggsAcornsTitle": {
+        "description": "Texto exibido no título da instrução de coletar ovos e bolotas da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageCollectEggsAcornsDescription": "Ganhe pontos coletando ovos e bolotas no estágio.",
+    "@gameInstructionsPageCollectEggsAcornsDescription": {
+        "description": "Texto exibido na descrição da instrução de coletar ovos e bolotas da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPagePowerfulWingsTitle": "Asas Poderosas",
+    "@gameInstructionsPagePowerfulWingsTitle": {
+        "description": "Texto exibido no título da instrução de asas poderosas da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPagePowerfulWingsDescription": "Colete a pena dourada para dar poder ao Dash com o Flutter. Enquanto estiver no ar, toque para dar um pulo duplo e veja o Dash voar!",
+    "@gameInstructionsPagePowerfulWingsDescription": {
+        "description": "Texto exibido na descrição da instrução de asas poderosas da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageLevelGatesTitle": "Portões de Nível",
+    "@gameInstructionsPageLevelGatesTitle": {
+        "description": "Texto exibido no título da instrução de portões de nível da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageLevelGatesDescription": "Avance pelos portões para enfrentar desafios mais difíceis nos estágios mais avançados.",
+    "@gameInstructionsPageLevelGatesDescription": {
+        "description": "Texto exibido na descrição da instrução de portões de nível da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageAvoidBugsTitle": "Evite os Bugs",
+    "@gameInstructionsPageAvoidBugsTitle": {
+        "description": "Texto exibido no título da instrução de evitar bugs da sobreposição de instruções do jogo"
+    },
+    "gameInstructionsPageAvoidBugsDescription": "Ninguém gosta de bugs! Pule para desviá-los e evite receber dano.",
+    "@gameInstructionsPageAvoidBugsDescription": {
+        "description": "Texto exibido na descrição da instrução de evitar bugs da sobreposição de instruções do jogo"
+    },
+    "mobileAppsComingSoon": "Apps Móveis em Breve",
+    "@mobileAppsComingSoon": {
+        "description": "Título exibido na página de informações do jogo para dispositivos móveis que estão acessando por meio de um navegador"
+    },
+    "mobileAppsComingSoonGrabThe": "Pegue o ",
+    "@mobileAppsComingSoonGrabThe": {
+        "description": "Descrição exibida na página de informações do jogo para dispositivos móveis que estão acessando por meio de um navegador"
+    },
+    "mobileAppsComingSoonMobileSourceCode": "código-fonte móvel ",
+    "@mobileAppsComingSoonMobileSourceCode": {
+        "description": "Descrição exibida na página de informações do jogo para dispositivos móveis que estão acessando por meio de um navegador"
+    },
+    "mobileAppsComingSoonDescription": "no repositório e procure pelos aplicativos disponíveis para download em breve nas lojas! Abra este link em um navegador web de desktop para jogar hoje.",
+    "@mobileModeUnavailableDescription": {
+        "description": "Descrição exibida na página de informações do jogo para dispositivos móveis que estão acessando por meio de um navegador"
+    },
+    "superDash": "Super Dash",
+    "@superDash": {
+        "description": "Nome do jogo"
+    },
+    "howItsMade": "Como é feito",
+    "@howItsMade": {
+        "description": "Texto exibido na página de informações do jogo"
+    },
+    "aboutSuperDash": "Sobre o Super Dash",
+    "@aboutSuperDash": {
+        "description": "Texto exibido no pop-up de informações do jogo"
+    },
+    "learn": "Aprenda ",
+    "@learn": {
+        "description": "Texto exibido no pop-up de informações do jogo"
+    },
+    "howWeBuiltSuperDash": "como construímos o Super Dash",
+    "@howWeBuiltSuperDash": {
+        "description": "Texto exibido no pop-up de informações do jogo"
+    },
+    "inFlutterAndGrabThe": " no Flutter e pegue o ",
+    "@inFlutterAndGrabThe": {
+        "description": "Texto exibindo no pop-up de informações do jogo"
+    },
+    "openSourceCode": "código aberto.",
+    "@openSourceCode": {
+        "description": "Texto exibido no pop-up de informações do jogo"
+    },
+    "otherLinks": "Outros Links",
+    "@otherLinks": {
+        "description": "Texto exibido no pop-up de informações do jogo"
+    },
+    "flutterGames": "Jogos Flutter",
+    "@flutterGames": {
+        "description": "Texto exibido no pop-up de informações do jogo"
+    },
+    "privacyPolicy": "Política de Privacidade",
+    "@privacyPolicy": {
+        "description": "Texto exibido no pop-up de informações do jogo"
+    },
+    "termsOfService": "Termos de Serviço",
+    "@termsOfService": {
+        "description": "Texto exibido no pop-up de informações do jogo"
+    },
+    "enter": "Entrar",
+    "@enter": {
+        "description": "Texto exibido na página de envio de pontuação"
+    },
+    "initialsBlacklistedMessage": "Mantenha PG, use iniciais diferentes",
+    "@initialsBlacklistedMessage": {
+        "description": "Texto exibido na página de envio de pontuação"
+    },
+    "initialsErrorMessage": "Por favor, insira três iniciais",
+    "@initialsErrorMessage": {
+        "description": "Texto exibido na página de envio de pontuação"
+    },
+    "scoreSubmissionErrorMessage": "Houve um erro ao enviar sua pontuação",
+    "@scoreSubmissionErrorMessage": {
+        "description": "Texto exibido na página de envio de pontuação"
+    },
+    "shareYourScore": "Compartilhe sua pontuação do Super Dash e desafie seus amigos a fazerem mais!",
+    "@shareYourScore": {
+        "description": "Texto exibido na página de compartilhamento"
+    },
+    "pts": "Pts",
+    "@pts": {
+        "description": "Texto exibido na página de compartilhamento"
+    },
+    "shareOn": "Compartilhar em:",
+    "@shareOn": {
+        "description": "Texto exibido na página de compartilhamento"
+    },
+    "share": "Compartilhar",
+    "@share": {
+        "description": "Texto exibido na página de compartilhamento"
+    },
+    "seeTheRanking": "Ver o ranking",
+    "@seeTheRanking": {
+        "description": "Texto exibido na página de compartilhamento"
+    },
+    "gameOver": "Fim de Jogo!",
+    "@gameOver": {
+        "description": "Texto exibido na página de fim de jogo"
+    },
+    "betterLuckNextTime": "Boa sorte na próxima vez.",
+    "@betterLuckNextTime": {
+        "description": "Texto exibido na página de fim de jogo"
+    },
+    "totalScore": "Pontuação Total",
+    "@totalScore": {
+        "description": "Texto exibido na página de fim de jogo"
+    },
+    "submitScore": "Enviar pontuação",
+    "@submitScore": {
+        "description": "Texto exibido na página de fim de jogo"
+    },
+    "playAgain": "Jogar Novamente",
+    "@playAgain": {
+        "description": "Texto exibido na página de fim de jogo"
+    },
+    "gameScoreLabel": "{points} Pts",
+    "@gameScoreLabel": {
+    "description": "Texto exibido no rótulo da pontuação do jogo",
+    "placeholders": {
+    "points": {
+        "type": "int"
+        }
+      }
+    },
+    "leaderboardPageLeaderboardHeadline": "Placar",
+    "@leaderboardPageLeaderboardHeadline": {
+        "description": "Texto exibido no cabeçalho da página de placar"
+    },
+    "leaderboardPageLeaderboardErrorText": "Houve um erro ao buscar o placar.",
+    "@leaderboardPageLeaderboardErrorText": {
+        "description": "Texto exibido na página de placar quando há um erro"
+    },
+    "leaderboardPageLeaderboardNoEntries": "Sem entradas",
+    "@leaderboardPageLeaderboardNoEntries": {
+        "description": "Texto exibido na página de placar quando não há entradas"
+    },
+    "leaderboardPageGoBackButton": "Voltar",
+    "@leaderboardPageGoBackButton": {
+        "description": "Texto exibido no botão de voltar da página de placar"
+    },
+    "tapToStart": "Toque/pressione Espaço para começar",
+    "@tapToStart": {
+        "description": "Texto exibido na página do jogo"
+    },
+    "downloadAppMessage": "Voe no Super Dash, evite os bugs, colete pontos e veja o quão longe você pode ir!",
+    "@downloadAppMessage": {
+        "description": "Texto exibido na página de download do aplicativo móvel"
+    },
+    "downloadAppLabel": "Baixe o aplicativo",
+    "@downloadAppLabel": {
+        "description": "Rótulo do botão para o download do aplicativo"
+    }
+}
