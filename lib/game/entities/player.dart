@@ -94,6 +94,7 @@ class Player extends JumperCharacter<SuperDashGame> {
     cameraAnchor = PlayerCameraAnchor(
       cameraViewport: cameraViewport,
       levelSize: levelSize,
+      showCameraBounds: gameRef.inMapTester,
     );
 
     add(cameraAnchor);
