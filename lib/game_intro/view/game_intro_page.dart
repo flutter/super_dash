@@ -92,6 +92,7 @@ class _IntroPage extends StatelessWidget {
                 AudioButton(),
                 LeaderboardButton(),
                 InfoButton(),
+                LanguageButton(),
                 HowToPlayButton(),
               ],
             ),

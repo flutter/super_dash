@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:super_dash/game_intro/game_intro.dart';
+import 'package:super_dash/game_intro/game_select_language/view/game_select_language_overlay.dart';
 import 'package:super_dash/leaderboard/leaderboard.dart';
 import 'package:super_dash/settings/settings_controller.dart';
 
@@ -57,6 +58,20 @@ class HowToPlayButton extends StatelessWidget {
       icon: Icons.help,
       onPressed: () => Navigator.of(context).push(
         GameInstructionsOverlay.route(),
+      ),
+    );
+  }
+}
+
+class LanguageButton extends StatelessWidget {
+  const LanguageButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GameIconButton(
+      icon: Icons.public_rounded,
+      onPressed: () => Navigator.of(context).push(
+        GameSelectLanguageOverlay.route(),
       ),
     );
   }
