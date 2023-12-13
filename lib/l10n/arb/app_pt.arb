@@ -28,13 +28,13 @@
     "@gameInstructionsPageTapToJumpDescriptionDesktop": {
         "description": "Texto exibido na descrição da instrução de toque para pular da sobreposição de instruções do jogo"
     },
-    "gameInstructionsPageCollectEggsAcornsTitle": "Colete Ovos e Bolotas",
+    "gameInstructionsPageCollectEggsAcornsTitle": "Colete Ovos e nozes",
     "@gameInstructionsPageCollectEggsAcornsTitle": {
-        "description": "Texto exibido no título da instrução de coletar ovos e bolotas da sobreposição de instruções do jogo"
+        "description": "Texto exibido no título da instrução de coletar ovos e nozes da sobreposição de instruções do jogo"
     },
-    "gameInstructionsPageCollectEggsAcornsDescription": "Ganhe pontos coletando ovos e bolotas no estágio.",
+    "gameInstructionsPageCollectEggsAcornsDescription": "Ganhe pontos coletando ovos e nozes no estágio.",
     "@gameInstructionsPageCollectEggsAcornsDescription": {
-        "description": "Texto exibido na descrição da instrução de coletar ovos e bolotas da sobreposição de instruções do jogo"
+        "description": "Texto exibido na descrição da instrução de coletar ovos e nozes da sobreposição de instruções do jogo"
     },
     "gameInstructionsPagePowerfulWingsTitle": "Asas Poderosas",
     "@gameInstructionsPagePowerfulWingsTitle": {
