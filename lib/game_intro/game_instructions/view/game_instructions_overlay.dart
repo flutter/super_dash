@@ -166,20 +166,20 @@ class _CardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      children: [
-        _CardImage(assetPath: assetPath),
-        const SizedBox(height: 24),
-        Text(
-          title,
-          style: theme.textTheme.headlineSmall?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _CardImage(assetPath: assetPath),
+          const SizedBox(height: 24),
+          Text(
+            title,
+            style: theme.textTheme.headlineSmall?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        const SizedBox(height: 12),
-        Expanded(
-          child: Padding(
+          const SizedBox(height: 12),
+          Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 24,
             ),
@@ -191,8 +191,8 @@ class _CardContent extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

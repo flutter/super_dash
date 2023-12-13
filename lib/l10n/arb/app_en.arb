@@ -212,5 +212,9 @@
     "downloadAppLabel": "Download the app",
     "@downloadAppLabel": {
         "description": "Button lable for the app download"
+    },
+    "selectLanguage": "Select language",
+    "@selectLanguage": {
+        "description": "Text shown in language select overlay"
     }
 }
