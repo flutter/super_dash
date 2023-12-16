@@ -12,8 +12,8 @@ class ScoreLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final textTheme = Theme.of(context).textTheme;
-    final score = context.select(
-      (GameBloc bloc) => bloc.state.score,
+    final state = context.select(
+      (GameBloc bloc) => (score: bloc.state.score, wings: bloc.state.wingsQty),
     );
 
     return SafeArea(
@@ -37,7 +37,18 @@ class ScoreLabel extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                l10n.gameScoreLabel(score),
+                l10n.gameScoreLabel(state.score),
+                style: textTheme.titleLarge?.copyWith(
+                  color: const Color(0xFF4D5B92),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Assets.images.powerfulWingsInstruction.image(
+                width: 40,
+                height: 40,
+              ),
+              Text(
+                l10n.wingsQtyLabel(state.wings),
                 style: textTheme.titleLarge?.copyWith(
                   color: const Color(0xFF4D5B92),
                 ),

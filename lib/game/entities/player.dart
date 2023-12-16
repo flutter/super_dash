@@ -27,7 +27,6 @@ class Player extends JumperCharacter<SuperDashGame> {
   late final PlayerStateBehavior stateBehavior =
       findBehavior<PlayerStateBehavior>();
 
-  bool hasGoldenFeather = false;
   bool isPlayerInvincible = false;
   bool isPlayerTeleporting = false;
   bool isPlayerRespawning = false;
@@ -41,6 +40,8 @@ class Player extends JumperCharacter<SuperDashGame> {
 
   @override
   int get priority => 1;
+
+  bool get hasGoldenFeather => gameRef.state.wingsQty > 0;
 
   void jumpEffects() {
     final jumpSound = hasGoldenFeather ? Sfx.phoenixJump : Sfx.jump;
@@ -125,7 +126,9 @@ class Player extends JumperCharacter<SuperDashGame> {
   }
 
   void addPowerUp() {
-    hasGoldenFeather = true;
+    gameRef.gameBloc.add(
+      const GameWingsIncreased(),
+    );
 
     if (stateBehavior.state == DashState.idle) {
       stateBehavior.state = DashState.phoenixIdle;
@@ -172,7 +175,10 @@ class Player extends JumperCharacter<SuperDashGame> {
       }
 
       // If player has a golden feather, use it to avoid death.
-      hasGoldenFeather = false;
+      gameRef.gameBloc.add(
+        const GameWingsDecreased(),
+      );
+
       return respawn();
     }
 
@@ -213,7 +219,10 @@ class Player extends JumperCharacter<SuperDashGame> {
         }
 
         // If player has a golden feather, use it to avoid death.
-        hasGoldenFeather = false;
+        gameRef.gameBloc.add(
+          const GameWingsDecreased(),
+        );
+
         return respawn();
       }
     }

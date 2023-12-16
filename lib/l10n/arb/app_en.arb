@@ -185,6 +185,15 @@
             }
         }
     },
+    "wingsQtyLabel": "{points}x Wings",
+    "@wingsQtyLabel": {
+        "description": "Text shown on the game wings label",
+        "placeholders": {
+            "points": {
+                "type": "int"
+            }
+        }
+    },
     "leaderboardPageLeaderboardHeadline": "Leaderboard",
     "@leaderboardPageLeaderboardHeadline": {
         "description": "Text shown in the leaderboard page headline"
