@@ -123,7 +123,7 @@ class _GameInstructionsOverlayViewState
         children: [
           SizedBox(
             width: 390,
-            height: 400,
+            height: 410,
             child: PageView.builder(
               controller: pageController,
               onPageChanged: context.read<GameInstructionsCubit>().updateStep,
@@ -139,11 +139,11 @@ class _GameInstructionsOverlayViewState
               },
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 22),
           GameInstructionNavigationControls(
             pageController: pageController,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
         ],
       ),
     );
