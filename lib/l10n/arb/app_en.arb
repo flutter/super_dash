@@ -201,16 +201,21 @@
     "@leaderboardPageGoBackButton": {
         "description": "Text shown in the leaderboard page go back button"
     },
-    "tapToStart": "Tap/press Space to start",
+    "tapToStart": "Tap to start",
     "@tapToStart": {
         "description": "Text shown in the game page"
     },
+    "pressSpaceToStart": "Press Space to start",
+    "@pressSpaceToStart": {
+        "description": "Text shown in the game page"
+    },
+    
     "downloadAppMessage": "Fly into Super Dash, avoid the bugs, collect points, and see how far you can go!",
     "@downloadAppMessage": {
         "description": "Text shown in the download mobile app page"
     },
     "downloadAppLabel": "Download the app",
     "@downloadAppLabel": {
-        "description": "Button lable for the app download"
+        "description": "Button label for the app download"
     }
 }
