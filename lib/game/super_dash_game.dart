@@ -215,7 +215,7 @@ class SuperDashGame extends LeapGame
     _resetEntities();
 
     Future<void>.delayed(
-      const Duration(seconds: 1),
+      const Duration(seconds: 2),
       () async {
         await loadWorldAndMap(
           images: images,
