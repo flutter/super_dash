@@ -79,30 +79,6 @@ class Item extends PhysicalEntity<SuperDashGame> {
           size: size,
         ),
       );
-    } else {
-      add(
-        SpriteComponent(
-          size: size,
-          sprite: gameRef.itemsSpritesheet.getSpriteById(
-            (tiledObject.gid ?? 0) - gameRef.itemsTileset.firstGid!,
-          ),
-          children: [
-            SequenceEffect(
-              [
-                MoveEffect.by(
-                  -Vector2(0, gameRef.tileSize / 2),
-                  CurvedEffectController(.8, Curves.easeIn),
-                ),
-                MoveEffect.by(
-                  Vector2(0, gameRef.tileSize / 2),
-                  CurvedEffectController(.8, Curves.easeOut),
-                ),
-              ],
-              infinite: true,
-            ),
-          ],
-        ),
-      );
     }
   }
 }

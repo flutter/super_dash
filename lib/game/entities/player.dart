@@ -23,7 +23,6 @@ class Player extends JumperCharacter<SuperDashGame> {
   final Vector2 cameraViewport;
   late Vector2 spawn;
   late List<Vector2> respawnPoints;
-  late final PlayerCameraAnchor cameraAnchor;
   late final PlayerStateBehavior stateBehavior =
       findBehavior<PlayerStateBehavior>();
 
@@ -91,37 +90,29 @@ class Player extends JumperCharacter<SuperDashGame> {
     size = Vector2.all(gameRef.tileSize * .5);
     walkSpeed = gameRef.tileSize * speed;
     minJumpImpulse = world.gravity * jumpImpulse;
-    cameraAnchor = PlayerCameraAnchor(
-      cameraViewport: cameraViewport,
-      levelSize: levelSize,
-      showCameraBounds: gameRef.inMapTester,
-    );
 
-    add(cameraAnchor);
     add(PlayerControllerBehavior());
     add(PlayerStateBehavior());
-
-    gameRef.camera.follow(cameraAnchor);
 
     loadSpawnPoint();
     loadRespawnPoints();
   }
 
   void loadRespawnPoints() {
-    final respawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('respawn');
+    /* final respawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('respawn');
     respawnPoints = [
       ...respawnGroup.objects.map(
         (object) => Vector2(object.x, object.y),
       ),
-    ];
+    ];*/
   }
 
   void loadSpawnPoint() {
-    final spawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
+    /*  final spawnGroup = gameRef.leapMap.getTileLayer<ObjectGroup>('spawn');
     for (final object in spawnGroup.objects) {
       position = Vector2(object.x, object.y);
       spawn = position.clone();
-    }
+    }*/
   }
 
   void addPowerUp() {
@@ -137,86 +128,6 @@ class Player extends JumperCharacter<SuperDashGame> {
   @override
   void update(double dt) {
     super.update(dt);
-
-    if (_gameOverTimer != null) {
-      _gameOverTimer = _gameOverTimer! - dt;
-      if (_gameOverTimer! <= 0) {
-        _gameOverTimer = null;
-        gameRef.gameOver();
-      }
-      return;
-    }
-
-    _checkPlayerStuck(dt);
-
-    if (isPlayerTeleporting) return;
-
-    if ((gameRef.isLastSection && x >= gameRef.leapMap.width - tileSize) ||
-        (!gameRef.isLastSection &&
-            x >= gameRef.leapMap.width - gameRef.tileSize * 15)) {
-      sectionCleared();
-      return;
-    }
-
-    if (isDead) {
-      return _animateToGameOver();
-    }
-
-    // Player falls in a hazard zone.
-    if ((collisionInfo.downCollision?.tags.contains('hazard') ?? false) &&
-        !isPlayerInvincible) {
-      // If player has no golden feathers, game over.
-      if (!hasGoldenFeather) {
-        _animateToGameOver(DashState.deathPit);
-        return;
-      }
-
-      // If player has a golden feather, use it to avoid death.
-      hasGoldenFeather = false;
-      return respawn();
-    }
-
-    final collisions = collisionInfo.otherCollisions ?? const [];
-
-    if (collisions.isEmpty) return;
-
-    for (final collision in collisions) {
-      if (collision is Item) {
-        switch (collision.type) {
-          case ItemType.acorn || ItemType.egg:
-            gameRef.audioController.playSfx(
-              collision.type == ItemType.acorn
-                  ? Sfx.acornPickup
-                  : Sfx.eggPickup,
-            );
-            gameRef.gameBloc.add(
-              GameScoreIncreased(by: collision.type.points),
-            );
-          case ItemType.goldenFeather:
-            addPowerUp();
-            gameRef.audioController.playSfx(Sfx.featherPowerup);
-        }
-        gameRef.world.add(
-          ItemEffect(
-            type: collision.type,
-            position: collision.position.clone(),
-          ),
-        );
-        collision.removeFromParent();
-      }
-
-      if (collision is Enemy && !isPlayerInvincible) {
-        // If player has no golden feathers, game over.
-        if (!hasGoldenFeather) {
-          health -= collision.enemyDamage;
-          return;
-        }
-
-        // If player has a golden feather, use it to avoid death.
-        hasGoldenFeather = false;
-        return respawn();
-      }
-    }
   }
 
   void _checkPlayerStuck(double dt) {

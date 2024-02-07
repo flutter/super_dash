@@ -42,16 +42,16 @@ class GameView extends StatelessWidget {
             overlayBuilderMap: {
               'tapToJump': (context, game) => const TapToJumpOverlay(),
             },
-            initialActiveOverlays: const ['tapToJump'],
+            initialActiveOverlays: const [],
           ),
-          const Positioned(
+          /* const Positioned(
             top: 12,
             child: ScoreLabel(),
           ),
           const Positioned(
             bottom: 12,
             child: SafeArea(child: AudioButton()),
-          ),
+          ),*/
         ],
       ),
     );
