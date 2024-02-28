@@ -14,12 +14,12 @@ dependencies:
   authentication_repository:
     path: packages/authentication_repository
   bloc: ^8.1.2
-  cloud_firestore: ^4.12.2
+  cloud_firestore: ^4.15.6
   equatable: ^2.0.5
   file_selector: ^1.0.1
-  firebase_analytics: ^10.7.1
-  firebase_auth: ^4.12.1
-  firebase_core: ^2.21.0
+  firebase_analytics: ^10.8.7
+  firebase_auth: ^4.17.6
+  firebase_core: ^2.25.5
   flame: ^1.10.0
   flame_behaviors: ^1.0.0
   flame_tiled: ^1.15.0
