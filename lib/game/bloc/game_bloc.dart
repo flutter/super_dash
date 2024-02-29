@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -10,6 +12,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<GameScoreDecreased>(_onGameScoreDecreased);
     on<GameOver>(_onGameOver);
     on<GameSectionCompleted>(_onGameSectionCompleted);
+    on<GameWingsIncreased>(_onGameWingsIncreased);
+    on<GameWingsDecreased>(_onGameWingsDecreased);
   }
 
   void _onGameScoreIncreased(
@@ -30,6 +34,28 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     emit(
       state.copyWith(
         score: state.score - event.by,
+      ),
+    );
+  }
+
+  void _onGameWingsIncreased(
+    GameWingsIncreased event,
+    Emitter<GameState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        wingsQty: min(state.wingsQty + event.by, GameState.maxWingsQty),
+      ),
+    );
+  }
+
+  void _onGameWingsDecreased(
+    GameWingsDecreased event,
+    Emitter<GameState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        wingsQty: state.wingsQty - event.by,
       ),
     );
   }

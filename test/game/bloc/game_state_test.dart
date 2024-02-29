@@ -21,7 +21,7 @@ void main() {
     test('returns object with updated score when score is passed', () {
       expect(
         GameState.initial().copyWith(score: 100),
-        GameState(score: 100, currentLevel: 1, currentSection: 0),
+        GameState(score: 100, currentLevel: 1, currentSection: 0, wingsQty: 0),
       );
     });
 
@@ -30,7 +30,7 @@ void main() {
       () {
         expect(
           GameState.initial().copyWith(currentLevel: 2),
-          GameState(score: 0, currentLevel: 2, currentSection: 0),
+          GameState(score: 0, currentLevel: 2, currentSection: 0, wingsQty: 0),
         );
       },
     );
@@ -38,7 +38,14 @@ void main() {
     test('returns object with updated currentSection when score is passed', () {
       expect(
         GameState.initial().copyWith(currentSection: 3),
-        GameState(score: 0, currentLevel: 1, currentSection: 3),
+        GameState(score: 0, currentLevel: 1, currentSection: 3, wingsQty: 0),
+      );
+    });
+
+    test('returns object with updated wings when wings is passed', () {
+      expect(
+        GameState.initial().copyWith(wingsQty: 2),
+        GameState(score: 0, currentLevel: 1, currentSection: 0, wingsQty: 2),
       );
     });
   });

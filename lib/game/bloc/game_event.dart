@@ -25,6 +25,24 @@ final class GameScoreDecreased extends GameEvent {
   List<Object> get props => [by];
 }
 
+final class GameWingsIncreased extends GameEvent {
+  const GameWingsIncreased({this.by = 1});
+
+  final int by;
+
+  @override
+  List<Object> get props => [by];
+}
+
+final class GameWingsDecreased extends GameEvent {
+  const GameWingsDecreased({this.by = 1});
+
+  final int by;
+
+  @override
+  List<Object> get props => [by];
+}
+
 final class GameOver extends GameEvent {
   const GameOver();
 }
