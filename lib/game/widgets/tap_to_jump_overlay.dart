@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:super_dash/l10n/l10n.dart';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
+
+bool get isAndroid => !kIsWeb && Platform.isAndroid;
+bool get isIOS => !kIsWeb && Platform.isIOS;
+bool get isWindows => !kIsWeb && Platform.isWindows;
+bool get isWeb => kIsWeb;
 
 class TapToJumpOverlay extends StatelessWidget {
   const TapToJumpOverlay({super.key});
@@ -22,7 +29,7 @@ class TapToJumpOverlay extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
-              l10n.tapToStart,
+              isAndroid || isIOS ? l10n.tapToStart : l10n.pressSpaceToStart,
               style: textTheme.titleLarge?.copyWith(
                 color: Colors.white,
               ),
