@@ -11,7 +11,7 @@ import 'package:super_dash/map_tester/map_tester.dart';
 import 'package:super_dash/settings/settings.dart';
 import 'package:super_dash/share/share.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({
     required this.audioController,
     required this.settingsController,
@@ -30,6 +30,21 @@ class App extends StatelessWidget {
   final LeaderboardRepository leaderboardRepository;
 
   @override
+  State<App> createState() => _AppState();
+
+  static _AppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_AppState>();
+}
+
+class _AppState extends State<App> {
+  Locale? _locale;
+  void setLocale(Locale value) {
+    setState(() {
+      _locale = value;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AppLifecycleObserver(
       child: MultiRepositoryProvider(
@@ -38,31 +53,33 @@ class App extends StatelessWidget {
             create: (context) {
               final lifecycleNotifier =
                   context.read<ValueNotifier<AppLifecycleState>>();
-              return audioController
+              return widget.audioController
                 ..attachLifecycleNotifier(lifecycleNotifier);
             },
             lazy: false,
           ),
           RepositoryProvider<SettingsController>.value(
-            value: settingsController,
+            value: widget.settingsController,
           ),
           RepositoryProvider<ShareController>.value(
-            value: shareController,
+            value: widget.shareController,
           ),
           RepositoryProvider<AuthenticationRepository>.value(
-            value: authenticationRepository..signInAnonymously(),
+            value: widget.authenticationRepository..signInAnonymously(),
           ),
           RepositoryProvider<LeaderboardRepository>.value(
-            value: leaderboardRepository,
+            value: widget.leaderboardRepository,
           ),
         ],
         child: MaterialApp(
+          locale: _locale,
           theme: ThemeData(
             textTheme: AppTextStyles.textTheme,
           ),
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
-          home: isTesting ? const MapTesterView() : const GameIntroPage(),
+          home:
+              widget.isTesting ? const MapTesterView() : const GameIntroPage(),
         ),
       ),
     );
